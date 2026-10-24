@@ -188,3 +188,104 @@ document.getElementById('logoImg').onerror=function(){this.style.display='none'}
 </script>
 </body>
 </html>
+<!-- ===== FINAL SPIN + WALLET ADD SYSTEM ===== -->
+<div id="spinModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:999999; justify-content:center; align-items:center; flex-direction:column;">
+  <div style="position:relative; width:300px; height:300px;">
+    <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:15px solid transparent; border-right:15px solid transparent; border-top:30px solid gold; z-index:20;"></div>
+    <canvas id="wheelCanvas" width="300" height="300" style="border-radius:50%; border:6px solid gold; box-shadow:0 0 25px gold; background:#111;"></canvas>
+    <button onclick="startSpin()" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:70px; height:70px; border-radius:50%; background:black; color:gold; font-weight:900; border:3px solid gold; z-index:10;">SPIN</button>
+  </div>
+  <h2 id="spinResult" style="color:gold; margin-top:20px; text-align:center;"></h2>
+  <button onclick="closeSpin()" style="margin-top:15px; padding:10px 30px; background:white; border-radius:20px; border:none; font-weight:bold;">❌ বন্ধ করুন</button>
+</div>
+
+<script>
+let prizes = ["10৳","50৳","90৳","1000৳","100৳","500৳","20৳","150৳"];
+let colors = ["#ff9800","#9c27b0","#e91e63","#2196f3","#ff5722","#4caf50","#ff4081","#3f51b5"];
+let canvas = document.getElementById('wheelCanvas');
+let ctx = canvas.getContext('2d');
+let isSpinning = false;
+let rotation = 0;
+
+function drawWheel(){
+  let cx=150, cy=150, r=145;
+  let slice = 2*Math.PI/prizes.length;
+  for(let i=0;i<prizes.length;i++){
+    ctx.beginPath(); ctx.fillStyle=colors[i];
+    ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,i*slice,(i+1)*slice); ctx.fill();
+    ctx.strokeStyle='gold'; ctx.lineWidth=1; ctx.stroke();
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(i*slice+slice/2);
+    ctx.fillStyle='white'; ctx.font='bold 16px Arial'; ctx.textAlign='right';
+    ctx.fillText(prizes[i], r-15, 5); ctx.restore();
+  }
+}
+drawWheel();
+
+// BR Tournament এ ক্লিক করলে এইটা কল করবা
+function openBRWheel(){
+  let bal = getWallet();
+  if(bal < 20){ alert('Balance কম! Spin করতে 20৳ লাগবে!'); return; }
+  document.getElementById('spinModal').style.display='flex';
+  document.getElementById('spinResult').innerText='SPIN এ ক্লিক করুন!';
+}
+function closeSpin(){ document.getElementById('spinModal').style.display='none'; }
+
+// ওয়ালেট থেকে টাকা পাওয়া - সব নাম সাপোর্ট করবে
+function getWallet(){
+  return parseInt(localStorage.getItem('wallet_balance') || localStorage.getItem('walletBalance') || localStorage.getItem('balance') || '0');
+}
+function setWallet(amount){
+  localStorage.setItem('wallet_balance', amount);
+  localStorage.setItem('walletBalance', amount);
+  localStorage.setItem('balance', amount);
+  // UI আপডেট
+  let els = document.querySelectorAll('#walletAmount, .wallet-balance, [id*=wallet]');
+  els.forEach(e=>{ if(e) e.innerText = amount + '৳'; });
+}
+
+function startSpin(){
+  if(isSpinning) return;
+  isSpinning = true;
+  // 20 টাকা কাটো
+  let bal = getWallet();
+  setWallet(bal - 20);
+  document.getElementById('spinResult').innerText='ঘুরছে...';
+
+  // 10,20,50 বেশি পড়বে, 1000 কম পড়বে (তোমার লাভ হবে)
+  let weightedPrizes = [0,1,1,2,0,1,6,1]; // index: 0=10, 1=50, 2=90, 3=1000...
+  let finalIndex = weightedPrizes[Math.floor(Math.random()*weightedPrizes.length)];
+  // আসল random চাইলে: let finalIndex = Math.floor(Math.random()*prizes.length);
+
+  let sliceDeg = 360/prizes.length;
+  let target = 360*6 + (360 - (finalIndex*sliceDeg + sliceDeg/2));
+  
+  let start=null, dur=4000;
+  function anim(t){
+    if(!start) start=t;
+    let p = (t-start)/dur; if(p>1) p=1;
+    let ease = 1-Math.pow(1-p,3);
+    rotation = ease*target;
+    canvas.style.transform = `rotate(${rotation}deg)`;
+    if(p<1) requestAnimationFrame(anim);
+    else{
+      isSpinning=false;
+      let wonText = prizes[finalIndex];
+      let wonAmount = parseInt(wonText);
+      
+      // ===== এখানেই ওয়ালেটে এড হবে =====
+      let newBal = getWallet() + wonAmount;
+      setWallet(newBal);
+      
+      document.getElementById('spinResult').innerHTML = `🎉 আপনি জিতেছেন<br><span style="font-size:32px; color:#00ff00;">${wonText}</span><br>ওয়ালেটে যোগ হয়েছে!`;
+      
+      // History
+      let hist = JSON.parse(localStorage.getItem('wallet_history')||'[]');
+      hist.unshift({type:'WIN', amount:wonAmount, name:'Lucky Spin - '+wonText, date:new Date().toLocaleString()});
+      localStorage.setItem('wallet_history', JSON.stringify(hist));
+
+      setTimeout(()=>{ alert(`অভিনন্দন! ${wonText} জিতেছেন! বর্তমান ব্যালেন্স: ${newBal}৳`); closeSpin(); location.reload(); }, 1500);
+    }
+  }
+  requestAnimationFrame(anim);
+}
+</script>
