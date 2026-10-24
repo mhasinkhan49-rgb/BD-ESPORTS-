@@ -2,136 +2,189 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BD SPORTS - BD Tournament Official | Free Fire Tournament</title>
-<link rel="icon" type="image/png" href="logo.png">
-
-<meta property="og:title" content="BD SPORTS - BD Tournament">
-<meta property="og:description" content="বাংলাদেশের সেরা Free Fire টুর্নামেন্ট। প্রতিদিন জিতুন। 100% Trusted Payment bKash 01756596482">
-<meta property="og:image" content="logo.png">
-<meta name="keywords" content="BD tournament, BD FF tournament, BD SPORTS, Free Fire BD, bdf tournament">
-<meta name="description" content="BD SPORTS Official Tournament - Solo Duo Squad Daily. bKash: 01756596482">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BD SPORTS - BD Tournament | Official</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3eb0ff">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#070b18;color:#fff}
-.header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#0f1429;position:sticky;top:0;z-index:10}
-.logo{display:flex;align-items:center;gap:10px;font-weight:900}
-.logo img{width:40px;height:40px;border-radius:10px}
-.btn{padding:9px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
-.btn-login{background:#1c2340;color:#fff;border:1px solid #2a3355}
-.btn-signup{background:linear-gradient(90deg,#3ab0ff,#8b5cff);color:#000}
-.hero{margin:14px;background:linear-gradient(135deg,#182040,#2a1e4e);border-radius:20px;padding:22px;border:1px solid #263050}
-.hero h1{font-size:28px;margin:8px 0}
-.hero h1 span{color:#4aa3ff}
-.bkash-box{margin:14px;background:#0f1e35;border:2px dashed #00ff88;border-radius:14px;padding:14px;text-align:center}
-.bkash-box h2{color:#00ff88}
-.card{background:#131a33;border:1px solid #232c4d;border-radius:14px;padding:14px;margin:10px 14px;display:flex;justify-content:space-between;align-items:center}
-.winner-list .card{background:#151c36}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0f1429;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #232c4d;z-index:20}
-.nav-item{text-align:center;font-size:11px;color:#7a829e}
-.nav-item.active{color:#4aa3ff}
-.deposit-plus{width:58px;height:58px;background:linear-gradient(90deg,#3ab0ff,#8b5cff);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:#000;margin-top:-28px;font-weight:900}
-.whatsapp-float{position:fixed;bottom:85px;right:16px;background:#25D366;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;z-index:30;box-shadow:0 4px 12px rgba(0,0,0,.4);cursor:pointer}
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:50;align-items:center;justify-content:center;padding:20px}
-.modal-box{background:#131a33;border-radius:16px;padding:20px;width:100%;max-width:400px;border:1px solid #2a3355}
-.input{width:100%;padding:12px;border-radius:10px;border:1px solid #2a3355;background:#0f1429;color:#fff;margin:8px 0}
+body{background:#080c1c;color:#fff;padding-bottom:90px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#0f1530;position:sticky;top:0;z-index:10}
+.logo{display:flex;gap:8px;align-items:center;font-weight:900}
+.logo img{width:38px;height:38px;border-radius:8px;background:#000}
+.btn{padding:9px 16px;border-radius:10px;border:none;font-weight:800}
+.btn1{background:#1d2545;color:#fff;border:1px solid #2d375f}
+.btn2{background:linear-gradient(90deg,#3eb0ff,#a15cff);color:#000}
+.hero{margin:12px;background:linear-gradient(135deg,#1a2048,#301e5a);border-radius:18px;padding:18px;border:1px solid #2a345e}
+.bkash{margin:12px;background:#102040;border:2px dashed #00ff88;border-radius:14px;padding:14px;text-align:center}
+.card{background:#121a36;border:1px solid #253055;border-radius:14px;padding:14px;margin:10px 12px}
+.stat{background:#121a36;border:1px solid #253055;border-radius:12px;padding:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 12px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0f1530;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #253055;z-index:20}
+.nav{font-size:11px;color:#7e88a8;text-align:center}
+.nav.active{color:#4aa3ff}
+.plus{width:56px;height:56px;background:linear-gradient(90deg,#3eb0ff,#a15cff);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:#000;font-weight:900;margin-top:-28px}
+.wa{position:fixed;bottom:85px;right:14px;background:#25D366;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:15}
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:50;align-items:center;justify-content:center;padding:18px}
+.box{background:#131c3a;border:1px solid #2e3a65;border-radius:16px;padding:18px;width:100%;max-width:380px}
+.inp{width:100%;padding:11px;border-radius:9px;border:1px solid #2e3a65;background:#0f1530;color:#fff;margin:6px 0}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="logo"><img src="logo.png"><div>BD SPORTS<br><small style="font-size:9px;letter-spacing:2px;color:#8a93b5">TOURNAMENT</small></div></div>
-  <div><button class="btn btn-login" onclick="alert('Login Coming Soon')">লগইন</button> <button class="btn btn-signup">সাইন আপ</button></div>
+<div class="top">
+<div class="logo"><img src="logo.png" id="logoImg"><div>BD SPORTS<br><small style="font-size:9px;color:#8a94b8;letter-spacing:2px">BD TOURNAMENT</small><br><small id="userShow" style="font-size:10px;color:#00ff88"></small></div></div>
+<div><button class="btn btn1" onclick="openLogin()">লগইন</button> <button class="btn btn2" onclick="openSignup()">সাইন আপ</button></div>
 </div>
 
 <div class="hero">
-  <small style="color:#4aa3ff">বাংলাদেশের গেমারদের জন্য - 100% বিশ্বস্ত</small>
-  <h1>BD SPORTS <span>TOURNAMENT</span></h1>
-  <p style="color:#a8b0c8;font-size:14px;margin:10px 0">প্রতিদিন Solo, Duo ও Squad ম্যাচে আপনার স্কিল দেখান এবং আকর্ষণীয় প্রাইজ পুল জিতে নিন।</p>
-  <button class="btn btn-signup" style="margin-right:8px">টুর্নামেন্ট দেখুন →</button>
-  <button class="btn btn-login">ফ্রি সাইন আপ</button>
+<small style="color:#5ab2ff">বাংলাদেশের সেরা - 100% বিশ্বস্ত - BD Tournament</small>
+<h1 style="font-size:28px;margin:8px 0">BD SPORTS<br><span style="color:#4aa3ff">TOURNAMENT</span></h1>
+<p style="color:#a8b3cc;font-size:13px">প্রতিদিন Solo, Duo, Squad - bKash 01756596482</p>
 </div>
 
-<div class="bkash-box">
-  <div>💰 Official bKash Payment - বিশ্বস্ত</div>
-  <h2>01756596482</h2>
-  <small>Personal | Send Money | Ref: BD SPORTS | Instant Verify</small><br>
-  <button class="btn btn-signup" style="margin-top:10px;width:100%" onclick="openDeposit()">+ টাকা Add করুন (Deposit)</button>
+<div class="bkash">
+<div>💰 Official bKash - বিশ্বস্ত</div>
+<h2 style="color:#00ff88;font-size:24px;margin:6px 0">01756596482</h2>
+<small style="color:#9aadc8">Personal - Send Money</small><br>
+<button class="btn btn2" style="width:100%;margin-top:10px" onclick="showDep()">+ টাকা Add - Deposit</button>
 </div>
 
-<div class="card"><div>🏆<b> ০</b> চলমান টুর্নামেন্ট</div><div>💰<b> ৳৯,৬৯০</b> মোট প্রাইজ</div></div>
-<div class="card"><div>👥<b> ৪৭</b> রেজিস্টার্ড প্লেয়ার</div><div>🛡️<b> ১০০%</b> যাচাইকৃত পেমেন্ট</div></div>
-
-<div style="padding:14px"><h3>সাম্প্রতিক বিজয়ীরা</h3></div>
-<div class="winner-list">
-  <div class="card"><div>🥇 samian120 - Champion 🏆 Esports 4V4</div><b style="color:#00ff88">৳১৮০.০০</b></div>
-  <div class="card"><div>🔥 VTXRELAX - FREE FIRE SOLO</div><b style="color:#00ff88">৳১০.০০</b></div>
-  <div class="card"><div>🏅 GW Shanto - 3rd Position</div><b style="color:#00ff88">৳৫০.০০</b></div>
+<div class="stats">
+<div class="stat">🏆 <b id="tCount">0</b><br><small>চলমান টুর্নামেন্ট</small></div>
+<div class="stat">💰 <b>৳<span id="prizePool">9690</span></b><br><small>প্রাইজ পুল</small></div>
+<div class="stat">👥 <b>47+</b><br><small>প্লেয়ার</small></div>
+<div class="stat">🛡️ <b>100%</b><br><small>Trusted</small></div>
 </div>
 
-<div style="padding:14px">
-  <h3>💳 আমার ওয়ালেট</h3>
-  <div class="card" style="display:block">
-    <div>বর্তমান ব্যালেন্স: <b style="color:#00ff88;font-size:20px" id="walletBal">৳০.০০</b></div>
-    <div style="display:flex;gap:10px;margin-top:12px">
-      <button class="btn btn-signup" style="flex:1" onclick="openDeposit()">Deposit</button>
-      <button class="btn btn-login" style="flex:1" onclick="openWithdraw()">Withdraw</button>
-    </div>
-  </div>
+<div class="card">
+<div style="display:flex;justify-content:space-between"><span>💳 আমার ওয়ালেট</span><b id="bal" style="color:#00ff88">৳0</b></div>
+<div style="display:flex;gap:10px;margin-top:10px"><button class="btn btn2" style="flex:1" onclick="showDep()">Deposit</button><button class="btn btn1" style="flex:1" onclick="showWith()">Withdraw</button></div>
 </div>
 
-<div style="height:120px"></div>
+<div style="padding:0 14px;margin-top:14px;display:flex;justify-content:space-between"><h3>🔥 টুর্নামেন্ট লিস্ট</h3><button class="btn btn1" style="font-size:11px" onclick="addTournamentPrompt()">+ Add Tournament (Admin)</button></div>
+<div id="tList"></div>
 
-<div class="whatsapp-float" onclick="openWhatsAppAuto()">💬</div>
+<div class="card" style="border-left:4px solid #00ff88"><b>🛡️ কেন বিশ্বস্ত?</b><br><small style="color:#a8b3cc">✅ bKash 01756596482 Instant<br>✅ Wallet System<br>✅ 24/7 WhatsApp: অটো মেসেজে "আমার একটা সমস্যা হইছে"</small></div>
 
-<div class="bottom-nav">
-  <div class="nav-item active">🏠<br>হোম</div>
-  <div class="nav-item">🏆<br>টুর্নামেন্ট</div>
-  <div class="nav-item" onclick="openDeposit()"><div class="deposit-plus">+</div>ডিপোজিট</div>
-  <div class="nav-item">🎮<br>আমার ম্যাচ</div>
-  <div class="nav-item">💳<br>ওয়ালেট</div>
+<div class="wa" onclick="autoWA()">💬</div>
+<div class="bottom">
+<div class="nav active">🏠<br>হোম</div>
+<div class="nav" onclick="document.getElementById('tList').scrollIntoView()">🏆<br>টুর্নামেন্ট</div>
+<div class="nav" onclick="showDep()"><div class="plus">+</div>ডিপোজিট</div>
+<div class="nav" onclick="showMyMatches()">🎮<br>আমার ম্যাচ</div>
+<div class="nav" onclick="showDep()">💳<br>ওয়ালেট</div>
 </div>
 
-<div class="modal" id="depositModal">
-  <div class="modal-box">
-    <h3>Deposit - bKash 01756596482</h3>
-    <p style="color:#aaa;font-size:13px;margin:8px 0">উপরে নাম্বারে Send Money করে Transaction ID দিন</p>
-    <input class="input" placeholder="আপনার bKash নাম্বার">
-    <input class="input" placeholder="Amount (যেমন 100)">
-    <input class="input" placeholder="Transaction ID (যেমন TrxID123)">
-    <button class="btn btn-signup" style="width:100%;margin-top:10px" onclick="alert('Request Sent! Admin 5 মিনিটে Approve করবে। Wallet এ যোগ হবে।')">Submit</button>
-    <button class="btn btn-login" style="width:100%;margin-top:8px" onclick="closeModal()">বন্ধ করুন</button>
-  </div>
-</div>
+<!-- MODALS -->
+<div class="modal" id="authModal"><div class="box">
+<h3 id="authTitle">Login</h3>
+<input class="inp" id="authName" placeholder="নাম / Username">
+<input class="inp" id="authPass" type="password" placeholder="Password">
+<button class="btn btn2" style="width:100%" onclick="doAuth()">Confirm</button>
+<button class="btn btn1" style="width:100%;margin-top:8px" onclick="hideAll()">Close</button>
+</div></div>
 
-<div class="modal" id="withdrawModal">
-  <div class="modal-box">
-    <h3>Withdraw - Instant bKash</h3>
-    <input class="input" placeholder="আপনার bKash নাম্বার">
-    <input class="input" placeholder="Amount (Min 100)">
-    <button class="btn btn-signup" style="width:100%;margin-top:10px" onclick="alert('Withdraw Request Sent to 01756596482!')">Withdraw করুন</button>
-    <button class="btn btn-login" style="width:100%;margin-top:8px" onclick="closeModal()">বন্ধ করুন</button>
-  </div>
-</div>
+<div class="modal" id="depModal"><div class="box">
+<h3>Deposit - 01756596482</h3>
+<input class="inp" id="dnum" placeholder="আপনার bKash Number">
+<input class="inp" id="damt" placeholder="Amount">
+<input class="inp" id="dtrx" placeholder="TrxID">
+<button class="btn btn2" style="width:100%" onclick="submitDep()">Submit</button>
+<button class="btn btn1" style="width:100%;margin-top:8px" onclick="hideAll()">Close</button>
+</div></div>
+
+<div class="modal" id="withModal"><div class="box">
+<h3>Withdraw</h3>
+<input class="inp" id="wNum" placeholder="আপনার bKash - 017...">
+<input class="inp" id="wAmt" placeholder="Amount - Min 100">
+<button class="btn btn2" style="width:100%" onclick="doWithdraw()">Withdraw Request</button>
+<button class="btn btn1" style="width:100%;margin-top:8px" onclick="hideAll()">Close</button>
+</div></div>
 
 <script>
-function openDeposit(){document.getElementById('depositModal').style.display='flex'}
-function openWithdraw(){document.getElementById('withdrawModal').style.display='flex'}
-function closeModal(){document.getElementById('depositModal').style.display='none';document.getElementById('withdrawModal').style.display='none'}
-function openWhatsAppAuto(){
-  const msg = encodeURIComponent("Hi BD SPORTS 👋\nআমার একটা সমস্যা হইছে - \n\nআমার নাম: \nUID: \nসমস্যা: ");
-  window.open("https://wa.me/8801756596482?text="+msg,"_blank");
+let currentUser = localStorage.getItem('bd_user') || null;
+let users = JSON.parse(localStorage.getItem('bd_users')||'{}');
+let bal = parseInt(localStorage.getItem('bd_bal_'+(currentUser||'guest'))||'0');
+let tournaments = JSON.parse(localStorage.getItem('bd_tournaments')||'null') || [
+{ id:1, name:'BDFF BR SQUAD - SEASON 2', map:'Bermuda', entry:50, prize:5500, left:12},
+{ id:2, name:'SOLO KILL RUSH - Daily', map:'Bermuda', entry:20, prize:800, left:28},
+{ id:3, name:'DUO TOURNAMENT - Night', map:'Purgatory', entry:40, prize:2000, left:15}
+];
+let myMatches = JSON.parse(localStorage.getItem('bd_my_'+(currentUser||'guest'))||'[]');
+
+function save(){localStorage.setItem('bd_tournaments',JSON.stringify(tournaments)); render();}
+function render(){
+document.getElementById('tCount').innerText=tournaments.length;
+document.getElementById('bal').innerText='৳'+bal;
+document.getElementById('userShow').innerText=currentUser? '👤 '+currentUser : '';
+let html='';
+tournaments.forEach(t=>{
+html+=`<div class="card"><h3>${t.name}</h3><p style="font-size:12px;color:#8a94b8;margin:6px 0">${t.map} | Entry: ৳${t.entry} | Prize: ৳${t.prize} | ${t.left} Left</p><button class="btn btn2" style="width:100%" onclick="joinT(${t.id})">রেজিস্ট্রেশন - ৳${t.entry} (Wallet থেকে কাটবে)</button></div>`;
+});
+document.getElementById('tList').innerHTML=html;
 }
+function openLogin(){document.getElementById('authTitle').innerText='লগইন';document.getElementById('authModal').style.display='flex';window._authMode='login'}
+function openSignup(){document.getElementById('authTitle').innerText='সাইন আপ';document.getElementById('authModal').style.display='flex';window._authMode='signup'}
+function doAuth(){
+let n=document.getElementById('authName').value.trim();let p=document.getElementById('authPass').value.trim();
+if(!n||!p){alert('নাম আর পাসওয়ার্ড দিন');return}
+if(window._authMode=='signup'){
+if(users[n]){alert('User আছে, Login করুন');return}
+users[n]=p;localStorage.setItem('bd_users',JSON.stringify(users));
+}
+if(users[n]!==p){alert('Password ভুল');return}
+currentUser=n;localStorage.setItem('bd_user',n);
+bal=parseInt(localStorage.getItem('bd_bal_'+n)||'0');
+myMatches=JSON.parse(localStorage.getItem('bd_my_'+n)||'[]');
+hideAll();render();alert('Welcome '+n+'! লগইন সফল!');
+}
+function showDep(){document.getElementById('depModal').style.display='flex'}
+function showWith(){document.getElementById('withModal').style.display='flex'}
+function hideAll(){document.querySelectorAll('.modal').forEach(m=>m.style.display='none')}
+function submitDep(){
+let amt=parseInt(document.getElementById('damt').value||'0');let trx=document.getElementById('dtrx').value;
+if(!amt||!trx){alert('Amount আর TrxID দিন');return}
+if(!currentUser){alert('আগে লগইন করুন');openLogin();return}
+bal+=amt;localStorage.setItem('bd_bal_'+currentUser,bal);render();hideAll();
+alert('Deposit Success! ৳'+amt+' Wallet এ যোগ হয়েছে!');
+window.open('https://wa.me/8801756596482?text='+encodeURIComponent('NEW DEPOSIT\nUser:'+currentUser+'\nAmount:'+amt+'\nTrx:'+trx+'\nbKash:01756596482'),'_blank');
+}
+function doWithdraw(){
+let amt=parseInt(document.getElementById('wAmt').value||'0');
+if(amt>bal){alert('ব্যালেন্স কম!');return}
+if(amt<100){alert('Min 100');return}
+bal-=amt;localStorage.setItem('bd_bal_'+currentUser,bal);render();hideAll();
+alert('Withdraw Request Sent! 01756596482 থেকে পাঠানো হবে');
+window.open('https://wa.me/8801756596482?text='+encodeURIComponent('WITHDRAW\nUser:'+currentUser+'\nAmount:'+amt+'\nNum:'+document.getElementById('wNum').value),'_blank');
+}
+function joinT(id){
+if(!currentUser){alert('আগে লগইন করুন');openLogin();return}
+let t=tournaments.find(x=>x.id==id);
+if(bal < t.entry){alert('Wallet এ টাকা নাই! Deposit করুন');showDep();return}
+bal-=t.entry;localStorage.setItem('bd_bal_'+currentUser,bal);
+myMatches.push({name:t.name,time:new Date().toLocaleString()});localStorage.setItem('bd_my_'+currentUser,JSON.stringify(myMatches));
+t.left--;save();render();
+alert('Tournament Join Success! '+t.name);
+}
+function addTournamentPrompt(){
+let name=prompt('Tournament Name?');if(!name)return;
+let entry=parseInt(prompt('Entry Fee? যেমন 50')||'50');
+let prize=parseInt(prompt('Prize? যেমন 5000')||'1000');
+tournaments.unshift({id:Date.now(),name:name,map:'Bermuda',entry:entry,prize:prize,left:20});
+save();
+}
+function showMyMatches(){
+if(!currentUser){alert('আগে লগইন করুন');openLogin();return}
+if(myMatches.length==0){alert('আপনি কোনো ম্যাচ Join করেন নাই');return}
+alert('আমার ম্যাচ:\n'+myMatches.map(m=>m.name+' - '+m.time).join('\n'));
+}
+function autoWA(){
+let msg=encodeURIComponent("Hi BD SPORTS 👋\nআমার একটা সমস্যা হইছে\n\nনাম: "+(currentUser||'')+"\nসমস্যা: \nHelp করুন please");
+window.open("https://wa.me/8801756596482?text="+msg,"_blank");
+}
+render();
+// Fix broken logo - fallback to text if no logo.png
+document.getElementById('logoImg').onerror=function(){this.style.display='none'}
 </script>
-</body>{
-  "name": "BD SPORTS - BD Tournament",
-  "short_name": "BD Tournament",
-  "icons": [{"src": "logo.png","sizes": "512x512","type": "image/png"}],
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#070b18"
-}<link rel="icon" href="logo.png">
-<meta property="og:image" content="logo.png">
-<link rel="manifest" href="manifest.json"> 
+</body>
 </html>
