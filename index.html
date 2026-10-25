@@ -3,185 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BD ESPORTS - Lucky Spin</title>
+<title>হ্যালো বাংলাদেশ টুর্নামেন্ট</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0a0a0a;color:white;min-height:100vh}
-.header{background:#d32f2f;padding:12px 15px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:22px;color:gold}
-.wallet-box{background:#222;border:1px solid gold;border-radius:20px;padding:6px 14px;display:flex;gap:10px}
-.main{padding:20px;text-align:center}
-.tournament-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid gold;border-radius:15px;padding:20px;margin:15px 0;cursor:pointer}
-.btn-join{background:linear-gradient(to right,#ff512f,#dd2476);border:none;color:white;padding:12px 25px;border-radius:25px;font-weight:bold;margin-top:10px;width:100%}
-#spinModal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;display:flex;justify-content:center;align-items:center;flex-direction:column;padding:20px}
-.wheel-wrap{position:relative;width:340px;height:340px;max-width:90vw}
-.wheel-pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:36px;height:44px;background:#0d1130;border:3px solid gold;border-radius:50%;z-index:30}
-#wheelCanvas{width:100%;height:100%;border-radius:50%;border:5px solid #0d1130;box-shadow:0 0 0 3px gold}
-.center-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#0a0e2e;border:3px solid gold;color:white;font-weight:900;cursor:pointer;z-index:20}
-.spin-action-btn{margin-top:28px;background:linear-gradient(to right,#a21caf,#f97316);border:2px solid #ffd78a;color:white;padding:14px 45px;border-radius:30px;font-size:18px;font-weight:bold;cursor:pointer}
+    <div class="marquee"><div class="marquee-track">🇧🇩 হ্যালো বাংলাদেশ টুর্নামেন্ট...</div></div>
+<div class="bkash-strip"><div>💳 Wallet Add: 01756596482 (bKash)</div><div>📱 Nagad: 01756596482</div></div>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Hind Siliguri',Arial}
+body{background:#0a0e1a;color:white}
+.topbar{background:linear-gradient(90deg,#b71c1c,#d32f2f);padding:10px 15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
+.logo{font-size:20px;font-weight:800;color:#ffeb3b}
+.wallet{background:rgba(0,0,0,0.4);border:1px solid gold;border-radius:25px;padding:7px 16px;display:flex;gap:12px;font-size:14px}
+.hero{background:radial-gradient(circle at center,#1a237e 0%,#0a0e1a 70%);padding:25px 15px;text-align:center;border-bottom:2px solid gold}
+.hero h1{font-size:26px;color:#ffeb3b}
+.hero p{color:#ccc;margin-top:6px;font-size:13px}
+.tabs{display:flex;overflow-x:auto;background:#111;padding:8px;gap:8px;position:sticky;top:48px;z-index:98}
+.tab{white-space:nowrap;padding:8px 16px;border-radius:20px;background:#222;border:1px solid #333;cursor:pointer;font-size:13px}
+.tab.active{background:gold;color:black;font-weight:bold;border-color:gold}
+.container{padding:12px}
+.card{background:linear-gradient(135deg,#1e1e2f,#12121e);border:1px solid #333;border-left:4px solid gold;border-radius:14px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.card-left h3{font-size:16px}
+.card-left .meta{font-size:11px;color:#aaa;margin:4px 0;display:flex;gap:8px;flex-wrap:wrap}
+.badge{background:#222;border-radius:6px;padding:2px 7px;font-size:10px}
+.badge.profit{background:#1b5e20;color:#66ff66;border:1px solid #2e7d32}
+.badge.entry{background:#b71c1c;color:#ff8a80}
+.profit-big{font-size:20px;font-weight:800;color:#00e676}
+.entry-small{font-size:11px;color:#ff5252}
+.btn-join{margin-top:6px;background:linear-gradient(90deg,#ff3d00,#ff9100);border:none;color:white;padding:8px 18px;border-radius:20px;font-weight:700;cursor:pointer;font-size:13px;width:110px}
+.btn-join.free{background:linear-gradient(90deg,#00c853,#64dd17)}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:none;justify-content:center;align-items:center;padding:15px}
+.modal-box{background:#15151f;border:2px solid gold;border-radius:16px;padding:20px;width:100%;max-width:380px;max-height:90vh;overflow:auto}
+.input{width:100%;padding:11px;background:#0f0f1a;border:1px solid #333;border-radius:8px;color:white;margin:7px 0;font-size:14px}
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-top:8px}
+.btn-gold{background:gold;color:black}
+.btn-green{background:#00c853;color:white}
+.btn-red{background:#222;color:#aaa;border:1px solid #333}
+.bkash-box{background:#e40064;color:white;border-radius:10px;padding:12px;margin:10px 0;text-align:center}
+.history-item{border-bottom:1px solid #222;padding:7px 0;font-size:12px}
 </style>
 </head>
 <body>
-<div class="header"><div class="logo">BD ESPORTS</div><div class="wallet-box">💰 <span id="walletDisplay">0৳</span></div></div>
-<div class="main">
-<h2 style="color:gold;">BR Tournaments - Lucky Spin</h2>
-<p style="color:#aaa;font-size:13px;margin:10px 0;">1000৳, 50৳, 90৳, 10৳ জিতো!</p>
-<div class="tournament-card" onclick="openSpin('BR Solo',20)"><h3>🔥 BR Solo Tournament</h3><p>Entry: 20৳</p><button class="btn-join">Join & Spin Now</button></div>
-<div class="tournament-card" onclick="openAdmin()" style="border-color:red;"><h3 style="color:#ff5555;">👑 ADMIN - Winner Add</h3></div>
-<div style="margin-top:20px;background:#111;padding:15px;border-radius:10px;text-align:left;"><h4 style="color:gold;">📜 Wallet History</h4><div id="history" style="font-size:12px;margin-top:10px;"></div></div>
+<div class="topbar">
+<div class="logo">🇧🇩 হ্যালো বাংলাদেশ</div>
+<div class="wallet"><span>💰 <b id="walletBal">0৳</b></span><span onclick="openWallet()" style="cursor:pointer">👤</span></div>
 </div>
-<div id="spinModal" style="display:none;"><button onclick="closeSpin()" style="position:absolute;top:15px;right:15px;width:40px;height:40px;background:white;border-radius:10px;border:none;font-size:22px;cursor:pointer;">✕</button><div class="wheel-wrap"><div class="wheel-pointer"></div><canvas id="wheelCanvas" width="340" height="340"></canvas><button class="center-btn" onclick="doSpin()">SPIN</button></div><button class="spin-action-btn" onclick="doSpin()">↻ স্পিন করুন</button><div id="spinResult" style="margin-top:16px;color:#ffe082;font-weight:bold;text-align:center;"></div></div>
-<div id="adminPanel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:100000;justify-content:center;align-items:center;"><div style="background:#111;border:2px solid gold;border-radius:15px;padding:20px;width:90%;max-width:380px;"><h3 style="color:gold;text-align:center;">ADMIN</h3><input id="admPass" type="password" placeholder="Password" style="width:100%;padding:12px;margin:10px 0;border-radius:8px;background:#222;color:white;"><button onclick="checkAdmin()" style="width:100%;padding:12px;background:gold;color:black;border:none;border-radius:8px;font-weight:bold;">Login</button><div id="admMain" style="display:none;margin-top:15px;"><input id="winName" placeholder="Username" style="width:100%;padding:12px;margin:5px 0;border-radius:8px;background:#222;color:white;"><input id="winAmt" type="number" placeholder="Amount ex:1000" style="width:100%;padding:12px;margin:5px 0;border-radius:8px;background:#222;color:white;"><input id="winTour" placeholder="Tournament" style="width:100%;padding:12px;margin:5px 0;border-radius:8px;background:#222;color:white;"><button onclick="adminAdd()" style="width:100%;padding:12px;background:#00ff00;color:black;border:none;border-radius:8px;font-weight:bold;margin-top:10px;">💰 Wallet এ Add</button><button onclick="document.getElementById('adminPanel').style.display='none'" style="width:100%;padding:10px;background:#333;color:white;border:none;border-radius:8px;margin-top:10px;">Close</button></div></div></div>
+<div class="hero">
+<h1>হ্যালো বাংলাদেশ টুর্নামেন্ট</h1>
+<p>🔥 BR & Custom Tournament - রিয়েল টাকা জিতো!</p>
+<div style="margin-top:12px;display:flex;gap:10px;justify-content:center;">
+<button onclick="openWallet()" style="background:gold;color:black;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;font-size:13px;">💰 টাকা Add করো</button>
+<button onclick="openWithdraw()" style="background:#222;color:white;border:1px solid #555;padding:8px 16px;border-radius:20px;font-size:13px;">💸 Withdraw</button>
+</div>
+</div>
+<div class="tabs" id="tabs">
+<div class="tab active" onclick="filterT('all',this)">সব ম্যাচ</div>
+<div class="tab" onclick="filterT('br',this)">বিয়ার ম্যাচ</div>
+<div class="tab" onclick="filterT('lone',this)">Lone Wolf</div>
+<div class="tab" onclick="filterT('custom',this)">কাস্টম ম্যাচ</div>
+<div class="tab" onclick="filterT('free',this)">ফ্রি কাস্টম</div>
+</div>
+<div class="container" id="tournamentList"></div>
+
+<div class="modal" id="joinModal">
+<div class="modal-box">
+<h3 style="color:gold;text-align:center;" id="joinTitle">Tournament Join</h3>
+<p style="font-size:12px;color:#aaa;text-align:center;margin:5px 0;" id="joinDesc"></p>
+<div id="joinForm">
+<p style="font-size:12px;color:#ff8a80;">Entry Fee: <b id="joinFee"></b></p>
+<input id="playerName" class="input" placeholder="Free Fire নাম (UID)">
+<input id="playerPhone" class="input" placeholder="WhatsApp নাম্বার">
+<button class="btn btn-gold" onclick="confirmJoin()">✅ Confirm Join - <span id="joinFeeBtn"></span></button>
+<button class="btn btn-red" onclick="closeM('joinModal')">Cancel</button>
+</div>
+<div id="joinSuccess" style="display:none;text-align:center;">
+<h2 style="color:#00e676;">✅ Join সফল!</h2>
+<p>ID: <b id="matchIdShow"></b></p>
+<p style="font-size:12px;color:#aaa;">Room ID 10 মিনিট আগে WhatsApp এ পাবেন!</p>
+<button class="btn btn-gold" onclick="closeM('joinModal')">OK</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="walletModal">
+<div class="modal-box">
+<h3 style="color:gold;text-align:center;">💰 টাকা Add করুন</h3>
+<div class="bkash-box"><p style="font-size:12px;">এই নাম্বারে bKash Send Money</p><b>01756596482</b><br><small>Personal</small></div>
+<input id="addAmount" class="input" type="number" placeholder="কত টাকা পাঠিয়েছেন? ex: 100">
+<input id="trxId" class="input" placeholder="Transaction ID (TrxID)">
+<input id="senderNum" class="input" placeholder="যে নাম্বার থেকে পাঠিয়েছেন">
+<button class="btn btn-green" onclick="submitAddMoney()">📤 Request পাঠান</button>
+<p style="font-size:11px;color:#aaa;margin-top:8px;text-align:center;">* Admin 2-5 মিনিটে Approve করবে।</p>
+<div style="margin-top:15px;"><h4 style="color:gold;font-size:13px;">📜 My Requests</h4><div id="addHistory"></div></div>
+<button class="btn btn-red" onclick="closeM('walletModal')">Close</button>
+</div>
+</div>
+
+<div class="modal" id="withdrawModal">
+<div class="modal-box">
+<h3 style="color:gold;text-align:center;">💸 Withdraw</h3>
+<p style="font-size:12px;color:#aaa;text-align:center;">ব্যালেন্স: <b id="wBal" style="color:#00e676;">0৳</b> | Min 50৳</p>
+<input id="wAmount" class="input" type="number" placeholder="কত টাকা তুলবেন?">
+<select id="wMethod" class="input"><option>bKash Personal</option><option>Nagad</option></select>
+<input id="wNumber" class="input" placeholder="bKash/Nagad নাম্বার">
+<button class="btn btn-gold" onclick="submitWithdraw()">Withdraw Request</button>
+<div style="margin-top:12px;"><h4 style="color:gold;font-size:13px;">📜 History</h4><div id="wHistory"></div></div>
+<button class="btn btn-red" onclick="closeM('withdrawModal')">Close</button>
+</div>
+</div>
+
+<div class="modal" id="adminModal">
+<div class="modal-box">
+<h3 style="color:gold;text-align:center;">👑 Admin</h3>
+<input id="adminPass" class="input" type="password" placeholder="Password">
+<button class="btn btn-gold" onclick="adminLogin()">Login</button>
+<div id="adminContent" style="display:none;">
+<p style="font-size:12px;color:#aaa;">Pending Requests:</p>
+<div id="adminRequests" style="max-height:300px;overflow:auto;background:#0a0a14;padding:10px;border-radius:8px;margin:10px 0;"></div>
+<h4 style="font-size:13px;color:gold;">Manual Add</h4>
+<input id="admU" class="input" placeholder="User Phone">
+<input id="admA" class="input" type="number" placeholder="Amount">
+<button class="btn btn-green" onclick="adminAddManual()">Add Money</button>
+<button class="btn btn-red" onclick="closeM('adminModal')">Close</button>
+</div>
+</div>
+</div>
+
 <script>
-function getWallet(){return parseInt(localStorage.getItem('wallet_balance')||'0');}
-function setWallet(v){localStorage.setItem('wallet_balance',v);document.getElementById('walletDisplay').innerText=v+'৳';updateHist();}
-function addHist(type,amt,name){let h=JSON.parse(localStorage.getItem('wallet_history')||'[]');h.unshift({type,amt,name,date:new Date().toLocaleString()});localStorage.setItem('wallet_history',JSON.stringify(h));updateHist();}
-function updateHist(){let h=JSON.parse(localStorage.getItem('wallet_history')||'[]');let el=document.getElementById('history');if(h.length==0)el.innerHTML='<span style="color:#666">No Transaction</span>';else el.innerHTML=h.slice(0,20).map(x=>`<div style="border-bottom:1px solid #222;padding:5px 0;"><b style="color:${x.type=='WIN'?'#0f0':'#f80'}">${x.type}</b> ${x.amt}৳ - ${x.name}<br><small style="color:#666">${x.date}</small></div>`).join('');}
-const simplePrizes=[{label:"1000৳",amount:1000},{label:"50৳",amount:50},{label:"90৳",amount:90},{label:"10৳",amount:10},{label:"100৳",amount:100},{label:"500৳",amount:500},{label:"20৳",amount:20},{label:"150৳",amount:150}];
-let usePrizes=simplePrizes;let colors=["#ff8c00","#9c27b0","#e91e63","#311b92","#ff6f00","#4caf50","#1a237e","#ff5722"];
-let canvas=document.getElementById('wheelCanvas');let ctx=canvas.getContext('2d');let isSpinning=false,rotation=0,currentFee=20,currentTour='';
-function drawWheel(){let cx=170,cy=170,r=162;let slice=2*Math.PI/usePrizes.length;ctx.clearRect(0,0,340,340);for(let i=0;i<usePrizes.length;i++){ctx.beginPath();ctx.fillStyle=colors[i%colors.length];ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,i*slice,(i+1)*slice);ctx.fill();ctx.strokeStyle='#ffd700';ctx.lineWidth=2;ctx.stroke();ctx.save();ctx.translate(cx,cy);ctx.rotate(i*slice+slice/2);ctx.textAlign='right';ctx.fillStyle='white';ctx.font='bold 15px Arial';ctx.fillText(usePrizes[i].label,r-20,5);ctx.restore();}ctx.beginPath();ctx.fillStyle='#0a0e2e';ctx.arc(cx,cy,42,0,2*Math.PI);ctx.fill();ctx.strokeStyle='#ffd700';ctx.lineWidth=3;ctx.stroke();}
-drawWheel();
-function openSpin(tour,fee){currentTour=tour;currentFee=fee;if(getWallet()<fee){alert('Balance কম! '+fee+'৳ লাগবে! বর্তমান: '+getWallet()+'৳');return;}document.getElementById('spinModal').style.display='flex';document.getElementById('spinResult').innerText='';}
-function closeSpin(){document.getElementById('spinModal').style.display='none';}
-function doSpin(){if(isSpinning)return;isSpinning=true;let bal=getWallet();setWallet(bal-currentFee);addHist('SPIN',-currentFee,currentTour+' Entry');document.getElementById('spinResult').innerText='ঘুরছে...';let finalIndex;let r=Math.random();if(r<0.4)finalIndex=3;else if(r<0.65)finalIndex=6;else if(r<0.85)finalIndex=1;else if(r<0.93)finalIndex=2;else if(r<0.98)finalIndex=4;else finalIndex=0;let sliceDeg=360/usePrizes.length;let target=360*5+(360-(finalIndex*sliceDeg+sliceDeg/2));let start=null,dur=3800;function anim(t){if(!start)start=t;let p=(t-start)/dur;if(p>1)p=1;let ease=1-Math.pow(1-p,4);rotation=ease*target;canvas.style.transform=`rotate(${rotation}deg)`;if(p<1)requestAnimationFrame(anim);else{isSpinning=false;let won=usePrizes[finalIndex];let newBal=getWallet()+won.amount;setWallet(newBal);addHist('WIN',won.amount,'Spin Win - '+won.label);document.getElementById('spinResult').innerHTML=`🎉 আপনি জিতেছেন <br><span style="font-size:30px;color:#00ff00;">${won.label} (${won.amount}৳)</span><br>Wallet এ যোগ হয়েছে!`;setTimeout(()=>{alert(`আপনি ${won.amount}৳ জিতেছেন! নতুন Balance: ${newBal}৳`);closeSpin();},1500);}}requestAnimationFrame(anim);}
-function openAdmin(){document.getElementById('adminPanel').style.display='flex';}
-function checkAdmin(){let p=document.getElementById('admPass').value;if(p==='01756596482'||p==='admin123'){document.getElementById('admMain').style.display='block';}else alert('Wrong Password! 01756596482');}
-function adminAdd(){let name=document.getElementById('winName').value.trim();let amt=parseInt(document.getElementById('winAmt').value);let tour=document.getElementById('winTour').value||'Admin Prize';if(!name||!amt){alert('Name ও Amount দাও');return;}let bal=getWallet();setWallet(bal+amt);addHist('WIN',amt,tour+' - Admin to '+name);alert(name+' কে '+amt+'৳ দেওয়া হলো!');document.getElementById('adminPanel').style.display='none';}
-setWallet(getWallet());updateHist();
+const tournaments=[
+{id:1,type:'br',cat:'lone',name:'বিয়ার ম্যাচ - Lone Wolf',entry:10,profit:70,mode:'Lone Wolf Off',time:'প্রতি 30 মিনিটে',players:'48 Player',icon:'🎯'},
+{id:2,type:'br',cat:'lone',name:'বিয়ার ম্যাচ - Duo',entry:15,profit:20,mode:'Lone Wolf Duo Off',time:'45 মিনিটে',players:'24 Team',icon:'🔥'},
+{id:3,type:'br',cat:'br',name:'বিয়ার ম্যাচ Duo',entry:20,profit:60,mode:'BR Duo',time:'1 ঘন্টায়',players:'25 Team',icon:'⚡'},
+{id:4,type:'custom',cat:'custom',name:'1v1 কাস্টম ম্যাচ',entry:5,profit:20,mode:'1v1 Custom',time:'Instant',players:'2 Player',icon:'🥊'},
+{id:5,type:'custom',cat:'custom',name:'2v2 কাস্টম ম্যাচ',entry:10,profit:15,mode:'2v2 Custom',time:'10 মিনিটে',players:'4 Player',icon:'👥'},
+{id:6,type:'custom',cat:'custom',name:'3v3 কাস্টম ম্যাচ',entry:10,profit:30,mode:'3v3 Custom',time:'10 মিনিটে',players:'6 Player',icon:'👑'},
+{id:7,type:'custom',cat:'custom',name:'ফ্রি কাস্টম - Big Match',entry:20,profit:100,mode:'Full Map',time:'2 ঘন্টায়',players:'48 Player',icon:'💣'},
+{id:8,type:'free',cat:'free',name:'ফ্রি কাস্টমার - Free Entry',entry:0,profit:20,mode:'Free Custom',time:'3 ঘন্টায়',players:'50 Player',icon:'🎁'}
+];
+let wallet=parseInt(localStorage.getItem('hb_wallet')||'0');
+let currentJoin=null;
+function saveWallet(v){wallet=v;localStorage.setItem('hb_wallet',v);document.getElementById('walletBal').innerText=v+'৳';}
+function render(list){let el=document.getElementById('tournamentList');el.innerHTML=list.map(t=>`<div class="card"><div class="card-left"><h3>${t.icon} ${t.name}</h3><div class="meta"><span class="badge entry">Entry ${t.entry}৳</span><span class="badge profit">Profit ${t.profit}৳</span><span class="badge">${t.mode}</span><span class="badge">⏰ ${t.time}</span></div></div><div class="card-right"><div class="profit-big">${t.profit}৳</div><div class="entry-small">Fee ${t.entry}৳</div><button class="btn-join ${t.entry==0?'free':''}" onclick="openJoin(${t.id})">${t.entry==0?'Free Join':'Join'}</button></div></div>`).join('');}
+function filterT(cat,el){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');if(cat=='all')render(tournaments);else render(tournaments.filter(t=>t.cat==cat||t.type==cat));}
+function openJoin(id){let t=tournaments.find(x=>x.id==id);currentJoin=t;document.getElementById('joinTitle').innerText=t.name;document.getElementById('joinDesc').innerText=t.mode+' | Profit '+t.profit+'৳';document.getElementById('joinFee').innerText=t.entry+'৳';document.getElementById('joinFeeBtn').innerText=t.entry+'৳';document.getElementById('joinForm').style.display='block';document.getElementById('joinSuccess').style.display='none';document.getElementById('joinModal').style.display='flex';}
+function confirmJoin(){let name=document.getElementById('playerName').value.trim();let phone=document.getElementById('playerPhone').value.trim();if(!name||!phone){alert('নাম ও নাম্বার দিন!');return;}if(wallet<currentJoin.entry){alert('Balance কম! '+currentJoin.entry+'৳ লাগবে!');openWallet();return;}let newW=wallet-currentJoin.entry;saveWallet(newW);let mid='HB'+Date.now().toString().slice(-6);document.getElementById('matchIdShow').innerText=mid;let joins=JSON.parse(localStorage.getItem('hb_joins')||'[]');joins.unshift({id:mid,tournament:currentJoin.name,entry:currentJoin.entry,profit:currentJoin.profit,name,phone,time:new Date().toLocaleString()});localStorage.setItem('hb_joins',JSON.stringify(joins));addHistory('JOIN','-'+currentJoin.entry+'৳',currentJoin.name+' - '+mid);document.getElementById('joinForm').style.display='none';document.getElementById('joinSuccess').style.display='block';}
+function addHistory(type,amt,name){let h=JSON.parse(localStorage.getItem('hb_hist')||'[]');h.unshift({type,amt,name,time:new Date().toLocaleString()});localStorage.setItem('hb_hist',JSON.stringify(h));}
+function openWallet(){document.getElementById('walletModal').style.display='flex';loadAddHistory();}
+function openWithdraw(){document.getElementById('wBal').innerText=wallet+'৳';document.getElementById('withdrawModal').style.display='flex';loadWHistory();}
+function closeM(id){document.getElementById(id).style.display='none';}
+function submitAddMoney(){let amt=parseInt(document.getElementById('addAmount').value);let trx=document.getElementById('trxId').value.trim();let sender=document.getElementById('senderNum').value.trim();if(!amt||!trx||!sender){alert('সব ঘর পূরণ করুন!');return;}let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');reqs.unshift({id:'REQ'+Date.now(),amount:amt,trx,sender,status:'Pending',time:new Date().toLocaleString()});localStorage.setItem('hb_add_req',JSON.stringify(reqs));addHistory('ADD_REQ',amt+'৳','bKash '+trx+' Pending');alert('Request পাঠানো হয়েছে!');loadAddHistory();}
+function loadAddHistory(){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');let el=document.getElementById('addHistory');if(reqs.length==0)el.innerHTML='<small style="color:#666">No Request</small>';else el.innerHTML=reqs.map(r=>`<div class="history-item"><b>${r.amount}৳</b> - ${r.trx} - <span style="color:${r.status=='Approved'?'#0f0':'#ff9800'}">${r.status}</span><br><small>${r.time}</small></div>`).join('');}
+function submitWithdraw(){let amt=parseInt(document.getElementById('wAmount').value);let num=document.getElementById('wNumber').value.trim();if(!amt||!num){alert('Amount ও নাম্বার দিন!');return;}if(amt<50){alert('Min 50৳');return;}if(wallet<amt){alert('Balance কম!');return;}let newW=wallet-amt;saveWallet(newW);let w=JSON.parse(localStorage.getItem('hb_w_req')||'[]');w.unshift({amount:amt,number:num,status:'Pending',time:new Date().toLocaleString()});localStorage.setItem('hb_w_req',JSON.stringify(w));addHistory('WITHDRAW','-'+amt+'৳','To '+num+' Pending');alert('Withdraw Request পাঠানো হয়েছে!');loadWHistory();}
+function loadWHistory(){let w=JSON.parse(localStorage.getItem('hb_w_req')||'[]');let el=document.getElementById('wHistory');if(w.length==0)el.innerHTML='<small style="color:#666">No Withdraw</small>';else el.innerHTML=w.map(r=>`<div class="history-item"><b>${r.amount}৳</b> to ${r.number} - <span style="color:orange;">${r.status}</span><br><small>${r.time}</small></div>`).join('');}
+function adminLogin(){let p=document.getElementById('adminPass').value;if(p=='01756596482'||p=='admin123'){document.getElementById('adminContent').style.display='block';loadAdminReq();}else alert('Wrong');}
+function loadAdminReq(){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');let el=document.getElementById('adminRequests');if(reqs.length==0)el.innerHTML='No Requests';else el.innerHTML=reqs.map((r,i)=>`<div style="border:1px solid #333;padding:8px;border-radius:8px;margin-bottom:6px;font-size:12px;"><b>${r.amount}৳</b> Trx:${r.trx} From:${r.sender}<br>Status:${r.status}<br><small>${r.time}</small><br>${r.status=='Pending'?`<button onclick="approveReq(${i})" style="background:#0f0;color:black;border:none;padding:4px 10px;border-radius:5px;margin-top:5px;">Approve</button> <button onclick="rejectReq(${i})" style="background:red;color:white;border:none;padding:4px 10px;border-radius:5px;">Reject</button>`:''}</div>`).join('');}
+function approveReq(i){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');let r=reqs[i];r.status='Approved';reqs[i]=r;localStorage.setItem('hb_add_req',JSON.stringify(reqs));let newW=wallet+r.amount;saveWallet(newW);addHistory('ADD','+'+r.amount+'৳','Approved '+r.trx);alert(r.amount+'৳ Approved!');loadAdminReq();loadAddHistory();}
+function rejectReq(i){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');reqs[i].status='Rejected';localStorage.setItem('hb_add_req',JSON.stringify(reqs));loadAdminReq();}
+function adminAddManual(){let u=document.getElementById('admU').value;let a=parseInt(document.getElementById('admA').value);if(!u||!a){alert('User ও Amount দিন');return;}let newW=wallet+a;saveWallet(newW);addHistory('ADMIN_ADD','+'+a+'৳','Manual to '+u);alert(u+' কে '+a+'৳ দেওয়া হলো!');}
+let pressTimer;document.querySelector('.logo').addEventListener('touchstart',()=>{pressTimer=setTimeout(()=>{document.getElementById('adminModal').style.display='flex';},1500);});document.querySelector('.logo').addEventListener('touchend',()=>clearTimeout(pressTimer));
+saveWallet(wallet);render(tournaments);
 </script>
 </body>
-</html><!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BD SPORTS - BD Tournament | Official</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3eb0ff">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#080c1c;color:#fff;padding-bottom:90px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#0f1530;position:sticky;top:0;z-index:10}
-.logo{display:flex;gap:8px;align-items:center;font-weight:900}
-.logo img{width:38px;height:38px;border-radius:8px;background:#000}
-.btn{padding:9px 16px;border-radius:10px;border:none;font-weight:800}
-.btn1{background:#1d2545;color:#fff;border:1px solid #2d375f}
-.btn2{background:linear-gradient(90deg,#3eb0ff,#a15cff);color:#000}
-.hero{margin:12px;background:linear-gradient(135deg,#1a2048,#301e5a);border-radius:18px;padding:18px;border:1px solid #2a345e}
-.bkash{margin:12px;background:#102040;border:2px dashed #00ff88;border-radius:14px;padding:14px;text-align:center}
-.card{background:#121a36;border:1px solid #253055;border-radius:14px;padding:14px;margin:10px 12px}
-.stat{background:#121a36;border:1px solid #253055;border-radius:12px;padding:12px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 12px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0f1530;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #253055;z-index:20}
-.nav{font-size:11px;color:#7e88a8;text-align:center}
-.nav.active{color:#4aa3ff}
-.plus{width:56px;height:56px;background:linear-gradient(90deg,#3eb0ff,#a15cff);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:#000;font-weight:900;margin-top:-28px}
-.wa{position:fixed;bottom:85px;right:14px;background:#25D366;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:15}
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:50;align-items:center;justify-content:center;padding:18px}
-.box{background:#131c3a;border:1px solid #2e3a65;border-radius:16px;padding:18px;width:100%;max-width:380px}
-.inp{width:100%;padding:11px;border-radius:9px;border:1px solid #2e3a65;background:#0f1530;color:#fff;margin:6px 0}
-</style>
-</head>
-<body>
-<div class="top">
-<div class="logo"><img src="logo.png" id="logoImg"><div>BD SPORTS<br><small style="font-size:9px;color:#8a94b8;letter-spacing:2px">BD TOURNAMENT</small><br><small id="userShow" style="font-size:10px;color:#00ff88"></small></div></div>
-<div><button class="btn btn1" onclick="openLogin()">লগইন</button> <button class="btn btn2" onclick="openSignup()">সাইন আপ</button></div>
-</div>
-
-<div class="hero">
-<small style="color:#5ab2ff">বাংলাদেশের সেরা - 100% বিশ্বস্ত - BD Tournament</small>
-<h1 style="font-size:28px;margin:8px 0">BD SPORTS<br><span style="color:#4aa3ff">TOURNAMENT</span></h1>
-<p style="color:#a8b3cc;font-size:13px">প্রতিদিন Solo, Duo, Squad - bKash 01756596482</p>
-</div>
-
-<div class="bkash">
-<div>💰 Official bKash - বিশ্বস্ত</div>
-<h2 style="color:#00ff88;font-size:24px;margin:6px 0">01756596482</h2>
-<small style="color:#9aadc8">Personal - Send Money</small><br>
-<button class="btn btn2" style="width:100%;margin-top:10px" onclick="showDep()">+ টাকা Add - Deposit</button>
-</div>
-
-<div class="stats">
-<div class="stat">🏆 <b id="tCount">0</b><br><small>চলমান টুর্নামেন্ট</small></div>
-<div class="stat">💰 <b>৳<span id="prizePool">9690</span></b><br><small>প্রাইজ পুল</small></div>
-<div class="stat">👥 <b>47+</b><br><small>প্লেয়ার</small></div>
-<div class="stat">🛡️ <b>100%</b><br><small>Trusted</small></div>
-</div>
-
-<div class="card">
-<div style="display:flex;justify-content:space-between"><span>💳 আমার ওয়ালেট</span><b id="bal" style="color:#00ff88">৳0</b></div>
-<div style="display:flex;gap:10px;margin-top:10px"><button class="btn btn2" style="flex:1" onclick="showDep()">Deposit</button><button class="btn btn1" style="flex:1" onclick="showWith()">Withdraw</button></div>
-</div>
-
-<div style="padding:0 14px;margin-top:14px;display:flex;justify-content:space-between"><h3>🔥 টুর্নামেন্ট লিস্ট</h3><button class="btn btn1" style="font-size:11px" onclick="addTournamentPrompt()">+ Add Tournament (Admin)</button></div>
-<div id="tList"></div>
-
-<div class="card" style="border-left:4px solid #00ff88"><b>🛡️ কেন বিশ্বস্ত?</b><br><small style="color:#a8b3cc">✅ bKash 01756596482 Instant<br>✅ Wallet System<br>✅ 24/7 WhatsApp: অটো মেসেজে "আমার একটা সমস্যা হইছে"</small></div>
-
-<div class="wa" onclick="autoWA()">💬</div>
-<div class="bottom">
-<div class="nav active">🏠<br>হোম</div>
-<div class="nav" onclick="document.getElementById('tList').scrollIntoView()">🏆<br>টুর্নামেন্ট</div>
-<div class="nav" onclick="showDep()"><div class="plus">+</div>ডিপোজিট</div>
-<div class="nav" onclick="showMyMatches()">🎮<br>আমার ম্যাচ</div>
-<div class="nav" onclick="showDep()">💳<br>ওয়ালেট</div>
-</div>
-
-<!-- MODALS -->
-<div class="modal" id="authModal"><div class="box">
-<h3 id="authTitle">Login</h3>
-<input class="inp" id="authName" placeholder="নাম / Username">
-<input class="inp" id="authPass" type="password" placeholder="Password">
-<button class="btn btn2" style="width:100%" onclick="doAuth()">Confirm</button>
-<button class="btn btn1" style="width:100%;margin-top:8px" onclick="hideAll()">Close</button>
-</div></div>
-
-<div class="modal" id="depModal"><div class="box">
-<h3>Deposit - 01756596482</h3>
-<input class="inp" id="dnum" placeholder="আপনার bKash Number">
-<input class="inp" id="damt" placeholder="Amount">
-<input class="inp" id="dtrx" placeholder="TrxID">
-<button class="btn btn2" style="width:100%" onclick="submitDep()">Submit</button>
-<button class="btn btn1" style="width:100%;margin-top:8px" onclick="hideAll()">Close</button>
-</div></div>
-
-<div class="modal" id="withModal"><div class="box">
-<h3>Withdraw</h3>
-<input class="inp" id="wNum" placeholder="আপনার bKash - 017...">
-<input class="inp" id="wAmt" placeholder="Amount - Min 100">
-<button class="btn btn2" style="width:100%" onclick="doWithdraw()">Withdraw Request</button>
-<button class="btn btn1" style="width:100%;margin-top:8px" onclick="hideAll()">Close</button>
-</div></div>
-
-<script>
-let currentUser = localStorage.getItem('bd_user') || null;
-let users = JSON.parse(localStorage.getItem('bd_users')||'{}');
-let bal = parseInt(localStorage.getItem('bd_bal_'+(currentUser||'guest'))||'0');
-let tournaments = JSON.parse(localStorage.getItem('bd_tournaments')||'null') || [
-{ id:1, name:'BDFF BR SQUAD - SEASON 2', map:'Bermuda', entry:50, prize:5500, left:12},
-{ id:2, name:'SOLO KILL RUSH - Daily', map:'Bermuda', entry:20, prize:800, left:28},
-{ id:3, name:'DUO TOURNAMENT - Night', map:'Purgatory', entry:40, prize:2000, left:15}
-];
-let myMatches = JSON.parse(localStorage.getItem('bd_my_'+(currentUser||'guest'))||'[]');
-
-function save(){localStorage.setItem('bd_tournaments',JSON.stringify(tournaments)); render();}
-function render(){
-document.getElementById('tCount').innerText=tournaments.length;
-document.getElementById('bal').innerText='৳'+bal;
-document.getElementById('userShow').innerText=currentUser? '👤 '+currentUser : '';
-let html='';
-tournaments.forEach(t=>{
-html+=`<div class="card"><h3>${t.name}</h3><p style="font-size:12px;color:#8a94b8;margin:6px 0">${t.map} | Entry: ৳${t.entry} | Prize: ৳${t.prize} | ${t.left} Left</p><button class="btn btn2" style="width:100%" onclick="joinT(${t.id})">রেজিস্ট্রেশন - ৳${t.entry} (Wallet থেকে কাটবে)</button></div>`;
-});
-document.getElementById('tList').innerHTML=html;
-}
-function openLogin(){document.getElementByIdctx.lineWidth=1; ctx.stroke();
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(i*slice+slice/2);style="color:gold; margin-top:15px; font-size:18px; font-weight:bold; text-align:center;"></p>
-  
-  <button onclick="closeSpin()" style="position:absolute; top:20px; right:20px; width:40px; height:40px; background:white; border-radius:50%; font-size:20px; border:none;">X</button>
-  
-  <p style="color:#aaa; margin-top:10px;">Entry Fee: 20৳ | Balance থেকে কাটবে</p>
-</div>
-
-<
+</html>
