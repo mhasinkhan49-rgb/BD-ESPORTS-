@@ -50,3 +50,30 @@ function loadRequests(){
     let realIndex = reqs.length-1-i;
     html+=`<div class="card ${r.status=='Pending'?'pending':r.status=='Approved'?'approved':'rejected'}">
       <b>💰 ${r.amount} Taka</b>
+<!DOC
+FF TOP UP BD - DIAMOND PRICE LIST
+
+DIAMOND PACKAGES:
+100 Diamond = 80 TK
+310 Diamond = 240 TK
+520 Diamond = 410 TK
+1060 Diamond = 820 TK
+2180 Diamond = 1650 TK
+5600 Diamond = 4000 TK
+
+SPECIAL PASS:
+Weekly Lite = 160 TK
+Weekly Pass = 240 TK
+Monthly Pass = 800 TK
+Level Up Pass = 100 TK
+
+PAYMENT: bKash / Nagad
+DELIVERY: 1 Minute - UID Only
+SHOP: FF TOP UP BD
+SUPPORT: 24/7 WhatsApp
+
+Order System:
+1. Enter Free Fire UID
+2. Select Package
+3. Pay via bKash/Nagad
+4. Get Diamond in 1 MinTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NxT TOP UP BD</title><style>body{margin:0;background:#0a0a0a;color:#fff;font-family:Arial,sans-serif}.header{background:#151515;padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ffcc00}.logo{color:#ffcc00;font-weight:900;font-size:22px}.live{background:#ffcc00;color:#000;padding:5px 12px;border-radius:20px;font-weight:900;font-size:12px}.banner{margin:12px;background:linear-gradient(90deg,#ff6600,#ffcc00);color:#000;padding:15px;border-radius:12px;text-align:center;font-weight:900}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}.card{background:#1e1e1e;border:1px solid #333;border-radius:14px;padding:12px;text-align:center}.price{color:#ffcc00;font-weight:900;font-size:20px;margin:8px 0}.btn{background:#ffcc00;color:#000;border:none;padding:10px;width:100%;border-radius:20px;font-weight:900}.form{background:#151515;margin:12px;padding:16px;border-radius:16px;border:1px solid #333}.input{width:100%;padding:13px;margin:8px 0;border-radius:10px;border:1px solid #444;background:#0a0a0a;color:#fff;box-sizing:border-box}.order{width:100%;background:#25D366;color:#fff;padding:15px;border:none;border-radius:12px;font-weight:900;font-size:17px}</style></head><body><div class="header"><div class="logo">NxT TOP UP BD</div><div class="live">24/7 LIVE</div></div><div class="banner">1 Minute Delivery - bKash: 01756596482</div><div class="grid"><div class="card"><div>100 Diamond</div><div class="price">80 TK</div><button class="btn" onclick="selectPkg('100 Diamond - 80 TK')">BUY NOW</button></div><div class="card"><div>210 Diamond</div><div class="price">170 TK</div><button class="btn" onclick="selectPkg('210 Diamond - 170 TK')">BUY NOW</button></div><div class="card"><div>520 Diamond</div><div class="price">420 TK</div><button class="btn" onclick="selectPkg('520 Diamond - 420 TK')">BUY NOW</button></div><div class="card"><div>1060 Diamond</div><div class="price">850 TK</div><button class="btn" onclick="selectPkg('1060 Diamond - 850 TK')">BUY NOW</button></div><div class="card"><div>Weekly Pass</div><div class="price">152 TK</div><button class="btn" onclick="selectPkg('Weekly Pass - 152 TK')">BUY NOW</button></div><div class="card"><div>Monthly Pass</div><div class="price">775 TK</div><button class="btn" onclick="selectPkg('Monthly Pass - 775 TK')">BUY NOW</button></div></div><div class="form"><input id="uid" class="input" placeholder="Free Fire UID"><input id="pkg" class="input" placeholder="Package" readonly><button class="order" onclick="orderNow()">WhatsApp Order</button></div><script>function selectPkg(v){document.getElementById('pkg').value=v}function orderNow(){var u=document.getElementById('uid').value;var p=document.getElementById('pkg').value;if(!u){alert('UID din');return}window.open("https://wa.me/8801756596482?text=ORDER UID:"+u+" Package:"+p)}</script></body></html>
