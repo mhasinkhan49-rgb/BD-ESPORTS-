@@ -13,13 +13,7 @@ body{background:#0a0e1a;color:white}function doPost(e) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var data = JSON.parse(e.postData.contents);
   sheet.appendRow([new Date(), data.amount, data.trx, data.sender, data.method, "Pending"]);
-  return ContentService.createTextOutput(JSON.stringify({result:"success"})).setMimeType(ContentService.MimeType.JSON);
-}
-function doGet() {
-  return ContentService.createTextOutput("Bot is Running - Hello Bangladesh");
-}
-.topbar{background:linear-gradient(90deg,#b71c1c,#d32f2f);padding:10px 15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
-.logo{font-size:20px;font-weight:800;color:#ffeb3b}
+  return ContentService.createTextOutput(JSON.stringify({result:"success"})).setMimeType(ContentService.MimeType.JSON)logo{font-size:20px;font-weight:800;color:#ffeb3b}
 .wallet{background:rgba(0,0,0,0.4);border:1px solid gold;border-radius:25px;padding:7px 16px;display:flex;gap:12px;font-size:14px}
 .hero{background:radial-gradient(circle at center,#1a237e 0%,#0a0e1a 70%);padding:25px 15px;text-align:center;border-bottom:2px solid gold}
 .hero h1{font-size:26px;color:#ffeb3b}
@@ -131,29 +125,7 @@ function doGet() {
 <input id="admA" class="input" type="number" placeholder="Amount">
 <button class="btn btn-green" onclick="adminAddManual()">Add Money</button>
 <button class="btn btn-red" onclick="closeM('adminModal')">Close</button>
-</div>
-</div>
-</div>
-function submitAddMoney(){
-  let amt=document.getElementById('addAmount').value;
-  let trx=document.getElementById('trxId').value;
-  let sender=document.getElementById('senderNum').value;
-  let method=document.getElementById('payMethod').value;
-  if(!amt||!trx){alert('Amount আর TrxID দাও');return;}
-  
-  // Save Locally
-  let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');
-  reqs.push({amount:amt,trx:trx,sender:sender,method:method,status:'Pending',time:new Date().toLocaleString()});
-  localStorage.setItem('hb_requests',JSON.stringify(reqs));
-  
-  // WhatsApp to Admin 01756596482
-  let msg=`🔥 NEW ADD MONEY REQUEST%0A💰 Amount: ${amt}৳%0A🆔 TrxID: ${trx}%0A📱 Sender: ${sender}%0A💳 Method: ${method}%0A%0AApprove করতে admin.html এ যাও`;
-  window.open(`https://wa.me/8801756596482?text=${msg}`,'_blank');
-  
-  alert('Request পাঠানো হয়েছে! Admin 2-5 মিনিটে Approve করবে');
-  closeM('walletModal');
-}
-<script>
+</div
 const tournaments=[
 {id:1,type:'br',cat:'lone',name:'বিয়ার ম্যাচ - Lone Wolf',entry:10,profit:70,mode:'Lone Wolf Off',time:'প্রতি 30 মিনিটে',players:'48 Player',icon:'🎯'},
 {id:2,type:'br',cat:'lone',name:'বিয়ার ম্যাচ - Duo',entry:15,profit:20,mode:'Lone Wolf Duo Off',time:'45 মিনিটে',players:'24 Team',icon:'🔥'},
@@ -188,4 +160,12 @@ let pressTimer;document.querySelector('.logo').addEventListener('touchstart',()=
 saveWallet(wallet);render(tournaments);
 </script>
 </body>
-</html>
+</html>body{background:#... 
+var sheet = SpreadsheetApp...
+var data = JSON...
+sheet.appendRow...
+return ContentService...
+}
+function doGet() {
+  return ContentService.createTextOutput("Bot is Running - Hello Bangladesh");
+}
