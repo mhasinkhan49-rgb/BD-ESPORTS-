@@ -390,5 +390,124 @@
 
             <div class="card">
                 <div class="card-img"><i class="fa-solid fa-user-group"></i></div>
-                <div class="card
-                    
+                <div class="card-content">
+                    <h3>ডুও ক্ল্যাশ</h3>
+                    <p>ম্যাপ: কালাহারি | মোড: ক্লাসিক</p>
+                    <span class="price-tag">এন্ট্রি ফি: ৩০ টাকা</span>
+                    <button class="btn" onclick="openModal('Duo Clash', '30')">জয়েন করুন</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><i class="fa-solid fa-user"></i></div>
+                <div class="card-content">
+                    <h3>সোলে র‍্যাংকড</h3>
+                    <p>ম্যাপ: পারগেটরি | মোড: র‍্যাংকড</p>
+                    <span class="price-tag">এন্ট্রি ফি: ২০ টাকা</span>
+                    <button class="btn" onclick="openModal('Solo Ranked', '20')">জয়েন করুন</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="tournamentTitle">রেজিস্ট্রেশন</h2>
+            <p>সিলেক্ট করুন পেমেন্ট মেথড:</p>
+            
+            <div class="payment-methods">
+                <button class="method-btn active" onclick="setPaymentMethod('bKash')">bKash</button>
+                <button class="method-btn" onclick="setPaymentMethod('Nagad')">Nagad</button>
+                <button class="method-btn" onclick="setPaymentMethod('Rocket')">Rocket</button>
+            </div>
+
+            <p>এই নাম্বারে সেন্ড মানি করুন:</p>
+            <div class="number-box">
+                <span id="paymentNumber">01756596482</span>
+                <button class="copy-btn" onclick="copyNumber()">কপি</button>
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label>আপনার ইন-গেম নাম (IGN):</label>
+                    <input type="text" id="ign" required placeholder="উদাহরণ: Boss_Player">
+                </div>
+                <div class="form-group">
+                    <label>পেমেন্ট ট্রানজেকশন আইডি (TrxID):</label>
+                    <input type="text" id="trxid" required placeholder="উদাহরণ: 9F8E7D6C5B">
+                </div>
+                <button type="submit" class="btn">সাবমিট</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/8801756596482" class="whatsapp-float" target="_blank" title="হেল্পলাইন">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <p>&copy; ২০২৬ হ্যালো বাংলাদেশ টুর্নামেন্ট। সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <script>
+        const numbers = {
+            bKash: '01756596482',
+            Nagad: '01756596482',
+            Rocket: '01756596482'
+        };
+
+        let currentTournament = '';
+        let currentPrice = '';
+        let currentMethod = 'bKash';
+
+        function openModal(title, price) {
+            currentTournament = title;
+            currentPrice = price;
+            document.getElementById('tournamentTitle').innerText = title + ' - ফি ' + price + ' টাকা';
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        function setPaymentMethod(method) {
+            currentMethod = method;
+            document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('paymentNumber').innerText = numbers[method];
+        }
+
+        function copyNumber() {
+            const numberText = document.getElementById('paymentNumber').innerText;
+            navigator.clipboard.writeText(numberText).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = 'কপি হয়েছে!';
+                setTimeout(() => btn.innerText = originalText, 2000);
+            });
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ign = document.getElementById('ign').value;
+            const trxid = document.getElementById('trxid').value;
+
+            alert(`ধন্যবাদ ${ign}! আপনার রেজিস্ট্রেশন রিকোয়েস্ট জমা দেওয়া হয়েছে। TrxID: ${trxid}`);
+            closeModal();
+            this.reset();
+        });
+
+        window.onclick = function(event) {
+            const overlay = document.getElementById('modalOverlay');
+            if (event.target == overlay) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
