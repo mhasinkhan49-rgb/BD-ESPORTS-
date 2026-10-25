@@ -1,401 +1,52 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>হ্যালো বাংলাদেশ টুর্নামেন্ট</title>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --accent-color: #3b82f6;
-            --text-color: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #2d2d2d;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* Navbar */
-        nav {
-            background-color: var(--card-bg);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-color);
-            letter-spacing: 1px;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 8rem 5% 4rem;
-            text-align: center;
-            background-color: var(--bg-color);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 1rem;
-        }
-
-        .btn {
-            background-color: var(--accent-color);
-            color: #ffffff;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: opacity 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        /* Tournaments Section */
-        .tournaments {
-            padding: 3rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            border-left: 3px solid var(--accent-color);
-            padding-left: 0.5rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .card-body h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-body p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .match-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.2rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.5rem 0;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 6px;
-            width: 90%;
-            max-width: 450px;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-
-        .modal h2 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .number-box {
-            background: #111;
-            padding: 0.8rem;
-            border-radius: 4px;
-            text-align: center;
-            margin: 1rem 0;
-            border: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .copy-btn {
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-            padding: 0.3rem 0.8rem;
-            cursor: pointer;
-            border-radius: 3px;
-            font-size: 0.85rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .form-group input {
-            width: 100%;
-            background: #121212;
-            border: 1px solid var(--border-color);
-            padding: 0.7rem;
-            color: var(--text-color);
-            border-radius: 4px;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: var(--accent-color);
-        }
-
-        .modal .btn {
-            width: 100%;
-        }
-
-        /* WhatsApp Floating Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            background-color: #25d366;
-            color: #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            z-index: 1000;
-            text-decoration: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--card-bg);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - হ্যালো বাংলাদেশ</title>
+<style>
+body{background:#000;color:#FFD700;font-family:Arial;text-align:center;padding:20px}
+input,button{padding:12px;margin:8px;border-radius:8px;border:none;font-size:16px}
+button{background:#FFD700;color:#000;font-weight:bold;cursor:pointer}
+.card{background:#111;border:1px solid #FFD700;padding:15px;margin:10px auto;border-radius:12px;max-width:500px;text-align:left}
+.pending{border-left:5px solid orange}
+.approved{border-left:5px solid #00ff00}
+.rejected{border-left:5px solid red}
+</style>
 </head>
 <body>
+<h1>👑 Admin Panel - হ্যালো বাংলাদেশ</h1>
 
-    <nav>
-        <div class="logo">HBT TOURNAMENT</div>
-        <div class="nav-links">
-            <a href="#home">হোম</a>
-            <a href="#tournaments">টুর্নামেন্ট</a>
-        </div>
-    </nav>
+<div id="loginBox">
+<input type="password" id="pass" placeholder="Password লিখো: admin123" style="width:80%;max-width:300px">
+<br>
+<button onclick="login()">Login</button>
+<p id="msg" style="color:red"></p>
+</div>
 
-    <header class="hero" id="home">
-        <h1>হ্যালো বাংলাদেশ টুর্নামেন্ট</h1>
-        <p>প্রতিদিন সোলো, ডুও এবং স্কোয়াড ম্যাচে অংশ নিয়ে আপনার স্কিল প্রমাণ করুন এবং পুরস্কার জিতে নিন।</p>
-        <a href="#tournaments" class="btn">টুর্নামেন্ট দেখুন</a>
-    </header>
+<div id="panel" style="display:none">
+<h2>💰 Add Money Requests</h2>
+<div id="list"></div>
+<button onclick="clearAll()" style="background:red;color:white;margin-top:20px">সব Delete করো</button>
+</div>
 
-    <section class="tournaments" id="tournaments">
-        <h2 class="section-title">চলমান টুর্নামেন্ট</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <div class="card-body">
-                    <h3>স্কোয়াড ব্যাটল</h3>
-                    <p>ম্যাপ: বারমুডা | মোড: টিডিএম</p>
-                    <div class="match-info">
-                        <span>ফি: ৫০ টাকা</span>
-                        <span>প্রাইজ পুল: ১০০০ টাকা</span>
-                    </div>
-                    <button class="btn" style="width: 100%;" onclick="openModal('Squad Battle', '50')">রেজিস্ট্রেশন করুন</button>
-                </div>
-            </div>
+<script>
+function login(){
+  let p = document.getElementById('pass').value.trim();
+  if(p === 'admin123'){
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('panel').style.display='block';
+    loadRequests();
+  } else {
+    document.getElementById('msg').innerText = 'ভুল! আবার লিখো: admin123 (ছোট হাতের)';
+  }
+}
 
-            <div class="card">
-                <div class="card-body">
-                    <h3>সোলো র‍্যাংকড</h3>
-                    <p>ম্যাপ: পারগেটরি | মোড: সোলো</p>
-                    <div class="match-info">
-                        <span>ফি: ২০ টাকা</span>
-                        <span>প্রাইজ পুল: ৪০০ টাকা</span>
-                    </div>
-                    <button class="btn" style="width: 100%;" onclick="openModal('Solo Ranked', '20')">রেজিস্ট্রেশন করুন</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Payment Modal -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 id="tournamentTitle">রেজিস্ট্রেশন</h2>
-            
-            <p style="font-size: 0.9rem; color: var(--text-muted);">বিকাশ সেন্ড মানি করুন:</p>
-            <div class="number-box">
-                <span id="paymentNumber" style="font-weight: 600;">01756596482</span>
-                <button class="copy-btn" onclick="copyNumber()">কপি</button>
-            </div>
-
-            <form id="registrationForm">
-                <div class="form-group">
-                    <label>ইন-গেম নাম (IGN)</label>
-                    <input type="text" id="ign" required placeholder="আপনার নাম">
-                </div>
-                <div class="form-group">
-                    <label>ট্রানজেকশন আইডি (TrxID)</label>
-                    <input type="text" id="trxid" required placeholder="যেমন: 9F8E7D6C">
-                </div>
-                <button type="submit" class="btn">কনফার্ম করুন</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/8801756596482" class="whatsapp-float" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
-    <footer>
-        <p>&copy; ২০২৬ হ্যালো বাংলাদেশ টুর্নামেন্ট। সর্বস্বত্ব সংরক্ষিত।</p>
-    </footer>
-
-    <script>
-        function openModal(title, price) {
-            document.getElementById('tournamentTitle').innerText = title + ' (ফি ' + price + ' টাকা)';
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
-        function copyNumber() {
-            const numberText = document.getElementById('paymentNumber').innerText;
-            navigator.clipboard.writeText(numberText).then(() => {
-                const btn = event.target;
-                btn.innerText = 'কপি হয়েছে';
-                setTimeout(() => btn.innerText = 'কপি', 2000);
-            });
-        }
-
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const ign = document.getElementById('ign').value;
-            alert('ধন্যবাদ ' + ign + '! আপনার তথ্য সফলভাবে জমা হয়েছে।');
-            closeModal();
-            this.reset();
-        });
-
-        window.onclick = function(event) {
-            const overlay = document.getElementById('modalOverlay');
-            if (event.target == overlay) {
-                closeModal();
-            }
-        }
-    </script>
-</body>
-</html>
+function loadRequests(){
+  let reqs = JSON.parse(localStorage.getItem('hb_requests')||'[]');
+  let html = '';
+  if(reqs.length==0){ html='<p>কোনো Request নেই</p>'; }
+  reqs.reverse().forEach((r,i)=>{
+    let realIndex = reqs.length-1-i;
+    html+=`<div class="card ${r.status=='Pending'?'pending':r.status=='Approved'?'approved':'rejected'}">
+      <b>💰 ${r.amount} Taka</b>
