@@ -1,189 +1,394 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>হ্যালো বাংলাদেশ টুর্নামেন্ট</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>হ্যালো বাংলাদেশ টুর্নামেন্ট</title>
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --secondary: #ff0055;
+            --dark: #0f0f12;
+            --dark-gray: #1a1a24;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+        }
 
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - হ্যালো বাংলাদেশ</title>
-<style>body{background:#070a14;color:white;font-family:Arial;padding:15px} .card{background:#1e1e2f;border:1px solid gold;border-radius:10px;padding:12px;margin:10px 0} .btn{padding:8px 15px;border:none;border-radius:8px;font-weight:bold;margin:3px} .approve{background:#00c853;color:white} .reject{background:#d32f2f;color:white} input{padding:10px;width:100%;margin:10px 0;border-radius:8px}</style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            background: rgba(15, 15, 18, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(15, 15, 18, 0.8), #0f0f12), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* Tournaments Section */
+        .tournaments {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--dark-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card-img {
+            height: 200px;
+            background: #2a2a36;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: var(--text-muted);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Payment Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--dark-gray);
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--primary);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-btn {
+            flex: 1;
+            background: #2a2a36;
+            color: var(--text);
+            border: 1px solid #444;
+            padding: 0.8rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .method-btn.active, .method-btn:hover {
+            border-color: var(--primary);
+            background: rgba(0, 255, 204, 0.1);
+        }
+
+        .number-box {
+            background: #000;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border: 1px dashed var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .number-box span {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input {
+            width: 100%;
+            background: #2a2a36;
+            border: 1px solid #444;
+            padding: 0.8rem;
+            color: var(--text);
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .modal .btn {
+            width: 100%;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25d366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #000;
+            color: var(--text-muted);
+            margin-top: 5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<h2 style="color:gold;text-align:center;">👑 Admin Panel - হ্যালো বাংলাদেশ</h2>
-<input type="password" id="pass" placeholder="Admin Password দাও">
-<button onclick="login()" style="width:100%;padding:10px;background:gold;border:none;border-radius:8px;font-weight:bold;">Login</button>
-<div id="panel" style="display:none;">
-<h3>💰 Pending Add Money Requests</h3>
-<div id="reqList"></div>
-<h3 style="margin-top:20px;">💸 Withdraw Requests</h3>
-<div id="withList"></div>
-</div>
-<script>
-function login(){if(document.getElementById('pass').value=='admin123'){document.getElementById('panel').style.display='block';load();}else alert('Wrong! Password is admin123');}
-function load(){
-let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');
-document.getElementById('reqList').innerHTML=reqs.map((r,i)=>`<div class="card">${r.amount}৳ - ${r.trx} - ${r.sender} - ${r.method} - <b style="color:orange">${r.status}</b><br><small>${r.time}</small><br><button class="btn approve" onclick="approve(${i})">Approve</button><button class="btn reject" onclick="reject(${i})">Reject</button></div>`).join('')||'No Request';
-let w=JSON.parse(localStorage.getItem('hb_withdraw')||'[]');
-document.getElementById('withList').innerHTML=w.map((x,i)=>`<div class="card">${x.amount}৳ - ${x.number} - <b>${x.status}</b><br><button class="btn approve" onclick="approveW(${i})">Paid</button></div>`).join('')||'No Withdraw';
-}
-function approve(i){let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');let r=reqs[i];r.status='Approved';let bal=parseInt(localStorage.getItem('hb_wallet')||'0');localStorage.setItem('hb_wallet',bal+parseInt(r.amount));localStorage.setItem('hb_requests',JSON.stringify(reqs));load();alert('Approved! '+r.amount+'৳ added');}
-function reject(i){let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');reqs[i].status='Rejected';localStorage.setItem('hb_requests',JSON.stringify(reqs));load();}
-function approveW(i){let w=JSON.parse(localStorage.getItem('hb_withdraw')||'[]');w[i].status='Paid';localStorage.setItem('hb_withdraw',JSON.stringify(w));load();}
-</script>
-</body>
-</html>    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
-<style>
-    <div class="marquee"><div class="marquee-track">🇧🇩 হ্যালো বাংলাদেশ টুর্নামেন্ট...</div></div>
-<div class="bkash-strip"><div>💳 Wallet Add: 01756596482 (bKash)</div><div>📱 Nagad: 01756596482</div></div>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Hind Siliguri',Arial}
-body{background:#0a0e1a;color:white}function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([new Date(), data.amount, data.trx, data.sender, data.method, "Pending"]);
-  return ContentService.createTextOutput(JSON.stringify({result:"success"})).setMimeType(ContentService.MimeType.JSON)logo{font-size:20px;font-weight:800;color:#ffeb3b}
-.wallet{background:rgba(0,0,0,0.4);border:1px solid gold;border-radius:25px;padding:7px 16px;display:flex;gap:12px;font-size:14px}
-.hero{background:radial-gradient(circle at center,#1a237e 0%,#0a0e1a 70%);padding:25px 15px;text-align:center;border-bottom:2px solid gold}
-.hero h1{font-size:26px;color:#ffeb3b}
-.hero p{color:#ccc;margin-top:6px;font-size:13px}
-.tabs{display:flex;overflow-x:auto;background:#111;padding:8px;gap:8px;position:sticky;top:48px;z-index:98}
-.tab{white-space:nowrap;padding:8px 16px;border-radius:20px;background:#222;border:1px solid #333;cursor:pointer;font-size:13px}
-.tab.active{background:gold;color:black;font-weight:bold;border-color:gold}
-.container{padding:12px}
-.card{background:linear-gradient(135deg,#1e1e2f,#12121e);border:1px solid #333;border-left:4px solid gold;border-radius:14px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.card-left h3{font-size:16px}
-.card-left .meta{font-size:11px;color:#aaa;margin:4px 0;display:flex;gap:8px;flex-wrap:wrap}
-.badge{background:#222;border-radius:6px;padding:2px 7px;font-size:10px}
-.badge.profit{background:#1b5e20;color:#66ff66;border:1px solid #2e7d32}
-.badge.entry{background:#b71c1c;color:#ff8a80}
-.profit-big{font-size:20px;font-weight:800;color:#00e676}
-.entry-small{font-size:11px;color:#ff5252}
-.btn-join{margin-top:6px;background:linear-gradient(90deg,#ff3d00,#ff9100);border:none;color:white;padding:8px 18px;border-radius:20px;font-weight:700;cursor:pointer;font-size:13px;width:110px}
-.btn-join.free{background:linear-gradient(90deg,#00c853,#64dd17)}
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;display:none;justify-content:center;align-items:center;padding:15px}
-.modal-box{background:#15151f;border:2px solid gold;border-radius:16px;padding:20px;width:100%;max-width:380px;max-height:90vh;overflow:auto}
-.input{width:100%;padding:11px;background:#0f0f1a;border:1px solid #333;border-radius:8px;color:white;margin:7px 0;font-size:14px}
-.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-top:8px}
-.btn-gold{background:gold;color:black}
-.btn-green{background:#00c853;color:white}
-.btn-red{background:#222;color:#aaa;border:1px solid #333}
-.bkash-box{background:#e40064;color:white;border-radius:10px;padding:12px;margin:10px 0;text-align:center}
-.history-item{border-bottom:1px solid #222;padding:7px 0;font-size:12px}
-</style>
-</head> onclick="openWallet()" style="cursor:pointer">👤</span></div>
-</div>
-<div class="hero">
-<h1>হ্যালো বাংলাদেশ টুর্নামেন্ট</h1>
-<p>🔥 BR & Custom Tournament - রিয়েল টাকা জিতো!</p>
-<div style="margin-top:12px;display:flex;gap:10px;justify-content:center;">
-<button onclick="openWallet()" style="background:gold;color:black;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;font-size:13px;">💰 টাকা Add করো</button>
-<button onclick="openWithdraw()" style="background:#222;color:white;border:1px solid #555;padding:8px 16px;border-radius:20px;font-size:13px;">💸 Withdraw</button>
-</div>
-</div>
-<div class="tabs" id="tabs">
-<div class="tab active" onclick="filterT('all',this)">সব ম্যাচ</div>
-<div class="tab" onclick="filterT('br',this)">বিয়ার ম্যাচ</div>
-<div class="tab" onclick="filterT('lone',this)">Lone Wolf</div>
-<div class="tab" onclick="filterT('custom',this)">কাস্টম ম্যাচ</div>
-<div class="tab" onclick="filterT('free',this)">ফ্রি কাস্টম</div>
-</div>
-<div class="container" id="tournamentList"></div>
 
-<div class="modal" id="joinModal">
-<div class="modal-box">
-<h3 style="color:gold;text-align:center;" id="joinTitle">Tournament Join</h3>
-<p style="font-size:12px;color:#aaa;text-align:center;margin:5px 0;" id="joinDesc"></p>
-<div id="joinForm">
-<p style="font-size:12px;color:#ff8a80;">Entry Fee: <b id="joinFee"></b></p>
-<input id="playerName" class="input" placeholder="Free Fire নাম (UID)">
-<input id="playerPhone" class="input" placeholder="WhatsApp নাম্বার">
-<button class="btn btn-gold" onclick="confirmJoin()">✅ Confirm Join - <span id="joinFeeBtn"></span></button>
-<button class="btn btn-red" onclick="closeM('joinModal')">Cancel</button>
-</div>
-<div id="joinSuccess" style="display:none;text-align:center;">
-<h2 style="color:#00e676;">✅ Join সফল!</h2>
-<p>ID: <b id="matchIdShow"></b></p>
-<p style="font-size:12px;color:#aaa;">Room ID 10 মিনিট আগে WhatsApp এ পাবেন!</p>
-<button class="btn btn-gold" onclick="closeM('joinModal')">OK</button>
-</div>
-</div>
-</div>
+    <nav>
+        <div class="logo">HBT</div>
+        <div class="nav-links">
+            <a href="#home">হোম</a>
+            <a href="#tournaments">টুর্নামেন্ট</a>
+            <a href="#contact">কন্টাক্ট</a>
+        </div>
+    </nav>
 
-<div class="modal" id="walletModal">
-<div class="modal-box">
-<h3 style="color:gold;text-align:center;">💰 টাকা Add করুন</h3>
-<div class="bkash-box"><p style="font-size:12px;">এই নাম্বারে bKash Send Money</p><b>01756596482</b><br><small>Personal</small></div>
-<input id="addAmount" class="input" type="number" placeholder="কত টাকা পাঠিয়েছেন? ex: 100">
-<input id="trxId" class="input" placeholder="Transaction ID (TrxID)">
-<input id="senderNum" class="input" placeholder="যে নাম্বার থেকে পাঠিয়েছেন">
-<button class="btn btn-green" onclick="submitAddMoney()">📤 Request পাঠান</button>
-<p style="font-size:11px;color:#aaa;margin-top:8px;text-align:center;">* Admin 2-5 মিনিটে Approve করবে।</p>
-<div style="margin-top:15px;"><h4 style="color:gold;font-size:13px;">📜 My Requests</h4><div id="addHistory"></div></div>
-<button class="btn btn-red" onclick="closeM('walletModal')">Close</button>
-</div>
-</div>
+    <header class="hero" id="home">
+        <h1>হ্যালো বাংলাদেশ টুর্নামেন্টে স্বাগতম</h1>
+        <p>আপনার পছন্দের ফ্রি ফায়ার টুর্নামেন্টে অংশ নিন এবং প্রাইজমানি জিতে নিন। সেরা স্কোয়াড কে হবে?</p>
+        <a href="#tournaments" class="btn">রেজিস্ট্রেশন করুন</a>
+    </header>
 
-<div class="modal" id="withdrawModal">
-<div class="modal-box">
-<h3 style="color:gold;text-align:center;">💸 Withdraw</h3>
-<p style="font-size:12px;color:#aaa;text-align:center;">ব্যালেন্স: <b id="wBal" style="color:#00e676;">0৳</b> | Min 50৳</p>
-<input id="wAmount" class="input" type="number" placeholder="কত টাকা তুলবেন?">
-<select id="wMethod" class="input"><option>bKash Personal</option><option>Nagad</option></select>
-<input id="wNumber" class="input" placeholder="bKash/Nagad নাম্বার">
-<button class="btn btn-gold" onclick="submitWithdraw()">Withdraw Request</button>
-<div style="margin-top:12px;"><h4 style="color:gold;font-size:13px;">📜 History</h4><div id="wHistory"></div></div>
-<button class="btn btn-red" onclick="closeM('withdrawModal')">Close</button>
-</div>
-</div>
+    <section class="tournaments" id="tournaments">
+        <h2 class="section-title">আপকামিং টুর্নামেন্ট</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div class="card-img"><i class="fa-solid fa-users"></i></div>
+                <div class="card-content">
+                    <h3>স্কোয়াড ব্যাটল</h3>
+                    <p>ম্যাপ: বারমুডা | মোড: টিডিএম</p>
+                    <span class="price-tag">এন্ট্রি ফি: ৫০ টাকা</span>
+                    <button class="btn" onclick="openModal('Squad Battle', '50')">জয়েন করুন</button>
+                </div>
+            </div>
 
-<div class="modal" id="adminModal">
-<div class="modal-box">
-<h3 style="color:gold;text-align:center;">👑 Admin</h3>
-<input id="adminPass" class="input" type="password" placeholder="Password">
-<button class="btn btn-gold" onclick="adminLogin()">Login</button>
-<div id="adminContent" style="display:none;">
-<p style="font-size:12px;color:#aaa;">Pending Requests:</p>
-<div id="adminRequests" style="max-height:300px;overflow:auto;background:#0a0a14;padding:10px;border-radius:8px;margin:10px 0;"></div>
-<h4 style="font-size:13px;color:gold;">Manual Add</h4>
-<input id="admU" class="input" placeholder="User Phone">
-<input id="admA" class="input" type="number" placeholder="Amount">
-<button class="btn btn-green" onclick="adminAddManual()">Add Money</button>
-<button class="btn btn-red" onclick="closeM('adminModal')">Close</button>
-</div
-const tournaments=[
-{id:1,type:'br',cat:'lone',name:'বিয়ার ম্যাচ - Lone Wolf',entry:10,profit:70,mode:'Lone Wolf Off',time:'প্রতি 30 মিনিটে',players:'48 Player',icon:'🎯'},
-{id:2,type:'br',cat:'lone',name:'বিয়ার ম্যাচ - Duo',entry:15,profit:20,mode:'Lone Wolf Duo Off',time:'45 মিনিটে',players:'24 Team',icon:'🔥'},
-{id:3,type:'br',cat:'br',name:'বিয়ার ম্যাচ Duo',entry:20,profit:60,mode:'BR Duo',time:'1 ঘন্টায়',players:'25 Team',icon:'⚡'},
-{id:4,type:'custom',cat:'custom',name:'1v1 কাস্টম ম্যাচ',entry:5,profit:20,mode:'1v1 Custom',time:'Instant',players:'2 Player',icon:'🥊'},
-{id:5,type:'custom',cat:'custom',name:'2v2 কাস্টম ম্যাচ',entry:10,profit:15,mode:'2v2 Custom',time:'10 মিনিটে',players:'4 Player',icon:'👥'},
-{id:6,type:'custom',cat:'custom',name:'3v3 কাস্টম ম্যাচ',entry:10,profit:30,mode:'3v3 Custom',time:'10 মিনিটে',players:'6 Player',icon:'👑'},
-{id:7,type:'custom',cat:'custom',name:'ফ্রি কাস্টম - Big Match',entry:20,profit:100,mode:'Full Map',time:'2 ঘন্টায়',players:'48 Player',icon:'💣'},
-{id:8,type:'free',cat:'free',name:'ফ্রি কাস্টমার - Free Entry',entry:0,profit:20,mode:'Free Custom',time:'3 ঘন্টায়',players:'50 Player',icon:'🎁'}
-];
-let wallet=parseInt(localStorage.getItem('hb_wallet')||'0');
-let currentJoin=null;
-function saveWallet(v){wallet=v;localStorage.setItem('hb_wallet',v);document.getElementById('walletBal').innerText=v+'৳';}
-function render(list){let el=document.getElementById('tournamentList');el.innerHTML=list.map(t=>`<div class="card"><div class="card-left"><h3>${t.icon} ${t.name}</h3><div class="meta"><span class="badge entry">Entry ${t.entry}৳</span><span class="badge profit">Profit ${t.profit}৳</span><span class="badge">${t.mode}</span><span class="badge">⏰ ${t.time}</span></div></div><div class="card-right"><div class="profit-big">${t.profit}৳</div><div class="entry-small">Fee ${t.entry}৳</div><button class="btn-join ${t.entry==0?'free':''}" onclick="openJoin(${t.id})">${t.entry==0?'Free Join':'Join'}</button></div></div>`).join('');}
-function filterT(cat,el){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');if(cat=='all')render(tournaments);else render(tournaments.filter(t=>t.cat==cat||t.type==cat));}
-function openJoin(id){let t=tournaments.find(x=>x.id==id);currentJoin=t;document.getElementById('joinTitle').innerText=t.name;document.getElementById('joinDesc').innerText=t.mode+' | Profit '+t.profit+'৳';document.getElementById('joinFee').innerText=t.entry+'৳';document.getElementById('joinFeeBtn').innerText=t.entry+'৳';document.getElementById('joinForm').style.display='block';document.getElementById('joinSuccess').style.display='none';document.getElementById('joinModal').style.display='flex';}
-function confirmJoin(){let name=document.getElementById('playerName').value.trim();let phone=document.getElementById('playerPhone').value.trim();if(!name||!phone){alert('নাম ও নাম্বার দিন!');return;}if(wallet<currentJoin.entry){alert('Balance কম! '+currentJoin.entry+'৳ লাগবে!');openWallet();return;}let newW=wallet-currentJoin.entry;saveWallet(newW);let mid='HB'+Date.now().toString().slice(-6);document.getElementById('matchIdShow').innerText=mid;let joins=JSON.parse(localStorage.getItem('hb_joins')||'[]');joins.unshift({id:mid,tournament:currentJoin.name,entry:currentJoin.entry,profit:currentJoin.profit,name,phone,time:new Date().toLocaleString()});localStorage.setItem('hb_joins',JSON.stringify(joins));addHistory('JOIN','-'+currentJoin.entry+'৳',currentJoin.name+' - '+mid);document.getElementById('joinForm').style.display='none';document.getElementById('joinSuccess').style.display='block';}
-function addHistory(type,amt,name){let h=JSON.parse(localStorage.getItem('hb_hist')||'[]');h.unshift({type,amt,name,time:new Date().toLocaleString()});localStorage.setItem('hb_hist',JSON.stringify(h));}
-function openWallet(){document.getElementById('walletModal').style.display='flex';loadAddHistory();}
-function openWithdraw(){document.getElementById('wBal').innerText=wallet+'৳';document.getElementById('withdrawModal').style.display='flex';loadWHistory();}
-function closeM(id){document.getElementById(id).style.display='none';}
-function submitAddMoney(){let amt=parseInt(document.getElementById('addAmount').value);let trx=document.getElementById('trxId').value.trim();let sender=document.getElementById('senderNum').value.trim();if(!amt||!trx||!sender){alert('সব ঘর পূরণ করুন!');return;}let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');reqs.unshift({id:'REQ'+Date.now(),amount:amt,trx,sender,status:'Pending',time:new Date().toLocaleString()});localStorage.setItem('hb_add_req',JSON.stringify(reqs));addHistory('ADD_REQ',amt+'৳','bKash '+trx+' Pending');alert('Request পাঠানো হয়েছে!');loadAddHistory();}
-function loadAddHistory(){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');let el=document.getElementById('addHistory');if(reqs.length==0)el.innerHTML='<small style="color:#666">No Request</small>';else el.innerHTML=reqs.map(r=>`<div class="history-item"><b>${r.amount}৳</b> - ${r.trx} - <span style="color:${r.status=='Approved'?'#0f0':'#ff9800'}">${r.status}</span><br><small>${r.time}</small></div>`).join('');}
-function submitWithdraw(){let amt=parseInt(document.getElementById('wAmount').value);let num=document.getElementById('wNumber').value.trim();if(!amt||!num){alert('Amount ও নাম্বার দিন!');return;}if(amt<50){alert('Min 50৳');return;}if(wallet<amt){alert('Balance কম!');return;}let newW=wallet-amt;saveWallet(newW);let w=JSON.parse(localStorage.getItem('hb_w_req')||'[]');w.unshift({amount:amt,number:num,status:'Pending',time:new Date().toLocaleString()});localStorage.setItem('hb_w_req',JSON.stringify(w));addHistory('WITHDRAW','-'+amt+'৳','To '+num+' Pending');alert('Withdraw Request পাঠানো হয়েছে!');loadWHistory();}
-function loadWHistory(){let w=JSON.parse(localStorage.getItem('hb_w_req')||'[]');let el=document.getElementById('wHistory');if(w.length==0)el.innerHTML='<small style="color:#666">No Withdraw</small>';else el.innerHTML=w.map(r=>`<div class="history-item"><b>${r.amount}৳</b> to ${r.number} - <span style="color:orange;">${r.status}</span><br><small>${r.time}</small></div>`).join('');}
-function adminLogin(){let p=document.getElementById('adminPass').value;if(p=='01756596482'||p=='admin123'){document.getElementById('adminContent').style.display='block';loadAdminReq();}else alert('Wrong');}
-function loadAdminReq(){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');let el=document.getElementById('adminRequests');if(reqs.length==0)el.innerHTML='No Requests';else el.innerHTML=reqs.map((r,i)=>`<div style="border:1px solid #333;padding:8px;border-radius:8px;margin-bottom:6px;font-size:12px;"><b>${r.amount}৳</b> Trx:${r.trx} From:${r.sender}<br>Status:${r.status}<br><small>${r.time}</small><br>${r.status=='Pending'?`<button onclick="approveReq(${i})" style="background:#0f0;color:black;border:none;padding:4px 10px;border-radius:5px;margin-top:5px;">Approve</button> <button onclick="rejectReq(${i})" style="background:red;color:white;border:none;padding:4px 10px;border-radius:5px;">Reject</button>`:''}</div>`).join('');}
-function approveReq(i){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');let r=reqs[i];r.status='Approved';reqs[i]=r;localStorage.setItem('hb_add_req',JSON.stringify(reqs));let newW=wallet+r.amount;saveWallet(newW);addHistory('ADD','+'+r.amount+'৳','Approved '+r.trx);alert(r.amount+'৳ Approved!');loadAdminReq();loadAddHistory();}
-function rejectReq(i){let reqs=JSON.parse(localStorage.getItem('hb_add_req')||'[]');reqs[i].status='Rejected';localStorage.setItem('hb_add_req',JSON.stringify(reqs));loadAdminReq();}
-function adminAddManual(){let u=document.getElementById('admU').value;let a=parseInt(document.getElementById('admA').value);if(!u||!a){alert('User ও Amount দিন');return;}let newW=wallet+a;saveWallet(newW);addHistory('ADMIN_ADD','+'+a+'৳','Manual to '+u);alert(u+' কে '+a+'৳ দেওয়া হলো!');}
-let pressTimer;document.querySelector('.logo').addEventListener('touchstart',()=>{pressTimer=setTimeout(()=>{document.getElementById('adminModal').style.display='flex';},1500);});document.querySelector('.logo').addEventListener('touchend',()=>clearTimeout(pressTimer));
-saveWallet(wallet);render(tournaments);
-</script>
-</body>
+            <div class="card">
+                <div class="card-img"><i class="fa-solid fa-user-group"></i></div>
+                <div class="card
+                    
