@@ -4,7 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>হ্যালো বাংলাদেশ টুর্নামেন্ট</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - হ্যালো বাংলাদেশ</title>
+<style>body{background:#070a14;color:white;font-family:Arial;padding:15px} .card{background:#1e1e2f;border:1px solid gold;border-radius:10px;padding:12px;margin:10px 0} .btn{padding:8px 15px;border:none;border-radius:8px;font-weight:bold;margin:3px} .approve{background:#00c853;color:white} .reject{background:#d32f2f;color:white} input{padding:10px;width:100%;margin:10px 0;border-radius:8px}</style>
+</head>
+<body>
+<h2 style="color:gold;text-align:center;">👑 Admin Panel - হ্যালো বাংলাদেশ</h2>
+<input type="password" id="pass" placeholder="Admin Password দাও">
+<button onclick="login()" style="width:100%;padding:10px;background:gold;border:none;border-radius:8px;font-weight:bold;">Login</button>
+<div id="panel" style="display:none;">
+<h3>💰 Pending Add Money Requests</h3>
+<div id="reqList"></div>
+<h3 style="margin-top:20px;">💸 Withdraw Requests</h3>
+<div id="withList"></div>
+</div>
+<script>
+function login(){if(document.getElementById('pass').value=='admin123'){document.getElementById('panel').style.display='block';load();}else alert('Wrong! Password is admin123');}
+function load(){
+let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');
+document.getElementById('reqList').innerHTML=reqs.map((r,i)=>`<div class="card">${r.amount}৳ - ${r.trx} - ${r.sender} - ${r.method} - <b style="color:orange">${r.status}</b><br><small>${r.time}</small><br><button class="btn approve" onclick="approve(${i})">Approve</button><button class="btn reject" onclick="reject(${i})">Reject</button></div>`).join('')||'No Request';
+let w=JSON.parse(localStorage.getItem('hb_withdraw')||'[]');
+document.getElementById('withList').innerHTML=w.map((x,i)=>`<div class="card">${x.amount}৳ - ${x.number} - <b>${x.status}</b><br><button class="btn approve" onclick="approveW(${i})">Paid</button></div>`).join('')||'No Withdraw';
+}
+function approve(i){let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');let r=reqs[i];r.status='Approved';let bal=parseInt(localStorage.getItem('hb_wallet')||'0');localStorage.setItem('hb_wallet',bal+parseInt(r.amount));localStorage.setItem('hb_requests',JSON.stringify(reqs));load();alert('Approved! '+r.amount+'৳ added');}
+function reject(i){let reqs=JSON.parse(localStorage.getItem('hb_requests')||'[]');reqs[i].status='Rejected';localStorage.setItem('hb_requests',JSON.stringify(reqs));load();}
+function approveW(i){let w=JSON.parse(localStorage.getItem('hb_withdraw')||'[]');w[i].status='Paid';localStorage.setItem('hb_withdraw',JSON.stringify(w));load();}
+</script>
+</body>
+</html>    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
     <div class="marquee"><div class="marquee-track">🇧🇩 হ্যালো বাংলাদেশ টুর্নামেন্ট...</div></div>
 <div class="bkash-strip"><div>💳 Wallet Add: 01756596482 (bKash)</div><div>📱 Nagad: 01756596482</div></div>
@@ -42,11 +73,7 @@ body{background:#0a0e1a;color:white}function doPost(e) {
 .bkash-box{background:#e40064;color:white;border-radius:10px;padding:12px;margin:10px 0;text-align:center}
 .history-item{border-bottom:1px solid #222;padding:7px 0;font-size:12px}
 </style>
-</head>
-<body>
-<div class="topbar">
-<div class="logo">🇧🇩 হ্যালো বাংলাদেশ</div>
-<div class="wallet"><span>💰 <b id="walletBal">0৳</b></span><span onclick="openWallet()" style="cursor:pointer">👤</span></div>
+</head> onclick="openWallet()" style="cursor:pointer">👤</span></div>
 </div>
 <div class="hero">
 <h1>হ্যালো বাংলাদেশ টুর্নামেন্ট</h1>
@@ -160,12 +187,3 @@ let pressTimer;document.querySelector('.logo').addEventListener('touchstart',()=
 saveWallet(wallet);render(tournaments);
 </script>
 </body>
-</html>body{background:#... 
-var sheet = SpreadsheetApp...
-var data = JSON...
-sheet.appendRow...
-return ContentService...
-}
-function doGet() {
-  return ContentService.createTextOutput("Bot is Running - Hello Bangladesh");
-}
