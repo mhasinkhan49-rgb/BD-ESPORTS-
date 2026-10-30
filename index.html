@@ -3,224 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pro Mobile Soccer 2026</title>
+    <title>Pro Soccer 2026</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-            -webkit-user-select: none;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #0d1117;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        #game-wrapper {
-            position: relative;
-            width: 100vw;
-            max-width: 420px;
-            height: 100vh;
-            max-height: 800px;
-            background: #111e16;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 2px solid #2e7d32;
-            box-shadow: 0 0 25px rgba(0, 255, 128, 0.2);
-        }
-        /* Header Bar */
-        .top-bar {
-            background: rgba(15, 23, 42, 0.9);
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        .scoreboard {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            font-weight: 800;
-            font-size: 14px;
-        }
-        .team-score { margin: 0 6px; color: #00e676; font-size: 16px; }
-        .match-timer { color: #ffeb3b; font-size: 13px; margin-left: 10px; font-family: monospace; }
-        .token-badge {
-            background: rgba(255, 193, 7, 0.15);
-            border: 1px solid #ffc107;
-            color: #ffc107;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Pitch Canvas Area */
-        .stadium-area {
-            position: relative;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #27692b;
-            overflow: hidden;
-        }
-        canvas {
-            background-color: #2e7d32;
-            display: block;
-        }
-
-        /* Mobile Controls */
-        .controls-panel {
-            height: 170px;
-            background: rgba(10, 14, 23, 0.95);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            z-index: 10;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .d-pad { position: relative; width: 120px; height: 120px; }
-        .d-btn {
-            position: absolute;
-            width: 38px;
-            height: 38px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            color: white;
-            font-size: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            touch-action: manipulation;
-            cursor: pointer;
-        }
-        .d-btn:active { background: rgba(0, 230, 118, 0.5); border-color: #00e676; }
-        .d-up { top: 0; left: 41px; }
-        .d-down { bottom: 0; left: 41px; }
-        .d-left { top: 41px; left: 0; }
-        .d-right { top: 41px; right: 0; }
-
-        .action-btns { display: flex; gap: 10px; align-items: center; }
-        .action-btn {
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.4);
-            color: white;
-            font-weight: 800;
-            font-size: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-        .action-btn:active { transform: scale(0.92); }
-        .btn-pass { background: linear-gradient(135deg, #1e88e5, #1565c0); }
-        .btn-sprint { background: linear-gradient(135deg, #43a047, #2e7d32); }
-        .btn-shoot { background: linear-gradient(135deg, #e53935, #c62828); }
-
-        .shop-trigger-btn {
-            position: absolute;
-            top: 55px;
-            right: 12px;
-            background: linear-gradient(135deg, #ffb300, #ff8f00);
-            color: #000;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 11px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .overlay-screen {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 8, 15, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 20;
-            padding: 20px;
-            text-align: center;
-        }
-        .character-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 12px;
-            margin: 8px 0;
-            width: 85%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .buy-action-btn {
-            background: linear-gradient(135deg, #ffc107, #ff8f00);
-            color: #000;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-        .buy-action-btn:disabled { background: #444; color: #888; }
-        .close-shop-btn {
-            margin-top: 15px;
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; font-family: sans-serif; }
+        body { background: #111; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        #game-container { position: relative; width: 100vw; max-width: 420px; height: 100vh; max-height: 750px; background: #2e7d32; display: flex; flex-direction: column; border: 2px solid #444; }
+        .header { background: rgba(0,0,0,0.8); padding: 10px; display: flex; justify-content: space-between; align-items: center; z-index: 10; font-size: 14px; font-weight: bold; }
+        .scoreboard { background: rgba(0,0,0,0.5); padding: 5px 12px; border-radius: 15px; border: 1px solid #777; }
+        .tokens { background: rgba(255,193,7,0.2); border: 1px solid #ffc107; color: #ffc107; padding: 4px 10px; border-radius: 15px; }
+        .stadium { position: relative; flex: 1; display: flex; justify-content: center; align-items: center; background: #388e3c; overflow: hidden; }
+        canvas { background: #4caf50; display: block; }
+        .controls { height: 160px; background: rgba(0,0,0,0.7); display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; z-index: 10; }
+        .d-pad { position: relative; width: 110px; height: 110px; }
+        .d-btn { position: absolute; width: 36px; height: 36px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; }
+        .d-up { top: 0; left: 37px; } .d-down { bottom: 0; left: 37px; } .d-left { top: 37px; left: 0; } .d-right { top: 37px; right: 0; }
+        .action-btns { display: flex; gap: 10px; }
+        .btn { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #fff; color: white; font-weight: bold; font-size: 11px; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+        .btn-pass { background: #1976d2; } .btn-sprint { background: #388e3c; } .btn-shoot { background: #d32f2f; }
+        .shop-btn { position: absolute; top: 50px; right: 10px; background: #ffb300; color: #000; border: none; padding: 5px 10px; border-radius: 12px; font-weight: bold; cursor: pointer; z-index: 10; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; padding: 20px; text-align: center; }
+        .card { background: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; margin: 8px 0; width: 80%; display: flex; justify-content: space-between; align-items: center; }
+        .buy-btn { background: #ffc107; color: #000; border: none; padding: 6px 12px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .buy-btn:disabled { background: #555; color: #888; }
+        .close-btn { margin-top: 15px; background: #d32f2f; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; }
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div id="game-wrapper">
-    <div class="top-bar">
-        <div class="scoreboard">
-            <span>YOU</span> <span id="score-user" class="team-score">0</span>
-            -
-            <span id="score-bot" class="team-score">0</span> <span>BOT</span>
-            <span id="match-timer" class="match-timer">01:00</span>
-        </div>
-        <div class="token-badge">🪙 <span id="token-count">0</span></div>
+<div id="game-container">
+    <div class="header">
+        <div class="scoreboard">YOU <span id="score-user">0</span> - <span id="score-bot">0</span> BOT <span id="timer" style="color:#ffeb3b; margin-left:10px;">01:00</span></div>
+        <div class="tokens">🪙 <span id="token-count">0</span></div>
     </div>
 
-    <button class="shop-trigger-btn" onclick="openShopModal()">🛒 শপ</button>
+    <button class="shop-btn" onclick="openShop()">🛒 শপ</button>
 
-    <div class="stadium-area">
+    <div class="stadium">
         <canvas id="fieldCanvas" width="360" height="480"></canvas>
     </div>
 
-    <div class="controls-panel">
+    <div class="controls">
         <div class="d-pad">
             <div class="d-btn d-up" id="btn-up">▲</div>
             <div class="d-btn d-left" id="btn-left">◀</div>
@@ -228,49 +51,34 @@
             <div class="d-btn d-down" id="btn-down">▼</div>
         </div>
         <div class="action-btns">
-            <div class="action-btn btn-pass" id="btn-pass">PASS</div>
-            <div class="action-btn btn-sprint" id="btn-sprint">SPRINT</div>
-            <div class="action-btn btn-shoot" id="btn-shoot">SHOOT</div>
+            <div class="btn btn-pass" id="btn-pass">PASS</div>
+            <div class="btn btn-sprint" id="btn-sprint">SPRINT</div>
+            <div class="btn btn-shoot" id="btn-shoot">SHOOT</div>
         </div>
     </div>
 
-    <!-- Shop Modal -->
-    <div id="shop-modal" class="overlay-screen hidden">
-        <h2 style="color: #ffc107; margin-bottom: 5px;">ক্যারেক্টার শপ</h2>
-        <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">টোকেন দিয়ে প্লেয়ার কিনুন</p>
-        
-        <div class="character-card">
-            <div style="text-align: left;">
-                <strong style="color: #ff4081; font-size: 16px;">লি (Lee)</strong>
-                <div style="font-size: 11px; color:#4fc3f7;">স্পিড ড্রিবলার (+৩৫% গতি)</div>
-            </div>
-            <button class="buy-action-btn" id="buy-lee" onclick="buyCharacter('Lee', 10000)">১০,০০০ 🪙</button>
+    <div id="shop-modal" class="overlay hidden">
+        <h2>ক্যারেক্টার শপ</h2>
+        <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">১০,০০০ টোকেন দিয়ে প্লেয়ার কিনুন</p>
+        <div class="card">
+            <div style="text-align:left;"><strong style="color:#ff4081;">লি (Lee)</strong><div style="font-size:11px; color:#ccc;">স্পিড: +৩৫%</div></div>
+            <button class="buy-btn" id="buy-lee" onclick="buyChar('Lee')">১০,০০০ 🪙</button>
         </div>
-
-        <div class="character-card">
-            <div style="text-align: left;">
-                <strong style="color: #00e676; font-size: 16px;">আফা (Afa)</strong>
-                <div style="font-size: 11px; color:#4fc3f7;">পাওয়ার স্ট্রাইকার (+৫০% শট)</div>
-            </div>
-            <button class="buy-action-btn" id="buy-afa" onclick="buyCharacter('Afa', 10000)">১০,০০০ 🪙</button>
+        <div class="card">
+            <div style="text-align:left;"><strong style="color:#00e676;">আফা (Afa)</strong><div style="font-size:11px; color:#ccc;">পাওয়ার: +৫০%</div></div>
+            <button class="buy-btn" id="buy-afa" onclick="buyChar('Afa')">১০,০০০ 🪙</button>
         </div>
-
-        <div class="character-card">
-            <div style="text-align: left;">
-                <strong style="color: #00b0ff; font-size: 16px;">ফিফা (Fifa)</strong>
-                <div style="font-size: 11px; color:#4fc3f7;">অল-রাউন্ড মাস্টার</div>
-            </div>
-            <button class="buy-action-btn" id="buy-fifa" onclick="buyCharacter('Fifa', 10000)">১০,০০০ 🪙</button>
+        <div class="card">
+            <div style="text-align:left;"><strong style="color:#00b0ff;">ফিফা (Fifa)</strong><div style="font-size:11px; color:#ccc;">মাস্টার স্ট্যাটস</div></div>
+            <button class="buy-btn" id="buy-fifa" onclick="buyChar('Fifa')">১০,০০০ 🪙</button>
         </div>
-
-        <button class="close-shop-btn" onclick="closeShopModal()">বন্ধ করুন</button>
+        <button class="close-btn" onclick="closeShop()">বন্ধ করুন</button>
     </div>
 
-    <!-- Match End Modal -->
-    <div id="end-modal" class="overlay-screen hidden">
-        <h1 id="match-result-title" style="color: #00e676;">ম্যাচ সমাপ্ত!</h1>
-        <p id="reward-info" style="margin: 15px 0; color: #ffc107; font-size: 18px; font-weight: bold;"></p>
-        <button class="buy-action-btn" style="padding: 12px 28px; font-size: 16px;" onclick="restartGameMatch()">আবার খেলুন</button>
+    <div id="end-modal" class="overlay hidden">
+        <h1 id="match-result">ম্যাচ সমাপ্ত!</h1>
+        <p id="reward-text" style="margin: 15px 0; color: #ffc107; font-size: 16px;"></p>
+        <button class="buy-btn" style="padding: 10px 20px;" onclick="restartMatch()">আবার খেলুন</button>
     </div>
 </div>
 
@@ -282,22 +90,14 @@
     let unlockedChars = JSON.parse(localStorage.getItem('unlocked_chars') || '[]');
     let selectedChar = localStorage.getItem('selected_char') || 'Normal';
 
-    let userScore = 0;
-    let botScore = 0;
-    let matchTime = 60;
-    let gameLoopInterval = null;
-    let timerLoopInterval = null;
-
-    const keys = { up: false, down: false, left: false, right: false, sprint: false };
+    let userScore = 0, botScore = 0, matchTime = 60;
+    let gameInterval, timerInterval;
+    let keys = { up: false, down: false, left: false, right: false, sprint: false };
     document.getElementById('token-count').innerText = tokens;
 
     class Ball {
         constructor(x, y) {
-            this.x = x; this.y = y;
-            this.vx = 0; this.vy = 0;
-            this.radius = 6;
-            this.friction = 0.97;
-            this.owner = null;
+            this.x = x; this.y = y; this.vx = 0; this.vy = 0; this.radius = 5; this.friction = 0.97; this.owner = null;
         }
         update() {
             if (this.owner) {
@@ -305,93 +105,59 @@
                 this.y = this.owner.y + Math.sin(this.owner.angle) * 12;
                 this.vx = 0; this.vy = 0;
             } else {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.vx *= this.friction;
-                this.vy *= this.friction;
-
+                this.x += this.vx; this.y += this.vy;
+                this.vx *= this.friction; this.vy *= this.friction;
                 if(this.x < 12) { this.x = 12; this.vx *= -0.6; }
                 if(this.x > canvas.width - 12) { this.x = canvas.width - 12; this.vx *= -0.6; }
                 
-                // Goal Logic
-                if(this.y < 15) {
-                    if(this.x > 110 && this.x < 250) {
-                        userScore++;
-                        document.getElementById('score-user').innerText = userScore;
-                        resetFieldPositions();
-                    } else { this.y = 15; this.vy *= -0.6; }
+                if(this.y < 12) {
+                    if(this.x > 110 && this.x < 250) { userScore++; document.getElementById('score-user').innerText = userScore; resetPos(); }
+                    else { this.y = 12; this.vy *= -0.6; }
                 }
-                if(this.y > canvas.height - 15) {
-                    if(this.x > 110 && this.x < 250) {
-                        botScore++;
-                        document.getElementById('score-bot').innerText = botScore;
-                        resetFieldPositions();
-                    } else { this.y = canvas.height - 15; this.vy *= -0.6; }
+                if(this.y > canvas.height - 12) {
+                    if(this.x > 110 && this.x < 250) { botScore++; document.getElementById('score-bot').innerText = botScore; resetPos(); }
+                    else { this.y = canvas.height - 12; this.vy *= -0.6; }
                 }
             }
         }
         draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
-            ctx.fill();
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-            ctx.closePath();
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff'; ctx.fill(); ctx.stroke(); ctx.closePath();
         }
     }
 
     class Player {
-        constructor(x, y, team, jerseyNum, isGK = false, isMain = false) {
-            this.startX = x; this.startY = y;
-            this.x = x; this.y = y;
-            this.team = team; 
-            this.jerseyNum = jerseyNum;
-            this.isGK = isGK;
-            this.isMain = isMain;
-            this.radius = 12;
-            this.speed = isGK ? 2.0 : 2.5;
-            this.angle = 0;
+        constructor(x, y, team, num, isGK = false, isMain = false) {
+            this.startX = x; this.startY = y; this.x = x; this.y = y;
+            this.team = team; this.num = num; this.isGK = isGK; this.isMain = isMain;
+            this.radius = 10; this.speed = isGK ? 2.0 : 2.5; this.angle = 0;
         }
-
         update() {
             let speedMult = 1;
             if(this.isMain) {
                 if(selectedChar === 'Lee') speedMult = 1.35;
                 if(selectedChar === 'Fifa') speedMult = 1.45;
             }
-
             if (this.isMain) {
                 let dx = 0, dy = 0;
-                if (keys.up) dy -= 1;
-                if (keys.down) dy += 1;
-                if (keys.left) dx -= 1;
-                if (keys.right) dx += 1;
-
+                if (keys.up) dy -= 1; if (keys.down) dy += 1; if (keys.left) dx -= 1; if (keys.right) dx += 1;
                 if (dx !== 0 || dy !== 0) {
                     this.angle = Math.atan2(dy, dx);
                     let curSpeed = this.speed * speedMult * (keys.sprint ? 1.5 : 1);
-                    this.x += Math.cos(this.angle) * curSpeed;
-                    this.y += Math.sin(this.angle) * curSpeed;
+                    this.x += Math.cos(this.angle) * curSpeed; this.y += Math.sin(this.angle) * curSpeed;
                 }
             } else if (this.isGK) {
                 this.x += (ball.x - this.x) * 0.1;
                 this.x = Math.max(120, Math.min(240, this.x));
             } else {
-                let target = ball;
                 if (this.team === 'bot') {
                     if (ball.owner === this) {
-                        let goalX = 180, goalY = 10;
-                        this.angle = Math.atan2(goalY - this.y, goalX - this.x);
+                        this.angle = Math.atan2(10 - this.y, 180 - this.x);
                         this.x += Math.cos(this.angle) * (this.speed * 1.1);
                         this.y += Math.sin(this.angle) * (this.speed * 1.1);
-
-                        if(this.y < 140) {
-                            shootBallAction(this, 0, -1);
-                        }
+                        if(this.y < 140) shoot(this, 0, -1);
                     } else {
-                        this.angle = Math.atan2(target.y - this.y, target.x - this.x);
+                        this.angle = Math.atan2(ball.y - this.y, ball.x - this.x);
                         this.x += Math.cos(this.angle) * (this.speed * 1.05);
                         this.y += Math.sin(this.angle) * (this.speed * 1.05);
                     }
@@ -401,153 +167,151 @@
                     }
                 }
             }
+            this.x = Math.max(14, Math.min(canvas.width - 14, this.x));
+            this.y = Math.max(14, Math.min(canvas.height - 14, this.y));
 
-            this.x = Math.max(15, Math.min(canvas.width - 15, this.x));
-            this.y = Math.max(15, Math.min(canvas.height - 15, this.y));
-
-            let distToBall = Math.hypot(ball.x - this.x, ball.y - this.y);
-            if (distToBall < this.radius + ball.radius + 2) {
+            if (Math.hypot(ball.x - this.x, ball.y - this.y) < this.radius + ball.radius + 2) {
                 ball.owner = this;
             }
         }
-
         draw() {
-            // Shadow
-            ctx.beginPath();
-            ctx.arc(this.x + 2, this.y + 3, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0,0,0,0.3)';
-            ctx.fill();
-
-            // Player Body
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             ctx.fillStyle = this.isGK ? '#ff9800' : (this.team === 'user' ? '#1e88e5' : '#e53935');
-            ctx.fill();
-            ctx.strokeStyle = this.isMain ? '#ffeb3b' : '#ffffff';
-            ctx.lineWidth = this.isMain ? 3 : 1.5;
-            ctx.stroke();
-
-            // Jersey Number
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 10px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(this.jerseyNum, this.x, this.y);
-
-            // Yellow Indicator for Main Player
-            if(this.isMain) {
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y - 17);
-                ctx.lineTo(this.x - 6, this.y - 25);
-                ctx.lineTo(this.x + 6, this.y - 25);
-                ctx.fillStyle = '#ffeb3b';
-                ctx.fill();
-            }
+            ctx.fill(); ctx.strokeStyle = this.isMain ? '#ffeb3b' : '#fff'; ctx.lineWidth = this.isMain ? 3 : 1; ctx.stroke(); ctx.closePath();
+            
+            ctx.fillStyle = '#fff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(this.num, this.x, this.y);
         }
     }
 
-    let playersList = [];
-    let ball = new Ball(canvas.width / 2, canvas.height / 2);
+    let players = [], ball = new Ball(180, 240);
 
-    function setupPlayers() {
-        playersList = [
-            // User Team (Blue - 4 Players)
-            new Player(180, 40, 'user', '1', true),               
-            new Player(180, 320, 'user', '10', false, true),       
-            new Player(90, 260, 'user', '7', false),             
-            new Player(270, 260, 'user', '9', false),             
-
-            // Bot Team (Red - 4 Players)
-            new Player(180, 440, 'bot', '1', true),               
-            new Player(180, 160, 'bot', '10', false),              
-            new Player(90, 200, 'bot', '11', false),              
-            new Player(270, 200, 'bot', '8', false)               
+    function init() {
+        players = [
+            new Player(180, 40, 'user', '1', true),
+            new Player(180, 320, 'user', '10', false, true),
+            new Player(90, 260, 'user', '7', false),
+            new Player(270, 260, 'user', '9', false),
+            new Player(180, 440, 'bot', '1', true),
+            new Player(180, 160, 'bot', '10', false),
+            new Player(90, 200, 'bot', '11', false),
+            new Player(270, 200, 'bot', '8', false)
         ];
     }
 
-    function resetFieldPositions() {
-        ball.owner = null;
-        ball.x = canvas.width / 2;
-        ball.y = canvas.height / 2;
-        ball.vx = 0; ball.vy = 0;
-        playersList.forEach(p => { p.x = p.startX; p.y = p.startY; });
+    function resetPos() {
+        ball.owner = null; ball.x = 180; ball.y = 240; ball.vx = 0; ball.vy = 0;
+        players.forEach(p => { p.x = p.startX; p.y = p.startY; });
     }
 
-    function passBallAction() {
-        let main = playersList.find(p => p.isMain);
+    function pass() {
+        let main = players.find(p => p.isMain);
         if (ball.owner === main) {
-            let teammates = playersList.filter(p => p.team === 'user' && !p.isMain);
-            let closest = teammates[0];
-            let minDist = 999;
-            teammates.forEach(t => {
-                let d = Math.hypot(t.x - main.x, t.y - main.y);
-                if (d < minDist) { minDist = d; closest = t; }
-            });
+            let teammates = players.filter(p => p.team === 'user' && !p.isMain);
+            let closest = teammates.reduce((prev, curr) => Math.hypot(curr.x - main.x, curr.y - main.y) < Math.hypot(prev.x - main.x, prev.y - main.y) ? curr : teammates[0]);
             ball.owner = null;
             let angle = Math.atan2(closest.y - main.y, closest.x - main.x);
-            ball.vx = Math.cos(angle) * 8.5;
-            ball.vy = Math.sin(angle) * 8.5;
+            ball.vx = Math.cos(angle) * 8; ball.vy = Math.sin(angle) * 8;
         }
     }
 
-    function shootBallAction(shooter = null, dirX = 0, dirY = -1) {
-        let p = shooter || playersList.find(p => p.isMain);
+    function shoot(shooter = null, dx = 0, dy = -1) {
+        let p = shooter || players.find(p => p.isMain);
         if (ball.owner === p) {
             ball.owner = null;
-            let power = 11;
-            if(p.isMain && (selectedChar === 'Afa' || selectedChar === 'Fifa')) power = 15;
-
+            let power = (p.isMain && (selectedChar === 'Afa' || selectedChar === 'Fifa')) ? 14 : 10;
             if(!shooter) {
                 let angle = Math.atan2(0 - p.y, 180 - p.x);
-                ball.vx = Math.cos(angle) * power;
-                ball.vy = Math.sin(angle) * power;
+                ball.vx = Math.cos(angle) * power; ball.vy = Math.sin(angle) * power;
             } else {
-                ball.vx = dirX * power;
-                ball.vy = dirY * power;
+                ball.vx = dx * power; ball.vy = dy * power;
             }
         }
     }
 
-    function drawPitchField() {
-        ctx.fillStyle = '#2e7d32';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Pitch Stripes
-        ctx.fillStyle = '#388e3c';
-        for(let i=0; i<canvas.height; i+=40) {
-            if((i/40)%2===0) ctx.fillRect(0, i, canvas.width, 40);
-        }
-
-        ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-        ctx.lineWidth = 2;
+    function loop() {
+        ctx.fillStyle = '#4caf50'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
         ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
-
-        // Center Lines
-        ctx.beginPath();
-        ctx.moveTo(10, canvas.height / 2);
-        ctx.lineTo(canvas.width - 10, canvas.height / 2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2, 45, 0, Math.PI * 2);
-        ctx.stroke();
-
-        // Goals
+        ctx.beginPath(); ctx.moveTo(10, canvas.height / 2); ctx.lineTo(canvas.width - 10, canvas.height / 2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(canvas.width / 2, canvas.height / 2, 40, 0, Math.PI * 2); ctx.stroke();
+        
         ctx.fillStyle = 'rgba(255,255,255,0.3)';
-        ctx.fillRect(110, 2, 140, 12);
-        ctx.strokeRect(110, 2, 140, 12);
-        ctx.fillRect(110, canvas.height - 14, 140, 12);
-        ctx.strokeRect(110, canvas.height - 14, 140, 12);
+        ctx.fillRect(110, 2, 140, 10); ctx.fillRect(110, canvas.height - 12, 140, 10);
+
+        players.forEach(p => { p.update(); p.draw(); });
+        ball.update(); ball.draw();
     }
 
-    function gameFrameRender() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawPitchField();
-        playersList.forEach(p => { p.update(); p.draw(); });
-        ball.update();
-        ball.draw();
-    }
-
-    function startTimerLoop() {
-        timerLoopInterval = setInterval(() => {
+    function startTimer() {
+        timerInterval = setInterval(() => {
             matchTime--;
-            
+            let m = Math.floor(matchTime / 60), s = matchTime % 60;
+            document.getElementById('timer').innerText = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+            if (matchTime <= 0) {
+                clearInterval(gameInterval); clearInterval(timerInterval);
+                let text = userScore > botScore ? "🎉 আপনি জিতেছেন! +৫০০ টোকেন" : "❌ আপনি হেরে গেছেন!";
+                if(userScore > botScore) { tokens += 500; localStorage.setItem('game_tokens', tokens); }
+                document.getElementById('token-count').innerText = tokens;
+                document.getElementById('match-result').innerText = text;
+                document.getElementById('end-modal').classList.remove('hidden');
+            }
+        }, 1000);
+    }
+
+    function restartMatch() {
+        userScore = 0; botScore = 0; matchTime = 60;
+        document.getElementById('score-user').innerText = '0';
+        document.getElementById('score-bot').innerText = '0';
+        document.getElementById('end-modal').classList.add('hidden');
+        resetPos();
+        gameInterval = setInterval(loop, 1000 / 60);
+        startTimer();
+    }
+
+    function openShop() { updateShop(); document.getElementById('shop-modal').classList.remove('hidden'); }
+    function closeShop() { document.getElementById('shop-modal').classList.add('hidden'); }
+
+    function updateShop() {
+        ['Lee', 'Afa', 'Fifa'].forEach(name => {
+            let btn = document.getElementById(`buy-${name.toLowerCase()}`);
+            if (unlockedChars.includes(name)) {
+                btn.innerText = selectedChar === name ? "সিলেক্টেed" : "সিলেক্ট";
+                btn.disabled = selectedChar === name;
+                btn.onclick = () => { selectedChar = name; localStorage.setItem('selected_char', name); updateShop(); };
+            } else {
+                btn.innerText = "১০,০০০ 🪙";
+                btn.disabled = tokens < 10000;
+            }
+        });
+    }
+
+    function buyChar(name) {
+        if (tokens >= 10000 && !unlockedChars.includes(name)) {
+            tokens -= 10000; unlockedChars.push(name); selectedChar = name;
+            localStorage.setItem('game_tokens', tokens);
+            localStorage.setItem('unlocked_chars', JSON.stringify(unlockedChars));
+            localStorage.setItem('selected_char', selectedChar);
+            document.getElementById('token-count').innerText = tokens;
+            updateShop();
+        }
+    }
+
+    function bind(id, prop) {
+        let el = document.getElementById(id);
+        el.addEventListener('touchstart', e => { e.preventDefault(); keys[prop] = true; });
+        el.addEventListener('touchend', e => { e.preventDefault(); keys[prop] = false; });
+        el.addEventListener('mousedown', () => keys[prop] = true);
+        el.addEventListener('mouseup', () => keys[prop] = false);
+    }
+    bind('btn-up', 'up'); bind('btn-down', 'down'); bind('btn-left', 'left'); bind('btn-right', 'right'); bind('btn-sprint', 'sprint');
+    
+    document.getElementById('btn-pass').addEventListener('click', pass);
+    document.getElementById('btn-shoot').addEventListener('click', () => shoot());
+
+    init();
+    gameInterval = setInterval(loop, 1000 / 60);
+    startTimer();
+</script>
+</body>
+</html>
