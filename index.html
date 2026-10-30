@@ -1,103 +1,553 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cyber Shield BD - Ethical Hacking Lab</title>
-<style>
-body{background:#050a14;color:#e0e0e0;font-family:monospace;margin:0}
-.header{background:#001a33;padding:20px;text-align:center;border-bottom:2px solid #00ff88}
-.header h1{color:#00ff88;margin:0;text-shadow:0 0 10px #00ff88}
-.nav{display:flex;justify-content:center;gap:10px;padding:15px;background:#0a1930;flex-wrap:wrap}
-.nav button{background:#002244;color:#00ff88;border:1px solid #00ff88;padding:10px 15px;border-radius:5px;cursor:pointer}
-.nav button:hover{background:#00ff88;color:#000}
-.container{max-width:900px;margin:auto;padding:15px}
-.card{background:#0f1f3d;border:1px solid #1e3a5f;border-radius:10px;padding:20px;margin-bottom:20px}
-.card h2{color:#00ff88;border-bottom:1px solid #1e3a5f;padding-bottom:10px}
-input{width:90%;padding:12px;background:#05102a;border:1px solid #00ff88;color:#fff;border-radius:5px;margin:10px 0}
-.btn{background:#00ff88;color:#000;padding:12px 20px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;width:100%}
-.result{margin-top:15px;padding:15px;border-radius:5px;background:#05102a;word-break:break-all}
-.safe{border-left:4px solid #00ff88}
-.danger{border-left:4px solid #ff3b3b}
-.warn{border-left:4px solid #ffaa00}
-.tip{background:#001a33;padding:10px;border-radius:5px;margin:5px 0}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pro Mobile Soccer 2026</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        #game-wrapper {
+            position: relative;
+            width: 100vw;
+            max-width: 420px;
+            height: 100vh;
+            max-height: 800px;
+            background: #111e16;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid #2e7d32;
+            box-shadow: 0 0 25px rgba(0, 255, 128, 0.2);
+        }
+        /* Header Bar */
+        .top-bar {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .scoreboard {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-weight: 800;
+            font-size: 14px;
+        }
+        .team-score { margin: 0 6px; color: #00e676; font-size: 16px; }
+        .match-timer { color: #ffeb3b; font-size: 13px; margin-left: 10px; font-family: monospace; }
+        .token-badge {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid #ffc107;
+            color: #ffc107;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Pitch Canvas Area */
+        .stadium-area {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #27692b;
+            overflow: hidden;
+        }
+        canvas {
+            background-color: #2e7d32;
+            display: block;
+        }
+
+        /* Mobile Controls */
+        .controls-panel {
+            height: 170px;
+            background: rgba(10, 14, 23, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 10;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .d-pad { position: relative; width: 120px; height: 120px; }
+        .d-btn {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+        .d-btn:active { background: rgba(0, 230, 118, 0.5); border-color: #00e676; }
+        .d-up { top: 0; left: 41px; }
+        .d-down { bottom: 0; left: 41px; }
+        .d-left { top: 41px; left: 0; }
+        .d-right { top: 41px; right: 0; }
+
+        .action-btns { display: flex; gap: 10px; align-items: center; }
+        .action-btn {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white;
+            font-weight: 800;
+            font-size: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .action-btn:active { transform: scale(0.92); }
+        .btn-pass { background: linear-gradient(135deg, #1e88e5, #1565c0); }
+        .btn-sprint { background: linear-gradient(135deg, #43a047, #2e7d32); }
+        .btn-shoot { background: linear-gradient(135deg, #e53935, #c62828); }
+
+        .shop-trigger-btn {
+            position: absolute;
+            top: 55px;
+            right: 12px;
+            background: linear-gradient(135deg, #ffb300, #ff8f00);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 11px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .overlay-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 8, 15, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            padding: 20px;
+            text-align: center;
+        }
+        .character-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            width: 85%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .buy-action-btn {
+            background: linear-gradient(135deg, #ffc107, #ff8f00);
+            color: #000;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .buy-action-btn:disabled { background: #444; color: #888; }
+        .close-shop-btn {
+            margin-top: 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
-<div class="header">
-<h1>🛡️ CYBER SHIELD BD</h1>
-<p>Ethical Hacking & Cyber Security Education Lab - Bangladesh</p>
-<p style="font-size:12px;color:#888">For Educational Purpose Only | Learn to Protect</p>
-</div>
 
-<div class="nav">
-<button onclick="show('pass')">🔑 Password Checker</button>
-<button onclick="show('phish')">🎣 Link Scanner</button>
-<button onclick="show('learn')">📚 Hacking থেকে বাঁচুন</button>
-</div>
+<div id="game-wrapper">
+    <div class="top-bar">
+        <div class="scoreboard">
+            <span>YOU</span> <span id="score-user" class="team-score">0</span>
+            -
+            <span id="score-bot" class="team-score">0</span> <span>BOT</span>
+            <span id="match-timer" class="match-timer">01:00</span>
+        </div>
+        <div class="token-badge">🪙 <span id="token-count">0</span></div>
+    </div>
 
-<div class="container">
+    <button class="shop-trigger-btn" onclick="openShopModal()">🛒 শপ</button>
 
-<div id="pass" class="card">
-<h2>🔑 তোমার Password কতটা Strong?</h2>
-<p>এখানে Password লিখে দেখো হ্যাকার কত সময়ে এটা ভাঙতে পারবে!</p>
-<input id="pInput" type="text" placeholder="এখানে Password লিখো...">
-<button class="btn" onclick="checkPass()">CHECK STRENGTH</button>
-<div id="pResult" class="result" style="display:none"></div>
-</div>
+    <div class="stadium-area">
+        <canvas id="fieldCanvas" width="360" height="480"></canvas>
+    </div>
 
-<div id="phish" class="card" style="display:none">
-<h2>🎣 ফিশিং লিংক Detector</h2>
-<p>সন্দেহজনক লিংক এখানে Paste করো - এটা আসল না নকল বলে দেবো!</p>
-<input id="linkInput" type="text" placeholder="https://... লিংক Paste করো">
-<button class="btn" onclick="checkLink()">SCAN LINK</button>
-<div id="linkResult" class="result" style="display:none"></div>
-</div>
+    <div class="controls-panel">
+        <div class="d-pad">
+            <div class="d-btn d-up" id="btn-up">▲</div>
+            <div class="d-btn d-left" id="btn-left">◀</div>
+            <div class="d-btn d-right" id="btn-right">▶</div>
+            <div class="d-btn d-down" id="btn-down">▼</div>
+        </div>
+        <div class="action-btns">
+            <div class="action-btn btn-pass" id="btn-pass">PASS</div>
+            <div class="action-btn btn-sprint" id="btn-sprint">SPRINT</div>
+            <div class="action-btn btn-shoot" id="btn-shoot">SHOOT</div>
+        </div>
+    </div>
 
-<div id="learn" class="card" style="display:none">
-<h2>📚 Ethical Hacking কি?</h2>
-<div class="tip"><b>1. Phishing কি?</b> হ্যাকাররা Facebook এর মতো নকল পেজ বানিয়ে তোমার Password চুরি করে। লিংকে সবসময় https এবং সঠিক বানান আছে কিনা দেখো।</div>
-<div class="tip"><b>2. Strong Password কিভাবে?</b> 12 অক্ষরের বেশি, বড় হাত, ছোট হাত, সংখ্যা, চিহ্ন মিশিয়ে বানাও। যেমন: Hello@BD#2026!</div>
-<div class="tip"><b>3. 2FA চালু করো:</b> Facebook, Gmail এ Two-Factor Authentication চালু রাখলে Password চুরি হলেও ID Hack হবে না।</div>
-<div class="tip"><b>4. Public WiFi বিপদ:</b> ফ্রি WiFi তে কখনো বিকাশ/ব্যাংক Login করবা না।</div>
-<div class="tip"><b>5. Ethical Hacker কিভাবে হবা?</b> Learn: Networking, Linux, Python, OWASP Top 10. সার্টিফিকেট: CEH, Google Cybersecurity.</div>
-</div>
+    <!-- Shop Modal -->
+    <div id="shop-modal" class="overlay-screen hidden">
+        <h2 style="color: #ffc107; margin-bottom: 5px;">ক্যারেক্টার শপ</h2>
+        <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">টোকেন দিয়ে প্লেয়ার কিনুন</p>
+        
+        <div class="character-card">
+            <div style="text-align: left;">
+                <strong style="color: #ff4081; font-size: 16px;">লি (Lee)</strong>
+                <div style="font-size: 11px; color:#4fc3f7;">স্পিড ড্রিবলার (+৩৫% গতি)</div>
+            </div>
+            <button class="buy-action-btn" id="buy-lee" onclick="buyCharacter('Lee', 10000)">১০,০০০ 🪙</button>
+        </div>
 
+        <div class="character-card">
+            <div style="text-align: left;">
+                <strong style="color: #00e676; font-size: 16px;">আফা (Afa)</strong>
+                <div style="font-size: 11px; color:#4fc3f7;">পাওয়ার স্ট্রাইকার (+৫০% শট)</div>
+            </div>
+            <button class="buy-action-btn" id="buy-afa" onclick="buyCharacter('Afa', 10000)">১০,০০০ 🪙</button>
+        </div>
+
+        <div class="character-card">
+            <div style="text-align: left;">
+                <strong style="color: #00b0ff; font-size: 16px;">ফিফা (Fifa)</strong>
+                <div style="font-size: 11px; color:#4fc3f7;">অল-রাউন্ড মাস্টার</div>
+            </div>
+            <button class="buy-action-btn" id="buy-fifa" onclick="buyCharacter('Fifa', 10000)">১০,০০০ 🪙</button>
+        </div>
+
+        <button class="close-shop-btn" onclick="closeShopModal()">বন্ধ করুন</button>
+    </div>
+
+    <!-- Match End Modal -->
+    <div id="end-modal" class="overlay-screen hidden">
+        <h1 id="match-result-title" style="color: #00e676;">ম্যাচ সমাপ্ত!</h1>
+        <p id="reward-info" style="margin: 15px 0; color: #ffc107; font-size: 18px; font-weight: bold;"></p>
+        <button class="buy-action-btn" style="padding: 12px 28px; font-size: 16px;" onclick="restartGameMatch()">আবার খেলুন</button>
+    </div>
 </div>
 
 <script>
-function show(id){
- document.getElementById('pass').style.display='none';
- document.getElementById('phish').style.display='none';
- document.getElementById('learn').style.display='none';
- document.getElementById(id).style.display='block';
-}
-function checkPass(){
- let p = document.getElementById('pInput').value;
- if(!p) return alert('Password লিখো');
- let score=0;
- if(p.length>=8) score++; if(p.length>=12) score++;
- if(/[A-Z]/.test(p)) score++; if(/[0-9]/.test(p)) score++; if(/[^A-Za-z0-9]/.test(p)) score++;
- let res = document.getElementById('pResult');
- res.style.display='block';
- if(score<=2){ res.className='result danger'; res.innerHTML=`<b>🔴 খুব দুর্বল!</b><br>এটা ${p.length*2} সেকেন্ডে হ্যাক হয়ে যাবে!<br><b>সমাধান:</b> বড় হাত, ছোট হাত, সংখ্যা, চিহ্ন দিয়ে 12+ অক্ষর বানাও।`; }
- else if(score<=3){ res.className='result warn'; res.innerHTML=`<b>🟡 মোটামুটি!</b><br>হ্যাক হতে 2-3 ঘন্টা লাগবে। আরো Strong করো।`; }
- else { res.className='result safe'; res.innerHTML=`<b>🟢 খুব Strong!</b><br>এটা হ্যাক করতে প্রায় ${Math.pow(2,p.length)} বছর লাগবে! Well Done!`; }
-}
-function checkLink(){
- let l = document.getElementById('linkInput').value.trim();
- if(!l) return alert('Link দাও');
- let res = document.getElementById('linkResult');
- res.style.display='block';
- let dangerWords = ['free','gift','lottery','verify','suspended','faceb00k','g00gle','bKash-offer'];
- let isDanger = dangerWords.some(w=>l.toLowerCase().includes(w)) || !l.startsWith('https') || l.length>80 && l.includes('@');
- if(isDanger){
-   res.className='result danger';
-   res.innerHTML=`<b>🔴 বিপজ্জনক হতে পারে!</b><br>লিংক: ${l}<br><br><b>কারণ:</b><br>1. https নেই বা সন্দেহজনক শব্দ আছে<br>2. বানান ভুল থাকতে পারে<br><b>কি করবা:</b> এই লিংকে Login করবা না!`;
- } else {
-   res.className='result safe';
-   res.innerHTML=`<b>🟢 আপাতত Safe মনে হচ্ছে!</b><br>লিংক: ${l}<br><br>তবুও লিংকের বানান ভালো করে দেখে নাও।`;
- }
-}
-</script>
-</body>
-</html>
+    const canvas = document.getElementById('fieldCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let tokens = parseInt(localStorage.getItem('game_tokens') || '0');
+    let unlockedChars = JSON.parse(localStorage.getItem('unlocked_chars') || '[]');
+    let selectedChar = localStorage.getItem('selected_char') || 'Normal';
+
+    let userScore = 0;
+    let botScore = 0;
+    let matchTime = 60;
+    let gameLoopInterval = null;
+    let timerLoopInterval = null;
+
+    const keys = { up: false, down: false, left: false, right: false, sprint: false };
+    document.getElementById('token-count').innerText = tokens;
+
+    class Ball {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.vx = 0; this.vy = 0;
+            this.radius = 6;
+            this.friction = 0.97;
+            this.owner = null;
+        }
+        update() {
+            if (this.owner) {
+                this.x = this.owner.x + Math.cos(this.owner.angle) * 12;
+                this.y = this.owner.y + Math.sin(this.owner.angle) * 12;
+                this.vx = 0; this.vy = 0;
+            } else {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vx *= this.friction;
+                this.vy *= this.friction;
+
+                if(this.x < 12) { this.x = 12; this.vx *= -0.6; }
+                if(this.x > canvas.width - 12) { this.x = canvas.width - 12; this.vx *= -0.6; }
+                
+                // Goal Logic
+                if(this.y < 15) {
+                    if(this.x > 110 && this.x < 250) {
+                        userScore++;
+                        document.getElementById('score-user').innerText = userScore;
+                        resetFieldPositions();
+                    } else { this.y = 15; this.vy *= -0.6; }
+                }
+                if(this.y > canvas.height - 15) {
+                    if(this.x > 110 && this.x < 250) {
+                        botScore++;
+                        document.getElementById('score-bot').innerText = botScore;
+                        resetFieldPositions();
+                    } else { this.y = canvas.height - 15; this.vy *= -0.6; }
+                }
+            }
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
+    class Player {
+        constructor(x, y, team, jerseyNum, isGK = false, isMain = false) {
+            this.startX = x; this.startY = y;
+            this.x = x; this.y = y;
+            this.team = team; 
+            this.jerseyNum = jerseyNum;
+            this.isGK = isGK;
+            this.isMain = isMain;
+            this.radius = 12;
+            this.speed = isGK ? 2.0 : 2.5;
+            this.angle = 0;
+        }
+
+        update() {
+            let speedMult = 1;
+            if(this.isMain) {
+                if(selectedChar === 'Lee') speedMult = 1.35;
+                if(selectedChar === 'Fifa') speedMult = 1.45;
+            }
+
+            if (this.isMain) {
+                let dx = 0, dy = 0;
+                if (keys.up) dy -= 1;
+                if (keys.down) dy += 1;
+                if (keys.left) dx -= 1;
+                if (keys.right) dx += 1;
+
+                if (dx !== 0 || dy !== 0) {
+                    this.angle = Math.atan2(dy, dx);
+                    let curSpeed = this.speed * speedMult * (keys.sprint ? 1.5 : 1);
+                    this.x += Math.cos(this.angle) * curSpeed;
+                    this.y += Math.sin(this.angle) * curSpeed;
+                }
+            } else if (this.isGK) {
+                this.x += (ball.x - this.x) * 0.1;
+                this.x = Math.max(120, Math.min(240, this.x));
+            } else {
+                let target = ball;
+                if (this.team === 'bot') {
+                    if (ball.owner === this) {
+                        let goalX = 180, goalY = 10;
+                        this.angle = Math.atan2(goalY - this.y, goalX - this.x);
+                        this.x += Math.cos(this.angle) * (this.speed * 1.1);
+                        this.y += Math.sin(this.angle) * (this.speed * 1.1);
+
+                        if(this.y < 140) {
+                            shootBallAction(this, 0, -1);
+                        }
+                    } else {
+                        this.angle = Math.atan2(target.y - this.y, target.x - this.x);
+                        this.x += Math.cos(this.angle) * (this.speed * 1.05);
+                        this.y += Math.sin(this.angle) * (this.speed * 1.05);
+                    }
+                } else {
+                    if (!this.isMain && ball.owner !== this) {
+                        this.y += (this.startY - this.y) * 0.04;
+                    }
+                }
+            }
+
+            this.x = Math.max(15, Math.min(canvas.width - 15, this.x));
+            this.y = Math.max(15, Math.min(canvas.height - 15, this.y));
+
+            let distToBall = Math.hypot(ball.x - this.x, ball.y - this.y);
+            if (distToBall < this.radius + ball.radius + 2) {
+                ball.owner = this;
+            }
+        }
+
+        draw() {
+            // Shadow
+            ctx.beginPath();
+            ctx.arc(this.x + 2, this.y + 3, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fill();
+
+            // Player Body
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.isGK ? '#ff9800' : (this.team === 'user' ? '#1e88e5' : '#e53935');
+            ctx.fill();
+            ctx.strokeStyle = this.isMain ? '#ffeb3b' : '#ffffff';
+            ctx.lineWidth = this.isMain ? 3 : 1.5;
+            ctx.stroke();
+
+            // Jersey Number
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(this.jerseyNum, this.x, this.y);
+
+            // Yellow Indicator for Main Player
+            if(this.isMain) {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y - 17);
+                ctx.lineTo(this.x - 6, this.y - 25);
+                ctx.lineTo(this.x + 6, this.y - 25);
+                ctx.fillStyle = '#ffeb3b';
+                ctx.fill();
+            }
+        }
+    }
+
+    let playersList = [];
+    let ball = new Ball(canvas.width / 2, canvas.height / 2);
+
+    function setupPlayers() {
+        playersList = [
+            // User Team (Blue - 4 Players)
+            new Player(180, 40, 'user', '1', true),               
+            new Player(180, 320, 'user', '10', false, true),       
+            new Player(90, 260, 'user', '7', false),             
+            new Player(270, 260, 'user', '9', false),             
+
+            // Bot Team (Red - 4 Players)
+            new Player(180, 440, 'bot', '1', true),               
+            new Player(180, 160, 'bot', '10', false),              
+            new Player(90, 200, 'bot', '11', false),              
+            new Player(270, 200, 'bot', '8', false)               
+        ];
+    }
+
+    function resetFieldPositions() {
+        ball.owner = null;
+        ball.x = canvas.width / 2;
+        ball.y = canvas.height / 2;
+        ball.vx = 0; ball.vy = 0;
+        playersList.forEach(p => { p.x = p.startX; p.y = p.startY; });
+    }
+
+    function passBallAction() {
+        let main = playersList.find(p => p.isMain);
+        if (ball.owner === main) {
+            let teammates = playersList.filter(p => p.team === 'user' && !p.isMain);
+            let closest = teammates[0];
+            let minDist = 999;
+            teammates.forEach(t => {
+                let d = Math.hypot(t.x - main.x, t.y - main.y);
+                if (d < minDist) { minDist = d; closest = t; }
+            });
+            ball.owner = null;
+            let angle = Math.atan2(closest.y - main.y, closest.x - main.x);
+            ball.vx = Math.cos(angle) * 8.5;
+            ball.vy = Math.sin(angle) * 8.5;
+        }
+    }
+
+    function shootBallAction(shooter = null, dirX = 0, dirY = -1) {
+        let p = shooter || playersList.find(p => p.isMain);
+        if (ball.owner === p) {
+            ball.owner = null;
+            let power = 11;
+            if(p.isMain && (selectedChar === 'Afa' || selectedChar === 'Fifa')) power = 15;
+
+            if(!shooter) {
+                let angle = Math.atan2(0 - p.y, 180 - p.x);
+                ball.vx = Math.cos(angle) * power;
+                ball.vy = Math.sin(angle) * power;
+            } else {
+                ball.vx = dirX * power;
+                ball.vy = dirY * power;
+            }
+        }
+    }
+
+    function drawPitchField() {
+        ctx.fillStyle = '#2e7d32';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Pitch Stripes
+        ctx.fillStyle = '#388e3c';
+        for(let i=0; i<canvas.height; i+=40) {
+            if((i/40)%2===0) ctx.fillRect(0, i, canvas.width, 40);
+        }
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+        // Center Lines
+        ctx.beginPath();
+        ctx.moveTo(10, canvas.height / 2);
+        ctx.lineTo(canvas.width - 10, canvas.height / 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, 45, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Goals
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(110, 2, 140, 12);
+        ctx.strokeRect(110, 2, 140, 12);
+        ctx.fillRect(110, canvas.height - 14, 140, 12);
+        ctx.strokeRect(110, canvas.height - 14, 140, 12);
+    }
+
+    function gameFrameRender() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPitchField();
+        playersList.forEach(p => { p.update(); p.draw(); });
+        ball.update();
+        ball.draw();
+    }
+
+    function startTimerLoop() {
+        timerLoopInterval = setInterval(() => {
+            matchTime--;
+            
