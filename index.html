@@ -3,36 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>FC BD 27 - Full System</title>
+<title>FC BD 27 - Fixed Smooth</title>
 <style>
-:root{--green:#1a5c1a;--light:#2ecc71}
-body{margin:0;background:#0a1a0a;color:#fff;font-family:Arial;overflow:hidden}
-.top-bar{background:#000;display:flex;justify-content:space-between;padding:8px 12px;align-items:center;border-bottom:2px solid var(--light)}
+body{margin:0;background:#0a1a0a;color:#fff;font-family:Arial;overflow:hidden;touch-action:none}
+.top-bar{background:#000;display:flex;justify-content:space-between;padding:8px 12px;border-bottom:2px solid #2ecc71}
 .score-box{background:#111;padding:6px 14px;border-radius:6px;font-weight:bold}
-.time-box{background:#ffcc00;color:#000;padding:6px 14px;border-radius:6px;font-weight:bold}
-#field{position:relative;width:100vw;height:calc(100vh - 140px);background:linear-gradient(#2a8f2a,#1e6b1e);overflow:hidden}
-.player{position:absolute;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:10px;font-weight:bold;transition:0.1s;border:2px solid #fff}
-.me{background:#e11;z-index:5} .me.active{box-shadow:0 0 15px #fff,0 0 25px #f00;transform:scale(1.4)}
-.opp{background:#3498db}
-.ball{position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;border:2px solid #000;z-index:10;box-shadow:0 2px 6px #000}
+#field{position:relative;width:100vw;height:calc(100vh - 135px);background:linear-gradient(#2f9d2f,#1e6b1e);overflow:hidden}
+.player{position:absolute;width:30px;height:30px;border-radius:50%;text-align:center;line-height:30px;font-size:11px;font-weight:bold;border:2px solid #fff;will-change:transform}
+.me{background:#e11;z-index:5} 
+.me.active{background:#ff0;color:#000;border-color:#000;box-shadow:0 0 18px #fff,0 0 30px #ff0;transform:scale(1.5);z-index:20}
+.opp{background:#3498db;opacity:0.9}
+.ball{position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;border:2px solid #000;z-index:30;will-change:transform}
 .goal{position:absolute;width:14px;height:120px;background:#fff;top:50%;transform:translateY(-50%)}
 .goal.left{left:0} .goal.right{right:0}
-.controls{position:absolute;bottom:0;width:100%;height:140px;background:#000a;display:flex;justify-content:space-between;padding:10px;box-sizing:border-box}
-.joystick{width:110px;height:110px;background:rgba(255,255,255,0.15);border-radius:50%;position:relative;border:2px solid #fff6}
-.stick{width:44px;height:44px;background:#fff;border-radius:50%;position:absolute;left:33px;top:33px}
+.controls{position:fixed;bottom:0;width:100%;height:135px;background:#000e;display:flex;justify-content:space-between;padding:10px;box-sizing:border-box}
+.joystick{width:110px;height:110px;background:rgba(255,255,255,0.12);border-radius:50%;position:relative;border:2px solid #fff5}
+.stick{width:44px;height:44px;background:#fff;border-radius:50%;position:absolute;left:33px;top:33px;box-shadow:0 2px 8px #000}
 .btns{display:flex;gap:10px;align-items:center}
 .cbtn{width:62px;height:62px;border-radius:50%;background:#222;border:2px solid #fff;color:#fff;font-weight:bold;font-size:11px;display:flex;align-items:center;justify-content:center}
-.cbtn:active{background:#fff;color:#000}
-#teamSelect{position:absolute;inset:0;background:#000e;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-.card{background:#1a2a1a;border:1px solid #2ecc71;border-radius:12px;padding:16px;margin:10px;width:90%;max-width:400px}
-button.main{width:100%;padding:14px;background:#2ecc71;color:#000;border:none;border-radius:8px;font-weight:bold;font-size:16px;margin-top:10px}
+.cbtn:active{background:#fff;color:#000;transform:scale(0.95)}
+#startScreen{position:absolute;inset:0;background:#000f;z-index:100;display:flex;align-items:center;justify-content:center}
+.card{background:#122212;border:1px solid #2ecc71;border-radius:12px;padding:20px;width:90%;max-width:360px;text-align:center}
+button.main{width:100%;padding:14px;background:#2ecc71;color:#000;border:none;border-radius:8px;font-weight:bold;font-size:16px}
 </style>
 </head>
 <body>
 <div class="top-bar">
-<div class="score-box" id="score">BD 0 - 0 ARG</div>
-<div class="time-box" id="timer">00:00</div>
-<div class="score-box">4-3-3 Attack ▼</div>
+<div class="score-box" id="score">BD 0 - 0 OPP</div>
+<div class="score-box" id="timer">00:00</div>
 </div>
 
 <div id="field">
@@ -44,172 +42,145 @@ button.main{width:100%;padding:14px;background:#2ecc71;color:#000;border:none;bo
 <div class="joystick" id="joy"><div class="stick" id="stick"></div></div>
 <div class="btns">
 <div class="cbtn" id="btnPass">PASS</div>
-<div class="cbtn" id="btnThrough" style="border-color:#ff0">THROUGH</div>
-<div class="cbtn" id="btnShoot" style="border-color:#f55">SHOOT</div>
-<div class="cbtn" id="btnSprint" style="border-color:#2ecc71">SPRINT<br>SKILL</div>
+<div class="cbtn" id="btnShoot" style="border-color:#ff4444">SHOOT</div>
 </div>
 </div>
 
-<div id="teamSelect">
-<h2 style="color:#2ecc71">⚽ FC BD 27 - Full System</h2>
+<div id="startScreen">
 <div class="card">
-<b>তোমার টিম বেছে নাও:</b><br><br>
-<select id="myTeam" style="width:100%;padding:10px;border-radius:6px">
-<option>🇧🇩 Bangladesh</option>
-<option>🇦🇷 Argentina</option>
-<option>🇧🇷 Brazil</option>
-<option>🇵🇹 Portugal</option>
-</select><br><br>
-<b>Formation:</b>
-<select style="width:100%;padding:10px;border-radius:6px">
-<option>4-3-3 Attack (FC Mobile এর মতো)</option>
-<option>4-4-2</option>
-<option>3-5-2</option>
-</select>
-<button class="main" onclick="startGame()">KICK OFF - খেলা শুরু করো</button>
-<p style="font-size:12px;color:#aaa;text-align:center">এটা তোমার ছবির EA FC Mobile এর মতোই System - Player Auto Switch হবে, বল কাছে গেলে Active হবে</p>
+<h2 style="color:#2ecc71;margin:0">FC BD 27 FIXED</h2>
+<p style="font-size:13px;color:#aaa">নতুন System: শুধু তোমার ১ জন Player চলবে, বাকি সবাই Fixed দাঁড়িয়ে থাকবে। কোনো ল্যাগ/থেমে থেমে যাওয়া নেই।</p>
+<button class="main" onclick="startGame()">KICK OFF</button>
 </div>
 </div>
 
 <script>
 const field=document.getElementById('field');
-const ball=document.getElementById('ball');
-let players=[]; let myPlayers=[]; let oppPlayers=[];
-let activeIndex=0; let ballOwner=null; let ballV={x:0,y:0};
-let scoreMe=0, scoreOpp=0; let time=0; let gameOn=false;
+const ballEl=document.getElementById('ball');
+let myPlayers=[], oppPlayers=[], activeIdx=9, ballOwner=null, ballV={x:0,y:0}, gameOn=false, scoreMe=0, scoreOpp=0, time=0;
 
-function createPlayer(x,y,isMe,idx){
+function createPlayer(x,y,isMe,label){
  let el=document.createElement('div');
  el.className='player '+(isMe?'me':'opp');
  el.style.left=x+'px'; el.style.top=y+'px';
- el.innerText=isMe?['GK','LB','CB','CB','RB','CM','CM','CM','LW','ST','RW'][idx]:idx+1;
+ el.innerText=label;
  field.appendChild(el);
- return {el,x,y,isMe,idx};
+ return {el,x,y,isMe,ox:x,oy:y}; // ox,oy = original position
 }
 
-function setupTeams(){
+function setup(){
  field.querySelectorAll('.player').forEach(e=>e.remove());
- players=[]; myPlayers=[]; oppPlayers=[];
- // My team 4-3-3 positions (percent to px)
+ myPlayers=[]; oppPlayers=[];
  let fw=field.clientWidth, fh=field.clientHeight;
- let myPos=[[60,fh/2],[120,fh*0.2],[120,fh*0.4],[120,fh*0.6],[120,fh*0.8],[250,fh*0.3],[250,fh*0.5],[250,fh*0.7],[380,fh*0.15],[380,fh*0.5],[380,fh*0.85]];
- let oppPos=[[fw-60,fh/2],[fw-120,fh*0.2],[fw-120,fh*0.4],[fw-120,fh*0.6],[fw-120,fh*0.8],[fw-250,fh*0.3],[fw-250,fh*0.5],[fw-250,fh*0.7],[fw-380,fh*0.15],[fw-380,fh*0.5],[fw-380,fh*0.85]];
- myPos.forEach((p,i)=>{let pl=createPlayer(p[0],p[1],true,i); players.push(pl); myPlayers.push(pl)});
- oppPos.forEach((p,i)=>{let pl=createPlayer(p[0],p[1],false,i); players.push(pl); oppPlayers.push(pl)});
- activeIndex=9; setActive(activeIndex);
- ball.style.left=myPlayers[activeIndex].x+20+'px';
- ball.style.top=myPlayers[activeIndex].y+'px';
- ballOwner=myPlayers[activeIndex];
+ let myPos=[[60,fh/2,'GK'],[120,fh*0.2,'LB'],[120,fh*0.38,'CB'],[120,fh*0.62,'CB'],[120,fh*0.8,'RB'],[240,fh*0.3,'CM'],[240,fh*0.5,'CM'],[240,fh*0.7,'CM'],[380,fh*0.18,'LW'],[380,fh*0.5,'ST'],[380,fh*0.82,'RW']];
+ let oppPos=[[fw-60,fh/2,'GK'],[fw-120,fh*0.2],[fw-120,fh*0.38],[fw-120,fh*0.62],[fw-120,fh*0.8],[fw-240,fh*0.3],[fw-240,fh*0.5],[fw-240,fh*0.7],[fw-380,fh*0.18],[fw-380,fh*0.5],[fw-380,fh*0.82]];
+
+ myPos.forEach(p=>{let pl=createPlayer(p[0],p[1],true,p[2]); myPlayers.push(pl)});
+ oppPos.forEach((p,i)=>{let pl=createPlayer(p[0],p[1],false,i==0?'GK':i); oppPlayers.push(pl)});
+
+ setActive(9);
+ let a=myPlayers[activeIdx];
+ ballEl.style.left=a.x+22+'px'; ballEl.style.top=a.y+'px';
+ ballOwner=a; ballV={x:0,y:0};
 }
 
 function setActive(i){
  myPlayers.forEach(p=>p.el.classList.remove('active'));
  myPlayers[i].el.classList.add('active');
- activeIndex=i;
+ activeIdx=i;
 }
 
 let joy={dx:0,dy:0,active:false};
 const joyEl=document.getElementById('joy'), stickEl=document.getElementById('stick');
-joyEl.addEventListener('touchstart',()=>joy.active=true);
+joyEl.addEventListener('touchstart',e=>{joy.active=true; e.preventDefault()},{passive:false});
 joyEl.addEventListener('touchmove',e=>{
  let r=joyEl.getBoundingClientRect(); let t=e.touches[0];
  let dx=t.clientX-(r.left+55), dy=t.clientY-(r.top+55);
  let dist=Math.min(45,Math.hypot(dx,dy)), ang=Math.atan2(dy,dx);
  joy.dx=Math.cos(ang)*dist/45; joy.dy=Math.sin(ang)*dist/45;
- stickEl.style.left=33+joy.dx*30+'px'; stickEl.style.top=33+joy.dy*30+'px';
-});
+ stickEl.style.left=33+joy.dx*32+'px'; stickEl.style.top=33+joy.dy*32+'px';
+ e.preventDefault();
+},{passive:false});
 joyEl.addEventListener('touchend',()=>{joy.active=false; joy.dx=0; joy.dy=0; stickEl.style.left='33px'; stickEl.style.top='33px'});
 
-function getActive(){return myPlayers[activeIndex];}
+function findNearestTeammate(){
+ let cur=myPlayers[activeIdx];
+ let best=null, bestD=999;
+ myPlayers.forEach((p,i)=>{
+   if(i===activeIdx) return;
+   let d=Math.hypot(p.x-cur.x,p.y-cur.y);
+   if(d>40 && p.x>cur.x-50 && d<bestD){bestD=d; best=p}
+ });
+ return best;
+}
 
-function passBall(power=8, through=false){
+function doPass(){
  if(!ballOwner||!ballOwner.isMe) return;
- let target=null; let bestDist=999;
- myPlayers.forEach((p,i)=>{if(i!==activeIndex){let d=through?p.x-getActive().x:Math.hypot(p.x-getActive().x,p.y-getActive().y); if(d>20&&d<400&&p.x>getActive().x){if(d<bestDist){bestDist=d; target=p}}}});
+ let target=findNearestTeammate();
  if(!target) target=myPlayers[9];
- let ang=Math.atan2(target.y-ball.offsetTop, target.x-ball.offsetLeft);
- ballV.x=Math.cos(ang)*power; ballV.y=Math.sin(ang)*power;
+ let ang=Math.atan2(target.y-ballEl.offsetTop, target.x-ballEl.offsetLeft);
+ ballV.x=Math.cos(ang)*10; ballV.y=Math.sin(ang)*10;
  ballOwner=null;
 }
-
-function shootBall(){
+function doShoot(){
  if(!ballOwner||!ballOwner.isMe) return;
- let goalY=field.clientHeight/2+(Math.random()-0.5)*60;
- let ang=Math.atan2(goalY-ball.offsetTop, field.clientWidth-ball.offsetLeft);
- ballV.x=Math.cos(ang)*14; ballV.y=Math.sin(ang)*14;
+ let goalY=field.clientHeight/2+(Math.random()-0.5)*50;
+ let ang=Math.atan2(goalY-ballEl.offsetTop, field.clientWidth-ballEl.offsetLeft);
+ ballV.x=Math.cos(ang)*15; ballV.y=Math.sin(ang)*15;
  ballOwner=null;
 }
 
-document.getElementById('btnPass').addEventListener('touchstart',()=>passBall(8,false));
-document.getElementById('btnThrough').addEventListener('touchstart',()=>passBall(11,true));
-document.getElementById('btnShoot').addEventListener('touchstart',shootBall);
-document.getElementById('btnSprint').addEventListener('touchstart',()=>{
- let p=getActive(); p.x+=joy.dx*30; p.y+=joy.dy*30;
-});
+document.getElementById('btnPass').addEventListener('touchstart',doPass);
+document.getElementById('btnShoot').addEventListener('touchstart',doShoot);
 
-function loop(){
+function gameLoop(){
  if(!gameOn) return;
- let ap=getActive();
+ let active=myPlayers[activeIdx];
+ // ONLY active player moves - FIXED!
  if(joy.active){
-   ap.x+=joy.dx*6; ap.y+=joy.dy*6;
-   ap.x=Math.max(10,Math.min(field.clientWidth-30,ap.x));
-   ap.y=Math.max(10,Math.min(field.clientHeight-30,ap.y));
-   ap.el.style.left=ap.x+'px'; ap.el.style.top=ap.y+'px';
-   if(ballOwner===ap){
-     ball.style.left=ap.x+20+'px'; ball.style.top=ap.y+'px';
+   active.x+=joy.dx*5.5;
+   active.y+=joy.dy*5.5;
+   active.x=Math.max(15,Math.min(field.clientWidth-35,active.x));
+   active.y=Math.max(15,Math.min(field.clientHeight-35,active.y));
+   active.el.style.left=active.x+'px';
+   active.el.style.top=active.y+'px';
+   if(ballOwner===active){
+     ballEl.style.left=active.x+22+'px';
+     ballEl.style.top=active.y+'px';
    }
  }
- // ball physics
+ // ball
  if(!ballOwner){
-   ball.style.left=(ball.offsetLeft+ballV.x)+'px';
-   ball.style.top=(ball.offsetTop+ballV.y)+'px';
-   ballV.x*=0.985; ballV.y*=0.985;
-   if(Math.abs(ballV.x)<0.2&&Math.abs(ballV.y)<0.2){ballV.x=0; ballV.y=0;}
-   // check pickup
-   players.forEach(p=>{
-     if(Math.hypot(ball.offsetLeft-p.x, ball.offsetTop-p.y)<22){
-       ballOwner=p; ballV.x=0; ballV.y=0;
-       if(p.isMe){
-         let idx=myPlayers.indexOf(p); setActive(idx);
+   ballEl.style.left=(ballEl.offsetLeft+ballV.x)+'px';
+   ballEl.style.top=(ballEl.offsetTop+ballV.y)+'px';
+   ballV.x*=0.982; ballV.y*=0.982;
+   if(Math.abs(ballV.x)<0.1) ballV.x=0;
+   if(Math.abs(ballV.y)<0.1) ballV.y=0;
+   // pickup check - only teammates can pick if ball slow
+   if(Math.hypot(ballV.x,ballV.y)<3){
+     for(let p of myPlayers){
+       if(Math.hypot(ballEl.offsetLeft-p.x, ballEl.offsetTop-p.y)<24){
+         ballOwner=p; setActive(myPlayers.indexOf(p)); ballV={x:0,y:0}; break;
        }
      }
-   });
+   }
    // goal
-   let bx=ball.offsetLeft, by=ball.offsetTop;
+   let bx=ballEl.offsetLeft, by=ballEl.offsetTop;
    if(bx>field.clientWidth-18 && by>field.clientHeight/2-60 && by<field.clientHeight/2+60){
-     scoreMe++; document.getElementById('score').innerText=`BD ${scoreMe} - ${scoreOpp} ARG`; alert('GOAL! BD! ⚽'); resetPos();
+     scoreMe++; document.getElementById('score').innerText=`BD ${scoreMe} - ${scoreOpp} OPP`; alert('GOAL!!! ⚽'); setup(); return;
    }
-   if(bx<18 && by>field.clientHeight/2-60 && by<field.clientHeight/2+60){
-     scoreOpp++; document.getElementById('score').innerText=`BD ${scoreMe} - ${scoreOpp} ARG`; alert('Opponent Goal!'); resetPos();
-   }
-   if(bx<0||bx>field.clientWidth||by<0||by>field.clientHeight){resetPos();}
- }
- // simple opponent AI - go to ball
- if(ballOwner&&!ballOwner.isMe){
-   ballOwner.x+=(Math.random()-0.5)*2; ballOwner.y+=1;
-   ball.style.left=ballOwner.x+'px'; ball.style.top=ballOwner.y+'px';
-   if(Math.random()<0.02){ballV.x=-8-Math.random()*4; ballV.y=(Math.random()-0.5)*6; ballOwner=null;}
- } else if(!ballOwner){
-   let closest=oppPlayers.reduce((a,b)=>Math.hypot(ball.offsetLeft-a.x,ball.offsetTop-a.y)<Math.hypot(ball.offsetLeft-b.x,ball.offsetTop-b.y)?a:b);
-   closest.x+=(ball.offsetLeft-closest.x)*0.03; closest.y+=(ball.offsetTop-closest.y)*0.03;
-   closest.el.style.left=closest.x+'px'; closest.el.style.top=closest.y+'px';
+   if(bx<0||bx>field.clientWidth||by<0||by>field.clientHeight){setup(); return;}
  }
 
- requestAnimationFrame(loop);
-}
-
-function resetPos(){
- setupTeams();
- ballV={x:0,y:0};
+ requestAnimationFrame(gameLoop);
 }
 
 function startGame(){
- document.getElementById('teamSelect').style.display='none';
- setupTeams(); gameOn=true; time=0;
- setInterval(()=>{time++; let m=Math.floor(time/60).toString().padStart(2,'0'); let s=(time%60).toString().padStart(2,'0'); document.getElementById('timer').innerText=m+':'+s;},1000);
- loop();
+ document.getElementById('startScreen').style.display='none';
+ setup(); gameOn=true;
+ setInterval(()=>{if(!gameOn) return; time++; let m=String(Math.floor(time/60)).padStart(2,'0'); let s=String(time%60).padStart(2,'0'); document.getElementById('timer').innerText=m+':'+s},1000);
+ gameLoop();
 }
-window.onresize=()=>{if(gameOn) setupTeams();}
 </script>
 </body>
 </html>
