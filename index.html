@@ -1,144 +1,45 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GARIR HUT - Simple Working</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0f172a;color:#fff;text-align:center}
-#start{position:fixed;inset:0;background:#0f172a;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;z-index:100}
-h1{font-size:42px;color:#facc15}
-.btn{padding:16px 30px;border:none;border-radius:30px;font-weight:900;font-size:18px;margin:8px}
-.btn-y{background:#facc15;color:#000}
-#top{padding:12px;background:#111827;border-bottom:2px solid #facc15;display:flex;justify-content:space-between;display:none}
-.page{display:none;padding:15px;padding-bottom:80px}
-.page.active{display:block}
-.card{background:#1e293b;border-radius:16px;padding:12px;margin:10px 0;text-align:left;border:2px solid #334155}
-.card.my{border-color:#facc15;background:#1a1a0a}
-.carBox{width:100%;height:90px;background:#111827;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:60px;margin-bottom:8px}
-.badge{background:#334155;padding:4px 8px;border-radius:8px;font-size:12px}
-.badge.g{background:#facc15;color:#000;font-weight:900}
-.tabs{position:fixed;bottom:0;width:100%;background:#111827;display:flex;border-top:2px solid #facc15;display:none}
-.tab{flex:1;padding:14px 5px;text-align:center;font-size:12px;font-weight:900;opacity:0.5}
-.tab.active{opacity:1;background:#1e293b;color:#facc15;border-top:3px solid #facc15}
-</style>
-</head>
-<body>
-
-<div id="start">
-<h1>🚗 GARIR HUT</h1>
-<p style="color:#facc15;font-weight:900;margin:10px 0">SIMPLE - 100% WORKING</p>
-<p style="font-size:13px;color:#aaa">কোনো Joystick নাই, কোনো Bug নাই<br>2 টা বাটনে সব কাজ হবে</p>
-<div style="background:#1e293b;padding:12px;border-radius:12px;margin:15px 0;font-size:13px;text-align:left;line-height:1.8">
-✅ PLAY চাপলেই গেম শুরু<br>
-✅ ENTER SHOWROOM চাপলেই ভিতরে<br>
-✅ দামে ক্লিক করে দাম পাল্টাও<br>
-✅ AUCTION থেকে গাড়ি কিনো
-</div>
-<button class="btn btn-y" onclick="play()">▶️ PLAY GAME</button>
-</div>
-
-<div id="top">
-<div>৳ <span id="money">800000</span></div>
-<div>🚗 <span id="cnt">0/6</span></div>
-</div>
-
-<div id="p-showroom" class="page active">
-<div style="background:#facc15;color:#000;padding:10px;border-radius:12px;font-weight:900;margin-bottom:10px">🏢 তোমার SHOWROOM - পিছনে শোরুম, ভিতরে 4 গাড়ি - দাম পাল্টাতে পারবা</div>
-<div id="myList"></div>
-</div>
-
-<div id="p-auction" class="page">
-<div style="background:#ff0000;color:#fff;padding:10px;border-radius:12px;font-weight:900;margin-bottom:10px">🔥 CAR AUCTION - 4 টা গ্যারেজ - Join করো, জিতলে গাড়ি তোমার</div>
-<div id="aucList"></div>
-</div>
-
-<div id="p-market" class="page">
-<div style="background:#3b82f6;color:#fff;padding:10px;border-radius:12px;font-weight:900;margin-bottom:10px">🏘️ NEIGHBORHOOD - পাড়ার বাড়ির সামনে গাড়ি - কিনে আনো</div>
-<div id="hoodList"></div>
-</div>
-
-<div class="tabs" id="tabs">
-<div class="tab active" onclick="openTab('p-showroom',this)">🏢 Showroom</div>
-<div class="tab" onclick="openTab('p-auction',this)">🔥 Auction</div>
-<div class="tab" onclick="openTab('p-market',this)">🏘️ Market</div>
-</div>
-
-<script>
-let money=800000;
-let myCars=[
-{name:"G-Wagon AMG 2024",real:"G-Wagon Black",color:"#111",emoji:"🚙",buy:300000,cond:90,myPrice:450000},
-{name:"Audi R8 Yellow",real:"Audi R8 V10",color:"#ffcc00",emoji:"🚗",buy:120000,cond:85,myPrice:180000}
-];
-let auctionCars=[
-{name:"Lamborghini Aventador",real:"Lambo Red",color:"#ff0000",emoji:"🏎️",price:150000},
-{name:"Ferrari 488 Pista",real:"Ferrari Red",color:"#cc0000",emoji:"🏎️",price:170000},
-{name:"Rolls Royce",real:"Rolls Royce Phantom",color:"#333",emoji:"🚘",price:200000}
-];
-let hoodCars=[
-{name:"Toyota Corolla",real:"Corolla White",color:"#fff",emoji:"🚙",price:40000},
-{name:"CNG Auto",real:"CNG Green",color:"#0a0",emoji:"🛺",price:15000},
-{name:"Premio",real:"Premio Silver",color:"#ccc",emoji:"🚗",price:60000}
-];
-
-function play(){
- document.getElementById('start').style.display='none';
- document.getElementById('top').style.display='flex';
- document.getElementById('tabs').style.display='flex';
- render();
-}
-function openTab(id,el){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- el.classList.add('active');
-}
-function render(){
- document.getElementById('money').innerText=money;
- document.getElementById('cnt').innerText=myCars.length+'/6';
- let h=''; myCars.forEach((c,i)=>{
-  h+=`<div class="card my"><div class="carBox" style="background:${c.color}">${c.emoji}</div><b>${c.real}</b><br><small>${c.name}</small><br><span class="badge">Cond ${c.cond}%</span> <span class="badge g">SUPER</span><br>Buy ৳${c.buy}<br><b style="color:#facc15" onclick="editPrice(${i})">তোমার দাম: ৳${c.myPrice} ✏️ ক্লিক করে পাল্টাও</b><br><div style="margin-top:8px"><button onclick="wash(${i})" style="background:#22c55e;color:#fff;border:none;padding:8px 12px;border-radius:8px;margin-right:4px">🧼 ধোও ৳500</button><button onclick="repair(${i})" style="background:#3b82f6;color:#fff;border:none;padding:8px 12px;border-radius:8px;margin-right:4px">🔧 Repair ৳2000</button><button onclick="sell(${i})" style="background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px">💰 বিক্রি</button></div></div>`;
- });
- for(let i=myCars.length;i<6;i++){h+=`<div class="card" style="border-style:dashed;opacity:0.5"><div class="carBox">➕</div><center>খালি Slot - Auction থেকে কিনো</center></div>`}
- document.getElementById('myList').innerHTML=h;
-
- let a=''; auctionCars.forEach((c,i)=>{
-  a+=`<div class="card"><div class="carBox" style="background:${c.color}">${c.emoji}</div><b>${c.real}</b><br>Auction Price: <b style="color:#facc15">৳${c.price}</b><br><button onclick="buyAuction(${i})" style="background:#22c55e;color:#fff;border:none;padding:10px 16px;border-radius:10px;width:100%;margin-top:6px;font-weight:900">🔥 Auction Join করো - জিতলে গাড়ি তোমার</button></div>`;
- });
- document.getElementById('aucList').innerHTML=a;
-
- let m=''; hoodCars.forEach((c,i)=>{
-  m+=`<div class="card"><div class="carBox" style="background:${c.color}">${c.emoji}</div><b>${c.real}</b><br>Price: <b style="color:#facc15">৳${c.price}</b><br><button onclick="buyHood(${i})" style="background:#3b82f6;color:#fff;border:none;padding:10px 16px;border-radius:10px;width:100%;margin-top:6px;font-weight:900">🏘️ কিনে Showroom এ আনো</button></div>`;
- });
- document.getElementById('hoodList').innerHTML=m;
-}
-function editPrice(i){
- let p=prompt(`💲 ${myCars[i].real} এর নতুন দাম কত দিবা?\nCustomer এই দাম দেখবে`,myCars[i].myPrice);
- if(p){myCars[i].myPrice=parseInt(p); render(); alert('✅ দাম Change! নতুন দাম ৳'+p);}
-}
-function wash(i){if(money<500)return alert('টাকা নাই'); money-=500; myCars[i].cond=Math.min(100,myCars[i].cond+10); render();}
-function repair(i){if(money<2000)return alert('টাকা নাই'); money-=2000; myCars[i].cond=Math.min(100,myCars[i].cond+25); render();}
-function sell(i){
- let c=myCars[i];
- if(confirm(`💰 ${c.real} বিক্রি করবা ৳${c.myPrice} এ?`)){money+=c.myPrice; myCars.splice(i,1); render(); alert('বিক্রি Done! ৳'+c.myPrice);}
-}
-function buyAuction(i){
- let c=auctionCars[i];
- if(myCars.length>=6)return alert('Showroom Full! আগে বিক্রি করো');
- if(money<c.price)return alert('টাকা নাই');
- if(confirm(`🔥 AUCTION JOIN?\n${c.real}\nBid ৳${c.price}\nজিতলে গাড়ি তোমার Showroom এ আসবে`)){
-  money-=c.price; myCars.push({name:c.name,real:c.real,color:c.color,emoji:c.emoji,buy:c.price,cond:80,myPrice:Math.floor(c.price*1.5)}); auctionCars.splice(i,1); render(); alert('🎉 Auction জিতছো! Showroom এ চলে গেছে!');
- }
-}
-function buyHood(i){
- let c=hoodCars[i];
- if(myCars.length>=6)return alert('Showroom Full!');
- if(money<c.price)return alert('টাকা নাই');
- if(confirm(`🏘️ ${c.real} কিনবা ৳${c.price} এ?`)){
-  money-=c.price; myCars.push({name:c.name,real:c.real,color:c.color,emoji:c.emoji,buy:c.price,cond:70,myPrice:Math.floor(c.price*1.6)}); hoodCars.splice(i,1); render(); alert('কিনছো! Showroom এ চলে গেছে!');
- }
-}
-</script>
-</body>
- </html>
+GameManager
+PlayerManager
+MoneyManager
+CarManager
+GarageManager
+CustomerManager
+CustomerAI
+NegotiationManager
+TestDriveManager
+DeliveryManager
+AuctionManager
+MarketManager
+EmployeeManager
+TrafficManager
+MissionManager
+WeatherManager
+SaveManager
+UIManagerBDCarForSale/
+│
+├── Assets/
+│   ├── Art/
+│   │   ├── Cars/
+│   │   ├── Buildings/
+│   │   ├── Characters/
+│   │   └── Environment/
+│   │
+│   ├── Audio/
+│   ├── Animations/
+│   ├── Materials/
+│   ├── Prefabs/
+│   │   ├── Cars/
+│   │   ├── Customers/
+│   │   └── Buildings/
+│   │
+│   ├── Scenes/
+│   │   ├── MainMenu
+│   │   ├── City
+│   │   ├── Showroom
+│   │   ├── Auction
+│   │   └── Garage
+│   │
+│   ├── Scripts/
+│   ├── ScriptableObjects/
+│   ├── UI/
+│   └── Resources/
