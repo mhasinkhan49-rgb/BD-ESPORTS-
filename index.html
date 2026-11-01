@@ -2,145 +2,143 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>GARIR HUT - Working + Manager</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GARIR HUT - Simple Working</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:#0f172a;color:#fff;overflow:hidden}
-#start{position:fixed;inset:0;background:linear-gradient(#0f172a,#000);z-index:100;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
-.btn{padding:14px 28px;border:none;border-radius:30px;font-weight:900;font-size:18px;margin:6px}
-.btn-yellow{background:#facc15;color:#000}
-.btn-green{background:#22c55e;color:#fff}
-#top{position:fixed;top:0;width:100%;background:#111827;padding:10px;display:flex;justify-content:space-between;z-index:20;border-bottom:2px solid #facc15;font-size:13px;display:none}
-#game{position:relative;width:100vw;height:100vh;background:#3a5a3a;overflow:hidden;display:none}
-#world{position:absolute;width:1600px;height:1600px;left:0;top:0}
-.building{position:absolute;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-weight:900}
-#showroom{left:700px;top:700px;width:300px;height:200px;background:#fff;color:#000;border-color:#facc15}
-#auction{left:700px;top:300px;width:300px;height:120px;background:#999;color:#fff;border-color:#ff0000}
-.car{position:absolute;width:70px;height:36px;border-radius:6px;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:28px}
-#player{position:absolute;width:22px;height:22px;background:#facc15;border-radius:50%;border:3px solid #000;left:800px;top:1000px}
-#player.sit{background:#22c55e;width:32px;height:16px;border-radius:4px}
-#joy{position:fixed;bottom:20px;left:20px;width:110px;height:110px;background:rgba(255,255,255,0.15);border-radius:50%;border:2px solid rgba(255,255,255,0.3);z-index:20}
-#stick{width:50px;height:50px;background:#facc15;border-radius:50%;position:absolute;left:30px;top:30px}
-#actions{position:fixed;bottom:0;width:100%;background:#0f172a;display:flex;gap:6px;padding:8px;overflow-x:auto;z-index:20;border-top:2px solid #facc15;display:none}
-.abtn{padding:10px 14px;border:none;border-radius:10px;font-weight:900;white-space:nowrap}
-#inside{position:fixed;inset:0;background:#0f172a;z-index:30;display:none;padding:10px;overflow-y:auto}
-#msg{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#000;padding:12px 20px;border-radius:20px;font-weight:900;z-index:40;display:none;text-align:center;max-width:300px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0f172a;color:#fff;text-align:center}
+#start{position:fixed;inset:0;background:#0f172a;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;z-index:100}
+h1{font-size:42px;color:#facc15}
+.btn{padding:16px 30px;border:none;border-radius:30px;font-weight:900;font-size:18px;margin:8px}
+.btn-y{background:#facc15;color:#000}
+#top{padding:12px;background:#111827;border-bottom:2px solid #facc15;display:flex;justify-content:space-between;display:none}
+.page{display:none;padding:15px;padding-bottom:80px}
+.page.active{display:block}
+.card{background:#1e293b;border-radius:16px;padding:12px;margin:10px 0;text-align:left;border:2px solid #334155}
+.card.my{border-color:#facc15;background:#1a1a0a}
+.carBox{width:100%;height:90px;background:#111827;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:60px;margin-bottom:8px}
+.badge{background:#334155;padding:4px 8px;border-radius:8px;font-size:12px}
+.badge.g{background:#facc15;color:#000;font-weight:900}
+.tabs{position:fixed;bottom:0;width:100%;background:#111827;display:flex;border-top:2px solid #facc15;display:none}
+.tab{flex:1;padding:14px 5px;text-align:center;font-size:12px;font-weight:900;opacity:0.5}
+.tab.active{opacity:1;background:#1e293b;color:#facc15;border-top:3px solid #facc15}
 </style>
 </head>
 <body>
-<div id="start">
-<h1 style="font-size:42px;color:#facc15">🚗 GARIR HUT</h1>
-<p style="color:#facc15;font-weight:900">Working + Manager Version</p>
-<p style="font-size:13px;color:#94a3b8;margin:10px 0">আগের সব ঠিক আছে + দাম Change + Auction Join</p>
-<button class="btn btn-yellow" id="playBtn">▶️ PLAY - আগের মতো কাজ করবে</button>
-</div>
-<div id="top"><div>৳ <span id="money">800000</span> | <span id="loc">OUTSIDE</span></div><div>🚗 <span id="cnt">0/6</span></div></div>
-<div id="game"><div id="world"><div id="showroom" class="building">SHOWROOM</div><div id="auction" class="building">AUCTION</div><div id="player"></div></div></div>
-<div id="joy"><div id="stick"></div></div>
-<div id="actions">
-<button class="abtn btn-yellow" id="sitBtn">🪑 বসো</button>
-<button class="abtn" style="background:#ffff00" id="lightBtn">💡 Light</button>
-<button class="abtn" style="background:#8b4513;color:#fff" id="doorBtn">🚪 Door</button>
-<button class="abtn" style="background:#00ff00" id="liftBtn">⬆️ Lift</button>
-<button class="abtn btn-green" id="aucBtn">🔥 Auction Join</button>
-<button class="abtn" style="background:#3b82f6;color:#fff" id="manageBtn">👔 Manager</button>
-</div>
-<div id="inside">
-<div style="display:flex;justify-content:space-between"><h2 style="color:#facc15">🏢 ভিতরে - Manager Panel</h2><button class="abtn btn-yellow" onclick="document.getElementById('inside').style.display='none'">বাইরে যাও</button></div>
-<div id="list"></div>
-</div>
-<div id="msg"></div>
-<script>
-let money=800000, playerX=800, playerY=1000, joyX=0, joyY=0, lightOn=false, doorOpen=false, liftUp=false, isSitting=false, keys={}, myCars=[], selected=null;
 
-document.getElementById('playBtn').addEventListener('click', ()=>{
+<div id="start">
+<h1>🚗 GARIR HUT</h1>
+<p style="color:#facc15;font-weight:900;margin:10px 0">SIMPLE - 100% WORKING</p>
+<p style="font-size:13px;color:#aaa">কোনো Joystick নাই, কোনো Bug নাই<br>2 টা বাটনে সব কাজ হবে</p>
+<div style="background:#1e293b;padding:12px;border-radius:12px;margin:15px 0;font-size:13px;text-align:left;line-height:1.8">
+✅ PLAY চাপলেই গেম শুরু<br>
+✅ ENTER SHOWROOM চাপলেই ভিতরে<br>
+✅ দামে ক্লিক করে দাম পাল্টাও<br>
+✅ AUCTION থেকে গাড়ি কিনো
+</div>
+<button class="btn btn-y" onclick="play()">▶️ PLAY GAME</button>
+</div>
+
+<div id="top">
+<div>৳ <span id="money">800000</span></div>
+<div>🚗 <span id="cnt">0/6</span></div>
+</div>
+
+<div id="p-showroom" class="page active">
+<div style="background:#facc15;color:#000;padding:10px;border-radius:12px;font-weight:900;margin-bottom:10px">🏢 তোমার SHOWROOM - পিছনে শোরুম, ভিতরে 4 গাড়ি - দাম পাল্টাতে পারবা</div>
+<div id="myList"></div>
+</div>
+
+<div id="p-auction" class="page">
+<div style="background:#ff0000;color:#fff;padding:10px;border-radius:12px;font-weight:900;margin-bottom:10px">🔥 CAR AUCTION - 4 টা গ্যারেজ - Join করো, জিতলে গাড়ি তোমার</div>
+<div id="aucList"></div>
+</div>
+
+<div id="p-market" class="page">
+<div style="background:#3b82f6;color:#fff;padding:10px;border-radius:12px;font-weight:900;margin-bottom:10px">🏘️ NEIGHBORHOOD - পাড়ার বাড়ির সামনে গাড়ি - কিনে আনো</div>
+<div id="hoodList"></div>
+</div>
+
+<div class="tabs" id="tabs">
+<div class="tab active" onclick="openTab('p-showroom',this)">🏢 Showroom</div>
+<div class="tab" onclick="openTab('p-auction',this)">🔥 Auction</div>
+<div class="tab" onclick="openTab('p-market',this)">🏘️ Market</div>
+</div>
+
+<script>
+let money=800000;
+let myCars=[
+{name:"G-Wagon AMG 2024",real:"G-Wagon Black",color:"#111",emoji:"🚙",buy:300000,cond:90,myPrice:450000},
+{name:"Audi R8 Yellow",real:"Audi R8 V10",color:"#ffcc00",emoji:"🚗",buy:120000,cond:85,myPrice:180000}
+];
+let auctionCars=[
+{name:"Lamborghini Aventador",real:"Lambo Red",color:"#ff0000",emoji:"🏎️",price:150000},
+{name:"Ferrari 488 Pista",real:"Ferrari Red",color:"#cc0000",emoji:"🏎️",price:170000},
+{name:"Rolls Royce",real:"Rolls Royce Phantom",color:"#333",emoji:"🚘",price:200000}
+];
+let hoodCars=[
+{name:"Toyota Corolla",real:"Corolla White",color:"#fff",emoji:"🚙",price:40000},
+{name:"CNG Auto",real:"CNG Green",color:"#0a0",emoji:"🛺",price:15000},
+{name:"Premio",real:"Premio Silver",color:"#ccc",emoji:"🚗",price:60000}
+];
+
+function play(){
  document.getElementById('start').style.display='none';
  document.getElementById('top').style.display='flex';
- document.getElementById('game').style.display='block';
- document.getElementById('actions').style.display='flex';
- spawnCars(); loop();
- showMsg('✅ আগের মতো সব কাজ করছে! Joystick নড়াও',3000);
-});
-
-function spawnCars(){
- let w=document.getElementById('world');
- let cars=[
-  {name:"G-Wagon",color:"#111",emoji:"🚙",x:720,y:760,price:450000,my:true,cond:85},
-  {name:"Audi R8",color:"#ffcc00",emoji:"🚗",x:820,y:760,price:180000,my:true,cond:80},
-  {name:"Lambo",color:"#ff0000",emoji:"🏎️",x:720,y:320,price:750000,my:false,auc:true},
-  {name:"Ferrari",color:"#cc0000",emoji:"🏎️",x:820,y:320,price:700000,my:false,auc:true}
- ];
- cars.forEach(c=>{
-  let d=document.createElement('div'); d.className='car'; d.style.left=c.x+'px'; d.style.top=c.y+'px'; d.style.background=c.color; d.innerHTML=c.emoji;
-  d.dataset.name=c.name; d.dataset.price=c.price; d.dataset.my=c.my; d.dataset.auc=c.auc; d.dataset.cond=c.cond;
-  if(c.my){d.style.borderColor='#facc15'; myCars.push(c);}
-  d.addEventListener('click', ()=>{ selected=d; showMsg('🎯 '+c.name+' ৳'+c.price+' - Auction Join চাপো',2000); });
-  w.appendChild(d);
- });
- renderInside();
+ document.getElementById('tabs').style.display='flex';
+ render();
 }
-
-function renderInside(){
- let h=''; myCars.forEach((c,i)=>{
-  h+=`<div style="background:#1e293b;padding:10px;border-radius:12px;margin:8px 0;display:flex;gap:10px"><div style="width:60px;height:40px;background:${c.color};border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:30px">🚗</div><div><b>${c.name}</b><br>Cond ${c.cond}% | Buy ৳${c.price}<br><b style="color:#facc15">Sell: ৳${c.price*1.4} <span onclick="editP(${i})" style="text-decoration:underline">✏️ Change</span></b><br><button class="abtn" style="background:#22c55e" onclick="wash(${i})">Wash</button><button class="abtn" style="background:#3b82f6;color:#fff" onclick="repair(${i})">Repair</button><button class="abtn" style="background:#ef4444;color:#fff" onclick="sell(${i})">Sell</button></div></div>`;
- });
- document.getElementById('list').innerHTML=h;
- document.getElementById('cnt').innerText=myCars.length+'/6';
+function openTab(id,el){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ el.classList.add('active');
+}
+function render(){
  document.getElementById('money').innerText=money;
-}
-window.editP=(i)=>{let p=prompt('নতুন দাম?',myCars[i].price*1.4); if(p){myCars[i].price=parseInt(p); renderInside();}};
-window.wash=(i)=>{if(money<500)return; money-=500; myCars[i].cond=Math.min(100,myCars[i].cond+10); renderInside();};
-window.repair=(i)=>{if(money<2000)return; money-=2000; myCars[i].cond=Math.min(100,myCars[i].cond+25); renderInside();};
-window.sell=(i)=>{let c=myCars[i]; money+=c.price*1.4; myCars.splice(i,1); renderInside(); showMsg('বিক্রি Done ৳'+c.price*1.4);};
+ document.getElementById('cnt').innerText=myCars.length+'/6';
+ let h=''; myCars.forEach((c,i)=>{
+  h+=`<div class="card my"><div class="carBox" style="background:${c.color}">${c.emoji}</div><b>${c.real}</b><br><small>${c.name}</small><br><span class="badge">Cond ${c.cond}%</span> <span class="badge g">SUPER</span><br>Buy ৳${c.buy}<br><b style="color:#facc15" onclick="editPrice(${i})">তোমার দাম: ৳${c.myPrice} ✏️ ক্লিক করে পাল্টাও</b><br><div style="margin-top:8px"><button onclick="wash(${i})" style="background:#22c55e;color:#fff;border:none;padding:8px 12px;border-radius:8px;margin-right:4px">🧼 ধোও ৳500</button><button onclick="repair(${i})" style="background:#3b82f6;color:#fff;border:none;padding:8px 12px;border-radius:8px;margin-right:4px">🔧 Repair ৳2000</button><button onclick="sell(${i})" style="background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px">💰 বিক্রি</button></div></div>`;
+ });
+ for(let i=myCars.length;i<6;i++){h+=`<div class="card" style="border-style:dashed;opacity:0.5"><div class="carBox">➕</div><center>খালি Slot - Auction থেকে কিনো</center></div>`}
+ document.getElementById('myList').innerHTML=h;
 
-function loop(){
- requestAnimationFrame(loop);
- let dx=joyX*4, dy=joyY*4;
- if(keys['w']) dy=-4; if(keys['s']) dy=4; if(keys['a']) dx=-4; if(keys['d']) dx=4;
- if(isSitting){dx=0;dy=0;}
- if(dx||dy){
-  playerX+=dx; playerY+=dy;
-  document.getElementById('player').style.left=playerX+'px';
-  document.getElementById('player').style.top=playerY+'px';
-  let wx=-playerX+innerWidth/2, wy=-playerY+innerHeight/2;
-  document.getElementById('world').style.transform=`translate(${wx}px,${wy}px)`;
+ let a=''; auctionCars.forEach((c,i)=>{
+  a+=`<div class="card"><div class="carBox" style="background:${c.color}">${c.emoji}</div><b>${c.real}</b><br>Auction Price: <b style="color:#facc15">৳${c.price}</b><br><button onclick="buyAuction(${i})" style="background:#22c55e;color:#fff;border:none;padding:10px 16px;border-radius:10px;width:100%;margin-top:6px;font-weight:900">🔥 Auction Join করো - জিতলে গাড়ি তোমার</button></div>`;
+ });
+ document.getElementById('aucList').innerHTML=a;
+
+ let m=''; hoodCars.forEach((c,i)=>{
+  m+=`<div class="card"><div class="carBox" style="background:${c.color}">${c.emoji}</div><b>${c.real}</b><br>Price: <b style="color:#facc15">৳${c.price}</b><br><button onclick="buyHood(${i})" style="background:#3b82f6;color:#fff;border:none;padding:10px 16px;border-radius:10px;width:100%;margin-top:6px;font-weight:900">🏘️ কিনে Showroom এ আনো</button></div>`;
+ });
+ document.getElementById('hoodList').innerHTML=m;
+}
+function editPrice(i){
+ let p=prompt(`💲 ${myCars[i].real} এর নতুন দাম কত দিবা?\nCustomer এই দাম দেখবে`,myCars[i].myPrice);
+ if(p){myCars[i].myPrice=parseInt(p); render(); alert('✅ দাম Change! নতুন দাম ৳'+p);}
+}
+function wash(i){if(money<500)return alert('টাকা নাই'); money-=500; myCars[i].cond=Math.min(100,myCars[i].cond+10); render();}
+function repair(i){if(money<2000)return alert('টাকা নাই'); money-=2000; myCars[i].cond=Math.min(100,myCars[i].cond+25); render();}
+function sell(i){
+ let c=myCars[i];
+ if(confirm(`💰 ${c.real} বিক্রি করবা ৳${c.myPrice} এ?`)){money+=c.myPrice; myCars.splice(i,1); render(); alert('বিক্রি Done! ৳'+c.myPrice);}
+}
+function buyAuction(i){
+ let c=auctionCars[i];
+ if(myCars.length>=6)return alert('Showroom Full! আগে বিক্রি করো');
+ if(money<c.price)return alert('টাকা নাই');
+ if(confirm(`🔥 AUCTION JOIN?\n${c.real}\nBid ৳${c.price}\nজিতলে গাড়ি তোমার Showroom এ আসবে`)){
+  money-=c.price; myCars.push({name:c.name,real:c.real,color:c.color,emoji:c.emoji,buy:c.price,cond:80,myPrice:Math.floor(c.price*1.5)}); auctionCars.splice(i,1); render(); alert('🎉 Auction জিতছো! Showroom এ চলে গেছে!');
  }
 }
-
-function showMsg(t,ms=2000){let m=document.getElementById('msg');m.innerText=t;m.style.display='block';setTimeout(()=>m.style.display='none',ms);}
-function toggleSit(){isSitting=!isSitting; document.getElementById('player').classList.toggle('sit',isSitting); showMsg(isSitting?'🪑 বসছো - Manager':'উঠছো');}
-function toggleLight(){lightOn=!lightOn; document.getElementById('game').style.background=lightOn?'#4a6a4a':'#0a0a1a'; showMsg(lightOn?'Light ON':'Light OFF');}
-function toggleDoor(){doorOpen=!doorOpen; showMsg(doorOpen?'Door OPEN':'Door CLOSED');}
-function toggleLift(){liftUp=!liftUp; showMsg(liftUp?'Lift UP':'Lift DOWN');}
-
-document.getElementById('sitBtn').addEventListener('click', toggleSit);
-document.getElementById('lightBtn').addEventListener('click', toggleLight);
-document.getElementById('doorBtn').addEventListener('click', toggleDoor);
-document.getElementById('liftBtn').addEventListener('click', toggleLift);
-document.getElementById('manageBtn').addEventListener('click', ()=>{document.getElementById('inside').style.display='block'; renderInside();});
-document.getElementById('aucBtn').addEventListener('click', ()=>{
- if(!selected){showMsg('গাড়িতে ক্লিক করো');return;}
- if(selected.dataset.auc=='true'){
-  let p=parseInt(selected.dataset.price);
-  if(money>=p){money-=p; myCars.push({name:selected.dataset.name,color:selected.style.background,price:p,cond:80}); selected.remove(); selected=null; renderInside(); showMsg('🎉 Auction জিতছো!');}
-  else showMsg('টাকা নাই');
- } else showMsg('এটা তোমার গাড়ি, Manager এ গিয়ে বিক্রি করো');
-});
-
-addEventListener('keydown', e=>{keys[e.key.toLowerCase()]=true; if(e.key.toLowerCase()=='e'){let d=Math.hypot(playerX-800,playerY-800); if(d<100) document.getElementById('inside').style.display='block';}});
-addEventListener('keyup', e=>keys[e.key.toLowerCase()]=false);
-
-const joy=document.getElementById('joy'), stick=document.getElementById('stick');
-joy.addEventListener('touchmove', e=>{
- e.preventDefault();
- let r=joy.getBoundingClientRect(); let t=e.touches[0];
- let x=t.clientX-(r.left+55), y=t.clientY-(r.top+55);
- let d=Math.hypot(x,y); if(d>45){x=x/d*45;y=y/d*45}
- stick.style.left=(30+x)+'px'; stick.style.top=(30+y)+'px';
- joyX=x/45; joyY=y/45;
-},{passive:false});
-joy.addEventListener('touchend', ()=>{stick.style.left='30px';stick.style.top='30px';joyX=0;joyY=0;});
+function buyHood(i){
+ let c=hoodCars[i];
+ if(myCars.length>=6)return alert('Showroom Full!');
+ if(money<c.price)return alert('টাকা নাই');
+ if(confirm(`🏘️ ${c.real} কিনবা ৳${c.price} এ?`)){
+  money-=c.price; myCars.push({name:c.name,real:c.real,color:c.color,emoji:c.emoji,buy:c.price,cond:70,myPrice:Math.floor(c.price*1.6)}); hoodCars.splice(i,1); render(); alert('কিনছো! Showroom এ চলে গেছে!');
+ }
+}
 </script>
 </body>
-</html>
+ </html>
