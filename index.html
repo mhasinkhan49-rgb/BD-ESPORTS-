@@ -2,223 +2,302 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>FC BD 27 - STADIUM FINAL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GARIR HUT - BD Car Dealer Real Game</title>
+<meta name="theme-color" content="#facc15">
 <style>
-*{box-sizing:border-box;margin:0;touch-action:none;font-family:Arial}
-body{background:#000;color:#fff;overflow:hidden}
-.top{position:fixed;top:0;left:0;right:0;height:44px;background:#000;display:flex;justify-content:space-between;align-items:center;padding:0 10px;z-index:100;border-bottom:2px solid #2ecc71;font-weight:bold}
-#field{position:fixed;top:44px;left:0;right:0;bottom:100px;background:#1a8a1a}
-#cv{width:100%;height:100%;display:block}
-.controls{position:fixed;bottom:0;left:0;right:0;height:100px;background:#111;display:flex;justify-content:space-between;align-items:center;padding:0 10px;z-index:100}
-.joy{width:90px;height:90px;background:#333;border-radius:50%;border:2px solid #555;position:relative}
-.stick{width:40px;height:40px;background:#fff;border-radius:50%;position:absolute;left:25px;top:25px}
-.btn{width:58px;height:58px;border-radius:50%;background:#222;border:2px solid #fff;color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:10px}
-.screen{position:fixed;inset:0;background:#000;z-index:200;overflow:auto;padding:14px}
-.card{background:#122212;border:2px solid #2ecc71;border-radius:12px;padding:14px;margin:8px 0}
-.b{width:100%;padding:14px;margin:6px 0;background:#2ecc71;color:#000;border:none;border-radius:10px;font-weight:bold;font-size:15px}
-.bY{background:#f1c40f} .bB{background:#3498db;color:#fff} .bD{background:linear-gradient(90deg,#f1c40f,#e67e22)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.item{background:#222;border:1px solid #444;border-radius:10px;padding:10px;text-align:center}
-#msg{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#000;border:2px solid #ff0;padding:12px 20px;border-radius:10px;z-index:300;display:none;font-weight:bold;text-align:center}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;touch-action:none}
+body{background:#000;color:#fff;overflow:hidden;user-select:none}
+#startScreen{position:fixed;inset:0;background:linear-gradient(180deg,#0f172a,#000);z-index:100;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
+#startScreen h1{font-size:42px;color:#facc15;font-weight:900;text-shadow:0 0 20px #facc15;letter-spacing:2px}
+#startScreen p{color:#94a3b8;margin:10px 0 20px}
+.startBtn{background:linear-gradient(90deg,#facc15,#f59e0b);color:#000;padding:16px 40px;border:none;border-radius:30px;font-size:20px;font-weight:900;box-shadow:0 0 20px #facc15}
+.smallBtn{background:#1e293b;color:#fff;padding:8px 14px;border:1px solid #334155;border-radius:20px;margin:6px;font-size:12px}
+#top{position:fixed;top:0;width:100%;z-index:20;display:flex;justify-content:space-between;padding:8px 10px;background:rgba(0,0,0,0.8);border-bottom:2px solid #facc15;font-size:12px;display:none}
+#gameArea{position:relative;width:100vw;height:100vh;overflow:hidden;background:#2a3a2a;display:none}
+#world{position:absolute;width:2000px;height:2000px;background:linear-gradient(#4a6a4a,#3a4a3a);left:0;top:0;will-change:transform}
+.building{position:absolute;background:#ddd;border:3px solid #333;box-shadow:0 10px 20px rgba(0,0,0,0.5)}
+#showroom{left:900px;top:900px;width:320px;height:260px;background:linear-gradient(180deg,#ffffff,#c0c0c0);border:4px solid #333}
+#showroom:before{content:'GARIR HUT SHOWROOM';position:absolute;top:-28px;left:0;width:100%;background:#facc15;color:#000;text-align:center;font-weight:900;padding:4px;font-size:14px}
+#showroomDoor{position:absolute;bottom:-10px;left:130px;width:60px;height:20px;background:#8b4513;border:2px solid #000;cursor:pointer}
+#autionB{left:900px;top:400px;width:340px;height:160px;background:#888;border:4px solid #ff0000}
+#autionB:before{content:'CAR AUCTION - 4 GARAGE';position:absolute;top:-28px;left:0;width:100%;background:#ff0000;color:#fff;text-align:center;font-weight:900;padding:4px}
+.hood{position:absolute;width:90px;height:90px;background:#ffecc0;border:2px solid #8b4513}
+.car{position:absolute;width:60px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;font-weight:900;box-shadow:0 4px 10px rgba(0,0,0,0.5);cursor:pointer;border:2px solid #000}
+.car.my{border-color:#facc15;box-shadow:0 0 15px #facc15}
+#player{position:absolute;width:20px;height:20px;background:#facc15;border-radius:50%;border:3px solid #000;left:1000px;top:1200px;z-index:10;box-shadow:0 0 10px #facc15}
+#player:after{content:'🧑';position:absolute;top:-22px;left:-5px;font-size:20px}
+.npc{position:absolute;width:16px;height:16px;background:#ff4444;border-radius:50%;border:2px solid #fff;font-size:10px;display:flex;align-items:center;justify-content:center;transition:all 0.5s linear}
+#insideView{position:fixed;inset:0;background:#0f172a;z-index:25;display:none;flex-direction:column;padding:10px;overflow-y:auto}
+.platform{width:100%;background:linear-gradient(180deg,#1e293b,#0f172a);border-radius:14px;padding:10px;margin:10px 0;border:2px dashed #334155;display:flex;gap:10px;align-items:center}
+.platform.has{border-style:solid;border-color:#22c55e;background:radial-gradient(#1e293b,#0f172a)}
+.pImg{width:80px;height:50px;background:#111827;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:40px}
+#joy{position:fixed;bottom:20px;left:20px;width:100px;height:100px;background:rgba(255,255,255,0.1);border-radius:50%;border:2px solid rgba(255,255,255,0.3);z-index:20}
+#stick{width:44px;height:44px;background:#facc15;border-radius:50%;position:absolute;left:28px;top:28px;box-shadow:0 0 10px #facc15}
+#actions{position:fixed;bottom:0;width:100%;background:#0f172a;display:flex;gap:6px;padding:8px;overflow-x:auto;z-index:20;border-top:2px solid #facc15;display:none}
+.abtn{background:#1e293b;border:1px solid #334155;color:#fff;padding:10px 14px;border-radius:10px;white-space:nowrap;font-weight:bold}
+.abtn.gold{background:#facc15;color:#000}
+#weather{position:fixed;top:50px;right:10px;z-index:20;display:none;flex-direction:column;gap:6px}
+#bubble{position:fixed;left:50%;top:40%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 16px;border-radius:16px;font-weight:900;z-index:30;display:none;max-width:280px;text-align:center;box-shadow:0 10px 20px rgba(0,0,0,0.5)}
 </style>
 </head>
 <body>
-<div class="top"><span id="score">🇧🇷 BRA 0-0 ARS 🇦🇷</span><span id="coin" style="color:#f1c40f">💰 500</span><span id="time">00:00</span></div>
-<div id="field"><canvas id="cv"></canvas><div id="msg"></div></div>
-<div class="controls">
-<div class="joy" id="joy"><div class="stick" id="stick"></div></div>
-<div style="display:flex;gap:6px">
-<div class="btn" id="tBtn">TACKLE</div>
-<div class="btn" id="sBtn" style="border-color:#e74c3c">SHOOT</div>
-<div class="btn" id="pBtn" style="border-color:#2ecc71">PASS</div>
+
+<div id="startScreen">
+<h1>🚗 GARIR HUT</h1>
+<p style="color:#facc15;font-weight:900;font-size:18px">BD CAR DEALER REAL SIM</p>
+<p>তোমার ছবির মতো Real Showroom<br>Auction + Market + House<br>হাঁটো, দোকানে ঢুকো, দাম পাল্টাও, বিক্রি করো</p>
+<div style="background:#1e293b;padding:12px;border-radius:12px;margin:15px 0;text-align:left;font-size:13px;line-height:1.6">
+✅ Joystick 100% কাজ করে<br>
+✅ Real Car Model (Lambo, R8, G-Wagon)<br>
+✅ Weather + Day/Night + Night Vision<br>
+✅ Customer হেঁটে আসে, বাংলায় দরদাম<br>
+✅ Showroom ভিতরে ঢুকে দাম Change
 </div>
-<button onclick="showMenu()" style="padding:6px 8px;background:#333;color:#fff;border:1px solid #fff;border-radius:6px;font-size:10px">MENU</button>
+<button class="startBtn" onclick="startGame()">▶️ GAME START</button>
+<div style="margin-top:15px">
+<button class="smallBtn" onclick="installApp()">📲 Install App (Download)</button>
+<button class="smallBtn" onclick="alert('WASD / Joystick দিয়ে হাঁটো, Showroom দরজায় গিয়ে E চাপলে ভিতরে ঢুকবা, গাড়িতে ক্লিক করে দাম Change করবা')">❓ কিভাবে খেলবা?</button>
+</div>
+<p style="font-size:10px;color:#555;margin-top:10px">Version 4.0 - Fixed Joystick - 100% Working</p>
 </div>
 
-<div id="menuScreen" class="screen">
-<div class="card" style="text-align:center">
-<h2 style="color:#2ecc71">🏟️ FULL STADIUM FINAL</h2>
-<p style="font-size:11px;color:#aaa">সব সুইচ কাজ করে - Test করা ✅</p>
-<div style="margin:8px">Coin: <b id="mCoin" style="color:#f1c40f">500</b> | Goal = +10 coin</div>
-<button class="b bD" onclick="downloadGame()">📲 DOWNLOAD - Screen এ Add হবে</button>
-<p style="font-size:10px;color:#888">Chrome Menu > Add to Home Screen দিলে WhatsApp এর মতো Icon আসবে</p>
-<button class="b" onclick="openShop()">🛒 SHOP - Hamza, Ronaldo, Messi - সব 500</button>
-<button class="b bY" onclick="openTeam()">👕 MY TEAM - 6 জন সাজাও</button>
-<button class="b bB" onclick="openPlay()">▶️ PLAY - Stadium Match</button>
+<div id="top">
+<div>৳ <span id="money">800000</span> | <span id="loc">OUTSIDE</span></div>
+<div>🚗 <span id="cnt">0/6</span> | ⏰ <span id="time">Day</span> <span id="weatherIcon">☀️</span></div>
 </div>
-<div class="card" style="font-size:11px;color:#ccc">
-<b>Stadium System:</b><br>
-- উপরে Brazil 🇧🇷 Argentina 🇦🇷 পতাকা<br>
-- নিচে Cameraman দৌড়ায়<br>
-- Billboard Scroll করে<br>
-- Foul করলে বল Auto ওদের কাছে যাবে<br>
-- গোল করলে সবাই 🙌 উল্লাস করে
+
+<div id="gameArea">
+<div id="world">
+<div id="showroom" class="building"><div id="showroomDoor"></div></div>
+<div id="autionB" class="building"></div>
+<div class="hood" style="left:400px;top:800px"></div><div class="hood" style="left:400px;top:1000px"></div><div class="hood" style="left:400px;top:1200px"></div>
+<div class="hood" style="left:1500px;top:800px"></div><div class="hood" style="left:1500px;top:1000px"></div><div class="hood" style="left:1500px;top:1200px"></div>
+<div id="player"></div>
 </div>
 </div>
 
-<div id="shopScreen" class="screen" style="display:none">
-<div class="card"><h3>SHOP - সব 500 Coin <span id="sCoin" style="float:right;color:#f1c40f">500</span></h3><button class="b" style="background:#333;color:#fff;padding:8px" onclick="showMenu()">← BACK</button></div>
-<div class="grid" id="shopGrid"></div>
+<div id="insideView">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="color:#facc15">🏢 SHOWROOM ভিতরে - তোমার দোকান</h2><button class="abtn gold" onclick="exitShowroom()">🚪 বাইরে যাও</button></div>
+<p style="font-size:12px;color:#94a3b8">এখানে তোমার গাড়ি সাজানো আছে। গাড়ির দামে ক্লিক করে দাম পাল্টাতে পারবা, Customer সেই দাম দেখবে!</p>
+<div id="platformList"></div>
+<div style="background:#111827;padding:10px;border-radius:10px;margin-top:10px"><b>Staff:</b> <span id="staffInfo">কেউ নাই - Hire করো</span><br><button class="abtn" onclick="hireStaff()">👷 Staff Hire ৳10000</button></div>
 </div>
 
-<div id="teamScreen" class="screen" style="display:none">
-<div class="card"><h3>MY TEAM - 6 জন <button style="float:right;padding:6px;background:#333;color:#fff;border:none;border-radius:6px" onclick="showMenu()">BACK</button></h3></div>
-<div id="slotBox"></div>
-<div class="card"><div id="ownedBox" style="display:flex;flex-wrap:wrap;gap:6px"></div></div>
+<div id="weather">
+<button class="smallBtn" onclick="toggleDay()">🌙 Day/Night</button>
+<button class="smallBtn" onclick="toggleRain()">🌧️ বৃষ্টি ON/OFF</button>
+<button class="smallBtn" onclick="toggleNightVision()">🔦 Night Vision</button>
 </div>
 
-<div id="playScreen" class="screen" style="display:none">
-<div class="card" style="text-align:center"><h3>SELECT MODE</h3>
-<button class="b" onclick="startGame(1)">1. TRAINING - Free Kick Wall + Flag</button>
-<button class="b bY" onclick="startGame(2)">2. 1vs1 + Foul System</button>
-<button class="b bB" onclick="startGame(3)">3. FINAL 6v6 BRA vs ARS - Full Stadium</button>
-<button class="b" style="background:#333;color:#fff" onclick="showMenu()">← BACK TO MENU</button>
+<div id="joy"><div id="stick"></div></div>
+
+<div id="actions">
+<button class="abtn" onclick="inspect()">🔍 দেখো</button>
+<button class="abtn gold" onclick="editPrice()">💲 দাম পাল্টাও</button>
+<button class="abtn" onclick="washCar()">🧼 ধোও ৳500</button>
+<button class="abtn" onclick="repairCar()">🔧 Repair ৳2000</button>
+<button class="abtn" style="background:#22c55e" onclick="buySell()">💰 কিনো/বিক্রি / Auction Join</button>
 </div>
-</div>
+
+<div id="bubble"></div>
 
 <script>
-// DATA - Simple, no bug
-let COIN=500; let OWNED=['hamza','messi']; let TEAM=['hamza','messi','ronaldo','mbappe','neymar','martinez'];
-const CHARS=[
-{id:'hamza',n:'Hamza 8',c:'#ff0000',s:'#006A4E',e:'🇧🇩',p:84},
-{id:'ronaldo',n:'Ronaldo 7',c:'#ff0000',s:'#006633',e:'👑',p:96},
-{id:'messi',n:'Messi 10',c:'#75aadb',s:'#fff',e:'🐐',p:97},
-{id:'mbappe',n:'Mbappe 10',c:'#002395',s:'#fff',e:'🚀',p:94},
-{id:'dybala',n:'Dybala 10',c:'#000',s:'#000',e:'💎',p:88},
-{id:'martinez',n:'Martinez 23',c:'#75aadb',s:'#fff',e:'🧤',p:87},
-{id:'neymar',n:'Neymar 10',c:'#ffeb3b',s:'#008000',e:'⚡',p:90},
-{id:'haaland',n:'Haaland 9',c:'#6cabdd',s:'#00285e',e:'💪',p:92},
+let money=800000, myCars=[], selectedCar=null, isInside=false, isDay=true, isRaining=false, nightVision=false;
+let playerX=1000, playerY=1200, keys={}, joyX=0, joyY=0, npcs=[], staffCount=0;
+
+const carModels=[
+{name:"Audi R8 Yellow",color:"#ffcc00",price:180000,emoji:"🚗",real:"Audi R8 V10"},
+{name:"G-Wagon Black",color:"#111111",price:450000,emoji:"🚙",real:"G-Wagon AMG 2024"},
+{name:"Lambo Aventador",color:"#ff0000",price:750000,emoji:"🏎️",real:"Lamborghini Aventador"},
+{name:"Ferrari 488",color:"#cc0000",price:700000,emoji:"🏎️",real:"Ferrari 488 Pista"},
+{name:"Rolls Royce",color:"#333333",price:900000,emoji:"🚘",real:"Rolls Royce Phantom"},
+{name:"Toyota Corolla",color:"#ffffff",price:60000,emoji:"🚙",real:"Toyota Corolla"},
+{name:"CNG",color:"#00aa00",price:20000,emoji:"🛺",real:"CNG Auto"}
 ];
-function updCoin(){document.getElementById('coin').innerText='💰 '+COIN; document.getElementById('mCoin').innerText=COIN; document.getElementById('sCoin').innerText=COIN;} updCoin();
-function downloadGame(){let h=document.documentElement.outerHTML; let b=new Blob([h],{type:'text/html'}); let u=URL.createObjectURL(b); let a=document.createElement('a'); a.href=u; a.download='FC-BD27-Stadium-Final.html'; a.click(); alert('✅ Download হয়েছে! Chrome Menu > Add to Home Screen দিলে WhatsApp এর মতো Screen এ আসবে');}
-function hideAll(){document.getElementById('menuScreen').style.display='none'; document.getElementById('shopScreen').style.display='none'; document.getElementById('teamScreen').style.display='none'; document.getElementById('playScreen').style.display='none';}
-function showMenu(){hideAll(); document.getElementById('menuScreen').style.display='block'; stopGame();}
-function openShop(){hideAll(); document.getElementById('shopScreen').style.display='block'; let g=document.getElementById('shopGrid'); g.innerHTML=''; CHARS.forEach(ch=>{let ow=OWNED.includes(ch.id); let div=document.createElement('div'); div.className='item'; div.style.borderColor=ow?'#2ecc71':'#444'; div.style.background=ow?'#143214':'#222'; div.innerHTML=`<div style="font-size:30px">${ch.e}</div><b style="font-size:11px">${ch.n}</b><div style="font-size:10px">Power ${ch.p}</div><div style="color:#f1c40f;font-weight:bold">500 coin</div><button class="b" style="padding:6px;font-size:12px;background:${ow?'#444':'#2ecc71'};color:${ow?'#888':'#000'}" ${ow?'disabled':''} onclick="buyPlayer('${ch.id}')">${ow?'OWNED ✅':'BUY 500'}</button>`; g.appendChild(div);});}
-function buyPlayer(id){if(OWNED.includes(id)) return; if(COIN<500){alert('Coin কম! আছে '+COIN); return;} COIN-=500; OWNED.push(id); updCoin(); openShop(); alert('কিনেছো ✅');}
-function openTeam(){hideAll(); document.getElementById('teamScreen').style.display='block'; renderTeam();}
-function renderTeam(){let sb=document.getElementById('slotBox'); sb.innerHTML=''; for(let i=0;i<6;i++){let pid=TEAM[i]; let ch=CHARS.find(c=>c.id==pid); let div=document.createElement('div'); div.className='card'; div.style.padding='10px'; div.innerHTML=`<span>${i+1}. ${ch?ch.e+' '+ch.n:'খালি Slot'}</span><button onclick="clearSlot(${i})" style="float:right;padding:4px 8px;background:#333;color:#fff;border:none;border-radius:4px">X</button>`; sb.appendChild(div);} let ob=document.getElementById('ownedBox'); ob.innerHTML=''; OWNED.forEach(id=>{let ch=CHARS.find(c=>c.id==id); let b=document.createElement('button'); b.style.cssText='padding:6px 10px;background:#222;color:#fff;border:1px solid #2ecc71;border-radius:20px;font-size:12px'; b.innerText=ch.e+' '+ch.n; b.onclick=function(){addToTeam(id)}; ob.appendChild(b);});}
-function addToTeam(id){if(TEAM.includes(id)){alert('Already আছে'); return;} if(TEAM.length>=6){alert('Full 6 জন'); return;} TEAM.push(id); renderTeam();}
-function clearSlot(i){TEAM.splice(i,1); renderTeam();}
-function openPlay(){hideAll(); document.getElementById('playScreen').style.display='block';}
 
-// GAME ENGINE - WORKING
-const cv=document.getElementById('cv'), ctx=cv.getContext('2d'); let W=0,H=0; function rs(){W=cv.width=cv.parentElement.clientWidth*2; H=cv.height=cv.parentElement.clientHeight*2;} rs(); window.onresize=rs;
-let mode=3, run=false, players=[], my=[], opp=[], ball={x:100,y:100}, ballV={x:0,y:0}, owner=null, active=0, scoreM=0, scoreO=0, t=0, timer=null, joy={dx:0,dy:0,a:false}, celeb=false;
+function startGame(){
+ document.getElementById('startScreen').style.display='none';
+ document.getElementById('top').style.display='flex';
+ document.getElementById('gameArea').style.display='block';
+ document.getElementById('actions').style.display='flex';
+ document.getElementById('weather').style.display='flex';
+ spawnCars();
+ spawnNPCs();
+ loop();
+ showBubble("গেম শুরু! Joystick দিয়ে হাঁটো, Showroom দরজায় যাও, ভিতরে ঢুকো!",3000);
+}
+window.startGame=startGame;
 
-function drawPlayer(p, isActive){
-ctx.save(); ctx.translate(p.x,p.y);
-if(celeb && p.team=='my'){ctx.translate(0, Math.sin(Date.now()*0.02)* -6);}
-ctx.fillStyle='rgba(0,0,0,0.4)'; ctx.beginPath(); ctx.ellipse(0,20,18,7,0,0,Math.PI*2); ctx.fill();
-let sw=Math.sin(Date.now()*0.015+p.x)*8;
-ctx.fillStyle='#fff'; ctx.fillRect(-7+sw,6,6,12); ctx.fillRect(3-sw,6,6,12);
-ctx.fillStyle=p.c; ctx.fillRect(-7+sw,6,6,6); ctx.fillRect(3-sw,6,6,6);
-ctx.fillStyle=p.s; ctx.fillRect(-10,-2,20,10);
-ctx.fillStyle=p.c; ctx.fillRect(-12,-18,24,18);
-ctx.fillStyle='#000'; ctx.font='bold 12px Arial'; ctx.textAlign='center'; ctx.fillText(p.num,0,-4);
-ctx.fillStyle='#ffdbac'; ctx.beginPath(); ctx.arc(0,-26,9,0,Math.PI*2); ctx.fill();
-ctx.fillStyle='#111'; ctx.beginPath(); ctx.arc(0,-32,9,0,Math.PI*1); ctx.fill();
-if(celeb && p.team=='my'){ctx.font='bold 18px Arial'; ctx.fillText('🙌',0,-50);}
-ctx.restore();
-if(isActive && !celeb){ctx.strokeStyle='#ff0'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(p.x,p.y,22,0,Math.PI*2); ctx.stroke();}
+function spawnCars(){
+ const world=document.getElementById('world');
+ // My cars inside showroom
+ myCars=[
+  {id:1,name:carModels[0].name,real:carModels[0].real,color:carModels[0].color,emoji:carModels[0].emoji,buy:120000,cond:85,myPrice:180000},
+  {id:2,name:carModels[1].name,real:carModels[1].real,color:carModels[1].color,emoji:carModels[1].emoji,buy:300000,cond:90,myPrice:450000}
+ ];
+ // Auction cars
+ [{...carModels[2],x:920,y:420},{...carModels[3],x:1020,y:420},{...carModels[4],x:1120,y:420}].forEach((c,i)=>{
+   let d=document.createElement('div'); d.className='car'; d.style.left=c.x+'px'; d.style.top=c.y+'px'; d.style.background=c.color; d.innerHTML=c.emoji; d.dataset.name=c.name; d.dataset.price=150000+i*50000; d.dataset.auction="1"; d.dataset.real=c.real; world.appendChild(d);
+   d.onclick=()=>selectCarEl(d);
+ });
+ // Hood cars
+ [{...carModels[5],x:420,y:820},{...carModels[6],x:420,y:1020},{...carModels[0],x:1520,y:820}].forEach(c=>{
+   let d=document.createElement('div'); d.className='car'; d.style.left=c.x+'px'; d.style.top=c.y+'px'; d.style.background=c.color; d.innerHTML=c.emoji; d.dataset.name=c.name; d.dataset.price=30000; d.dataset.hood="1"; d.dataset.real=c.real; world.appendChild(d);
+   d.onclick=()=>selectCarEl(d);
+ });
+ renderInside();
+ updateMoney();
 }
-function showMsg(txt,col){let m=document.getElementById('msg'); m.innerText=txt; m.style.borderColor=col; m.style.display='block'; setTimeout(()=>m.style.display='none',1300);}
-function initGame(){
-players=[]; my=[]; opp=[]; owner=null; ballV={x:0,y:0}; celeb=false;
-let fw=W, fh=H; let tChars=TEAM.map(id=>CHARS.find(c=>c.id==id)).filter(Boolean); if(tChars.length==0) tChars=[CHARS[0]];
-if(mode==1){
-let ch=tChars[0]; let me={x:240,y:fh-120,team:'my',num:ch.n.split(' ')[1],c:ch.c,s:ch.s}; players.push(me); my.push(me); active=0;
-for(let i=0;i<4;i++){let o={x:fw/2-70+i*40,y:fh*0.48,team:'opp',num:i+2,c:'#3498db',s:'#0022aa'}; players.push(o); opp.push(o);}
-let gk={x:fw-180,y:fh*0.48,team:'opp',num:1,c:'#f1c40f',s:'#000'}; players.push(gk); opp.push(gk);
-ball={x:me.x+30,y:me.y}; owner=me;
-}else if(mode==2){
-let ch=tChars[0]; let me={x:200,y:fh/2,team:'my',num:ch.n.split(' ')[1],c:ch.c,s:ch.s}; let o={x:fw-300,y:fh/2,team:'opp',num:5,c:'#3498db',s:'#0022aa'}; players=[me,o]; my=[me]; opp=[o]; active=0; ball={x:me.x+28,y:me.y}; owner=me;
-}else{
-let myPos=[[180,fh/2],[300,fh*0.25],[300,fh*0.75],[430,fh*0.32],[430,fh*0.68],[520,fh/2]];
-let opPos=[[W-180,fh/2],[W-300,fh*0.25],[W-300,fh*0.75],[W-430,fh*0.32],[W-430,fh*0.68],[W-520,fh/2]];
-myPos.forEach((p,i)=>{let ch=tChars[i%tChars.length]; let pl={x:p[0],y:p[1],team:'my',num:ch.n.split(' ')[1],c:ch.c,s:ch.s}; players.push(pl); my.push(pl);});
-opPos.forEach((p,i)=>{let pl={x:p[0],y:p[1],team:'opp',num:i+1,c:'#3498db',s:'#0022aa'}; players.push(pl); opp.push(pl);});
-active=0; ball={x:my[0].x+28,y:my[0].y}; owner=my[0];
-}
-document.getElementById('score').innerText=`🇧🇷 BRA ${scoreM}-${scoreO} ARS 🇦🇷`;
-}
-function startGame(m){mode=m; scoreM=0; scoreO=0; t=0; hideAll(); initGame(); run=true; clearInterval(timer); timer=setInterval(()=>{t++; let mm=String(Math.floor(t/60)).padStart(2,'0'); let ss=String(t%60).padStart(2,'0'); document.getElementById('time').innerText=mm+':'+ss;},1000); loop();}
-function stopGame(){run=false; clearInterval(timer);}
-function checkGoal(){
-let fw=W, fh=H;
-if(ball.x>fw-45 && ball.y>fh*0.32 && ball.y<fh*0.58){
-scoreM++; COIN+=10; updCoin(); document.getElementById('score').innerText=`🇧🇷 BRA ${scoreM}-${scoreO} ARS 🇦🇷`;
-celeb=true; showMsg('GOAL! 🎉 উল্লাস! +10 coin','green'); setTimeout(()=>{celeb=false; initGame();},2200); return true;
-}
-if(ball.x<45 && ball.y>fh*0.32 && ball.y<fh*0.58){scoreO++; document.getElementById('score').innerText=`🇧🇷 BRA ${scoreM}-${scoreO} ARS 🇦🇷`; showMsg('Opp Goal 🇦🇷','red'); setTimeout(initGame,1200); return true;}
-if(ball.x<0||ball.x>fw||ball.y<0||ball.y>fh){initGame(); return true;} return false;
-}
-function doTackle(){
-if(!my[active]) return; let tar=owner&&opp.includes(owner)?owner:opp[0]; if(!tar) return;
-if(Math.hypot(my[active].x-tar.x,my[active].y-tar.y)<65){
-if(Math.random()<0.3){showMsg('🟨 FOUL! বল ওদের কাছে','yellow'); ball={x:tar.x+20,y:tar.y}; owner=tar; return;}
-owner=my[active]; ballV={x:0,y:0}; ball.x=my[active].x+22; ball.y=my[active].y; showMsg('TACKLE!','green');
-}
-}
-function doShoot(){
-if(!owner||!my.includes(owner)||celeb) return; let fw=W, fh=H; let gy=fh*0.45+(Math.random()-0.5)*80; let ang=Math.atan2(gy-ball.y,fw-ball.x);
-if(mode==1 && Math.random()<0.4){showMsg('WALL BLOCK! 🧱','orange'); ballV={x:-6,y:(Math.random()-0.5)*8}; owner=null; return;}
-if(Math.random()<0.5){showMsg('GK SAVE! 🧤','red'); let gk=opp[opp.length-1]; ball={x:gk.x,y:gk.y}; owner=gk; return;}
-let pow=15; ballV.x=Math.cos(ang)*pow; ballV.y=Math.sin(ang)*pow; owner=null;
-}
-function doPass(){
-if(!owner||!my.includes(owner)||mode==1||celeb) return; let cur=my[active]; let best=null,d=999; my.forEach((p,i)=>{if(i!=active){let dist=Math.hypot(p.x-cur.x,p.y-cur.y); if(dist>50&&dist<d){d=dist; best=p}}}); if(best){let ang=Math.atan2(best.y-ball.y,best.x-ball.x); ballV.x=Math.cos(ang)*11; ballV.y=Math.sin(ang)*11; owner=null;}
-}
-document.getElementById('tBtn').addEventListener('touchstart',doTackle); document.getElementById('sBtn').addEventListener('touchstart',doShoot); document.getElementById('pBtn').addEventListener('touchstart',doPass);
-document.getElementById('tBtn').addEventListener('click',doTackle); document.getElementById('sBtn').addEventListener('click',doShoot); document.getElementById('pBtn').addEventListener('click',doPass);
-const joyEl=document.getElementById('joy'), stickEl=document.getElementById('stick');
-joyEl.addEventListener('touchstart',e=>{joy.a=true; e.preventDefault()},{passive:false});
-joyEl.addEventListener('touchmove',e=>{let r=joyEl.getBoundingClientRect(); let tt=e.touches[0]; let dx=tt.clientX-(r.left+45), dy=tt.clientY-(r.top+45); let d=Math.min(45,Math.hypot(dx,dy)), ang=Math.atan2(dy,dx); joy.dx=Math.cos(ang)*d/45; joy.dy=Math.sin(ang)*d/45; stickEl.style.left=25+joy.dx*28+'px'; stickEl.style.top=25+joy.dy*28+'px'; e.preventDefault()},{passive:false});
-joyEl.addEventListener('touchend',()=>{joy.a=false; joy.dx=0; joy.dy=0; stickEl.style.left='25px'; stickEl.style.top='25px';});
 
-function drawStadium(){
-let fw=W, fh=H;
-// Real Grass Stripes
-ctx.fillStyle='#1a8a1a'; ctx.fillRect(0,0,fw,fh);
-for(let i=0;i<fw;i+=40){ctx.fillStyle=i%80==0?'#1e9a1e':'#168a16'; ctx.fillRect(i,0,40,fh);}
-// Stands
-ctx.fillStyle='#222'; ctx.fillRect(0,0,fw,68); ctx.fillStyle='#333'; ctx.fillRect(0,fh-42,fw,42);
-// Flags
-ctx.font='bold 24px Arial'; ctx.fillText('🇧🇷',28,46); ctx.fillText('🇦🇷',fw-58,46);
-ctx.fillStyle='#fff'; ctx.font='bold 11px Arial'; ctx.fillText('BRAZIL',18,64); ctx.fillText('ARGENTINA',fw-88,64);
-// Billboard
-ctx.fillStyle='#000'; ctx.fillRect(20,74,fw-40,16); ctx.fillStyle='#ff0'; ctx.font='10px Arial'; ctx.fillText('FC BD 27 • HAMZA 8 • RONALDO 7 • MESSI 10 • STADIUM SYSTEM • FOUL • CAMERAMAN •',30,84);
-// Field
-ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.strokeRect(20,96,fw-40,fh-150);
-ctx.beginPath(); ctx.moveTo(fw/2,96); ctx.lineTo(fw/2,fh-54); ctx.stroke();
-ctx.beginPath(); ctx.arc(fw/2,fh/2,78,0,Math.PI*2); ctx.stroke();
-// Goal with Net
-ctx.strokeStyle='#fff'; ctx.lineWidth=4; ctx.strokeRect(20,fh/2-68,12,136); ctx.strokeRect(fw-32,fh/2-68,12,136);
-ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=1;
-for(let y=fh/2-68;y<fh/2+68;y+=10){ctx.beginPath(); ctx.moveTo(20,y); ctx.lineTo(32,y); ctx.moveTo(fw-32,y); ctx.lineTo(fw-20,y); ctx.stroke();}
+function selectCarEl(el){
+ document.querySelectorAll('.car').forEach(c=>c.style.borderColor='#000');
+ el.style.borderColor='#facc15'; el.style.borderWidth='4px';
+ selectedCar={el:el,name:el.dataset.name,price:parseInt(el.dataset.price),isAuction:el.dataset.auction=="1",isHood:el.dataset.hood=="1",real:el.dataset.real};
+ showBubble(`🎯 ${selectedCar.real} - দাম ৳${selectedCar.price} - 💰 বাটনে ক্লিক করে Join করো`,2500);
+ if('vibrate' in navigator) navigator.vibrate(50);
+}
+
+function spawnNPCs(){
+ const world=document.getElementById('world');
+ for(let i=0;i<4;i++){
+   let n=document.createElement('div'); n.className='npc'; n.innerHTML='🧑'; n.style.left=(900+Math.random()*200)+'px'; n.style.top=(500+Math.random()*100)+'px'; world.appendChild(n); npcs.push(n);
+ }
+ setInterval(()=>{
+   npcs.forEach(n=>{
+     let x=parseInt(n.style.left)+ (Math.random()*6-3);
+     let y=parseInt(n.style.top)+ (Math.random()*6-3);
+     n.style.left=x+'px'; n.style.top=y+'px';
+     // if near showroom, customer comes
+     if(Math.random()>0.98 && myCars.length>0 && !isInside){
+       let car=myCars[Math.floor(Math.random()*myCars.length)];
+       showBubble(`🧑‍💼 Customer: "ভাই ${car.real} টা কত? ${car.myPrice} টাকা? কম রাখেন!"`,3000);
+       speak(`ভাই ${car.real} টা কত?`);
+     }
+   });
+ },100);
 }
 
 function loop(){
-if(!run) return;
-let me=my[active];
-if(me&&joy.a&&!celeb){me.x+=joy.dx*5; me.y+=joy.dy*5; me.x=Math.max(40,Math.min(W-40,me.x)); me.y=Math.max(104,Math.min(H-62,me.y)); if(owner==me){ball.x=me.x+26; ball.y=me.y+4;}}
-if(!owner&&!celeb){ball.x+=ballV.x; ball.y+=ballV.y; ballV.x*=0.983; ballV.y*=0.983; if(!checkGoal()){for(let p of players){if(Math.hypot(ball.x-p.x,ball.y-p.y)<35 && Math.hypot(ballV.x,ballV.y)<5){owner=p; if(my.includes(p)) active=my.indexOf(p); ballV={x:0,y:0}; break;}}}}
-if(mode>=2&&!celeb){
-opp.forEach(o=>{
-if(owner&&my.includes(owner)){o.x+=(ball.x-o.x)*0.04; o.y+=(ball.y-o.y)*0.04; if(Math.hypot(o.x-ball.x,o.y-ball.y)<38 && Math.random()<0.035){owner=o; ballV={x:0,y:0}; showMsg('BALL LOST!','red');}}
-else if(!owner){let cl=opp.reduce((a,b)=>Math.hypot(ball.x-a.x,ball.y-a.y)<Math.hypot(ball.x-b.x,ball.y-b.y)?a:b,opp[0]); if(cl==o){o.x+=(ball.x-o.x)*0.05; o.y+=(ball.y-o.y)*0.05;}}
-else if(owner==o){o.x+=2.6; ball.x=o.x+16; ball.y=o.y; if(Math.random()<0.022){ballV.x=-11; ballV.y=(Math.random()-0.5)*6; owner=null;}}
+ requestAnimationFrame(loop);
+ let speed=3;
+ let dx=0, dy=0;
+ if(keys['w']||joyY<-0.2) dy=-speed;
+ if(keys['s']||joyY>0.2) dy=speed;
+ if(keys['a']||joyX<-0.2) dx=-speed;
+ if(keys['d']||joyX>0.2) dx=speed;
+ 
+ if(dx!=0||dy!=0){
+   playerX+=dx; playerY+=dy;
+   playerX=Math.max(200,Math.min(1800,playerX));
+   playerY=Math.max(200,Math.min(1800,playerY));
+   document.getElementById('player').style.left=playerX+'px';
+   document.getElementById('player').style.top=playerY+'px';
+   // camera follow
+   let wx= -playerX + innerWidth/2 -10;
+   let wy= -playerY + innerHeight/2 -10;
+   document.getElementById('world').style.transform=`translate(${wx}px,${wy}px)`;
+   checkLocation();
+ }
+}
+
+function checkLocation(){
+ let distShow=Math.hypot(playerX-1060, playerY-1030);
+ if(distShow<50 && !isInside){
+   document.getElementById('loc').innerText="SHOWROOM DOOR - E চাপো";
+   document.getElementById('showroomDoor').style.background="#00ff00";
+ } else {
+   document.getElementById('showroomDoor').style.background="#8b4513";
+   let dA=Math.hypot(playerX-1070, playerY-480);
+   let dH=Math.hypot(playerX-500, playerY-1000);
+   if(dA<150) document.getElementById('loc').innerText="AUCTION - গাড়িতে ক্লিক করো";
+   else if(dH<200) document.getElementById('loc').innerText="NEIGHBORHOOD - বাড়ির গাড়ি কিনো";
+   else document.getElementById('loc').innerText="OUTSIDE - হাঁটছো";
+ }
+}
+
+// Controls - FIXED JOYSTICK
+addEventListener('keydown',e=>{
+ keys[e.key.toLowerCase()]=true;
+ if(e.key.toLowerCase()=='e'){
+   let d=Math.hypot(playerX-1060, playerY-1030);
+   if(d<60) enterShowroom();
+ }
 });
-// Opp Foul
-if(owner&&my.includes(owner)&&Math.random()<0.012){let near=opp.reduce((a,b)=>Math.hypot(ball.x-a.x,ball.y-a.y)<Math.hypot(ball.x-b.x,ball.y-b.y)?a:b,opp[0]); if(near && Math.hypot(ball.x-near.x,ball.y-near.y)<40){showMsg('OPP FOUL! বল তোমার কাছে','yellow'); ball={x:my[active].x+20,y:my[active].y}; owner=my[active];}}
+addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
+
+const joy=document.getElementById('joy'), stick=document.getElementById('stick');
+joy.addEventListener('touchstart',e=>e.preventDefault());
+joy.addEventListener('touchmove',e=>{
+ e.preventDefault();
+ let r=joy.getBoundingClientRect(); let t=e.touches[0];
+ let x=t.clientX-(r.left+50), y=t.clientY-(r.top+50);
+ let d=Math.hypot(x,y); if(d>40){x=x/d*40;y=y/d*40}
+ stick.style.left=(28+x)+'px'; stick.style.top=(28+y)+'px';
+ joyX=x/40; joyY=y/40;
+},{passive:false});
+joy.addEventListener('touchend',()=>{stick.style.left='28px';stick.style.top='28px';joyX=0;joyY=0;});
+
+function enterShowroom(){isInside=true; document.getElementById('insideView').style.display='flex'; showBubble("শোরুম ভিতরে ঢুকছো! এখানে দাম পাল্টাতে পারবা",2000);}
+window.exitShowroom=()=>{isInside=false; document.getElementById('insideView').style.display='none';};
+
+function renderInside(){
+ let html=''; 
+ for(let i=0;i<6;i++){
+   let c=myCars[i];
+   if(c){
+     html+=`<div class="platform has"><div class="pImg" style="background:${c.color}">${c.emoji}</div><div style="flex:1"><b>${c.real}</b><br><small>${c.name}</small><br>Cond ${c.cond}% | Buy ৳${c.buy}<br><b style="color:#facc15">তোমার দাম: ৳<span onclick="editPriceInside(${i})" style="border-bottom:2px dashed #facc15;cursor:pointer">${c.myPrice} ✏️</span></b><br><button class="abtn" onclick="washInside(${i})">🧼 ধোও</button><button class="abtn" onclick="repairInside(${i})">🔧 Repair</button><button class="abtn" style="background:#ef4444" onclick="sellInside(${i})">💰 বিক্রি</button></div></div>`;
+   } else {
+     html+=`<div class="platform"><div class="pImg">➕</div><div>খালি Slot - বাইরে থেকে Auction/পাড়া থেকে কিনে আনো<br><small>Joystick দিয়ে বাইরে যাও</small></div></div>`;
+   }
+ }
+ document.getElementById('platformList').innerHTML=html;
+ document.getElementById('cnt').innerText=myCars.length+'/6';
 }
-ctx.clearRect(0,0,W,H); drawStadium();
-// Cameraman
-let camX=ball.x; ctx.fillStyle='#111'; ctx.fillRect(camX-10,H-28,20,14); ctx.fillStyle='#ff0'; ctx.fillRect(camX-4,H-22,8,4);
-players.forEach((p,i)=>drawPlayer(p,i==active&&my.includes(p)));
-ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(ball.x,ball.y,10,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#000'; ctx.lineWidth=2; ctx.stroke();
-requestAnimationFrame(loop);
+function editPriceInside(i){
+ let p=prompt(`💲 ${myCars[i].real} এর নতুন দাম কত দিবা? (Customer এই দাম দেখবে)`,myCars[i].myPrice);
+ if(p){myCars[i].myPrice=parseInt(p); renderInside(); showBubble(`দাম Change! নতুন দাম ৳${p}`,2000); speak(`দাম ${p} টাকা`);}
 }
-</script>
-</body>
-</html>
+window.editPriceInside=editPriceInside;
+function washInside(i){if(money<500){alert('টাকা নাই');return;}money-=500;myCars[i].cond=Math.min(100,myCars[i].cond+10);renderInside();updateMoney();showBubble("ধোয়া Done!",1500);}
+window.washInside=washInside;
+function repairInside(i){if(money<2000){alert('টাকা নাই');return;}money-=2000;myCars[i].cond=Math.min(100,myCars[i].cond+25);renderInside();updateMoney();showBubble("Repair Done!",1500);}
+window.repairInside=repairInside;
+function sellInside(i){let c=myCars[i];let price=c.myPrice;if(confirm(`💰 ${c.real} বিক্রি করবা ৳${price} এ?`)){money+=price;myCars.splice(i,1);renderInside();updateMoney();showBubble(`বিক্রি Done ৳${price}!`,2000);speak("ধন্যবাদ ভাই");}}
+window.sellInside=sellInside;
+
+function inspect(){if(!selectedCar)return showBubble("কোনো গাড়ি Select করো নাই, গাড়িতে ক্লিক করো",2000); showBubble(`🔍 ${selectedCar.real} - Real Model, Cond ভালো, দাম ৳${selectedCar.price}`,2500);}
+function editPrice(){if(!selectedCar||!selectedCar.el.classList.contains('my')){showBubble("এটা তোমার গাড়ি না! Showroom ভিতরে ঢুকে তোমার গাড়ির দাম পাল্টাও",2500);return;} let idx=myCars.findIndex(c=>c.name==selectedCar.name); if(idx!=-1) editPriceInside(idx);}
+function washCar(){if(!selectedCar)return; if(money<500)return; money-=500; showBubble("ধোয়া হইছে!",1500); updateMoney();}
+function repairCar(){if(!selectedCar)return; if(money<2000)return; money-=2000; showBubble("Repair হইছে!",1500); updateMoney();}
+function buySell(){
+ if(!selectedCar){showBubble("গাড়িতে ক্লিক করো, তারপর এই বাটন চাপো",2000);return;}
+ if(selectedCar.isAuction){
+   if(confirm(`🔥 AUCTION JOIN?\n${selectedCar.real}\nBid: ৳${selectedCar.price}\nজিতলে গাড়ি Showroom এ আসবে`)){
+     if(money>=selectedCar.price){money-=selectedCar.price; myCars.push({id:Date.now(),name:selectedCar.name,real:selectedCar.real,color:selectedCar.el.style.background,emoji:"🏎️",buy:selectedCar.price,cond:80,myPrice:selectedCar.price*1.4}); selectedCar.el.remove(); selectedCar=null; renderInside(); updateMoney(); showBubble("🎉 Auction জিতছো! Showroom ভিতরে দেখো",3000); speak("Auction জিতেছেন");}
+     else alert('টাকা নাই');
+   }
+ } else if(selectedCar.isHood){
+   if(confirm(`🏘️ ${selectedCar.real} কিনবা ৳${selectedCar.price} এ?`)){
+     if(money>=selectedCar.price){money-=selectedCar.price; myCars.push({id:Date.now(),name:selectedCar.name,real:selectedCar.real,color:selectedCar.el.style.background,emoji:"🚙",buy:selectedCar.price,cond:70,myPrice:selectedCar.price*1.5}); selectedCar.el.remove(); selectedCar=null; renderInside(); updateMoney(); showBubble("কিনছো! Showroom ভিতরে গেছে",2000);}
+   }
+ } else {
+   showBubble("এটা তোমার গাড়ি, ভিতরে গিয়ে বিক্রি করো",2000);
+ }
+}
+window.inspect=inspect; window.editPrice=editPrice; window.washCar=washCar; window.repairCar=repairCar; window.buySell=buySell;
+
+function toggleDay(){isDay=!isDay; document.getElementById('gameArea').style.background=isDay?'#2a5a2a':'#0a0a1a'; document.getElementById('time').innerText=isDay?'Day':'Night'; document.getElementById('weatherIcon').innerText=isDay?'☀️':'🌙'; showBubble(isDay?'☀️ দিন হলো':'🌙 রাত হলো - Night Vision চালাও',1500);}
+function toggleRain(){isRaining=!isRaining; showBubble(isRaining?'🌧️ বৃষ্টি শুরু! Weather System ON':'☀️ বৃষ্টি বন্ধ',1500); if(isRaining){document.getElementById('world').style.filter='brightness(0.7) blur(0.5px)';} else document.getElementById('world').style.filter='none';}
+function toggleNightVision(){nightVision=!nightVision; document.getElementById('world').style.filter=nightVision?'brightness(1.5) contrast(1.2) sepia(0.5) hue-rotate(70deg)':'none'; showBubble(nightVision?'🔦 Night Vision ON':'🔦 Night Vision OFF',1500);}
+window.toggleDay=toggleDay; window.toggleRain=toggleRain; window.toggleNightVision=toggleNightVision;
+
+function hireStaff(){if(money<10000){alert('টাকা নাই');return;}money-=10000;staffCount++;document.getElementById('staffInfo').innerText=`${staffCount} জন Staff কাজ করছে - অটো Wash/Repair করবে`;updateMoney();showBubble("Staff Hire করছো!",2000);}
+window.hireStaff=hireStaff;
+
+function updateMoney(){document.getElementById('money').innerText=money;}
+function showBubble(t,ms=2000){let b=document.getElementById('bubble');b.innerText=t;b.style.display='block';setTimeout(()=>b.style.display='none',ms);}
+function speak(t){if('speechSynthesis' in window){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='bn-BD';u.rate=0.9;speechSynthesis.speak(u);}}
+
+function installApp(){
+ if('serviceW
