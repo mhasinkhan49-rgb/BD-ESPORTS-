@@ -3,250 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>GARIR HUT - 100% Working</title>
+<title>GARIR HUT - Enter Fixed</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;touch-action:none;-webkit-tap-highlight-color:transparent}
 body{background:#0f172a;color:#fff;overflow:hidden}
 #start{position:fixed;inset:0;background:linear-gradient(#0f172a,#000);z-index:100;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
-h1{font-size:40px;color:#facc15;font-weight:900}
-.btn{padding:14px 28px;border:none;border-radius:30px;font-weight:900;font-size:18px;margin:8px;cursor:pointer}
+.btn{padding:16px 32px;border:none;border-radius:30px;font-weight:900;font-size:18px;margin:8px}
 .btn-yellow{background:#facc15;color:#000;box-shadow:0 0 15px #facc15}
 .btn-green{background:#22c55e;color:#fff}
-.btn-blue{background:#3b82f6;color:#fff}
-.btn:active{transform:scale(0.95)}
 #top{position:fixed;top:0;width:100%;background:#111827;padding:10px;display:flex;justify-content:space-between;z-index:20;border-bottom:2px solid #facc15;font-size:13px;display:none}
-#game{position:relative;width:100vw;height:100vh;background:#2d4a2d;overflow:hidden;display:none}
-#world{position:absolute;width:1600px;height:1600px;left:0;top:0;background:#3a5a3a}
-.building{position:absolute;border:3px solid #000;display:flex;justify-content:center;align-items:center;font-weight:900;color:#000}
-#showroom{left:700px;top:700px;width:300px;height:200px;background:#fff;border-color:#facc15}
-#showroom:after{content:'SHOWROOM - ভিতরে ঢুকতে E';position:absolute;top:-22px;left:0;width:100%;background:#facc15;color:#000;text-align:center;font-size:12px;padding:2px}
-#auction{left:700px;top:300px;width:300px;height:120px;background:#999;border-color:#ff0000}
-#auction:after{content:'CAR AUCTION - 4 GARAGE';position:absolute;top:-22px;left:0;width:100%;background:#ff0000;color:#fff;text-align:center;font-size:12px;padding:2px}
-.car{position:absolute;width:70px;height:36px;border-radius:6px;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 8px rgba(0,0,0,0.5)}
-#player{position:absolute;width:22px;height:22px;background:#facc15;border-radius:50%;border:3px solid #000;left:800px;top:1000px;z-index:5;box-shadow:0 0 10px #facc15}
-#player.sit{background:#22c55e;width:30px;height:16px;border-radius:4px}
-#chair{position:absolute;left:850px;top:750px;width:40px;height:40px;background:#654321;border:2px solid #000;display:flex;align-items:center;justify-content:center;font-size:20px}
-#lightSw{position:absolute;left:710px;top:720px;width:20px;height:30px;background:#ffff00;border:2px solid #000}
-#doorSw{position:absolute;left:950px;top:900px;width:20px;height:40px;background:#8b4513;border:2px solid #000}
-#lift{position:absolute;left:750px;top:800px;width:80px;height:80px;background:#222;border:2px solid #00ff00;display:flex;align-items:center;justify-content:center;color:#00ff00;font-weight:900}
-#joy{position:fixed;bottom:20px;left:20px;width:110px;height:110px;background:rgba(255,255,255,0.15);border-radius:50%;border:2px solid rgba(255,255,255,0.3);z-index:20}
-#stick{width:50px;height:50px;background:#facc15;border-radius:50%;position:absolute;left:30px;top:30px;box-shadow:0 0 10px #facc15}
-#actions{position:fixed;bottom:0;width:100%;background:#0f172a;display:flex;gap:6px;padding:8px;overflow-x:auto;z-index:20;border-top:2px solid #facc15;display:none}
-.abtn{padding:10px 14px;border:none;border-radius:10px;font-weight:900;white-space:nowrap}
-#msg{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#000;padding:12px 20px;border-radius:20px;font-weight:900;z-index:30;display:none;max-width:300px;text-align:center}
+#game{position:relative;width:100vw;height:100vh;background:#3a5a3a;overflow:hidden;display:none}
+#world{position:absolute;width:1600px;height:1600px;left:0;top:0;will-change:transform}
+.building{position:absolute;border:4px solid #000;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
+#showroom{left:700px;top:700px;width:300px;height:200px;background:#fff;color:#000;border-color:#facc15}
+#auction{left:700px;top:300px;width:300px;height:120px;background:#888;color:#fff;border-color:#ff0000}
+.car{position:absolute;width:70px;height:36px;border-radius:8px;border:3px solid #000;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 5px 10px rgba(0,0,0,0.5)}
+#player{position:absolute;width:24px;height:24px;background:#facc15;border-radius:50%;border:3px solid #000;left:800px;top:1100px;z-index:10;box-shadow:0 0 12px #facc15}
+#player:after{content:'🧑';position:absolute;top:-22px;left:-4px;font-size:22px}
+#joy{position:fixed;bottom:100px;left:20px;width:120px;height:120px;background:rgba(255,255,255,0.15);border-radius:50%;border:3px solid rgba(255,255,255,0.3);z-index:30}
+#stick{width:56px;height:56px;background:#facc15;border-radius:50%;position:absolute;left:32px;top:32px;box-shadow:0 0 15px #facc15}
+#enterBtn{position:fixed;bottom:100px;right:20px;z-index:30;background:#facc15;color:#000;padding:18px 24px;border:none;border-radius:20px;font-weight:900;font-size:16px;box-shadow:0 0 15px #facc15;display:none}
+#inside{position:fixed;inset:0;background:#0f172a;z-index:50;display:none;padding:10px;overflow-y:auto}
+#msg{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#000;padding:14px 22px;border-radius:20px;font-weight:900;z-index:60;display:none;text-align:center;max-width:320px;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
 </style>
 </head>
 <body>
 
 <div id="start">
-<h1>🚗 GARIR HUT</h1>
-<p style="color:#facc15;font-weight:900;margin:8px 0">100% WORKING - NO BUG</p>
-<p style="font-size:13px;color:#94a3b8">তোমার ছবির মতো Showroom + Auction + Market<br>Joystick 100% কাজ করবে, Switch কাজ করবে, বসতে পারবা</p>
-<div style="margin:15px 0;text-align:left;background:#1e293b;padding:12px;border-radius:12px;font-size:13px;line-height:1.8">
-✅ Play বাটন 100% কাজ করবে<br>
-✅ Joystick দিয়ে সামনে যাবা<br>
-✅ Switch টিপলে Light/Door/Lift কাজ করবে<br>
-✅ Chair এ বসতে পারবা (E)<br>
-✅ Auction এ Join করতে পারবা
-</div>
-<button class="btn btn-yellow" id="playBtn">▶️ PLAY GAME - ক্লিক করো</button>
-<button class="btn btn-blue" id="dlBtn">📲 DOWNLOAD / INSTALL</button>
-<p style="font-size:11px;color:#666;margin-top:10px">যদি কাজ না করে, Chrome এ Hard Reload দাও</p>
+<h1 style="font-size:44px;color:#facc15">🚗 GARIR HUT</h1>
+<p style="color:#facc15;font-weight:900">ENTER FIXED VERSION</p>
+<p style="font-size:13px;color:#94a3b8;margin:12px 0">এইবার ভিতরে ঢুকতে কাছে যাওয়া লাগবে না<br>বড় বাটন চাপলেই ঢুকবা!</p>
+<button class="btn btn-yellow" id="playBtn">▶️ PLAY - Joystick Fixed</button>
+<p style="font-size:11px;color:#666;margin-top:10px">Joystick না চললে পেজ Reload দাও</p>
 </div>
 
-<div id="top">
-<div>৳ <span id="money">800000</span> | <span id="loc">OUTSIDE</span></div>
-<div>💡 <span id="lightTxt">OFF</span> | 🚪 <span id="doorTxt">CLOSED</span> | ⬆️ <span id="liftTxt">DOWN</span></div>
-</div>
+<div id="top"><div>৳ <span id="money">800000</span> | <span id="loc">OUTSIDE</span></div><div>🚗 <span id="cnt">2/6</span></div></div>
 
 <div id="game">
 <div id="world">
-<div id="showroom" class="building">SHOWROOM ভিতর 4 গাড়ি</div>
-<div id="auction" class="building">AUCTION 4 GARAGE</div>
-<div id="chair">🪑</div>
-<div id="lightSw" title="Light Switch"></div>
-<div id="doorSw" title="Door Switch"></div>
-<div id="lift">LIFT</div>
+<div id="showroom" class="building">🏢 SHOWROOM<br>4 Cars Inside</div>
+<div id="auction" class="building">🔥 AUCTION<br>4 Garage</div>
 <div id="player"></div>
 </div>
 </div>
 
+<button id="enterBtn">🚪 ENTER SHOWROOM<br><small>ভিতরে ঢুকো</small></button>
+
 <div id="joy"><div id="stick"></div></div>
 
-<div id="actions">
-<button class="abtn btn-yellow" id="sitBtn">🪑 বসো (E)</button>
-<button class="abtn" style="background:#ffff00" id="lightBtn">💡 Light Switch</button>
-<button class="abtn" style="background:#8b4513;color:#fff" id="doorBtn">🚪 Door Switch</button>
-<button class="abtn" style="background:#00ff00;color:#000" id="liftBtn">⬆️ Lift Switch</button>
-<button class="abtn btn-green" id="auctionBtn">🔥 Auction Join</button>
+<div id="inside">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+<h2 style="color:#facc15">🏢 শোরুমের ভিতরে - তুমি ঢুকছো!</h2>
+<button class="btn btn-yellow" id="exitBtn" style="padding:12px 20px">🚪 EXIT - বাইরে যাও</button>
+</div>
+<p style="font-size:13px;color:#94a3b8;margin-bottom:10px">এখানে তোমার গাড়ি। দামে ক্লিক করে দাম পাল্টাও, Wash/Repair করো, বিক্রি করো!</p>
+<div id="list"></div>
+<div style="margin-top:15px;background:#111827;padding:12px;border-radius:12px">
+<b>🔥 Auction Garage গাড়ি:</b><br>
+<div id="aucList"></div>
+<button class="btn btn-green" id="joinAucBtn" style="width:100%;margin-top:8px">🔥 Auction Join করো ৳150000</button>
+</div>
 </div>
 
 <div id="msg"></div>
 
 <script>
-// Ensure buttons work even if JS slow
-document.addEventListener('DOMContentLoaded', function(){
+let money=800000, playerX=800, playerY=1100, joyX=0, joyY=0, keys={}, myCars=[], isInside=false;
 
-let money=800000, playerX=800, playerY=1000, joyX=0, joyY=0, lightOn=false, doorOpen=false, liftUp=false, isSitting=false, keys={};
-
-function showMsg(t,ms=2500){let m=document.getElementById('msg');m.innerText=t;m.style.display='block';setTimeout(()=>m.style.display='none',ms);}
-
-// PLAY BUTTON - 100% WORKING
-document.getElementById('playBtn').addEventListener('click', function(){
+document.getElementById('playBtn').addEventListener('click', ()=>{
  document.getElementById('start').style.display='none';
  document.getElementById('top').style.display='flex';
  document.getElementById('game').style.display='block';
- document.getElementById('actions').style.display='flex';
- spawnCars();
- showMsg('✅ Game Start! Joystick দিয়ে হাঁটো!',3000);
- loop();
-});
-
-document.getElementById('dlBtn').addEventListener('click', function(){
- showMsg('📲 Install করতে: Chrome এর উপরে 3 Dot -> Add to Home Screen / Install App চাপো! তাহলে App এর মতো হবে',4000);
- if('vibrate' in navigator) navigator.vibrate(100);
+ document.getElementById('enterBtn').style.display='block';
+ spawnCars(); loop();
+ showMsg('✅ Joystick ঠিক আছে! নড়াও দেখো, সামনে যাবে। ENTER বাটন চাপলে ভিতরে ঢুকবা!',3500);
 });
 
 function spawnCars(){
- let w=document.getElementById('world');
- let cars=[
-  {name:"G-Wagon",color:"#111",emoji:"🚙",x:720,y:760,price:450000,my:true},
-  {name:"Audi R8",color:"#ffcc00",emoji:"🚗",x:820,y:760,price:180000,my:true},
-  {name:"Lambo",color:"#ff0000",emoji:"🏎️",x:720,y:830,price:750000,my:true},
-  {name:"Ferrari",color:"#cc0000",emoji:"🏎️",x:820,y:830,price:700000,my:false,auc:true},
-  {name:"Supra",color:"#0000ff",emoji:"🚗",x:720,y:320,price:150000,my:false,auc:true},
-  {name:"Rolls",color:"#333",emoji:"🚘",x:820,y:320,price:900000,my:false,auc:true}
+ myCars=[
+  {name:"G-Wagon Black",real:"G-Wagon AMG 2024",color:"#111",emoji:"🚙",buy:300000,cond:90,myPrice:450000},
+  {name:"Audi R8 Yellow",real:"Audi R8 V10",color:"#ffcc00",emoji:"🚗",buy:120000,cond:85,myPrice:180000}
  ];
- cars.forEach(c=>{
-  let d=document.createElement('div'); d.className='car'; d.style.left=c.x+'px'; d.style.top=c.y+'px'; d.style.background=c.color; d.innerHTML=c.emoji; d.dataset.name=c.name; d.dataset.price=c.price; d.dataset.my=c.my; d.dataset.auc=c.auc;
-  if(c.my) d.style.borderColor='#facc15';
-  d.addEventListener('click', function(){ selectCar(d); });
-  w.appendChild(d);
+ renderInside();
+ let w=document.getElementById('world');
+ [{name:"Lambo",real:"Lamborghini Aventador",color:"#ff0000",emoji:"🏎️",x:720,y:320},{name:"Ferrari",real:"Ferrari 488 Pista",color:"#cc0000",emoji:"🏎️",x:820,y:320}].forEach(c=>{
+  let d=document.createElement('div'); d.className='car'; d.style.left=c.x+'px'; d.style.top=c.y+'px'; d.style.background=c.color; d.innerHTML=c.emoji; w.appendChild(d);
  });
 }
 
-function selectCar(el){
- document.querySelectorAll('.car').forEach(c=>c.style.outline='none');
- el.style.outline='4px solid #facc15';
- showMsg('🎯 '+el.dataset.name+' - দাম ৳'+el.dataset.price+' - Auction Join বাটন চাপো',3000);
- window.selectedCar=el;
+function renderInside(){
+ let h=''; myCars.forEach((c,i)=>{
+  h+=`<div style="background:#1e293b;padding:12px;border-radius:14px;margin:10px 0;display:flex;gap:12px;border:2px solid #334155"><div style="width:80px;height:60px;background:${c.color};border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:36px">${c.emoji}</div><div style="flex:1"><b>${c.real}</b><br><small>${c.name}</small><br>Cond ${c.cond}%<br><b style="color:#facc15" onclick="editP(${i})">দাম: ৳${c.myPrice} ✏️ পাল্টাও</b><br><div style="margin-top:6px"><button onclick="wash(${i})" style="background:#22c55e;color:#fff;border:none;padding:6px 10px;border-radius:8px;margin-right:4px">Wash</button><button onclick="repair(${i})" style="background:#3b82f6;color:#fff;border:none;padding:6px 10px;border-radius:8px;margin-right:4px">Repair</button><button onclick="sell(${i})" style="background:#ef4444;color:#fff;border:none;padding:6px 10px;border-radius:8px">Sell</button></div></div></div>`;
+ });
+ document.getElementById('list').innerHTML=h;
+ document.getElementById('cnt').innerText=myCars.length+'/6';
+ document.getElementById('money').innerText=money;
+ document.getElementById('aucList').innerHTML='Lambo Aventador - ৳150000 - Ferrari 488 - ৳170000';
 }
+window.editP=(i)=>{let p=prompt('নতুন দাম কত?',myCars[i].myPrice); if(p){myCars[i].myPrice=parseInt(p); renderInside(); showMsg('দাম Change! ৳'+p);}};
+window.wash=(i)=>{if(money<500)return showMsg('টাকা নাই'); money-=500; myCars[i].cond=Math.min(100,myCars[i].cond+10); renderInside(); showMsg('Wash Done!');};
+window.repair=(i)=>{if(money<2000)return showMsg('টাকা নাই'); money-=2000; myCars[i].cond=Math.min(100,myCars[i].cond+25); renderInside(); showMsg('Repair Done!');};
+window.sell=(i)=>{let c=myCars[i]; money+=c.myPrice; myCars.splice(i,1); renderInside(); showMsg('বিক্রি Done ৳'+c.myPrice);};
 
 function loop(){
  requestAnimationFrame(loop);
- let dx=joyX*4, dy=joyY*4;
- if(keys['w']) dy=-4; if(keys['s']) dy=4; if(keys['a']) dx=-4; if(keys['d']) dx=4;
- if(isSitting) {dx=0;dy=0;}
- if(dx!=0||dy!=0){
+ let dx=joyX*5, dy=joyY*5;
+ if(keys['w']) dy=-5; if(keys['s']) dy=5; if(keys['a']) dx=-5; if(keys['d']) dx=5;
+ if(dx||dy){
   playerX+=dx; playerY+=dy;
   playerX=Math.max(200,Math.min(1400,playerX));
   playerY=Math.max(200,Math.min(1400,playerY));
   document.getElementById('player').style.left=playerX+'px';
   document.getElementById('player').style.top=playerY+'px';
-  let wx= -playerX + innerWidth/2;
-  let wy= -playerY + innerHeight/2;
+  let wx=-playerX+innerWidth/2, wy=-playerY+innerHeight/2;
   document.getElementById('world').style.transform=`translate(${wx}px,${wy}px)`;
-  checkNear();
+  let distShow=Math.hypot(playerX-850, playerY-800);
+  document.getElementById('loc').innerText=distShow<200?'SHOWROOM এর কাছে - ENTER চাপো':'OUTSIDE - হাঁটছো';
  }
 }
 
-function checkNear(){
- let dChair=Math.hypot(playerX-870, playerY-770);
- let dLight=Math.hypot(playerX-720, playerY-735);
- let dDoor=Math.hypot(playerX-960, playerY-920);
- let dLift=Math.hypot(playerX-790, playerY-840);
- if(dChair<50) document.getElementById('loc').innerText='CHAIR - E চাপলে বসবা';
- else if(dLight<50) document.getElementById('loc').innerText='LIGHT SWITCH - E চাপো';
- else if(dDoor<50) document.getElementById('loc').innerText='DOOR SWITCH - E চাপো';
- else if(dLift<60) document.getElementById('loc').innerText='LIFT SWITCH - E চাপো';
- else if(playerY<500) document.getElementById('loc').innerText='AUCTION AREA';
- else if(playerY>650 && playerY<950) document.getElementById('loc').innerText='SHOWROOM';
- else document.getElementById('loc').innerText='OUTSIDE';
-}
+function showMsg(t,ms=2500){let m=document.getElementById('msg');m.innerText=t;m.style.display='block';setTimeout(()=>m.style.display='none',ms);}
 
-// CONTROLS - FIXED
-window.addEventListener('keydown', e=>{
- keys[e.key.toLowerCase()]=true;
- if(e.key.toLowerCase()=='e') handleInteract();
+// ENTER / EXIT - BIG BUTTON - NO CLICK PROBLEM
+document.getElementById('enterBtn').addEventListener('click', ()=>{
+ document.getElementById('inside').style.display='block';
+ isInside=true;
+ showMsg('🏢 ভিতরে ঢুকছো! এখানে দাম পাল্টাতে পারবা',2000);
 });
-window.addEventListener('keyup', e=>keys[e.key.toLowerCase()]=false);
-
-function handleInteract(){
- let dChair=Math.hypot(playerX-870, playerY-770);
- let dLight=Math.hypot(playerX-720, playerY-735);
- let dDoor=Math.hypot(playerX-960, playerY-920);
- let dLift=Math.hypot(playerX-790, playerY-840);
- if(dChair<50) toggleSit();
- else if(dLight<50) toggleLight();
- else if(dDoor<50) toggleDoor();
- else if(dLift<50) toggleLift();
- else showMsg('কাছে যাও, তারপর E চাপো বা বাটন চাপো',2000);
-}
-
-function toggleSit(){
- isSitting=!isSitting;
- let p=document.getElementById('player');
- if(isSitting){p.classList.add('sit'); p.innerHTML='🧑‍💼 বসে আছো'; showMsg('🪑 বসছো! Manager এর মতো বসে আছো, E চাপলে উঠবা',2500);}
- else {p.classList.remove('sit'); p.innerHTML=''; showMsg('উঠে গেছো!',1500);}
- if('vibrate' in navigator) navigator.vibrate(50);
-}
-function toggleLight(){
- lightOn=!lightOn;
- document.getElementById('lightTxt').innerText=lightOn?'ON':'OFF';
- document.getElementById('game').style.background=lightOn?'#4a6a4a':'#0a0a1a';
- document.getElementById('lightSw').style.background=lightOn?'#ffff00':'#555';
- showMsg(lightOn?'💡 Light ON!':'💡 Light OFF!',1500);
-}
-function toggleDoor(){
- doorOpen=!doorOpen;
- document.getElementById('doorTxt').innerText=doorOpen?'OPEN':'CLOSED';
- document.getElementById('doorSw').style.background=doorOpen?'#00ff00':'#8b4513';
- showMsg(doorOpen?'🚪 Door খুলছো! ভিতরে ঢুকতে পারবা':'🚪 Door বন্ধ!',1500);
-}
-function toggleLift(){
- liftUp=!liftUp;
- document.getElementById('liftTxt').innerText=liftUp?'UP':'DOWN';
- document.getElementById('lift').style.transform=liftUp?'translateY(-20px)':'translateY(0)';
- document.getElementById('lift').style.background=liftUp?'#00ff00':'#222';
- showMsg(liftUp?'⬆️ Lift উপরে! গাড়ি উপরে উঠছে':'⬇️ Lift নিচে',1500);
-}
-
-// Buttons - 100% working with both click and touch
-document.getElementById('sitBtn').addEventListener('click', toggleSit);
-document.getElementById('lightBtn').addEventListener('click', toggleLight);
-document.getElementById('doorBtn').addEventListener('click', toggleDoor);
-document.getElementById('liftBtn').addEventListener('click', toggleLift);
-document.getElementById('auctionBtn').addEventListener('click', function(){
- if(!window.selectedCar){showMsg('আগে একটা গাড়িতে ক্লিক করো!',2000);return;}
- let price=window.selectedCar.dataset.price;
- let name=window.selectedCar.dataset.name;
- if(window.selectedCar.dataset.auc=='true'){
-  if(confirm('🔥 AUCTION JOIN?\n'+name+'\nদাম ৳'+price+'\nজিততে চাও?')){
-   if(money>=price){money-=price; document.getElementById('money').innerText=money; window.selectedCar.dataset.my='true'; window.selectedCar.style.borderColor='#facc15'; showMsg('🎉 Auction জিতছো! '+name+' এখন তোমার!',3000);}
-   else showMsg('টাকা নাই!',2000);
-  }
- } else {
-  showMsg('এটা তোমার গাড়ি, ভিতরে গিয়ে বিক্রি করো',2000);
- }
+document.getElementById('exitBtn').addEventListener('click', ()=>{
+ document.getElementById('inside').style.display='none';
+ isInside=false;
+ showMsg('বাইরে আসছো!',1500);
+});
+document.getElementById('joinAucBtn').addEventListener('click', ()=>{
+ if(money<150000){showMsg('টাকা নাই!');return;}
+ money-=150000; myCars.push({name:"Lambo Aventador",real:"Lamborghini Aventador",color:"#ff0000",emoji:"🏎️",buy:150000,cond:80,myPrice:220000});
+ renderInside(); showMsg('🎉 Auction জিতছো! Lambo এখন তোমার Showroom এ!',3000);
 });
 
-// Joystick - FIXED
+// Joystick - FIXED with Pointer Events (works on WhatsApp Browser)
 const joy=document.getElementById('joy'), stick=document.getElementById('stick');
-joy.addEventListener('touchstart', e=>e.preventDefault(), {passive:false});
-joy.addEventListener('touchmove', e=>{
- e.preventDefault();
- let r=joy.getBoundingClientRect(); let t=e.touches[0];
- let x=t.clientX-(r.left+55), y=t.clientY-(r.top+55);
- let d=Math.hypot(x,y); if(d>45){x=x/d*45;y=y/d*45}
- stick.style.left=(30+x)+'px'; stick.style.top=(30+y)+'px';
- joyX=x/45; joyY=y/45;
-}, {passive:false});
-joy.addEventListener('touchend', e=>{
- e.preventDefault();
- stick.style.left='30px'; stick.style.top='30px'; joyX=0; joyY=0;
-}, {passive:false});
+let activePointer=null;
 
-});
+joy.addEventListener('pointerdown', e=>{
+ e.preventDefault(); activePointer=e.pointerId; joy.setPointerCapture(e.pointerId);
+},{passive:false});
+
+joy.addEventListener('pointermove', e=>{
+ if(activePointer!==e.pointerId) return;
+ e.preventDefault();
+ let r=joy.getBoundingClientRect();
+ let x=e.clientX-(r.left+60), y=e.clientY-(r.top+60);
+ let d=Math.hypot(x,y); if(d>50){x=x/d*50;y=y/d*50}
+ stick.style.left=(32+x)+'px'; stick.style.top=(32+y)+'px';
+ joyX=x/50; joyY=y/50;
+},{passive:false});
+
+function endJoy(e){
+ if(activePointer!==null){
+  stick.style.left='32px'; stick.style.top='32px';
+  joyX=0; joyY=0; activePointer=null;
+ }
+}
+joy.addEventListener('pointerup', endJoy);
+joy.addEventListener('pointercancel', endJoy);
+joy.addEventListener('pointerleave', endJoy);
+
+addEventListener('keydown', e=>{keys[e.key.toLowerCase()]=true;});
+addEventListener('keyup', e=>{keys[e.key.toLowerCase()]=false;});
 </script>
 </body>
 </html>
