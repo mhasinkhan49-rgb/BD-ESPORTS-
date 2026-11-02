@@ -1,13 +1,12 @@
-from pathlib import Path
-
-html = r'''<!doctype html>
+<!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>BATTLEVERSE X — Mobile Prototype</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101820;color:#fff;font-family:system-ui,Arial;touch-action:none}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101820;color:#fff;font-family:system-ui,Arial;touch-action:none}
 #game{display:block;width:100vw;height:100dvh;background:#243b32}
 #hud{position:fixed;inset:0;pointer-events:none}
 .top{display:flex;justify-content:space-between;padding:10px;gap:8px}
@@ -18,79 +17,439 @@ html = r'''<!doctype html>
 #knob{width:46px;height:46px;border-radius:50%;background:#d7e7ddaa;position:absolute;left:33px;top:33px}
 .actions{display:grid;grid-template-columns:repeat(2,64px);gap:10px;pointer-events:auto}
 button{border:1px solid #ffffff77;border-radius:50%;width:64px;height:64px;background:#07131dcc;color:white;font-weight:700;font-size:12px}
-#fire{background:#b83232dd}#wall{background:#287c9add}
+#fire{background:#b83232dd}
+#wall{background:#287c9add}
 #overlay{position:fixed;inset:0;background:#07131dcc;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center}
 .panel{max-width:380px;background:#172a2b;border:1px solid #ffffff33;border-radius:18px;padding:22px}
-.panel h1{margin:0 0 8px;letter-spacing:1px}.panel p{color:#d1ddd5;font-size:14px;line-height:1.5}
+.panel h1{margin:0 0 8px;letter-spacing:1px}
+.panel p{color:#d1ddd5;font-size:14px;line-height:1.5}
 #start{border-radius:12px;width:auto;height:auto;padding:13px 24px;background:#2f9e68;font-size:16px}
 .small{font-size:11px!important;color:#a9b8b0!important}
 </style>
 </head>
 <body>
+
 <canvas id="game"></canvas>
+
 <div id="hud">
- <div class="top"><div class="pill">BATTLEVERSE X · TEST BUILD</div><div class="pill" id="stats">❤️ 100　🤖 10　⏱ 00:00</div></div>
+ <div class="top">
+  <div class="pill">BATTLEVERSE X · TEST BUILD</div>
+  <div class="pill" id="stats">❤️ 100　🤖 10　⏱ 00:00</div>
+ </div>
+
  <div id="help">বাম দিকের জয়স্টিক টেনে চলুন · FIRE চাপুন · নীল WALL বসান</div>
+
  <div id="controls">
   <div id="stick"><div id="knob"></div></div>
-  <div class="actions"><button id="jump">JUMP</button><button id="scope">SCOPE</button><button id="wall">GLOO<br>WALL</button><button id="fire">FIRE</button></div>
+  <div class="actions">
+   <button id="jump">JUMP</button>
+   <button id="scope">SCOPE</button>
+   <button id="wall">GLOO<br>WALL</button>
+   <button id="fire">FIRE</button>
+  </div>
  </div>
 </div>
-<div id="overlay"><div class="panel"><h1>BATTLEVERSE X</h1><p>এটি একটি ছোট playable mobile prototype: ১০টি বট, চলাফেরা, গুলি, নিরাপদ এলাকা ও Gloo Wall-এর ডেমো।</p><p class="small">এটি এখনো সম্পূর্ণ 3D/অনলাইন গেম নয়। প্রথমে Start চাপুন।</p><button id="start">START MATCH</button></div></div>
+
+<div id="overlay">
+ <div class="panel">
+  <h1>BATTLEVERSE X</h1>
+  <p>এটি একটি ছোট playable mobile prototype: ১০টি বট, চলাফেরা, গুলি, নিরাপদ এলাকা ও Gloo Wall-এর ডেমো।</p>
+  <p class="small">এটি এখনো সম্পূর্ণ 3D/অনলাইন গেম নয়। প্রথমে Start চাপুন।</p>
+  <button id="start">START MATCH</button>
+ </div>
+</div>
+
 <script>
-(()=> {
-const c=document.getElementById('game'),ctx=c.getContext('2d'),stats=document.getElementById('stats');
-let W,H,scale=1, running=false, last=0, elapsed=0, hp=100, kills=0, ammo=40, firing=false, scoped=false, move={x:0,y:0}, walls=[], bullets=[], botBullets=[];
+(()=>{
+const c=document.getElementById('game'),
+ctx=c.getContext('2d'),
+stats=document.getElementById('stats');
+
+let W,H,scale=1,running=false,last=0,elapsed=0;
+let hp=100,kills=0,ammo=40,firing=false,scoped=false;
+let move={x:0,y:0},walls=[],bullets=[],botBullets=[];
+
 const player={x:0,y:0,r:13,speed:190,angle:0};
 let bots=[];
+
 const rand=(a,b)=>a+Math.random()*(b-a);
-function resize(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio;scale=devicePixelRatio;ctx.setTransform(scale,0,0,scale,0,0);W=innerWidth;H=innerHeight;if(!player.x){player.x=W/2;player.y=H/2}}
-addEventListener('resize',resize);resize();
-function spawnBots(){bots=[];for(let i=0;i<10;i++)bots.push({x:rand(40,W-40),y:rand(80,H-80),r:12,hp:2,dir:rand(0,6.28),cool:rand(1,3),alive:true})}
-function start(){document.getElementById('overlay').style.display='none';running=true;elapsed=0;hp=100;kills=0;ammo=40;walls=[];bullets=[];botBullets=[];player.x=W/2;player.y=H/2;spawnBots();last=performance.now();requestAnimationFrame(loop)}
+
+function resize(){
+ W=c.width=innerWidth*devicePixelRatio;
+ H=c.height=innerHeight*devicePixelRatio;
+ scale=devicePixelRatio;
+ ctx.setTransform(scale,0,0,scale,0,0);
+ W=innerWidth;
+ H=innerHeight;
+ if(!player.x){
+  player.x=W/2;
+  player.y=H/2;
+ }
+}
+
+addEventListener('resize',resize);
+resize();
+
+function spawnBots(){
+ bots=[];
+ for(let i=0;i<10;i++){
+  bots.push({
+   x:rand(40,W-40),
+   y:rand(80,H-80),
+   r:12,
+   hp:2,
+   dir:rand(0,6.28),
+   cool:rand(1,3),
+   alive:true
+  });
+ }
+}
+
+function start(){
+ document.getElementById('overlay').style.display='none';
+ running=true;
+ elapsed=0;
+ hp=100;
+ kills=0;
+ ammo=40;
+ walls=[];
+ bullets=[];
+ botBullets=[];
+ player.x=W/2;
+ player.y=H/2;
+ spawnBots();
+ last=performance.now();
+ requestAnimationFrame(loop);
+}
+
 document.getElementById('start').onclick=start;
-function circle(x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()}
-function line(x,y,x2,y2,color,width=2){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x2,y2);ctx.stroke()}
-function loop(now){if(!running)return;let dt=Math.min((now-last)/1000,.04);last=now;elapsed+=dt;update(dt);draw();stats.textContent=`❤️ ${Math.max(0,Math.ceil(hp))}　🤖 ${bots.filter(b=>b.alive).length}　⏱ ${fmt(elapsed)}`;if(hp<=0||bots.every(b=>!b.alive)){running=false;setTimeout(()=>{document.querySelector('.panel h1').textContent=hp>0?'MATCH COMPLETE':'MATCH OVER';document.querySelector('.panel p').textContent=`বট eliminated: ${kills}/10 · সময়: ${fmt(elapsed)} · আবার খেলতে Start চাপুন।`;document.getElementById('overlay').style.display='flex';document.getElementById('start').textContent='PLAY AGAIN'},300);return}requestAnimationFrame(loop)}
-function fmt(t){return String(Math.floor(t/60)).padStart(2,'0')+':'+String(Math.floor(t%60)).padStart(2,'0')}
+
+function circle(x,y,r,color){
+ ctx.fillStyle=color;
+ ctx.beginPath();
+ ctx.arc(x,y,r,0,Math.PI*2);
+ ctx.fill();
+}
+
+function line(x,y,x2,y2,color,width=2){
+ ctx.strokeStyle=color;
+ ctx.lineWidth=width;
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+ ctx.lineTo(x2,y2);
+ ctx.stroke();
+}
+
+function loop(now){
+ if(!running)return;
+
+ let dt=Math.min((now-last)/1000,.04);
+ last=now;
+ elapsed+=dt;
+
+ update(dt);
+ draw();
+
+ stats.textContent=
+ `❤️ ${Math.max(0,Math.ceil(hp))}　🤖 ${bots.filter(b=>b.alive).length}　⏱ ${fmt(elapsed)}`;
+
+ if(hp<=0||bots.every(b=>!b.alive)){
+  running=false;
+  setTimeout(()=>{
+   document.querySelector('.panel h1').textContent=
+    hp>0?'MATCH COMPLETE':'MATCH OVER';
+
+   document.querySelector('.panel p').textContent=
+    `বট eliminated: ${kills}/10 · সময়: ${fmt(elapsed)} · আবার খেলতে Start চাপুন।`;
+
+   document.getElementById('overlay').style.display='flex';
+   document.getElementById('start').textContent='PLAY AGAIN';
+  },300);
+  return;
+ }
+
+ requestAnimationFrame(loop);
+}
+
+function fmt(t){
+ return String(Math.floor(t/60)).padStart(2,'0')+':'+
+ String(Math.floor(t%60)).padStart(2,'0');
+}
+
 function update(dt){
- player.x=Math.max(15,Math.min(W-15,player.x+move.x*player.speed*dt));player.y=Math.max(65,Math.min(H-15,player.y+move.y*player.speed*dt));
+
+ player.x=Math.max(15,Math.min(W-15,
+ player.x+move.x*player.speed*dt));
+
+ player.y=Math.max(65,Math.min(H-15,
+ player.y+move.y*player.speed*dt));
+
  const alive=bots.filter(b=>b.alive);
- if(alive.length){let target=alive.reduce((a,b)=>Math.hypot(b.x-player.x,b.y-player.y)<Math.hypot(a.x-player.x,a.y-player.y)?b:a);player.angle=Math.atan2(target.y-player.y,target.x-player.x)}
- for(let b of bots)if(b.alive){let d=Math.hypot(player.x-b.x,player.y-b.y);b.dir+=rand(-.9,.9)*dt;if(d>110){b.x+=Math.cos(b.dir)*35*dt;b.y+=Math.sin(b.dir)*35*dt}else{b.x+=(player.x-b.x)/d*12*dt;b.y+=(player.y-b.y)/d*12*dt}b.x=Math.max(12,Math.min(W-12,b.x));b.y=Math.max(65,Math.min(H-12,b.y));b.cool-=dt;if(b.cool<=0&&d<360){botBullets.push({x:b.x,y:b.y,vx:(player.x-b.x)/d*180,vy:(player.y-b.y)/d*180});b.cool=rand(1.4,2.5)}}
- for(let a of bullets){a.x+=a.vx*dt;a.y+=a.vy*dt;a.life-=dt;for(let b of bots)if(b.alive&&Math.hypot(a.x-b.x,a.y-b.y)<b.r+4){b.hp--;a.life=0;if(b.hp<=0){b.alive=false;kills++}break}}
- bullets=bullets.filter(a=>a.life>0&&a.x>-10&&a.x<W+10&&a.y>-10&&a.y<H+10);
- for(let a of botBullets){a.x+=a.vx*dt;a.y+=a.vy*dt;a.life=(a.life||2)-dt;if(Math.hypot(a.x-player.x,a.y-player.y)<player.r+4){hp-=12;a.life=0}}
- botBullets=botBullets.filter(a=>a.life>0&&a.x>-10&&a.x<W+10&&a.y>-10&&a.y<H+10);
- if(firing&&ammo>0){shootTimer-=dt;if(shootTimer<=0){shoot();shootTimer=.22}}
- // shrinking safe zone
+
+ if(alive.length){
+  let target=alive.reduce((a,b)=>
+   Math.hypot(b.x-player.x,b.y-player.y)<
+   Math.hypot(a.x-player.x,a.y-player.y)?b:a);
+
+  player.angle=Math.atan2(
+   target.y-player.y,
+   target.x-player.x
+  );
+ }
+
+ for(let b of bots)if(b.alive){
+
+  let d=Math.hypot(player.x-b.x,player.y-b.y);
+
+  b.dir+=rand(-.9,.9)*dt;
+
+  if(d>110){
+   b.x+=Math.cos(b.dir)*35*dt;
+   b.y+=Math.sin(b.dir)*35*dt;
+  }else{
+   b.x+=(player.x-b.x)/d*12*dt;
+   b.y+=(player.y-b.y)/d*12*dt;
+  }
+
+  b.x=Math.max(12,Math.min(W-12,b.x));
+  b.y=Math.max(65,Math.min(H-12,b.y));
+
+  b.cool-=dt;
+
+  if(b.cool<=0&&d<360){
+   botBullets.push({
+    x:b.x,
+    y:b.y,
+    vx:(player.x-b.x)/d*180,
+    vy:(player.y-b.y)/d*180
+   });
+   b.cool=rand(1.4,2.5);
+  }
+ }
+
+ for(let a of bullets){
+  a.x+=a.vx*dt;
+  a.y+=a.vy*dt;
+  a.life-=dt;
+
+  for(let b of bots){
+   if(b.alive&&Math.hypot(a.x-b.x,a.y-b.y)<b.r+4){
+    b.hp--;
+    a.life=0;
+
+    if(b.hp<=0){
+     b.alive=false;
+     kills++;
+    }
+    break;
+   }
+  }
+ }
+
+ bullets=bullets.filter(a=>
+  a.life>0&&a.x>-10&&a.x<W+10&&a.y>-10&&a.y<H+10
+ );
+
+ for(let a of botBullets){
+  a.x+=a.vx*dt;
+  a.y+=a.vy*dt;
+  a.life=(a.life||2)-dt;
+
+  if(Math.hypot(a.x-player.x,a.y-player.y)<player.r+4){
+   hp-=12;
+   a.life=0;
+  }
+ }
+
+ botBullets=botBullets.filter(a=>
+  a.life>0&&a.x>-10&&a.x<W+10&&a.y>-10&&a.y<H+10
+ );
+
+ if(firing&&ammo>0){
+  shootTimer-=dt;
+  if(shootTimer<=0){
+   shoot();
+   shootTimer=.22;
+  }
+ }
 }
+
 let shootTimer=0;
-function shoot(){ammo--;bullets.push({x:player.x+Math.cos(player.angle)*17,y:player.y+Math.sin(player.angle)*17,vx:Math.cos(player.angle)*520,vy:Math.sin(player.angle)*520,life:1.1})}
-function draw(){
- ctx.fillStyle='#294538';ctx.fillRect(0,0,W,H);
- // ground grid and village huts
- ctx.strokeStyle='#ffffff12';ctx.lineWidth=1;for(let x=0;x<W;x+=44)line(x,55,x,H,'#ffffff12');for(let y=55;y<H;y+=44)line(0,y,W,y,'#ffffff12');
- for(let i=0;i<8;i++){let x=(i*173+70)%W,y=90+(i*137)%(H-110);ctx.fillStyle='#806b4d';ctx.fillRect(x,y,48,34);ctx.fillStyle='#a78a60';ctx.beginPath();ctx.moveTo(x-5,y);ctx.lineTo(x+24,y-15);ctx.lineTo(x+53,y);ctx.fill()}
- // safe zone ring
- let r=Math.max(90,Math.min(W,H)*.48-elapsed*2.1);ctx.beginPath();ctx.arc(W/2,H/2,r,0,Math.PI*2);ctx.strokeStyle='#f4d35e';ctx.lineWidth=3;ctx.setLineDash([10,8]);ctx.stroke();ctx.setLineDash([]);
- for(let w of walls){ctx.fillStyle='#5ac8e8bb';ctx.fillRect(w.x-23,w.y-7,46,14);ctx.strokeStyle='#d7f7ff';ctx.strokeRect(w.x-23,w.y-7,46,14)}
- for(let b of bots)if(b.alive){circle(b.x,b.y,b.r,'#d95d4f');circle(b.x+3,b.y-3,3,'#fff');}
- for(let a of bullets)circle(a.x,a.y,4,'#ffe082');for(let a of botBullets)circle(a.x,a.y,4,'#ff9c8e');
- circle(player.x,player.y,player.r,'#55d6a2');line(player.x,player.y,player.x+Math.cos(player.angle)*24,player.y+Math.sin(player.angle)*24,'#eafff5',4);
- ctx.fillStyle='#fff';ctx.font='12px system-ui';ctx.fillText('AMMO '+ammo,12,H-16);
+
+function shoot(){
+ ammo--;
+ bullets.push({
+  x:player.x+Math.cos(player.angle)*17,
+  y:player.y+Math.sin(player.angle)*17,
+  vx:Math.cos(player.angle)*520,
+  vy:Math.sin(player.angle)*520,
+  life:1.1
+ });
 }
-const stick=document.getElementById('stick'),knob=document.getElementById('knob');let active=false,center;
-function stickMove(e){let rect=stick.getBoundingClientRect(),cx=rect.left+rect.width/2,cy=rect.top+rect.height/2,dx=e.clientX-cx,dy=e.clientY-cy,len=Math.hypot(dx,dy),m=Math.min(1,len/43);move={x:len?dx/len*m:0,y:len?dy/len*m:0};knob.style.transform=`translate(${move.x*38}px,${move.y*38}px)`}
-stick.addEventListener('pointerdown',e=>{active=true;stick.setPointerCapture(e.pointerId);stickMove(e)});stick.addEventListener('pointermove',e=>{if(active)stickMove(e)});stick.addEventListener('pointerup',()=>{active=false;move={x:0,y:0};knob.style.transform='translate(0,0)'});
-const fire=document.getElementById('fire');fire.addEventListener('pointerdown',e=>{e.preventDefault();firing=true;shootTimer=0});['pointerup','pointercancel','pointerleave'].forEach(ev=>fire.addEventListener(ev,()=>firing=false));
-document.getElementById('wall').onclick=()=>walls.push({x:player.x+Math.cos(player.angle)*48,y:player.y+Math.sin(player.angle)*48});
-document.getElementById('scope').onclick=()=>{scoped=!scoped;document.getElementById('scope').style.outline=scoped?'3px solid #f4d35e':'none';player.speed=scoped?145:190};
-document.getElementById('jump').onclick=()=>{player.x=Math.max(20,Math.min(W-20,player.x+Math.cos(player.angle)*45));player.y=Math.max(70,Math.min(H-20,player.y+Math.sin(player.angle)*45))};
+
+function draw(){
+
+ ctx.fillStyle='#294538';
+ ctx.fillRect(0,0,W,H);
+
+ ctx.strokeStyle='#ffffff12';
+ ctx.lineWidth=1;
+
+ for(let x=0;x<W;x+=44){
+  line(x,55,x,H,'#ffffff12');
+ }
+
+ for(let y=55;y<H;y+=44){
+  line(0,y,W,y,'#ffffff12');
+ }
+
+ // Village houses
+ for(let i=0;i<8;i++){
+  let x=(i*173+70)%W;
+  let y=90+(i*137)%(H-110);
+
+  ctx.fillStyle='#806b4d';
+  ctx.fillRect(x,y,48,34);
+
+  ctx.fillStyle='#a78a60';
+  ctx.beginPath();
+  ctx.moveTo(x-5,y);
+  ctx.lineTo(x+24,y-15);
+  ctx.lineTo(x+53,y);
+  ctx.fill();
+ }
+
+ // Safe zone
+ let r=Math.max(90,Math.min(W,H)*.48-elapsed*2.1);
+
+ ctx.beginPath();
+ ctx.arc(W/2,H/2,r,0,Math.PI*2);
+ ctx.strokeStyle='#f4d35e';
+ ctx.lineWidth=3;
+ ctx.setLineDash([10,8]);
+ ctx.stroke();
+ ctx.setLineDash([]);
+
+ // Gloo walls
+ for(let w of walls){
+  ctx.fillStyle='#5ac8e8bb';
+  ctx.fillRect(w.x-23,w.y-7,46,14);
+  ctx.strokeStyle='#d7f7ff';
+  ctx.strokeRect(w.x-23,w.y-7,46,14);
+ }
+
+ // Bots
+ for(let b of bots){
+  if(b.alive){
+   circle(b.x,b.y,b.r,'#d95d4f');
+   circle(b.x+3,b.y-3,3,'#fff');
+  }
+ }
+
+ // Bullets
+ for(let a of bullets)circle(a.x,a.y,4,'#ffe082');
+ for(let a of botBullets)circle(a.x,a.y,4,'#ff9c8e');
+
+ // Player
+ circle(player.x,player.y,player.r,'#55d6a2');
+
+ line(
+  player.x,
+  player.y,
+  player.x+Math.cos(player.angle)*24,
+  player.y+Math.sin(player.angle)*24,
+  '#eafff5',
+  4
+ );
+
+ ctx.fillStyle='#fff';
+ ctx.font='12px system-ui';
+ ctx.fillText('AMMO '+ammo,12,H-16);
+}
+
+// Joystick
+const stick=document.getElementById('stick');
+const knob=document.getElementById('knob');
+
+let active=false;
+
+function stickMove(e){
+ let rect=stick.getBoundingClientRect();
+ let cx=rect.left+rect.width/2;
+ let cy=rect.top+rect.height/2;
+
+ let dx=e.clientX-cx;
+ let dy=e.clientY-cy;
+
+ let len=Math.hypot(dx,dy);
+ let m=Math.min(1,len/43);
+
+ move={
+  x:len?dx/len*m:0,
+  y:len?dy/len*m:0
+ };
+
+ knob.style.transform=
+ `translate(${move.x*38}px,${move.y*38}px)`;
+}
+
+stick.addEventListener('pointerdown',e=>{
+ active=true;
+ stick.setPointerCapture(e.pointerId);
+ stickMove(e);
+});
+
+stick.addEventListener('pointermove',e=>{
+ if(active)stickMove(e);
+});
+
+stick.addEventListener('pointerup',()=>{
+ active=false;
+ move={x:0,y:0};
+ knob.style.transform='translate(0,0)';
+});
+
+// Fire button
+const fire=document.getElementById('fire');
+
+fire.addEventListener('pointerdown',e=>{
+ e.preventDefault();
+ firing=true;
+ shootTimer=0;
+});
+
+['pointerup','pointercancel','pointerleave'].forEach(ev=>
+ fire.addEventListener(ev,()=>firing=false)
+);
+
+// Gloo Wall
+document.getElementById('wall').onclick=()=>{
+ walls.push({
+  x:player.x+Math.cos(player.angle)*48,
+  y:player.y+Math.sin(player.angle)*48
+ });
+};
+
+// Scope
+document.getElementById('scope').onclick=()=>{
+ scoped=!scoped;
+
+ document.getElementById('scope').style.outline=
+  scoped?'3px solid #f4d35e':'none';
+
+ player.speed=scoped?145:190;
+};
+
+// Jump
+document.getElementById('jump').onclick=()=>{
+ player.x=Math.max(20,Math.min(W-20,
+ player.x+Math.cos(player.angle)*45));
+
+ player.y=Math.max(70,Math.min(H-20,
+ player.y+Math.sin(player.angle)*45));
+};
+
 })();
 </script>
-</body></html>'''
-path = Path("/mnt/data/battleverse_x_mobile_prototype.html")
-path.write_text(html, encoding="utf-8")
-print(f"তৈরি হয়েছে: {path}")
-    
+</body>
+</html>
