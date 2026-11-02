@@ -1,383 +1,1177 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>FireStrike - 3D Battle Royale</title>
-    <!-- Tailwind CSS for UI styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js for 3D graphics rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Free Fire Style 3D Game</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Rajdhani:wght@600;700&display=swap');
-        
-        body {
-            font-family: 'Rajdhani', sans-serif;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
             overflow: hidden;
-            background-color: #050505;
+            background: #000;
             color: #fff;
         }
 
-        .ff-font {
-            font-family: 'Teko', sans-serif;
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff5500;
-            border-radius: 3px;
-        }
-
-        /* Stylized Buttons */
-        .btn-fire {
-            background: linear-gradient(135deg, #ff8800 0%, #ff2200 100%);
-            box-shadow: 0 0 15px rgba(255, 68, 0, 0.6);
-            transition: all 0.2s ease;
-            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-        }
-
-        .btn-fire:hover {
-            transform: scale(1.04) translateY(-2px);
-            box-shadow: 0 0 25px rgba(255, 68, 0, 0.9);
-        }
-
-        .btn-dark {
-            background: rgba(20, 20, 30, 0.85);
-            border: 1px solid rgba(255, 100, 0, 0.3);
-            backdrop-filter: blur(8px);
-            transition: all 0.2s ease;
-        }
-
-        .btn-dark:hover {
-            border-color: #ff5500;
-            background: rgba(40, 30, 20, 0.9);
-        }
-
-        /* Glassmorphism Panels */
-        .glass-panel {
-            background: rgba(12, 16, 24, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
-        }
-
-        .glass-panel-orange {
-            background: rgba(25, 12, 5, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 100, 0, 0.3);
-            box-shadow: 0 0 20px rgba(255, 68, 0, 0.2);
-        }
-
-        /* Damage Overlay FX */
-        #damage-flash {
+        .ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            transition: opacity 0.3s ease-out;
         }
 
-        /* Virtual Joystick Elements */
-        .touch-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(4px);
-            touch-action: manipulation;
-        }
-        .touch-btn:active {
-            background: rgba(255, 85, 0, 0.5);
-            transform: scale(0.95);
+        .interactive {
+            pointer-events: auto;
         }
 
-        /* Animations */
-        @keyframes pulse-glow {
-            0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 85, 0, 0.8)); }
-            50% { filter: drop-shadow(0 0 15px rgba(255, 150, 0, 1)); }
+        /* Lobby UI */
+        #lobby-screen {
+            background: linear-gradient(135deg, #120700 0%, #2a0e00 50%, #080300 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            z-index: 10;
+            overflow-y: auto;
         }
-        .animate-glow {
-            animation: pulse-glow 2s infinite;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid #ff6600;
         }
+
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-box input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #ffaa00;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 120px;
+        }
+
+        .level-badge {
+            background: #ff6600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .currency-box {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .mode-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .mode-select {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #ff6600;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mode-btn.selected {
+            background: #ff6600;
+            font-weight: bold;
+            box-shadow: 0 0 10px #ff6600;
+        }
+
+        .btn {
+            background: linear-gradient(180deg, #ff8800 0%, #cc4400 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.4);
+        }
+
+        .btn-start {
+            padding: 15px 40px;
+            font-size: 22px;
+            background: linear-gradient(180deg, #ffaa00 0%, #ff3300 100%);
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Modals */
+        .modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 15, 20, 0.95);
+            border: 2px solid #ff6600;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 750px;
+            height: 75%;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0,0,0,0.9);
+            z-index: 20;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            color: #ffaa00;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .card {
+            background: rgba(40, 40, 50, 0.8);
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card.active {
+            border: 2px solid #00ffcc;
+            background: rgba(0, 255, 204, 0.1);
+        }
+
+        /* In-Game HUD */
+        #hud-screen {
+            display: none;
+        }
+
+        .crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hud-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .bar-container {
+            width: 180px;
+            height: 14px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 100%;
+            background: #00ff66;
+        }
+
+        .bar-text {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 14px;
+        }
+
+        .hud-top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-align: right;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Mobile Controls */
+        #joystick-zone {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+
+        #joystick-knob {
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 102, 0, 0.7);
+            border-radius: 50%;
+        }
+
+        .action-btns {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .btn-round {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .btn-fire { background: rgba(255, 51, 0, 0.8); width: 75px; height: 75px; font-size: 14px; }
+        .btn-gloo { background: rgba(0, 204, 255, 0.8); }
+        .btn-reload { background: rgba(255, 204, 0, 0.8); color: #000; }
+        .btn-switch { background: rgba(153, 0, 255, 0.8); }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body class="w-screen h-screen select-none overflow-hidden text-white bg-black">
+<body>
 
-    <!-- GAME CANVAS CONTAINER -->
-    <div id="canvas-container" class="absolute inset-0 w-full h-full z-0"></div>
+    <canvas id="game-canvas"></canvas>
 
-    <!-- DAMAGE INDICATOR FLASH -->
-    <div id="damage-flash" class="absolute inset-0 bg-red-600/30 opacity-0 z-10"></div>
-
-    <!-- MAIN MENU / LOBBY OVERLAY -->
-    <div id="lobby-ui" class="absolute inset-0 z-20 flex flex-col justify-between p-4 sm:p-6 bg-gradient-to-r from-black/80 via-transparent to-black/80">
-        
-        <!-- TOP NAVIGATION BAR -->
-        <div class="flex justify-between items-center w-full">
-            <!-- Player Info Profile Badge -->
-            <div class="glass-panel p-2 px-4 rounded-lg flex items-center gap-3 border-l-4 border-amber-500">
-                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center font-bold text-xl text-black shadow-lg">
-                    <i class="fa-solid fa-user-ninja"></i>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span id="player-name-display" class="font-bold text-lg tracking-wider text-amber-400">SURVIVOR_99</span>
-                        <span class="bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/40 font-mono">LVL 45</span>
-                    </div>
-                    <!-- EXP Bar -->
-                    <div class="w-32 bg-gray-800 h-2 rounded-full overflow-hidden mt-1 border border-gray-700">
-                        <div class="bg-gradient-to-r from-amber-500 to-yellow-300 h-full w-3/4"></div>
-                    </div>
-                </div>
+    <!-- Lobby Layer -->
+    <div id="lobby-screen" class="ui-layer interactive">
+        <div class="header">
+            <div class="profile-box">
+                <input type="text" id="player-name" value="NXT GAMER" onchange="saveProfile()">
+                <span class="level-badge">Lvl <span id="player-level">1</span></span>
+                <span style="font-size: 11px; color: #aaa;">XP: <span id="player-xp">0</span>/10000</span>
             </div>
-
-            <!-- Currencies & Resources -->
-            <div class="flex items-center gap-4">
-                <div class="glass-panel px-4 py-1.5 rounded-full flex items-center gap-2 border border-yellow-500/30">
-                    <i class="fa-solid fa-coins text-yellow-400 text-lg"></i>
-                    <span id="lobby-coins" class="font-bold text-yellow-400 tracking-wider">1,250</span>
-                </div>
-                <div class="glass-panel px-4 py-1.5 rounded-full flex items-center gap-2 border border-cyan-500/30">
-                    <i class="fa-solid fa-gem text-cyan-400 text-lg"></i>
-                    <span class="font-bold text-cyan-400 tracking-wider">85</span>
-                </div>
-                <button onclick="toggleAudio()" id="audio-btn" class="glass-panel w-10 h-10 rounded-full flex items-center justify-center text-amber-400 hover:text-white transition">
-                    <i class="fa-solid fa-volume-high"></i>
-                </button>
+            <div class="currency-box">
+                🪙 <span id="user-gold">100000</span>
             </div>
         </div>
 
-        <!-- MAIN LOBBY CONTENT AREA -->
-        <div class="flex justify-between items-end mb-4">
-            
-            <!-- Left Side Actions / Character Specs -->
-            <div class="flex flex-col gap-3 w-64">
-                <div class="glass-panel-orange p-4 rounded-xl">
-                    <div class="text-xs text-amber-400 font-semibold tracking-widest uppercase mb-1">CHARACTER STATS</div>
-                    <div class="text-2xl font-bold ff-font tracking-wide text-white uppercase" id="char-name">Alok Shadow</div>
-                    
-                    <div class="space-y-2 mt-3 text-sm">
-                        <div>
-                            <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                <span>MOVEMENT SPEED</span>
-                                <span id="stat-speed">100%</span>
-                            </div>
-                            <div class="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden">
-                                <div id="bar-speed" class="bg-amber-500 h-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                <span>ARMOR BUFF</span>
-                                <span id="stat-armor">+20%</span>
-                            </div>
-                            <div class="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden">
-                                <div id="bar-armor" class="bg-orange-500 h-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Loadout Selection -->
-                <div class="glass-panel p-3 rounded-xl flex justify-around">
-                    <button onclick="selectWeapon('rifle')" id="btn-rifle" class="p-2 rounded-lg bg-amber-500/20 border border-amber-500 text-amber-400 font-bold text-xs flex flex-col items-center gap-1 w-20">
-                        <i class="fa-solid fa-gun text-lg"></i>
-                        <span>AK-47</span>
-                    </button>
-                    <button onclick="selectWeapon('shotgun')" id="btn-shotgun" class="p-2 rounded-lg bg-gray-800/50 border border-gray-700 text-gray-400 font-bold text-xs flex flex-col items-center gap-1 w-20 hover:border-amber-500/50">
-                        <i class="fa-solid fa-burst text-lg"></i>
-                        <span>M1887</span>
-                    </button>
-                    <button onclick="selectWeapon('sniper')" id="btn-sniper" class="p-2 rounded-lg bg-gray-800/50 border border-gray-700 text-gray-400 font-bold text-xs flex flex-col items-center gap-1 w-20 hover:border-amber-500/50">
-                        <i class="fa-solid fa-crosshairs text-lg"></i>
-                        <span>AWM</span>
-                    </button>
-                </div>
+        <div class="mode-container">
+            <div class="mode-select">
+                <button class="mode-btn" onclick="selectMode('training', this)">Training Ground</button>
+                <button class="mode-btn selected" onclick="selectMode('br', this)">BR Match (10 Enemy)</button>
+                <button class="mode-btn" onclick="selectMode('1v1', this)">1v1 Match (Unlimited Gloo)</button>
             </div>
+            <button class="btn btn-start" onclick="startGame()">START MATCH</button>
+        </div>
 
-            <!-- Right Side Big Play Button & Mode Select -->
-            <div class="flex flex-col items-end gap-3">
-                <div class="glass-panel p-3 rounded-xl flex items-center gap-4 border-r-4 border-amber-500">
-                    <div class="text-right">
-                        <div class="text-xs text-gray-400 font-bold uppercase">SELECTED MAP</div>
-                        <div class="text-lg font-bold text-amber-400 uppercase tracking-wide">BERMUDA ARENA</div>
-                    </div>
-                    <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center border border-amber-500/40 text-amber-400">
-                        <i class="fa-solid fa-map-location-dot text-2xl"></i>
-                    </div>
-                </div>
+        <div class="nav-buttons">
+            <button class="btn" onclick="openModal('char-modal')">Characters</button>
+            <button class="btn" onclick="openModal('dress-modal')">Dressup</button>
+            <button class="btn" onclick="openModal('weapon-modal')">Gun Skins</button>
+        </div>
+    </div>
 
-                <!-- START MATCH BUTTON -->
-                <button onclick="startGame()" class="btn-fire px-12 py-4 text-3xl font-black ff-font tracking-widest text-white uppercase italic flex items-center gap-3">
-                    <i class="fa-solid fa-play animate-bounce"></i> START MATCH
-                </button>
+    <!-- Character Store Modal -->
+    <div id="char-modal" class="modal interactive">
+        <div class="modal-header">
+            <span>CHARACTER STORE (8)</span>
+            <button class="btn" onclick="closeModal('char-modal')">X</button>
+        </div>
+        <div class="grid-container" id="char-list"></div>
+    </div>
+
+    <!-- Dressup Modal -->
+    <div id="dress-modal" class="modal interactive">
+        <div class="modal-header">
+            <span>DRESSUP & ACCESSORIES</span>
+            <button class="btn" onclick="closeModal('dress-modal')">X</button>
+        </div>
+        <div class="grid-container" id="dress-list"></div>
+    </div>
+
+    <!-- Weapon Store Modal -->
+    <div id="weapon-modal" class="modal interactive">
+        <div class="modal-header">
+            <span>GUN & MELEE SKINS</span>
+            <button class="btn" onclick="closeModal('weapon-modal')">X</button>
+        </div>
+        <div class="grid-container" id="weapon-list"></div>
+    </div>
+
+    <!-- In-Game HUD -->
+    <div id="hud-screen" class="ui-layer">
+        <div class="crosshair"></div>
+
+        <div class="hud-top">
+            <div class="bar-container">
+                <div id="hp-bar" class="bar-fill"></div>
+                <div class="bar-text">HP: <span id="hp-val">200</span>/200</div>
+            </div>
+        </div>
+
+        <div class="hud-top-right">
+            <div>Kills: <span id="kill-count" style="color:#00ffcc;">0</span></div>
+            <div>Alive: <span id="alive-count" style="color:#ffcc00;">0</span></div>
+        </div>
+
+        <!-- Mobile Controls Overlay -->
+        <div id="joystick-zone" class="interactive">
+            <div id="joystick-knob"></div>
+        </div>
+
+        <div class="action-btns interactive">
+            <div style="display:flex; gap:10px;">
+                <div class="btn-round btn-switch" onclick="switchGun()">GUN</div>
+                <div class="btn-round btn-reload" onclick="reloadGun()">RELOAD</div>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <div class="btn-round btn-gloo" onclick="deployGlooWall()">GLOO<br><span id="gloo-val">∞</span></div>
+                <div class="btn-round btn-fire" onclick="shootWeapon()">FIRE</div>
             </div>
         </div>
     </div>
 
-    <!-- IN-GAME HUD OVERLAY (HIDDEN IN LOBBY) -->
-    <div id="game-hud" class="hidden absolute inset-0 z-20 pointer-events-none flex flex-col justify-between p-4">
-        
-        <!-- HUD TOP ROW -->
-        <div class="flex justify-between items-start w-full">
-            
-            <!-- Health & Armor HUD -->
-            <div class="w-72 glass-panel p-3 rounded-xl border-l-4 border-emerald-500 pointer-events-auto">
-                <!-- Health Bar -->
-                <div class="mb-2">
-                    <div class="flex justify-between text-xs font-bold mb-1">
-                        <span class="text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-heart"></i> HP</span>
-                        <span id="hp-text" class="text-white">100 / 100</span>
-                    </div>
-                    <div class="w-full bg-gray-900 h-3 rounded-full overflow-hidden p-0.5 border border-gray-700">
-                        <div id="hp-bar" class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full rounded-full transition-all duration-200" style="width: 100%"></div>
-                    </div>
-                </div>
-
-                <!-- Armor Bar -->
-                <div>
-                    <div class="flex justify-between text-xs font-bold mb-1">
-                        <span class="text-cyan-400 flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> ARMOR</span>
-                        <span id="armor-text" class="text-white">50 / 50</span>
-                    </div>
-                    <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden p-0.5 border border-gray-700">
-                        <div id="armor-bar" class="bg-gradient-to-r from-cyan-600 to-cyan-400 h-full rounded-full transition-all duration-200" style="width: 100%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Match Status Info (Alive, Kills) -->
-            <div class="glass-panel px-6 py-2 rounded-xl flex items-center gap-6 border-b-2 border-amber-500">
-                <div class="text-center">
-                    <div class="text-xs text-gray-400 font-bold">ALIVE</div>
-                    <div id="hud-alive" class="text-2xl font-black ff-font text-amber-400">10</div>
-                </div>
-                <div class="h-8 w-px bg-gray-700"></div>
-                <div class="text-center">
-                    <div class="text-xs text-gray-400 font-bold">KILLS</div>
-                    <div id="hud-kills" class="text-2xl font-black ff-font text-red-500">0</div>
-                </div>
-            </div>
-
-            <!-- Mini Map -->
-            <div class="relative w-28 h-28 glass-panel rounded-full border-2 border-amber-500 overflow-hidden flex items-center justify-center">
-                <canvas id="minimap-canvas" width="112" height="112" class="w-full h-full"></canvas>
-                <!-- Player Indicator Center -->
-                <div class="absolute w-2.5 h-2.5 bg-amber-400 rounded-full border border-black z-10 shadow-md shadow-amber-500"></div>
-            </div>
-        </div>
-
-        <!-- CENTER CROSSHAIR -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="relative w-8 h-8 flex items-center justify-center">
-                <div class="absolute w-1 h-3 bg-emerald-400/80 top-0 rounded-full"></div>
-                <div class="absolute w-1 h-3 bg-emerald-400/80 bottom-0 rounded-full"></div>
-                <div class="absolute h-1 w-3 bg-emerald-400/80 left-0 rounded-full"></div>
-                <div class="absolute h-1 w-3 bg-emerald-400/80 right-0 rounded-full"></div>
-                <div class="w-1.5 h-1.5 bg-red-500 rounded-full shadow-sm shadow-red-500"></div>
-            </div>
-        </div>
-
-        <!-- HUD BOTTOM ROW -->
-        <div class="flex justify-between items-end w-full">
-            
-            <!-- Controls Hint (Desktop) -->
-            <div class="hidden md:flex flex-col gap-1 text-xs text-gray-400 glass-panel p-3 rounded-lg border-l-2 border-amber-500/50">
-                <div><span class="text-amber-400 font-bold">WASD</span> : Move</div>
-                <div><span class="text-amber-400 font-bold">MOUSE</span> : Aim & Look</div>
-                <div><span class="text-amber-400 font-bold">LEFT CLICK</span> : Fire Weapon</div>
-                <div><span class="text-amber-400 font-bold">SPACE</span> : Jump | <span class="text-amber-400 font-bold">R</span> : Reload</div>
-                <div><span class="text-amber-400 font-bold">ESC</span> : Release Mouse Lock</div>
-            </div>
-
-            <!-- Ammo Counter Display -->
-            <div class="glass-panel p-4 rounded-xl flex items-center gap-4 border-r-4 border-amber-500 pointer-events-auto">
-                <div class="text-right">
-                    <div id="hud-weapon-name" class="text-sm font-bold text-amber-400 uppercase tracking-wider">AK-47</div>
-                    <div class="flex items-baseline gap-1">
-                        <span id="ammo-clip" class="text-4xl font-black ff-font text-white">30</span>
-                        <span class="text-gray-500 text-xl font-bold">/</span>
-                        <span id="ammo-total" class="text-lg font-bold text-gray-400">120</span>
-                    </div>
-                </div>
-                <button onclick="reloadWeapon()" class="w-10 h-10 bg-amber-500/20 hover:bg-amber-500/40 rounded-lg border border-amber-500/50 flex items-center justify-center text-amber-400 text-lg transition">
-                    <i class="fa-solid fa-rotate-right"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- TOUCH CONTROLS FOR MOBILE DEVICIES -->
-        <div id="touch-controls" class="md:hidden absolute inset-0 pointer-events-none flex justify-between p-6 items-end z-30">
-            <!-- Left Analog Move Area -->
-            <div id="joystick-zone" class="w-32 h-32 rounded-full border-2 border-white/20 bg-black/20 pointer-events-auto relative flex items-center justify-center">
-                <div id="joystick-knob" class="w-12 h-12 rounded-full bg-amber-500/60 border border-amber-300 absolute"></div>
-            </div>
-            
-            <!-- Right Action Buttons -->
-            <div class="flex flex-col gap-4 pointer-events-auto items-end">
-                <button id="touch-fire" class="w-20 h-20 rounded-full touch-btn bg-red-600/40 border-red-500 flex items-center justify-center text-2xl text-red-300">
-                    <i class="fa-solid fa-crosshairs"></i>
-                </button>
-                <div class="flex gap-3">
-                    <button id="touch-jump" class="w-14 h-14 rounded-full touch-btn flex items-center justify-center text-xl text-amber-400">
-                        <i class="fa-solid fa-arrow-up"></i>
-                    </button>
-                    <button id="touch-reload" class="w-14 h-14 rounded-full touch-btn flex items-center justify-center text-xl text-cyan-400">
-                        <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- GAME OVER / VICTORY MODAL -->
-    <div id="end-screen" class="hidden absolute inset-0 z-40 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-6">
-        <div id="end-card" class="glass-panel-orange p-8 rounded-2xl max-w-md w-full text-center border-t-4 border-amber-500 shadow-2xl">
-            <h1 id="end-title" class="text-6xl font-black ff-font tracking-wider text-amber-400 italic mb-2">BOOYAH!</h1>
-            <p id="end-subtitle" class="text-gray-300 mb-6 font-semibold">#1 VICTORIOUS SURVIVOR</p>
-
-            <div class="grid grid-cols-2 gap-4 my-6">
-                <div class="bg-black/40 p-3 rounded-lg border border-amber-500/20">
-                    <div class="text-xs text-gray-400 font-bold">TOTAL KILLS</div>
-                    <div id="end-kills" class="text-3xl font-black ff-font text-white">0</div>
-                </div>
-                <div class="bg-black/40 p-3 rounded-lg border border-amber-500/20">
-                    <div class="text-xs text-gray-400 font-bold">COINS EARNED</div>
-                    <div id="end-coins" class="text-3xl font-black ff-font text-yellow-400">+350</div>
-                </div>
-            </div>
-
-            <button onclick="returnToLobby()" class="btn-fire w-full py-3 text-2xl font-black ff-font tracking-widest text-white uppercase italic">
-                BACK TO LOBBY
-            </button>
-        </div>
-    </div>
-
-    <!-- MAIN GAME SCRIPT LOGIC -->
     <script>
-        // --- AUDIO SYNTHESIZER (Web Audio API) ---
-        class SoundFX {
-            constructor() {
-                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                this.muted = false;
+        // Profile & Leveling Data
+        let playerProfile = {
+            name: 'NXT GAMER',
+            level: 1,
+            xp: 0,
+            gold: 100000
+        };
+
+        let selectedMode = 'br';
+        let activeChar = 'jack';
+        let activeDress = 'default';
+        let activeGun = 'mp40';
+        let activeSecondaryGun = 'desert_eagle';
+
+        // 8 Characters Data
+        const characters = {
+            'jack': { name: 'জ্যাক (Jack)', price: 0, color: 0x00aaff, owned: true },
+            'jackie': { name: 'জ্যাকি (Jackie)', price: 10000, color: 0xff0055, owned: false },
+            'jessica': { name: 'জেসিকা (Jessica)', price: 15000, color: 0xaa00ff, owned: false },
+            'akkas': { name: 'আক্কাস (Akkas)', price: 20000, color: 0x00ff66, owned: false },
+            'korim': { name: 'করিম (Korim)', price: 25000, color: 0xffaa00, owned: false },
+            'rofik': { name: 'রফিক (Rofik)', price: 30000, color: 0x00ffff, owned: false },
+            'sam': { name: 'স্যাম (Sam)', price: 35000, color: 0xffff00, owned: false },
+            'roky': { name: 'রকি (Roky)', price: 40000, color: 0xff3300, owned: false }
+        };
+
+        // Dressup Data
+        const dressups = {
+            'default': { name: 'Normal Clothes', price: 0, owned: true },
+            'red_shirt': { name: 'Red T-Shirt', price: 5000, owned: false, hatColor: 0xff0000 },
+            'black_pant': { name: 'Black Jeans', price: 8000, owned: false, hatColor: 0x111111 },
+            'sunglasses': { name: 'Cool Sunglasses', price: 12000, owned: false, hatColor: 0x000000 }
+        };
+
+        // Gun Skins
+        const weapons = {
+            'mp40': { name: 'MP40', price: 0, damage: 25, ammo: 32, owned: true },
+            'ump': { name: 'UMP', price: 10000, damage: 28, ammo: 30, owned: false },
+            'xm8': { name: 'XM8', price: 15000, damage: 32, ammo: 30, owned: false },
+            'desert_eagle': { name: 'Desert Eagle', price: 8000, damage: 60, ammo: 7, owned: true },
+            'ak47': { name: 'AK-47', price: 20000, damage: 38, ammo: 30, owned: false },
+            'awm': { name: 'AWM', price: 30000, damage: 150, ammo: 5, owned: false },
+            'mini_uzi': { name: 'Mini Uzi', price: 12000, damage: 20, ammo: 25, owned: false },
+            'katana': { name: 'Katana Skin', price: 15000, damage: 80, ammo: 1, owned: false },
+            'pan': { name: 'Pan Skin', price: 10000, damage: 70, ammo: 1, owned: false }
+        };
+
+        // 3D Variables
+        let scene, camera, renderer;
+        let playerGroup, enemies = [], glooWalls = [];
+        let playerHp = 200, kills = 0, aliveEnemies = 0;
+        let ammoCurrent = 30;
+        let glooWallsCount = 0; // Infinity for 1v1
+        let gameActive = false;
+
+        // Joystick Movement Setup
+        let moveVector = { x: 0, y: 0 };
+        let joystickActive = false;
+
+        function init() {
+            renderLobbyUI();
+            setup3D();
+            setupJoystick();
+
+            // Keyboard Support
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function setup3D() {
+            const canvas = document.getElementById('game-canvas');
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87ceeb);
+            scene.fog = new THREE.FogExp2(0x87ceeb, 0.015);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(50, 100, 50);
+            scene.add(dirLight);
+
+            // Ground Ground
+            const groundGeo = new THREE.PlaneGeometry(300, 300);
+            const groundMat = new THREE.MeshLambertMaterial({ color: 0x3a7d44 });
+            const ground = new THREE.Mesh(groundGeo, groundMat);
+            ground.rotation.x = -Math.PI / 2;
+            scene.add(ground);
+        }
+
+        function setupJoystick() {
+            const zone = document.getElementById('joystick-zone');
+            const knob = document.getElementById('joystick-knob');
+
+            zone.addEventListener('touchstart', handleJoystickStart, false);
+            zone.addEventListener('touchmove', handleJoystickMove, false);
+            zone.addEventListener('touchend', handleJoystickEnd, false);
+        }
+
+        function handleJoystickStart(e) { joystickActive = true; }
+        function handleJoystickMove(e) {
+            if (!joystickActive) return;
+            const touch = e.touches[0];
+            const rect = document.getElementById('joystick-zone').getBoundingClientRect();
+            let dx = touch.clientX - (rect.left + rect.width / 2);
+            let dy = touch.clientY - (rect.top + rect.height / 2);
+
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            let maxDist = 35;
+            if (dist > maxDist) {
+                dx = (dx / dist) * maxDist;
+                dy = (dy / dist) * maxDist;
             }
 
-            playShoot() {
-                if(this.muted) return;
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(300, this.ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
-                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.15);
+            document.getElementById('joystick-knob').style.transform = `translate(${dx}px, ${dy}px)`;
+            moveVector.x = dx / maxDist;
+            moveVector.y = dy / maxDist;
+        }
+
+        function handleJoystickEnd() {
+            joystickActive = false;
+            document.getElementById('joystick-knob').style.transform = `translate(0px, 0px)`;
+            moveVector = { x: 0, y: 0 };
+        }
+
+        // Render Modals & Lobby
+        function renderLobbyUI() {
+            document.getElementById('player-name').value = playerProfile.name;
+            document.getElementById('player-level').innerText = playerProfile.level;
+            document.getElementById('player-xp').innerText = playerProfile.xp;
+            document.getElementById('user-gold').innerText = playerProfile.gold;
+
+            // Characters List
+            let charContainer = document.getElementById('char-list');
+            charContainer.innerHTML = '';
+            for (let id in characters) {
+                let c = characters[id];
+                let isEquipped = activeChar === id;
+                charContainer.innerHTML += `
+                    <div class="card ${isEquipped ? 'active' : ''}">
+                        <h4>${c.name}</h4>
+                        <p style="color:#ffd700;">${c.owned ? 'Owned' : c.price + ' Gold'}</p>
+                        <button class="btn" onclick="buyOrEquipChar('${id}')">
+                            ${isEquipped ? 'Equipped' : (c.owned ? 'Equip' : 'Buy')}
+                        </button>
+                    </div>
+                `;
             }
+
+            // Dressup List
+            let dressContainer = document.getElementById('dress-list');
+            dressContainer.innerHTML = '';
+            for (let id in dressups) {
+                let d = dressups[id];
+                let isEquipped = activeDress === id;
+                dressContainer.innerHTML += `
+                    <div class="card ${isEquipped ? 'active' : ''}">
+                        <h4>${d.name}</h4>
+                        <p style="color:#ffd700;">${d.owned ? 'Owned' : d.price + ' Gold'}</p>
+                        <button class="btn" onclick="buyOrEquipDress('${id}')">
+                            ${isEquipped ? 'Equipped' : (d.owned ? 'Equip' : 'Buy')}
+                        </button>
+                    </div>
+                `;
+            }
+
+            // Weapon Skins List
+            let weaponContainer = document.getElementById('weapon-list');
+            weaponContainer.innerHTML = '';
+            for (let id in weapons) {
+                let w = weapons[id];
+                let isEquipped<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Free Fire Style 3D Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+        }
+
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .interactive {
+            pointer-events: auto;
+        }
+
+        /* Lobby UI */
+        #lobby-screen {
+            background: linear-gradient(135deg, #120700 0%, #2a0e00 50%, #080300 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            z-index: 10;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid #ff6600;
+        }
+
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-box input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #ffaa00;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 120px;
+        }
+
+        .level-badge {
+            background: #ff6600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .currency-box {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .mode-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .mode-select {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #ff6600;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mode-btn.selected {
+            background: #ff6600;
+            font-weight: bold;
+            box-shadow: 0 0 10px #ff6600;
+        }
+
+        .btn {
+            background: linear-gradient(180deg, #ff8800 0%, #cc4400 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.4);
+        }
+
+        .btn-start {
+            padding: 15px 40px;
+            font-size: 22px;
+            background: linear-gradient(180deg, #ffaa00 0%, #ff3300 100%);
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Modals */
+        .modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 15, 20, 0.95);
+            border: 2px solid #ff6600;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 750px;
+            height: 75%;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0,0,0,0.9);
+            z-index: 20;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            color: #ffaa00;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .card {
+            background: rgba(40, 40, 50, 0.8);
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card.active {
+            border: 2px solid #00ffcc;
+            background: rgba(0, 255, 204, 0.1);
+        }
+
+        /* In-Game HUD */
+        #hud-screen {
+            display: none;
+        }
+
+        .crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hud-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .bar-container {
+            width: 180px;
+            height: 14px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 100%;
+            background: #00ff66;
+        }
+
+        .bar-text {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 14px;
+        }
+
+        .hud-top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-align: right;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Mobile Controls */
+        #joystick-zone {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+
+        #joystick-knob {
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 102, 0, 0.7);
+            border-radius: 50%;
+        }
+
+        .action-btns {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .btn-round {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .btn-fire { background: rgba(255, 51, 0, 0.8); width: 75px; height: 75px; font-size: 14px; }
+        .btn-gloo { background: rgba(0, 204, 255, 0.8); }
+        .btn-reload { background: rgba(255, 204, 0, 0.8); color: #000; }
+        .btn-switch { background: rgba(153, 0, 255, 0.8); }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Lobby Layer -->
+    <div id="lobby-screen" class="ui-layer interactive">
+        <div class="header">
+            <div class="profile-box">
+                <input type="text" id="player-name" value="NXT GAMER" onchange="saveProfile()">
+                <span class="level-badge">Lvl <span id="player-level">1</span></span>
+                <span style="font-size: 11px; color: #aaa;">XP: <span id="player-xp">0</span>/10000</span>
+            </div>
+            <div class="currency-box">
+                🪙 <span id="user-gold">100000</span>
+            </div>
+        </div>
+
+        <div class="mode-container">
+            <div class="mode-select">
+                <button class="mode-btn" onclick="selectMode('training', this)">Training Ground</button>
+                <button class="mode-btn selected" onclick="selectMode('br', this)">BR Match (10 Enemy)</button>
+                <button class="mode-btn" onclick="selectMode('1v1', this)">1v1 Match (Unlimited Gloo)</button>
+            </div>
+            <button class="btn btn-start" onclick="startGame()">START MATCH</button>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn" onclick="openModal('char-modal')">Characters</button>
+            <button class="btn" onclick="openModal('dress-modal')">Dressup</button>
+            <button class="btn" onclick="openModal('weapon-modal')">Gun Skins</button>
+        </div>
+    </div>
+
+    <!-- Character Store Modal -->
+    <div id="char-modal" class="modal interactive">
+        <div class="modal-header">
+            <span>CHARACTER STORE (8)</span>
+            <button class="btn" onclick="closeModal('char-modal')">X</button>
+        </div>
+        <div class="grid-container" id="char-list"></div>
+    </div>
+
+    <!-- Dressup Modal -->
+    <div id="dress-modal" class="modal interactive">
+        <div class="modal-header">
+            <span>DRESSUP & ACCESSORIES</span>
+            <button class="btn" onclick="closeModal('dress-modal')">X</button>
+        </div>
+        <div class="grid-container" id="dress-list"></div>
+    </div>
+
+    <!-- Weapon Store Modal -->
+    <div id="weapon-modal" class="modal interactive">
+        <div class="modal-header">
+            <span>GUN & MELEE SKINS</span>
+            <button class="btn" onclick="closeModal('weapon-modal')">X</button>
+        </div>
+        <div class="grid-container" id="weapon-list"></div>
+    </div>
+
+    <!-- In-Game HUD -->
+    <div id="hud-screen" class="ui-layer">
+        <div class="crosshair"></div>
+
+        <div class="hud-top">
+            <div class="bar-container">
+                <div id="hp-bar" class="bar-fill"></div>
+                <div class="bar-text">HP: <span id="hp-val">200</span>/200</div>
+            </div>
+        </div>
+
+        <div class="hud-top-right">
+            <div>Kills: <span id="kill-count" style="color:#00ffcc;">0</span></div>
+            <div>Alive: <span id="alive-count" style="color:#ffcc00;">0</span></div>
+        </div>
+
+        <!-- Mobile Controls Overlay -->
+        <div id="joystick-zone" class="interactive">
+            <div id="joystick-knob"></div>
+        </div>
+
+        <div class="action-btns interactive">
+            <div style="display:flex; gap:10px;">
+                <div class="btn-round btn-switch" onclick="switchGun()">GUN</div>
+                <div class="btn-round btn-reload" onclick="reloadGun()">RELOAD</div>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <div class="btn-round btn-gloo" onclick="deployGlooWall()">GLOO<br><span id="gloo-val">∞</span></div>
+                <div class="btn-round btn-fire" onclick="shootWeapon()">FIRE</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Profile & Leveling Data
+        let playerProfile = {
+            name: 'NXT GAMER',
+            level: 1,
+            xp: 0,
+            gold: 100000
+        };
+
+        let selectedMode = 'br';
+        let activeChar = 'jack';
+        let activeDress = 'default';
+        let activeGun = 'mp40';
+        let activeSecondaryGun = 'desert_eagle';
+
+        // 8 Characters Data
+        const characters = {
+            'jack': { name: 'জ্যাক (Jack)', price: 0, color: 0x00aaff, owned: true },
+            'jackie': { name: 'জ্যাকি (Jackie)', price: 10000, color: 0xff0055, owned: false },
+            'jessica': { name: 'জেসিকা (Jessica)', price: 15000, color: 0xaa00ff, owned: false },
+            'akkas': { name: 'আক্কাস (Akkas)', price: 20000, color: 0x00ff66, owned: false },
+            'korim': { name: 'করিম (Korim)', price: 25000, color: 0xffaa00, owned: false },
+            'rofik': { name: 'রফিক (Rofik)', price: 30000, color: 0x00ffff, owned: false },
+            'sam': { name: 'স্যাম (Sam)', price: 35000, color: 0xffff00, owned: false },
+            'roky': { name: 'রকি (Roky)', price: 40000, color: 0xff3300, owned: false }
+        };
+
+        // Dressup Data
+        const dressups = {
+            'default': { name: 'Normal Clothes', price: 0, owned: true },
+            'red_shirt': { name: 'Red T-Shirt', price: 5000, owned: false, hatColor: 0xff0000 },
+            'black_pant': { name: 'Black Jeans', price: 8000, owned: false, hatColor: 0x111111 },
+            'sunglasses': { name: 'Cool Sunglasses', price: 12000, owned: false, hatColor: 0x000000 }
+        };
+
+        // Gun Skins
+        const weapons = {
+            'mp40': { name: 'MP40', price: 0, damage: 25, ammo: 32, owned: true },
+            'ump': { name: 'UMP', price: 10000, damage: 28, ammo: 30, owned: false },
+            'xm8': { name: 'XM8', price: 15000, damage: 32, ammo: 30, owned: false },
+            'desert_eagle': { name: 'Desert Eagle', price: 8000, damage: 60, ammo: 7, owned: true },
+            'ak47': { name: 'AK-47', price: 20000, damage: 38, ammo: 30, owned: false },
+            'awm': { name: 'AWM', price: 30000, damage: 150, ammo: 5, owned: false },
+            'mini_uzi': { name: 'Mini Uzi', price: 12000, damage: 20, ammo: 25, owned: false },
+            'katana': { name: 'Katana Skin', price: 15000, damage: 80, ammo: 1, owned: false },
+            'pan': { name: 'Pan Skin', price: 10000, damage: 70, ammo: 1, owned: false }
+        };
+
+        // 3D Variables
+        let scene, camera, renderer;
+        let playerGroup, enemies = [], glooWalls = [];
+        let playerHp = 200, kills = 0, aliveEnemies = 0;
+        let ammoCurrent = 30;
+        let glooWallsCount = 0; // Infinity for 1v1
+        let gameActive = false;
+
+        // Joystick Movement Setup
+        let moveVector = { x: 0, y: 0 };
+        let joystickActive = false;
+
+        function init() {
+            renderLobbyUI();
+            setup3D();
+            setupJoystick();
+
+            // Keyboard Support
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function setup3D() {
+            const canvas = document.getElementById('game-canvas');
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87ceeb);
+            scene.fog = new THREE.FogExp2(0x87ceeb, 0.015);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(50, 100, 50);
+            scene.add(dirLight);
+
+            // Ground Ground
+            const groundGeo = new THREE.PlaneGeometry(300, 300);
+            const groundMat = new THREE.MeshLambertMaterial({ color: 0x3a7d44 });
+            const ground = new THREE.Mesh(groundGeo, groundMat);
+            ground.rotation.x = -Math.PI / 2;
+            scene.add(ground);
+        }
+
+        function setupJoystick() {
+            const zone = document.getElementById('joystick-zone');
+            const knob = document.getElementById('joystick-knob');
+
+            zone.addEventListener('touchstart', handleJoystickStart, false);
+            zone.addEventListener('touchmove', handleJoystickMove, false);
+            zone.addEventListener('touchend', handleJoystickEnd, false);
+        }
+
+        function handleJoystickStart(e) { joystickActive = true; }
+        function handleJoystickMove(e) {
+            if (!joystickActive) return;
+            const touch = e.touches[0];
+            const rect = document.getElementById('joystick-zone').getBoundingClientRect();
+            let dx = touch.clientX - (rect.left + rect.width / 2);
+            let dy = touch.clientY - (rect.top + rect.height / 2);
+
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            let maxDist = 35;
+            if (dist > maxDist) {
+                dx = (dx / dist) * maxDist;
+                dy = (dy / dist) * maxDist;
+            }
+
+            document.getElementById('joystick-knob').style.transform = `translate(${dx}px, ${dy}px)`;
+            moveVector.x = dx / maxDist;
+            moveVector.y = dy / maxDist;
+        }
+
+        function handleJoystickEnd() {
+            joystickActive = false;
+            document.getElementById('joystick-knob').style.transform = `translate(0px, 0px)`;
+            moveVector = { x: 0, y: 0 };
+        }
+
+        // Render Modals & Lobby
+        function renderLobbyUI() {
+            document.getElementById('player-name').value = playerProfile.name;
+            document.getElementById('player-level').innerText = playerProfile.level;
+            document.getElementById('player-xp').innerText = playerProfile.xp;
+            document.getElementById('user-gold').innerText = playerProfile.gold;
+
+            // Characters List
+            let charContainer = document.getElementById('char-list');
+            charContainer.innerHTML = '';
+            for (let id in characters) {
+                let c = characters[id];
+                let isEquipped = activeChar === id;
+                charContainer.innerHTML += `
+                    <div class="card ${isEquipped ? 'active' : ''}">
+                        <h4>${c.name}</h4>
+                        <p style="color:#ffd700;">${c.owned ? 'Owned' : c.price + ' Gold'}</p>
+                        <button class="btn" onclick="buyOrEquipChar('${id}')">
+                            ${isEquipped ? 'Equipped' : (c.owned ? 'Equip' : 'Buy')}
+                        </button>
+                    </div>
+                `;
+            }
+
+            // Dressup List
+            let dressContainer = document.getElementById('dress-list');
+            dressContainer.innerHTML = '';
+            for (let id in dressups) {
+                let d = dressups[id];
+                let isEquipped = activeDress === id;
+                dressContainer.innerHTML += `
+                    <div class="card ${isEquipped ? 'active' : ''}">
+                        <h4>${d.name}</h4>
+                        <p style="color:#ffd700;">${d.owned ? 'Owned' : d.price + ' Gold'}</p>
+                        <button class="btn" onclick="buyOrEquipDress('${id}')">
+                            ${isEquipped ? 'Equipped' : (d.owned ? 'Equip' : 'Buy')}
+                        </button>
+                    </div>
+                `;
+            }
+
+            // Weapon Skins List
+            let weaponContainer = document.getElementById('weapon-list');
+            weaponContainer.innerHTML = '';
+            for (let id in weapons) {
+                let w = weapons[id];
+                let isEquipped
