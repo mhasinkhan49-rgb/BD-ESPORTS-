@@ -3,514 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DARK GUIDELINE</title>
-
+<title>আমার বাজার - Market Game</title>
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- background:#050d0a;
- color:#eafff1;
- font-family:Arial,sans-serif;
-}
-header{
- background:#091a12;
- border-bottom:1px solid #1b7045;
- padding:20px;
- text-align:center;
-}
-header h1{
- color:#00ff83;
- letter-spacing:3px;
- margin:5px;
-}
-header p{color:#9bbbaa}
-nav{
- display:flex;
- overflow-x:auto;
- gap:10px;
- padding:12px;
- background:#102219;
- position:sticky;
- top:0;
- z-index:5;
-}
-nav a{
- color:#00ff83;
- text-decoration:none;
- white-space:nowrap;
- padding:8px 12px;
- border:1px solid #23613f;
- border-radius:7px;
-}
-nav a:hover{background:#17633d}
-.container{
- max-width:1100px;
- margin:auto;
- padding:20px;
-}
-.hero{
- text-align:center;
- padding:40px 10px;
- background:linear-gradient(135deg,#102d1e,#06100b);
- border-radius:15px;
-}
-.hero h2{
- color:#00ff83;
- font-size:32px;
-}
-.hero p{color:#b7d2c0}
-.search{
- width:100%;
- padding:14px;
- margin:20px 0;
- background:#102219;
- border:1px solid #00b866;
- border-radius:8px;
- color:white;
- font-size:16px;
-}
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:15px;
-}
-.card{
- background:#102219;
- border:1px solid #24573b;
- padding:20px;
- border-radius:12px;
- transition:.2s;
-}
-.card:hover{
- border-color:#00ff83;
- transform:translateY(-3px);
-}
-.card h3{color:#00ff83}
-.card p{color:#b7cbbb;font-size:14px}
-button{
- background:#00c968;
- color:#04130a;
- border:0;
- padding:11px 16px;
- border-radius:7px;
- font-weight:bold;
- cursor:pointer;
-}
-button:hover{background:#00ff83}
-.lesson{
- background:#102219;
- border:1px solid #24573b;
- padding:22px;
- border-radius:12px;
- margin-top:20px;
- line-height:1.8;
-}
-.lesson h2{color:#00ff83}
-.lesson li{margin:8px 0}
-.quiz{
- background:#102219;
- padding:22px;
- border-radius:12px;
- margin-top:20px;
-}
-.quiz button{
- display:block;
- margin:10px 0;
- width:100%;
- text-align:left;
-}
-#result{color:#00ff83;font-weight:bold}
-footer{
- text-align:center;
- padding:30px;
- color:#8ca997;
- border-top:1px solid #24573b;
- margin-top:40px;
-}
+*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#fef3c7}
+header{background:#16a34a;color:#fff;padding:12px;text-align:center}
+.top{display:flex;justify-content:space-around;background:#fff;padding:10px;font-weight:bold;position:sticky;top:0}
+.container{padding:10px;max-width:600px;margin:auto}
+.card{background:#fff;border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:0 2px 8px #0001}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:bold;cursor:pointer;background:#22c55e;color:#fff;margin:3px}
+button.blue{background:#3b82f6} button.orange{background:#f97316} button.purple{background:#a855f7} button.red{background:#ef4444}
+input,select{padding:9px;border-radius:8px;border:1px solid #ccc;width:100%;margin:4px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{border:1px solid #eee;border-radius:12px;padding:8px;text-align:center;background:#fffbeb}
+.item b{font-size:18px}
+.customer{border:2px dashed #f97316;padding:10px;border-radius:12px;background:#fff7ed}
 .hidden{display:none}
-.badge{color:#00ff83;font-size:12px}
+#van{font-size:40px;text-align:center}
 </style>
 </head>
-
 <body>
-
-<header>
-<h1>⚡ DARK GUIDELINE</h1>
-<p>LEARN • EXPLORE • UNDERSTAND • PROTECT</p>
-</header>
-
-<nav>
-<a href="#home">Home</a>
-<a href="#courses">Courses</a>
-<a href="#internet">Internet</a>
-<a href="#android">Android</a>
-<a href="#iphone">iPhone</a>
-<a href="#security">Security</a>
-<a href="#quiz">Quiz</a>
-</nav>
+<header><h2 id="shopTitle">🛒 আমার বাজার</h2><div>দিন <span id="day">1</span> | ⏰ <span id="time">সকাল</span></div></header>
+<div class="top"><span>💰 টাকা: <span id="money">1000</span>৳</span><span>⭐ লেভেল: <span id="level">1</span></span><span>😊 খুশি কাস্টমার: <span id="happy">0</span></span></div>
 
 <div class="container">
+<!-- SHOP NAME -->
+<div class="card" id="setupCard">
+<h3>তোমার দোকানের নাম দাও</h3>
+<input id="shopName" placeholder="যেমন: মহাশিম স্টোর">
+<button onclick="setShop()">দোকান খুলো 🚀</button>
+</div>
 
-<section class="hero" id="home">
-<h2>WELCOME TO DARK GUIDELINE</h2>
-<p>প্রযুক্তির প্রতিটি বিষয় শিখুন বাংলায়।</p>
-<p>Internet | Mobile | Computer | Cyber Security</p>
-<button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">
-START LEARNING
-</button>
-</section>
-
-<input class="search" id="search"
-placeholder="🔎 এখানে বিষয় খুঁজুন..."
-oninput="searchCourses()">
-
-<section id="courses">
-<h2 style="color:#00ff83">📚 ALL LEARNING CATEGORIES</h2>
-
-<div class="grid" id="courseGrid">
-
+<!-- PRODUCTS -->
 <div class="card">
-<h3>🌐 Internet Mastery</h3>
-<p>ইন্টারনেট, IP, DNS, Wi-Fi, Router ও VPN সম্পর্কে জানুন।</p>
-<button onclick="showLesson('internet')">Learn More</button>
+<h3>🥦 আমার মালপত্র - দাম তুমি বসাও</h3>
+<div class="grid" id="products"></div>
+<p>💡 টিপস: দাম বেশি দিলে কাস্টমার দামাদামি করবে, কম দিলে তাড়াতাড়ি কিনবে।</p>
 </div>
 
+<!-- CUSTOMER -->
 <div class="card">
-<h3>📱 Android Guide</h3>
-<p>Android-এর গুরুত্বপূর্ণ সেটিংস, Permission ও Security।</p>
-<button onclick="showLesson('android')">Learn More</button>
+<h3>🧍 কাস্টমার আসছে...</h3>
+<div id="customerArea"><button class="blue" onclick="newCustomer()">কাস্টমার ডাকো 📢</button></div>
 </div>
 
+<!-- MOBILE ORDER -->
 <div class="card">
-<h3>🍎 iPhone Guide</h3>
-<p>iOS Settings, Apple ID, iCloud ও Privacy।</p>
-<button onclick="showLesson('iphone')">Learn More</button>
+<h3>📱 মোবাইল দিয়ে মাল অর্ডার করো</h3>
+<select id="orderItem">
+<option value="chips">চিপস - ৩০৳ (কিনে ৬০৳ বেচবা)</option>
+<option value="chanachur">চানাচুর - ২৫৳</option>
+<option value="mojo">মজো - ৩৫৳</option>
+<option value="speed">স্পিড - ৪০৳</option>
+<option value="alu">আলু ৫ কেজি - ১০০৳</option>
+<option value="tomato">টমেটো ৫ কেজি - ১২০৳</option>
+</select>
+<button class="orange" onclick="orderOnline()">অর্ডার করো 🛵</button>
+<div id="van"></div>
+<div id="orderMsg"></div>
 </div>
 
+<!-- HOUSE -->
 <div class="card">
-<h3>🛡️ Network Security</h3>
-<p>Firewall, Network, Ports ও নিরাপত্তা ব্যবস্থা।</p>
-<button onclick="showLesson('network')">Learn More</button>
+<h3>🏠 আমার বাড়ি</h3>
+<p>ক্লান্ত হয়ে গেছো? বাড়ি গিয়ে ঘুমাও, পরের দিন নতুন কাস্টমার আসবে।</p>
+<button class="purple" onclick="goHome()">🏠 বাড়ি গিয়ে ঘুমাও 😴</button>
+<button onclick="upgradeShop()">⬆️ দোকান আপগ্রেড করো (৫০০৳)</button>
+<div id="homeMsg"></div>
 </div>
 
-<div class="card">
-<h3>🔐 Ethical Hacking</h3>
-<p>বৈধভাবে সাইবার সিকিউরিটি শেখার পদ্ধতি।</p>
-<button onclick="showLesson('hacking')">Learn More</button>
+<div class="card"><h3>📒 হিসাব খাতা</h3><div id="log">দোকান খুলে গেছে! কাস্টমার ডাকো।</div></div>
 </div>
-
-<div class="card">
-<h3>🐧 Kali Linux</h3>
-<p>Linux Terminal ও Security Tools-এর পরিচিতি।</p>
-<button onclick="showLesson('linux')">Learn More</button>
-</div>
-
-<div class="card">
-<h3>💻 Web Security</h3>
-<p>Website, HTTPS, Browser ও Web Application Security।</p>
-<button onclick="showLesson('web')">Learn More</button>
-</div>
-
-<div class="card">
-<h3>🔑 Password Security</h3>
-<p>শক্তিশালী Password, MFA ও Account Protection।</p>
-<button onclick="showLesson('password')">Learn More</button>
-</div>
-
-<div class="card">
-<h3>💻 Computer Guide</h3>
-<p>Windows, Hardware, Software ও Programming।</p>
-<button onclick="showLesson('computer')">Learn More</button>
-</div>
-
-</div>
-</section>
-
-<section id="lessonArea" class="lesson hidden">
-<h2 id="lessonTitle"></h2>
-<div id="lessonContent"></div>
-<button onclick="document.getElementById('lessonArea').classList.add('hidden')">
-বন্ধ করুন
-</button>
-</section>
-
-<section id="internet" class="lesson">
-<h2>🌐 Internet Learning</h2>
-<p>ইন্টারনেট হলো সারা বিশ্বের বিভিন্ন নেটওয়ার্কের সংযোগব্যবস্থা।</p>
-<ul>
-<li>Internet কী?</li>
-<li>IP Address কী?</li>
-<li>DNS কীভাবে কাজ করে?</li>
-<li>Wi-Fi কী?</li>
-<li>Mobile Data কী?</li>
-<li>Router কী?</li>
-<li>VPN কী?</li>
-<li>HTTP এবং HTTPS কী?</li>
-</ul>
-</section>
-
-<section id="android" class="lesson">
-<h2>📱 Android Complete Settings</h2>
-<ul>
-<li>Network & Internet</li>
-<li>Wi-Fi Settings</li>
-<li>Bluetooth</li>
-<li>Hotspot</li>
-<li>Developer Options</li>
-<li>App Permissions</li>
-<li>Privacy & Security</li>
-<li>Location Settings</li>
-<li>Battery Settings</li>
-<li>Storage Settings</li>
-<li>Accessibility</li>
-<li>Backup & Reset</li>
-</ul>
-<p>প্রতিটি সেটিংসের কাজ, ব্যবহার এবং নিরাপত্তার প্রভাব আলাদাভাবে শেখানো হবে।</p>
-</section>
-
-<section id="iphone" class="lesson">
-<h2>🍎 iPhone Complete Guide</h2>
-<ul>
-<li>Apple ID</li>
-<li>iCloud</li>
-<li>Wi-Fi & Cellular</li>
-<li>Bluetooth</li>
-<li>Privacy & Security</li>
-<li>Face ID</li>
-<li>Location Services</li>
-<li>App Permissions</li>
-<li>Battery Health</li>
-<li>Software Update</li>
-</ul>
-</section>
-
-<section id="security" class="lesson">
-<h2>🛡️ Cyber Security Learning</h2>
-<ul>
-<li>Ethical Hacking Fundamentals</li>
-<li>Network Security</li>
-<li>Web Application Security</li>
-<li>Linux Fundamentals</li>
-<li>Password Protection</li>
-<li>Phishing Awareness</li>
-<li>Penetration Testing Fundamentals</li>
-<li>Defensive Security</li>
-</ul>
-<p>সব প্র্যাকটিস নিজের ল্যাব অথবা স্পষ্ট অনুমতিপ্রাপ্ত সিস্টেমে করতে হবে।</p>
-</section>
-
-<section class="lesson">
-<h2>📊 Learning Roadmap</h2>
-<ol>
-<li>Computer Fundamentals</li>
-<li>Internet Fundamentals</li>
-<li>Networking Basics</li>
-<li>IP Address, DNS & Ports</li>
-<li>Linux Fundamentals</li>
-<li>Python Programming</li>
-<li>Web Security</li>
-<li>Ethical Hacking</li>
-<li>Practical Security Lab</li>
-</ol>
-</section>
-
-<section id="quiz" class="quiz">
-<h2 style="color:#00ff83">🧪 Cyber Security Quiz</h2>
-<p>প্রশ্ন: DNS-এর প্রধান কাজ কী?</p>
-
-<button onclick="checkAnswer(false)">
-A. ফোন চার্জ করা
-</button>
-
-<button onclick="checkAnswer(true)">
-B. Domain Name-এর IP Address খুঁজে দেওয়া
-</button>
-
-<button onclick="checkAnswer(false)">
-C. Wi-Fi-এর গতি বাড়ানো
-</button>
-
-<p id="result"></p>
-</section>
-
-<section class="lesson">
-<h2>🔒 Security Rules</h2>
-<ul>
-<li>অন্যের অ্যাকাউন্টে অনুমতি ছাড়া প্রবেশ করবে না।</li>
-<li>অন্যের মোবাইল নিয়ন্ত্রণের চেষ্টা করবে না।</li>
-<li>নিজের Lab-এ নিরাপদে পরীক্ষা করবে।</li>
-<li>নিজের Password ও ব্যক্তিগত তথ্য সুরক্ষিত রাখবে।</li>
-</ul>
-</section>
-
-</div>
-
-<footer>
-<h3 style="color:#00ff83">DARK GUIDELINE</h3>
-<p>LEARN • EXPLORE • UNDERSTAND • PROTECT</p>
-<p>© 2026 DARK GUIDELINE. All Rights Reserved.</p>
-</footer>
 
 <script>
+let money=1000, day=1, level=1, happy=0;
+let stock={alu:10,potol:8,tomato:10,begun:8,chips:0,chanachur:0,mojo:0,speed:0};
+let prices={alu:40,potol:50,tomato:60,begun:45,chips:60,chanachur:50,mojo:55,speed:65};
+let names={alu:"🥔 আলু",potol:"🥒 পটল",tomato:"🍅 টমেটো",begun:"🍆 বেগুন",chips:"🍟 চিপস",chanachur:"🥜 চানাচুর",mojo:"🥤 মজো",speed:"⚡ স্পিড"};
+let currentCustomer=null;
 
-const lessons = {
-
-internet:{
-title:"🌐 Internet Mastery",
-content:`
-<h3>Internet কী?</h3>
-<p>ইন্টারনেট হলো বিশ্বব্যাপী নেটওয়ার্কের সংযোগব্যবস্থা।</p>
-<h3>IP Address</h3>
-<p>নেটওয়ার্কে ডিভাইস শনাক্ত করার ঠিকানা।</p>
-<h3>DNS</h3>
-<p>Domain Name-কে IP Address-এর সঙ্গে মিলিয়ে দেয়।</p>
-<h3>VPN</h3>
-<p>VPN নেটওয়ার্ক ট্রাফিককে একটি নিরাপদ টানেলের মাধ্যমে পাঠাতে পারে।</p>`
-},
-
-android:{
-title:"📱 Android Settings",
-content:`
-<h3>Android Settings</h3>
-<p>Settings অ্যাপে মোবাইলের বিভিন্ন নিয়ন্ত্রণ থাকে।</p>
-<ul>
-<li>Network: ইন্টারনেট সংযোগ।</li>
-<li>Privacy: ব্যক্তিগত তথ্যের অনুমতি।</li>
-<li>Security: ফোনের নিরাপত্তা।</li>
-<li>Battery: ব্যাটারি ব্যবস্থাপনা।</li>
-<li>Apps: অ্যাপ নিয়ন্ত্রণ।</li>
-</ul>`
-},
-
-iphone:{
-title:"🍎 iPhone Settings",
-content:`
-<h3>iPhone Settings</h3>
-<ul>
-<li>Wi-Fi: নেটওয়ার্ক সংযোগ।</li>
-<li>Apple ID: Apple Account ব্যবস্থাপনা।</li>
-<li>iCloud: Cloud Backup ও Sync।</li>
-<li>Privacy: অ্যাপের অনুমতি।</li>
-<li>Face ID: ডিভাইস আনলক ও যাচাইকরণ।</li>
-</ul>`
-},
-
-network:{
-title:"🛡️ Network Security",
-content:`
-<h3>Network Security কী?</h3>
-<p>নেটওয়ার্ক ও তার ডেটাকে অননুমোদিত প্রবেশ থেকে সুরক্ষিত রাখার পদ্ধতি।</p>
-<ul>
-<li>Firewall</li>
-<li>WPA2 ও WPA3</li>
-<li>Network Monitoring</li>
-<li>Secure Router Configuration</li>
-<li>DNS Security</li>
-</ul>`
-},
-
-hacking:{
-title:"🔐 Ethical Hacking",
-content:`
-<h3>Ethical Hacking</h3>
-<p>অনুমতি নিয়ে কোনো সিস্টেমের নিরাপত্তা পরীক্ষা করাকে Ethical Hacking বলে।</p>
-<ul>
-<li>Networking</li>
-<li>Linux</li>
-<li>Web Security</li>
-<li>Security Testing</li>
-<li>Responsible Disclosure</li>
-</ul>
-<p>অনুমতি ছাড়া কোনো সিস্টেম পরীক্ষা করা যাবে না।</p>`
-},
-
-linux:{
-title:"🐧 Linux Fundamentals",
-content:`
-<h3>Linux কী?</h3>
-<p>Linux একটি জনপ্রিয় Operating System family।</p>
-<p>প্রাথমিক কমান্ড:</p>
-<ul>
-<li><code>pwd</code> — বর্তমান অবস্থান দেখায়।</li>
-<li><code>ls</code> — ফাইলের তালিকা দেখায়।</li>
-<li><code>cd</code> — ডিরেক্টরি পরিবর্তন করে।</li>
-<li><code>whoami</code> — বর্তমান ব্যবহারকারীর নাম দেখায়।</li>
-<li><code>mkdir</code> — নতুন ফোল্ডার তৈরি করে।</li>
-</ul>`
-},
-
-web:{
-title:"💻 Web Security",
-content:`
-<h3>Website Security</h3>
-<ul>
-<li>HTTPS কী?</li>
-<li>SSL/TLS কী?</li>
-<li>Secure Login</li>
-<li>Input Validation</li>
-<li>Cross-Site Scripting সম্পর্কে ধারণা</li>
-<li>SQL Injection প্রতিরোধ</li>
-</ul>`
-},
-
-password:{
-title:"🔑 Password Security",
-content:`
-<h3>Password Protection</h3>
-<ul>
-<li>প্রতিটি অ্যাকাউন্টে আলাদা Password ব্যবহার করুন।</li>
-<li>দীর্ঘ ও অনুমান করা কঠিন Passphrase ব্যবহার করুন।</li>
-<li>MFA চালু করুন।</li>
-<li>Password Manager ব্যবহার করতে পারেন।</li>
-<li>কাউকে OTP বা Password দেবেন না।</li>
-</ul>`
-},
-
-computer:{
-title:"💻 Computer Fundamentals",
-content:`
-<h3>Computer Learning</h3>
-<ul>
-<li>Hardware</li>
-<li>Software</li>
-<li>Operating Systems</li>
-<li>Windows Settings</li>
-<li>File Management</li>
-<li>Programming Fundamentals</li>
-</ul>`
+function setShop(){
+ let n=document.getElementById('shopName').value;
+ if(!n) n="আমার বাজার";
+ document.getElementById('shopTitle').innerText="🛒 "+n;
+ document.getElementById('setupCard').classList.add('hidden');
+ addLog("🎉 "+n+" খুলে গেছে!");
+ render();
 }
-
-};
-
-function showLesson(name){
- const lesson=lessons[name];
- if(!lesson)return;
-
- document.getElementById("lessonTitle").innerHTML=lesson.title;
- document.getElementById("lessonContent").innerHTML=lesson.content;
-
- const area=document.getElementById("lessonArea");
- area.classList.remove("hidden");
- area.scrollIntoView({behavior:"smooth"});
+function render(){
+ document.getElementById('money').innerText=money;
+ document.getElementById('day').innerText=day;
+ document.getElementById('level').innerText=level;
+ document.getElementById('happy').innerText=happy;
+ let h="";
+ for(let k in stock){
+  h+=`<div class="item"><b>${names[k]}</b><br>স্টক: ${stock[k]} টা<br>দাম: <input type="number" value="${prices[k]}" onchange="prices['${k}']=parseInt(this.value)"> ৳<br><button onclick="sellQuick('${k}')">বেচো</button></div>`;
+ }
+ document.getElementById('products').innerHTML=h;
 }
+function addLog(t){ document.getElementById('log').innerHTML = "• "+t+"<br>"+document.getElementById('log').innerHTML; }
+function sellQuick(k){ if(stock[k]>0){ stock[k]--; money+=prices[k]; addLog(`${names[k]} ${prices[k]}৳ দিয়ে বিক্রি হলো`); render(); } else alert("স্টক শেষ! মোবাইল দিয়ে অর্ডার করো"); }
 
-function checkAnswer(correct){
- document.getElementById("result").innerText=
- correct?"✅ সঠিক উত্তর!":"❌ ভুল উত্তর। আবার চেষ্টা করো।";
+function newCustomer(){
+ let keys=Object.keys(stock).filter(k=>stock[k]>0);
+ if(keys.length==0){ alert("দোকানে মাল নাই! অর্ডার করো"); return; }
+ let item=keys[Math.floor(Math.random()*keys.length)];
+ let custNames=["রহিম চাচা","করিম","সখিনা আপা","জরিনা","আবুল","মিনা"];
+ let name=custNames[Math.floor(Math.random()*custNames.length)];
+ let offer=Math.floor(prices[item]*0.6);
+ currentCustomer={item,name,offer,round:0};
+ document.getElementById('customerArea').innerHTML=`
+ <div class="customer">
+ <b>${name} এসেছে 🧍</b><br>
+ আমি <b>${names[item]}</b> কিনবো। তোমার দাম ${prices[item]}৳, আমি দিবো <b>${offer}৳</b>। দিবা?<br><br>
+ <button onclick="acceptDeal()">✅ ঠিক আছে, নিয়ে যান</button>
+ <button class="orange" onclick="bargain()">😤 না, ${prices[item]}৳ ই লাগবে</button>
+ <button class="red" onclick="rejectCust()">❌ যান, দিবো না</button>
+ </div>`;
 }
-
-function searchCourses(){
- let value=document.getElementById("search").value.toLowerCase();
- let cards=document.querySelectorAll(".card");
-
- cards.forEach(card=>{
-  card.style.display=
-  card.innerText.toLowerCase().includes(value)?"block":"none";
- });
+function bargain(){
+ if(!currentCustomer) return;
+ currentCustomer.round++;
+ let c=currentCustomer;
+ let newOffer = Math.floor(c.offer + (prices[c.item]-c.offer)*0.5);
+ c.offer=newOffer;
+ if(currentCustomer.round>=2 || Math.random()>0.5){
+   document.getElementById('customerArea').innerHTML=`<div class="customer">ঠিক আছে ${newOffer}৳ তে দাও। <br><button onclick="acceptDeal()">✅ দিলাম</button> <button class="red" onclick="rejectCust()">❌ না</button></div>`;
+ } else {
+   document.getElementById('customerArea').innerHTML=`<div class="customer">আরে না ভাই, ${newOffer}৳ দিবো। এর বেশি পারবো না।<br><button onclick="acceptDeal()">✅ ঠিক আছে</button> <button class="orange" onclick="bargain()">😤 আরেকটু বাড়ান</button></div>`;
+ }
 }
-
+function acceptDeal(){
+ let c=currentCustomer; stock[c.item]--; money+=c.offer; happy++;
+ addLog(`✅ ${c.name} ${names[c.item]} কিনলো ${c.offer}৳ দিয়ে (তুমি চাইছিলা ${prices[c.item]}৳)`);
+ document.getElementById('customerArea').innerHTML=`<button class="blue" onclick="newCustomer()">আরেকজন কাস্টমার ডাকো 📢</button><p>ধন্যবাদ! কাস্টমার খুশি হয়ে চলে গেলো।</p>`;
+ currentCustomer=null; render();
+}
+function rejectCust(){
+ addLog(`❌ ${currentCustomer.name} রাগ করে চলে গেলো`);
+ document.getElementById('customerArea').innerHTML=`<button class="blue" onclick="newCustomer()">আরেকজন কাস্টমার ডাকো 📢</button>`;
+ currentCustomer=null;
+}
+function orderOnline(){
+ let v=document.getElementById('orderItem').value;
+ let cost={chips:30,chanachur:25,mojo:35,speed:40,alu:100,tomato:120}[v];
+ if(money<cost){ alert("টাকা নাই! আগে মাল বেচো"); return; }
+ money-=cost;
+ document.getElementById('orderMsg').innerHTML="অর্ডার হয়ে গেছে! ভ্যান আসতেছে...";
+ document.getElementById('van').innerHTML="🛵💨 .........";
+ setTimeout(()=>{
+   document.getElementById('van').innerHTML="🛵✅ ভ্যান চলে আসছে! মাল দিয়ে গেলো";
+   if(v=='alu') stock.alu+=5; else if(v=='tomato') stock.tomato+=5; else stock[v]+=5;
+   addLog(`🛵 ভ্যান এসে ${names[v]} দিয়ে গেলো`);
+   render();
+ },2000);
+}
+function goHome(){
+ day++; addLog(`😴 ঘুমিয়ে পরের দিন হয়ে গেলো। দিন ${day}`);
+ document.getElementById('homeMsg').innerHTML=`ঘুম থেকে উঠলা! এখন দিন ${day}। নতুন কাস্টমার আসবে।`;
+ document.getElementById('time').innerText="সকাল";
+ if(day%3==0){ level++; addLog("🎉 লেভেল আপ!"); }
+ render();
+}
+function upgradeShop(){
+ if(money>=500){ money-=500; level++; addLog("🏪 দোকান আপগ্রেড হয়ে গেছে! এখন বেশি কাস্টমার আসবে"); render(); } else alert("৫০০৳ লাগবে");
+}
+render();
 </script>
-
 </body>
 </html>
