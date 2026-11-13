@@ -3,125 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Boi Ghor - ফ্রি PDF বই ডাউনলোড</title>
-<meta name="description" content="Class 6-12 NCTB বই, ইসলামিক বই, গল্পের বই ফ্রি PDF ডাউনলোড করো">
+<title>My Choice - তোমার পছন্দের দোকান</title>
 <style>
-*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f8fafc}
-header{background:#16a34a;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
-header h1{margin:0;font-size:26px} header p{margin:5px;opacity:.9}
-.search{max-width:600px;margin:15px auto;padding:0 10px;display:flex;gap:8px}
-.search input{flex:1;padding:12px;border-radius:10px;border:1px solid #ccc;font-size:16px}
-.search button{padding:12px 20px;border:0;background:#f97316;color:#fff;border-radius:10px;font-weight:bold;cursor:pointer}
-.ad{background:#fff3cd;border:1px dashed #f59e0b;padding:12px;text-align:center;margin:10px auto;max-width:700px;border-radius:10px;font-size:13px;color:#92400e}
+*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f8fafc;padding-bottom:80px}
+header{background:#111;color:#fff;padding:12px;text-align:center;position:sticky;top:0;z-index:10}
+header h1{margin:0} header h1 span{color:#facc15}
+.topBar{display:flex;gap:8px;justify-content:center;padding:10px;background:#fff;flex-wrap:wrap;position:sticky;top:58px;z-index:9}
+.topBar button{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer}
+.topBar button.active{background:#111;color:#fff}
+.search{max-width:600px;margin:10px auto;padding:0 10px;display:flex;gap:8px}
+.search input{flex:1;padding:11px;border-radius:10px;border:1px solid #ccc}
+.search button{padding:11px 18px;border:0;background:#f97316;color:#fff;border-radius:10px;font-weight:bold}
 .container{max-width:900px;margin:auto;padding:10px}
-.cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
-.cats button{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;font-weight:bold}
-.cats button.active{background:#16a34a;color:#fff}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.banner{background:linear-gradient(90deg,#111,#7c3aed);color:#fff;padding:18px;border-radius:16px;text-align:center}
+.banner b{font-size:22px} .banner p{opacity:.9}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
 @media(max-width:600px){.grid{grid-template-columns:1fr 1fr}}
-.book{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #0001;text-align:center;padding-bottom:10px}
-.book img{width:100%;height:150px;object-fit:cover;background:#e2e8f0}
-.book h3{font-size:15px;margin:8px 5px;min-height:36px}
-.book p{font-size:12px;color:#666;margin:2px}
-.book button{border:0;padding:9px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin:3px}
-.down{background:#16a34a;color:#fff} .view{background:#3b82f6;color:#fff}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #0001;padding-bottom:10px;position:relative}
+.card img{width:100%;height:160px;object-fit:cover;background:#eee}
+.card h3{font-size:15px;margin:8px 8px 2px;min-height:36px}
+.price{font-weight:bold;font-size:18px;color:#16a34a;margin:2px 8px} .old{color:#999;text-decoration:line-through;font-size:13px;margin-left:5px}
+.card p{font-size:12px;color:#666;margin:2px 8px}
+.card button{width:calc(100% - 16px);margin:5px 8px;padding:10px;border:0;border-radius:10px;font-weight:bold;cursor:pointer}
+.buy{background:#111;color:#fff} .cartBtn{background:#facc15}
+.badge{position:absolute;top:8px;left:8px;background:#ef4444;color:#fff;padding:3px 8px;border-radius:20px;font-size:11px}
+.cartBox{background:#fff;border-radius:14px;padding:12px;margin-top:15px}
+input,select,textarea{width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #ccc}
+.payBox{background:#ffe4e6;border:2px dashed #e11d48;padding:12px;border-radius:12px;margin:10px 0}
+.payBox b{color:#be123c}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:100;padding:15px}
+.modal.open{display:flex}
+.modalIn{background:#fff;width:100%;max-width:500px;border-radius:16px;padding:16px;max-height:90vh;overflow:auto}
 .admin{background:#111;color:#fff;padding:15px;border-radius:14px;margin-top:20px}
-.admin input{width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #333}
+.admin input{background:#222;color:#fff;border-color:#444}
+.hidden{display:none}
+.orderItem{border:1px solid #eee;padding:10px;border-radius:10px;margin:6px 0;background:#f9fafb;color:#111}
 footer{background:#111;color:#aaa;text-align:center;padding:20px;font-size:13px;margin-top:20px}
 </style>
 </head>
 <body>
-<header>
-<h1>📚 PDF Boi Ghor</h1>
-<p>ফ্রি PDF বই ডাউনলোড করো - NCTB | ইসলামিক | গল্প</p>
-</header>
+<header><h1>MY <span>CHOICE</span> 🛍️</h1><p style="margin:2px">তোমার পছন্দ, তোমার দামে - ঘড়ি | সানগ্লাস | চশমা</p></header>
 
-<div class="search">
-<input id="searchBox" placeholder="বই খুঁজো... যেমন: Class 10 English" onkeyup="filterBooks()">
-<button onclick="filterBooks()">🔍 খুঁজো</button>
+<div class="topBar" id="cats">
+<button class="active" onclick="setCat('all',this)">সব</button>
+<button onclick="setCat('watch',this)">⌚ ঘড়ি</button>
+<button onclick="setCat('sunglass',this)">🕶️ সানগ্লাস</button>
+<button onclick="setCat('glass',this)">👓 চশমা</button>
+<button onclick="setCat('other',this)">🎁 অন্যান্য</button>
+<button onclick="openCart()" style="background:#facc15">🛒 কার্ট (<span id="cartCount">0</span>)</button>
+<button onclick="openAdminLogin()" style="background:#111;color:#fff">🔐 Admin</button>
 </div>
 
-<!-- GOOGLE ADSENSE জায়গা - এখানে তোমার টাকা আসবে -->
-<div class="ad">
-📢 বিজ্ঞাপনের জায়গা - Google AdSense কোড এখানে বসাবা<br>
-<small>এখানে ক্লিক হলেই তোমার টাকা আসবে</small>
-</div>
+<div class="search"><input id="searchBox" placeholder="খুঁজো... যেমন: ঘড়ি, সানগ্লাস" onkeyup="render()"><button onclick="render()">খুঁজো</button></div>
 
 <div class="container">
-<div class="cats" id="cats">
-<button class="active" onclick="setCat('all',this)">সব বই</button>
-<button onclick="setCat('nctb',this)">📗 NCTB বই</button>
-<button onclick="setCat('islamic',this)">🕌 ইসলামিক</button>
-<button onclick="setCat('golpo',this)">📖 গল্প / উপন্যাস</button>
-<button onclick="setCat('job',this)">💼 চাকরির বই</button>
+<div class="banner"><b>🔥 ঈদ অফার - ৫০% ছাড়!</b><p>আগে ডেলিভারি চার্জ দিলেই অর্ডার কনফার্ম। ক্যাশ অন ডেলিভারি।</p><p>📞 WhatsApp: 0756596482| বিকাশ: 01756596482</p></div>
+
+<div style="text-align:center;font-size:13px;margin-top:10px">মোট প্রোডাক্ট: <span id="totalP">0</span> টা | আজ অর্ডার: <span id="todayOrder">12</span> টা</div>
+
+<div class="grid" id="productGrid"></div>
+
+<!-- CART -->
+<div class="cartBox" id="cartSection">
+<h3>🛒 তোমার কার্ট</h3>
+<div id="cartList">কার্ট খালি। উপরে থেকে Add করো।</div>
+<div id="checkoutArea" class="hidden">
+<hr>
+<h3>📝 অর্ডার করার ফর্ম</h3>
+<input id="cName" placeholder="তোমার নাম *">
+<input id="cPhone" placeholder="মোবাইল নাম্বার *">
+<textarea id="cAddr" placeholder="ঠিকানা - গ্রাম, থানা, জেলা *"></textarea>
+<select id="cArea"><option value="dhaka">ঢাকার ভিতরে - ডেলিভারি ৬০৳</option><option value="outside">ঢাকার বাইরে - ডেলিভারি ১২০৳</option></select>
+
+<div class="payBox">
+<b>💸 প্রথমে ডেলিভারি চার্জ পাঠাও, তাইলেই অর্ডার কনফার্ম হবে</b><br>
+বিকাশ (Send Money): <b>01XXX-XXXXXX</b> <button onclick="copyNum('01XXX-XXXXXX')">কপি</button><br>
+নগদ (Send Money): <b>01XXX-XXXXXX</b> <button onclick="copyNum('01XXX-XXXXXX')">কপি</button><br>
+মোট ডেলিভারি চার্জ: <b id="deliveryFee">60</b>৳<br><br>
+<select id="payMethod"><option>বিকাশ</option><option>নগদ</option><option>রকেট</option></select>
+<input id="trxId" placeholder="TrxID লিখো - যেমন: 9H7X... *">
+<small>বিকাশ থেকে টাকা পাঠানোর পর যে মেসেজ আসে, ওইটায় TrxID থাকে।</small>
 </div>
 
-<div style="text-align:center;font-size:13px;color:#666">মোট বই: <span id="count">0</span> টা | আজ ডাউনলোড: <span id="todayDown">128</span></div><br>
-
-<div class="grid" id="bookGrid"></div>
-
-<div class="ad">
-📢 বিজ্ঞাপনের জায়গা ২ - ডাউনলোডের মাঝখানে<br>
-<small>এই জায়গাটায় সবচেয়ে বেশি ক্লিক হয়</small>
-</div>
-
-<!-- নিজে বই যোগ করার জায়গা -->
-<div class="admin">
-<h3>➕ নিজে বই যোগ করো (তুমি মালিক)</h3>
-<p style="font-size:12px;color:#aaa">শুধু ফ্রি / সরকারি বই দিবা। কপি করা বই দিবা না।</p>
-<input id="bTitle" placeholder="বইয়ের নাম - যেমন: Class 10 English For Today">
-<input id="bCat" placeholder="ক্যাটাগরি - nctb / islamic / golpo / job">
-<input id="bLink" placeholder="PDF লিংক - Google Drive / NCTB লিংক">
-<button style="background:#22c55e;color:#fff;border:0;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer" onclick="addBook()">বই যোগ করো ✅</button>
-<p id="adminMsg" style="color:#4ade80"></p>
+<p><b>মোট দিতে হবে এখন:</b> <span id="payNow">0</span>৳ (শুধু ডেলিভারি চার্জ) <br><b>বাকি টাকা:</b> <span id="payLater">0</span>৳ (মাল হাতে পেয়ে দিবা - Cash on Delivery)</p>
+<button style="background:#16a34a;color:#fff;border:0;padding:13px;border-radius:10px;width:100%;font-weight:bold;font-size:16px;cursor:pointer" onclick="placeOrder()">✅ অর্ডার কনফার্ম করো</button>
+<p id="orderMsg" style="color:green;font-weight:bold"></p>
 </div>
 </div>
 
-<footer>
-PDF Boi Ghor © 2026 | সব বই ফ্রি ও লিগ্যাল সোর্স থেকে নেওয়া<br>
-<a href="#" style="color:#aaa">Privacy Policy</a> | <a href="#" style="color:#aaa">Contact</a> | <a href="#" style="color:#aaa">DMCA</a>
-</footer>
+<!-- ADMIN -->
+<div class="admin" id="adminPanel">
+<h3>🔐 Admin Panel - শুধু তুমি</h3>
+<p style="font-size:12px;color:#aaa">এখানে তুমি নতুন মাল যোগ করবা। কাস্টমার এটা দেখবে না।</p>
+<div id="adminLogin">
+<input id="adminPass" type="password" placeholder="Admin পাসওয়ার্ড দাও (ডিফল্ট: 1234)">
+<button style="background:#facc15;border:0;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer" onclick="loginAdmin()">ঢুকো</button>
+</div>
+<div id="adminForm" class="hidden">
+<p>✅ তুমি Admin। এখন মাল যোগ করো।</p>
+<input id="pName" placeholder="প্রোডাক্টের নাম - যেমন: Rolex ঘড়ি কালো">
+<select id="pCat"><option value="watch">⌚ ঘড়ি</option><option value="sunglass">🕶️ সানগ্লাস</option><option value="glass">👓 চশমা</option><option value="other">🎁 অন্যান্য</option></select>
+<input id="pImg" placeholder="ছবির লিংক - Google / Facebook থেকে ছবির লিংক কপি করে দাও">
+<input id="pPrice" type="number" placeholder="দাম - যেমন: 850">
+<input id="pOld" type="number" placeholder="আগের দাম - যেমন: 1500 (ছাড় দেখানোর জন্য)">
+<input id="pDel" type="number" placeholder="ডেলিভারি চার্জ - যেমন: 60">
+<input id="pStock" type="number" placeholder="স্টক কয়টা আছে - যেমন: 10">
+<button style="background:#22c55e;border:0;padding:11px;border-radius:8px;font-weight:bold;cursor:pointer;width:100%" onclick="addProduct()">➕ প্রোডাক্ট যোগ করো</button>
+<hr>
+<h4>📦 অর্ডার লিস্ট - কে কি অর্ডার করছে</h4>
+<div id="orderList">এখনো কোনো অর্ডার নাই।</div>
+<button style="background:#ef4444;color:#fff;border:0;padding:8px 14px;border-radius:8px;cursor:pointer" onclick="clearOrders()">সব অর্ডার ডিলিট করো</button>
+<button style="background:#333;color:#fff;border:0;padding:8px 14px;border-radius:8px;cursor:pointer" onclick="changePass()">পাসওয়ার্ড বদলাও</button>
+</div>
+</div>
+</div>
+
+<footer>My Choice © 2026 | বিকাশে ডেলিভারি চার্জ পাঠিয়ে অর্ডার কনফার্ম করো | WhatsApp: 01XXX-XXXXXX</footer>
+
+<!-- PRODUCT MODAL -->
+<div class="modal" id="prodModal"><div class="modalIn"><div id="prodDetail"></div><button onclick="closeModal()" style="width:100%;padding:10px;background:#111;color:#fff;border:0;border-radius:10px;margin-top:10px">বন্ধ করো</button></div></div>
 
 <script>
-let books=[
-{title:"Class 10 - English For Today",cat:"nctb",down:5420,img:"https://via.placeholder.com/300x150/16a34a/fff?text=Class+10+English",link:"https://nctb.gov.bd"},
-{title:"Class 9-10 - গণিত বই",cat:"nctb",down:4210,img:"https://via.placeholder.com/300x150/3b82f6/fff?text=Class+10+Math",link:"https://nctb.gov.bd"},
-{title:"Class 8 - বিজ্ঞান",cat:"nctb",down:3890,img:"https://via.placeholder.com/300x150/f97316/fff?text=Class+8+Science",link:"https://nctb.gov.bd"},
-{title:"আর-রাহীকুল মাখতুম - সীরাত",cat:"islamic",down:8900,img:"https://via.placeholder.com/300x150/065f46/fff?text=Islamic+Book",link:"#"},
-{title:"প্যারাডক্সিক্যাল সাজিদ (ফ্রি স্যাম্পল)",cat:"islamic",down:6700,img:"https://via.placeholder.com/300x150/7c3aed/fff?text=Sajid",link:"#"},
-{title:"পথের পাঁচালী - বিভূতিভূষণ",cat:"golpo",down:3200,img:"https://via.placeholder.com/300x150/b45309/fff?text=Pather+Pachali",link:"#"},
-{title:"BCS প্রিলি - সাধারণ জ্ঞান",cat:"job",down:9800,img:"https://via.placeholder.com/300x150/dc2626/fff?text=BCS+Book",link:"#"},
-{title:"Class 7 - বাংলা বই",cat:"nctb",down:2100,img:"https://via.placeholder.com/300x150/0891b2/fff?text=Class+7+Bangla",link:"https://nctb.gov.bd"},
-{title:"হুমায়ূন আহমেদ - হিমু সমগ্র",cat:"golpo",down:4500,img:"https://via.placeholder.com/300x150/db2777/fff?text=Himu",link:"#"},
+let products=[
+{name:"⌚ Rolex Style ঘড়ি - কালো",cat:"watch",price:850,old:1500,del:60,stock:10,img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",badge:"HOT"},
+{name:"🕶️ Ray-Ban Style সানগ্লাস",cat:"sunglass",price:450,old:900,del:60,stock:15,img:"https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500",badge:"50% OFF"},
+{name:"👓 ফ্যাশন চশমা - ট্রান্সপারেন্ট",cat:"glass",price:350,old:600,del:60,stock:20,img:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500",badge:"NEW"},
+{name:"⌚ Smart Watch - Black",cat:"watch",price:1250,old:2000,del:120,stock:8,img:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500",badge:"BEST"},
+{name:"🕶️ UV Protection সানগ্লাস",cat:"sunglass",price:550,old:1000,del:60,stock:12,img:"https://images.unsplash.com/photo-1508296695146-257a814070b4?w=500",badge:""},
+{name:"⌚ চেইন ঘড়ি - গোল্ডেন",cat:"watch",price:950,old:1800,del:60,stock:5,img:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500",badge:"LIMITED"},
 ];
-let currentCat='all';
+let cart=[]; let orders=[]; let currentCat='all'; let adminPass="1234";
+let myBkash="01XXX-XXXXXX"; // এখানে তোমার আসল বিকাশ নাম্বার বসাবা
+
 function render(){
  let q=document.getElementById('searchBox').value.toLowerCase();
- let list=books.filter(b=>(currentCat=='all'||b.cat==currentCat) && b.title.toLowerCase().includes(q));
- document.getElementById('count').innerText=list.length;
- document.getElementById('bookGrid').innerHTML=list.map(b=>`
- <div class="book">
- <img src="${b.img}">
- <h3>${b.title}</h3>
- <p>📥 ${b.down} বার ডাউনলোড | ⭐ 4.8</p>
- <button class="view" onclick="window.open('${b.link}')">👀 পড়ো</button>
- <button class="down" onclick="downloadBook('${b.title}','${b.link}')">⬇️ ডাউনলোড</button>
- </div>`).join("") || "<p>এই নামে কোনো বই পাওয়া যায় নাই</p>";
+ let list=products.filter(p=>(currentCat=='all'||p.cat==currentCat) && p.name.toLowerCase().includes(q));
+ document.getElementById('totalP').innerText=products.length;
+ document.getElementById('productGrid').innerHTML=list.map((p,i)=>`
+ <div class="card">
+ ${p.badge?`<span class="badge">${p.badge}</span>`:""}
+ <img src="${p.img}" onclick="viewProduct(${products.indexOf(p)})">
+ <h3>${p.name}</h3>
+ <div class="price">${p.price}৳ <span class="old">${p.old}৳</span></div>
+ <p>🚚 ডেলিভারি: ${p.del}৳ | 📦 স্টক: ${p.stock} টা | ⭐ 4.8 (120)</p>
+ <button class="cartBtn" onclick="addToCart(${products.indexOf(p)})">🛒 কার্টে যোগ করো</button>
+ <button class="buy" onclick="buyNow(${products.indexOf(p)})">⚡ এখনই কিনো</button>
+ </div>`).join("") || "<p>এই নামে কিছু পাওয়া যায় নাই</p>";
+ updateCart();
 }
-function setCat(c,el){ currentCat=c; document.querySelectorAll('.cats button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); render(); }
-function filterBooks(){ render(); }
-function downloadBook(title,link){
- let d=parseInt(document.getElementById('todayDown').innerText)+1; document.getElementById('todayDown').innerText=d;
- alert("৫ সেকেন্ড বিজ্ঞাপন দেখার পর ডাউনলোড শুরু হবে...\n(এই বিজ্ঞাপন থেকেই তোমার ইনকাম)");
- setTimeout(()=>{ window.open(link); },1000);
+function setCat(c,el){ currentCat=c; document.querySelectorAll('.topBar button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); render(); }
+function viewProduct(i){ let p=products[i]; document.getElementById('prodDetail').innerHTML=`<img src="${p.img}" style="width:100%;border-radius:12px;height:250px;object-fit:cover"><h2>${p.name}</h2><p style="font-size:20px;color:#16a34a;font-weight:bold">${p.price}৳ <span style="color:#999;text-decoration:line-through;font-size:14px">${p.old}৳</span></p><p>🚚 ডেলিভারি চার্জ: ${p.del}৳<br>📦 স্টক: ${p.stock} টা<br>💸 বিকাশে আগে শুধু ডেলিভারি চার্জ দিবা, বাকি টাকা মাল হাতে পেয়ে দিবা।</p><button onclick="addToCart(${i});closeModal()" style="width:100%;padding:12px;background:#facc15;border:0;border-radius:10px;font-weight:bold">🛒 কার্টে যোগ করো</button>`; document.getElementById('prodModal').classList.add('open'); }
+function closeModal(){ document.getElementById('prodModal').classList.remove('open'); }
+function addToCart(i){ cart.push(products[i]); updateCart(); alert("কার্টে যোগ হয়ে গেছে!"); }
+function buyNow(i){ cart=[products[i]]; updateCart(); openCart(); }
+function openCart(){ document.getElementById('cartSection').scrollIntoView({behavior:'smooth'}); }
+function updateCart(){
+ document.getElementById('cartCount').innerText=cart.length;
+ if(cart.length==0){ document.getElementById('cartList').innerHTML="কার্ট খালি।"; document.getElementById('checkoutArea').classList.add('hidden'); return; }
+ let total=cart.reduce((a,b)=>a+b.price,0);
+ let del=document.getElementById('cArea').value=="dhaka"?60:120;
+ document.getElementById('deliveryFee').innerText=del;
+ document.getElementById('payNow').innerText=del;
+ document.getElementById('payLater').innerText=total;
+ document.getElementById('cartList').innerHTML=cart.map((p,idx)=>`<div style="display:flex;gap:10px;align-items:center;border:1px solid #eee;padding:8px;border-radius:10px;margin:5px 0"><img src="${p.img}" style="width:50px;height:50px;border-radius:8px;object-fit:cover"><div style="flex:1"><b>${p.name}</b><br>${p.price}৳</div><button onclick="removeCart(${idx})" style="background:red;color:#fff;border:0;padding:6px 10px;border-radius:8px">X</button></div>`).join("")+`<p><b>মোট প্রোডাক্ট দাম: ${total}৳ + ডেলিভারি ${del}৳ = ${total+del}৳</b></p>`;
+ document.getElementById('checkoutArea').classList.remove('hidden');
 }
-function addBook(){
- let t=document.getElementById('bTitle').value; let c=document.getElementById('bCat').value||"nctb"; let l=document.getElementById('bLink').value||"#";
- if(!t){alert("বইয়ের নাম দাও");return;}
- books.unshift({title:t,cat:c,down:0,img:"https://via.placeholder.com/300x150/16a34a/fff?text="+encodeURIComponent(t),link:l});
- document.getElementById('adminMsg').innerText="✅ বই যোগ হয়ে গেছে!";
- render();
+function removeCart(i){ cart.splice(i,1); updateCart(); }
+function copyNum(n){ navigator.clipboard.writeText(n); alert("নাম্বার কপি হয়ে গেছে: "+n); }
+function placeOrder(){
+ let name=document.getElementById('cName').value; let phone=document.getElementById('cPhone').value; let addr=document.getElementById('cAddr').value; let trx=document.getElementById('trxId').value;
+ if(!name||!phone||!addr||!trx){ alert("সব ঘর পূরণ করো! নাম, মোবাইল, ঠিকানা, TrxID লাগবেই"); return; }
+ let total=cart.reduce((a,b)=>a+b.price,0); let del=document.getElementById('cArea').value=="dhaka"?60:120;
+ let order={id:Date.now(),name,phone,addr,trx,items:cart.map(c=>c.name).join(", "),total:total+del,del,date:new Date().toLocaleString('bn-BD'),status:"নতুন - চেক করো"};
+ orders.unshift(order); cart=[]; updateCart();
+ document.getElementById('orderMsg').innerText=`✅ অর্ডার হয়ে গেছে! অর্ডার ID: ${order.id}. আমরা TrxID চেক করে তোমাকে কল দিবো।`;
+ document.getElementById('todayOrder').innerText=parseInt(document.getElementById('todayOrder').innerText)+1;
+ renderOrders(); alert("অর্ডার সফল! আমরা তোমাকে কল দিবো।");
 }
+function openAdminLogin(){ document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); }
+function loginAdmin(){ let p=document.getElementById('adminPass').value; if(p==adminPass){ document.getElementById('adminForm').classList.remove('hidden'); document.getElementById('adminLogin').classList.add('hidden'); alert("Admin এ ঢুকে গেছো!"); } else alert("ভুল পাসওয়ার্ড!"); }
+function addProduct(){
+ let name=document.getElementById('pName').value; let cat=document.getElementById('pCat').value; let img=document.getElementById('pImg').value||"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"; let price=parseInt(document.getElementById('pPrice').value)||0; let old=parseInt(document.getElementById('pOld').value)||price; let del=parseInt(document.getElementById('pDel').value)||60; let stock=parseInt(document.getElementById('pStock').value)||10;
+ if(!name||!price){ alert("নাম আর দাম দাও"); return; }
+ products.unshift({name,cat,img,price,old,del,stock,badge:"NEW"}); render(); alert("✅ প্রোডাক্ট যোগ হয়ে গেছে! কাস্টমার এখন দেখতে পারবে।");
+}
+function renderOrders(){ if(orders.length==0){ document.getElementById('orderList').innerHTML="এখনো কোনো অর্ডার নাই।"; return; } document.getElementById('orderList').innerHTML=orders.map(o=>`<div class="orderItem"><b>🆔 ${o.id}</b> - ${o.status}<br>👤 ${o.name} | 📞 ${o.phone}<br>📍 ${o.addr}<br>🛍️ ${o.items}<br>💸 মোট: ${o.total}৳ | TrxID: ${o.trx}<br><button onclick="confirmOrder(${o.id})" style="background:#16a34a;color:#fff;border:0;padding:6px 12px;border-radius:8px">✅ কনফার্ম করো</button> <button onclick="callCust('${o.phone}')" style="background:#111;color:#fff;border:0;padding:6px 12px;border-radius:8px">📞 কল করো</button></div>`).join(""); }
+function confirmOrder(id){ let o=orders.find(x=>x.id==id); if(o){ o.status="✅ কনফার্ম - মাল পাঠানো হচ্ছে"; renderOrders(); alert("অর্ডার কনফার্ম হয়ে গেছে!"); } }
+function callCust(ph){ window.open("tel:"+ph); }
+function clearOrders(){ orders=[]; renderOrders(); }
+function changePass(){ let np=prompt("নতুন পাসওয়ার্ড দাও"); if(np){ adminPass=np; alert("পাসওয়ার্ড বদলে গেছে: "+np); } }
+document.getElementById('cArea').addEventListener('change',updateCart);
 render();
 </script>
 </body>
