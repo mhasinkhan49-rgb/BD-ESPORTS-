@@ -3,197 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Choice - তোমার পছন্দের দোকান</title>
+<title>MY CHOICE - Daraz Style</title>
 <style>
-*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f8fafc;padding-bottom:80px}
-header{background:#111;color:#fff;padding:12px;text-align:center;position:sticky;top:0;z-index:10}
-header h1{margin:0} header h1 span{color:#facc15}
-.topBar{display:flex;gap:8px;justify-content:center;padding:10px;background:#fff;flex-wrap:wrap;position:sticky;top:58px;z-index:9}
-.topBar button{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer}
-.topBar button.active{background:#111;color:#fff}
-.search{max-width:600px;margin:10px auto;padding:0 10px;display:flex;gap:8px}
-.search input{flex:1;padding:11px;border-radius:10px;border:1px solid #ccc}
-.search button{padding:11px 18px;border:0;background:#f97316;color:#fff;border-radius:10px;font-weight:bold}
-.container{max-width:900px;margin:auto;padding:10px}
-.banner{background:linear-gradient(90deg,#111,#7c3aed);color:#fff;padding:18px;border-radius:16px;text-align:center}
-.banner b{font-size:22px} .banner p{opacity:.9}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
-@media(max-width:600px){.grid{grid-template-columns:1fr 1fr}}
-.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #0001;padding-bottom:10px;position:relative}
-.card img{width:100%;height:160px;object-fit:cover;background:#eee}
-.card h3{font-size:15px;margin:8px 8px 2px;min-height:36px}
-.price{font-weight:bold;font-size:18px;color:#16a34a;margin:2px 8px} .old{color:#999;text-decoration:line-through;font-size:13px;margin-left:5px}
-.card p{font-size:12px;color:#666;margin:2px 8px}
-.card button{width:calc(100% - 16px);margin:5px 8px;padding:10px;border:0;border-radius:10px;font-weight:bold;cursor:pointer}
-.buy{background:#111;color:#fff} .cartBtn{background:#facc15}
-.badge{position:absolute;top:8px;left:8px;background:#ef4444;color:#fff;padding:3px 8px;border-radius:20px;font-size:11px}
-.cartBox{background:#fff;border-radius:14px;padding:12px;margin-top:15px}
-input,select,textarea{width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #ccc}
-.payBox{background:#ffe4e6;border:2px dashed #e11d48;padding:12px;border-radius:12px;margin:10px 0}
-.payBox b{color:#be123c}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:100;padding:15px}
+*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f5f5f5;padding-bottom:70px}
+.top{position:sticky;top:0;z-index:20;background:#fff;padding:8px}
+.search{display:flex;gap:6px;border:2px solid #f85606;border-radius:10px;overflow:hidden;background:#fff}
+.search input{flex:1;border:0;padding:10px;outline:none;font-size:15px}
+.search .cam{font-size:22px;padding:6px}
+.search button{background:#f85606;color:#fff;border:0;padding:0 18px;font-weight:bold}
+.tabs{display:flex;gap:14px;overflow:auto;padding:10px 8px;background:#fff;white-space:nowrap;font-weight:bold;font-size:14px}
+.tabs span{padding-bottom:4px} .tabs .on{color:#f85606;border-bottom:3px solid #f85606}
+.banner{background:linear-gradient(90deg,#7c3aed,#f85606);color:#fff;padding:12px;text-align:center;border-radius:10px;margin:8px}
+.banner b{font-size:18px}
+.section{background:#fff;margin:8px 0;padding:10px}
+.secHead{display:flex;justify-content:space-between;align-items:center}
+.secHead b{font-size:18px} .secHead span{color:#7c3aed;font-size:13px;font-weight:bold}
+.flash{display:flex;gap:10px;overflow:auto}
+.flash .f{width:32%;flex-shrink:0}
+.flash img,.grid img{width:100%;height:130px;object-fit:cover;border-radius:8px}
+.price{color:#f85606;font-weight:bold;font-size:16px} .off{color:#f85606;background:#ffe1d2;padding:2px 5px;border-radius:5px;font-size:11px;font-weight:bold;margin-left:5px}
+.rank{display:flex;gap:10px;overflow:auto}
+.rank .r{width:130px;flex-shrink:0;background:#fff7ed;border-radius:10px;padding:6px;text-align:center;position:relative}
+.rank .r img{height:100px}
+.rank .num{position:absolute;top:35px;left:8px;background:gold;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:bold;border:2px solid red}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#fff;border-radius:10px;padding:8px;position:relative}
+.card .tag{position:absolute;bottom:72px;left:0;display:flex;font-size:10px;font-weight:bold;color:#fff}
+.tag span{padding:3px 5px} .tag .g{background:#0a8a5a} .tag .p{background:#ff005c}
+.rate{font-size:12px;color:#666}
+button{cursor:pointer}
+.btn{width:100%;padding:10px;border:0;border-radius:8px;font-weight:bold;margin-top:5px}
+.buy{background:#ffb800} .add{background:#f85606;color:#fff}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #ddd;z-index:30}
+.bottom div{text-align:center;font-size:12px}
+.bottom .active{color:#f85606;font-weight:bold}
+.modal{position:fixed;inset:0;background:#0008;display:none;z-index:100;align-items:flex-end}
 .modal.open{display:flex}
-.modalIn{background:#fff;width:100%;max-width:500px;border-radius:16px;padding:16px;max-height:90vh;overflow:auto}
-.admin{background:#111;color:#fff;padding:15px;border-radius:14px;margin-top:20px}
-.admin input{background:#222;color:#fff;border-color:#444}
+.sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:12px}
+.detailImg{width:100%;height:280px;object-fit:cover;border-radius:10px}
+.checkRow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}
+.payOpt{border:1px solid #ddd;padding:10px;border-radius:10px;margin:6px 0;display:flex;gap:10px;align-items:center}
+.payOpt.sel{border-color:#f85606;background:#fff7ed}
+input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin:5px 0}
+.admin{background:#111;color:#fff;padding:12px;border-radius:12px;margin:10px}
+.admin input{background:#222;color:#fff}
 .hidden{display:none}
-.orderItem{border:1px solid #eee;padding:10px;border-radius:10px;margin:6px 0;background:#f9fafb;color:#111}
-footer{background:#111;color:#aaa;text-align:center;padding:20px;font-size:13px;margin-top:20px}
+.bkashBox{background:#ffe4e6;border:2px dashed #e11d48;padding:12px;border-radius:12px;margin:10px 0;text-align:center}
+.bkashBox b{color:#be123c;font-size:20px}
 </style>
 </head>
 <body>
-<header><h1>MY <span>CHOICE</span> 🛍️</h1><p style="margin:2px">তোমার পছন্দ, তোমার দামে - ঘড়ি | সানগ্লাস | চশমা</p></header>
 
-<div class="topBar" id="cats">
-<button class="active" onclick="setCat('all',this)">সব</button>
-<button onclick="setCat('watch',this)">⌚ ঘড়ি</button>
-<button onclick="setCat('sunglass',this)">🕶️ সানগ্লাস</button>
-<button onclick="setCat('glass',this)">👓 চশমা</button>
-<button onclick="setCat('other',this)">🎁 অন্যান্য</button>
-<button onclick="openCart()" style="background:#facc15">🛒 কার্ট (<span id="cartCount">0</span>)</button>
-<button onclick="openAdminLogin()" style="background:#111;color:#fff">🔐 Admin</button>
+<div class="top">
+<div class="search"><input id="searchBox" placeholder="football chest belt / t800 ultra / ledis watch" onkeyup="render()"><span class="cam">📷</span><button>Search</button></div>
 </div>
 
-<div class="search"><input id="searchBox" placeholder="খুঁজো... যেমন: ঘড়ি, সানগ্লাস" onkeyup="render()"><button onclick="render()">খুঁজো</button></div>
-
-<div class="container">
-<div class="banner"><b>🔥 ঈদ অফার - ৫০% ছাড়!</b><p>আগে ডেলিভারি চার্জ দিলেই অর্ডার কনফার্ম। ক্যাশ অন ডেলিভারি।</p><p>📞 WhatsApp: 0756596482| বিকাশ: 01756596482</p></div>
-
-<div style="text-align:center;font-size:13px;margin-top:10px">মোট প্রোডাক্ট: <span id="totalP">0</span> টা | আজ অর্ডার: <span id="todayOrder">12</span> টা</div>
-
-<div class="grid" id="productGrid"></div>
-
-<!-- CART -->
-<div class="cartBox" id="cartSection">
-<h3>🛒 তোমার কার্ট</h3>
-<div id="cartList">কার্ট খালি। উপরে থেকে Add করো।</div>
-<div id="checkoutArea" class="hidden">
-<hr>
-<h3>📝 অর্ডার করার ফর্ম</h3>
-<input id="cName" placeholder="তোমার নাম *">
-<input id="cPhone" placeholder="মোবাইল নাম্বার *">
-<textarea id="cAddr" placeholder="ঠিকানা - গ্রাম, থানা, জেলা *"></textarea>
-<select id="cArea"><option value="dhaka">ঢাকার ভিতরে - ডেলিভারি ৬০৳</option><option value="outside">ঢাকার বাইরে - ডেলিভারি ১২০৳</option></select>
-
-<div class="payBox">
-<b>💸 প্রথমে ডেলিভারি চার্জ পাঠাও, তাইলেই অর্ডার কনফার্ম হবে</b><br>
-বিকাশ (Send Money): <b>01XXX-XXXXXX</b> <button onclick="copyNum('01XXX-XXXXXX')">কপি</button><br>
-নগদ (Send Money): <b>01XXX-XXXXXX</b> <button onclick="copyNum('01XXX-XXXXXX')">কপি</button><br>
-মোট ডেলিভারি চার্জ: <b id="deliveryFee">60</b>৳<br><br>
-<select id="payMethod"><option>বিকাশ</option><option>নগদ</option><option>রকেট</option></select>
-<input id="trxId" placeholder="TrxID লিখো - যেমন: 9H7X... *">
-<small>বিকাশ থেকে টাকা পাঠানোর পর যে মেসেজ আসে, ওইটায় TrxID থাকে।</small>
+<div class="tabs" id="tabs">
+<span class="on" onclick="setTab('foryou',this)">🔥 For You</span><span onclick="setTab('mega',this)">🧡 Mega Deals</span><span onclick="setTab('voucher',this)">🎟️ Voucher Max</span><span onclick="setTab('fast',this)">🚚 Fast Delivery</span><span onclick="setTab('flash',this)">⚡ Flash Sale</span>
 </div>
 
-<p><b>মোট দিতে হবে এখন:</b> <span id="payNow">0</span>৳ (শুধু ডেলিভারি চার্জ) <br><b>বাকি টাকা:</b> <span id="payLater">0</span>৳ (মাল হাতে পেয়ে দিবা - Cash on Delivery)</p>
-<button style="background:#16a34a;color:#fff;border:0;padding:13px;border-radius:10px;width:100%;font-weight:bold;font-size:16px;cursor:pointer" onclick="placeOrder()">✅ অর্ডার কনফার্ম করো</button>
-<p id="orderMsg" style="color:green;font-weight:bold"></p>
+<div class="banner"><b>MY CHOICE - 11.11 Super Offer</b><br>UP TO 80% OFF | বিকাশ: 01756596482 <span id="timer" style="background:#fff;color:#f85606;padding:2px 8px;border-radius:10px;font-weight:bold">End in 08:02:09</span></div>
+
+<div class="section">
+<div class="secHead"><b>Flash ⚡ Sale</b><span>11.11 Shop More ></span></div>
+<div class="flash" id="flashRow"></div>
+</div>
+
+<div class="section">
+<div class="secHead"><b>Top <span style="color:#f85606">Ranking</span></b><span>11.11 Discover More ></span></div>
+<div class="rank">
+<div class="r"><span class="num">1</span><b>Over-the-Ear Headphones</b><br><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300"><br>⭐ 4.8</div>
+<div class="r"><span class="num">1</span><b>Feature Phones</b><br><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300"><br>⭐ 4.5</div>
+<div class="r"><span class="num">1</span><b>Oil & Ghee</b><br><img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300"><br>⭐ 4.9</div>
+<div class="r"><span class="num">1</span><b>Chips & Snacks</b><br><img src="https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=300"><br>⭐ 4.7</div>
 </div>
 </div>
 
-<!-- ADMIN -->
-<div class="admin" id="adminPanel">
-<h3>🔐 Admin Panel - শুধু তুমি</h3>
-<p style="font-size:12px;color:#aaa">এখানে তুমি নতুন মাল যোগ করবা। কাস্টমার এটা দেখবে না।</p>
-<div id="adminLogin">
-<input id="adminPass" type="password" placeholder="Admin পাসওয়ার্ড দাও (ডিফল্ট: 1234)">
-<button style="background:#facc15;border:0;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer" onclick="loginAdmin()">ঢুকো</button>
+<div class="section">
+<div class="secHead"><b>For You - তোমার জন্য</b><span id="totalP"></span></div>
+<div class="grid" id="grid"></div>
 </div>
+
+<div style="padding:10px">
+<div class="admin">
+<h3>🔐 Admin Panel - শুধু তুমি (পাসওয়ার্ড: 1234)</h3>
+<input id="adminPass" type="password" placeholder="পাসওয়ার্ড দাও">
+<button onclick="loginAdmin()" style="background:#facc15;border:0;padding:10px 16px;border-radius:8px;font-weight:bold">ঢুকো</button>
 <div id="adminForm" class="hidden">
-<p>✅ তুমি Admin। এখন মাল যোগ করো।</p>
-<input id="pName" placeholder="প্রোডাক্টের নাম - যেমন: Rolex ঘড়ি কালো">
-<select id="pCat"><option value="watch">⌚ ঘড়ি</option><option value="sunglass">🕶️ সানগ্লাস</option><option value="glass">👓 চশমা</option><option value="other">🎁 অন্যান্য</option></select>
-<input id="pImg" placeholder="ছবির লিংক - Google / Facebook থেকে ছবির লিংক কপি করে দাও">
-<input id="pPrice" type="number" placeholder="দাম - যেমন: 850">
-<input id="pOld" type="number" placeholder="আগের দাম - যেমন: 1500 (ছাড় দেখানোর জন্য)">
-<input id="pDel" type="number" placeholder="ডেলিভারি চার্জ - যেমন: 60">
-<input id="pStock" type="number" placeholder="স্টক কয়টা আছে - যেমন: 10">
-<button style="background:#22c55e;border:0;padding:11px;border-radius:8px;font-weight:bold;cursor:pointer;width:100%" onclick="addProduct()">➕ প্রোডাক্ট যোগ করো</button>
+<input id="pName" placeholder="প্রোডাক্ট নাম - যেমন: T800 Ultra Watch">
+<input id="pImg" placeholder="ছবির লিংক">
+<input id="pPrice" type="number" placeholder="দাম - 459">
+<input id="pOld" type="number" placeholder="আগের দাম - 1200">
+<input id="pSold" type="number" placeholder="কতটা বিক্রি দেখাবে - 1.4k">
+<select id="pCat"><option value="watch">ঘড়ি</option><option value="sunglass">সানগ্লাস</option><option value="shoe">জুতা</option><option value="headphone">হেডফোন</option><option value="other">অন্যান্য</option></select>
+<button onclick="addProduct()" style="background:#22c55e;border:0;padding:11px;width:100%;border-radius:8px;font-weight:bold">➕ প্রোডাক্ট যোগ করো</button>
 <hr>
-<h4>📦 অর্ডার লিস্ট - কে কি অর্ডার করছে</h4>
-<div id="orderList">এখনো কোনো অর্ডার নাই।</div>
-<button style="background:#ef4444;color:#fff;border:0;padding:8px 14px;border-radius:8px;cursor:pointer" onclick="clearOrders()">সব অর্ডার ডিলিট করো</button>
-<button style="background:#333;color:#fff;border:0;padding:8px 14px;border-radius:8px;cursor:pointer" onclick="changePass()">পাসওয়ার্ড বদলাও</button>
+<h4>📦 অর্ডার লিস্ট</h4><div id="orderList">এখনো অর্ডার নাই</div>
 </div>
 </div>
 </div>
 
-<footer>My Choice © 2026 | বিকাশে ডেলিভারি চার্জ পাঠিয়ে অর্ডার কনফার্ম করো | WhatsApp: 01XXX-XXXXXX</footer>
+<div class="bottom">
+<div class="active" onclick="showPage('home')">🏠<br>Home</div>
+<div onclick="showPage('msg')">💬<br>Messages <span style="background:red;color:#fff;border-radius:50%;padding:0 5px">3</span></div>
+<div onclick="showPage('offer')" style="background:#ffb800;border-radius:50%;width:50px;height:50px;margin-top:-20px;display:flex;align-items:center;justify-content:center;font-weight:bold">UP TO<br>50% OFF</div>
+<div onclick="openCart()">🛒<br>Cart <span id="cartCount">0</span></div>
+<div onclick="showPage('account')">👤<br>Account</div>
+</div>
 
-<!-- PRODUCT MODAL -->
-<div class="modal" id="prodModal"><div class="modalIn"><div id="prodDetail"></div><button onclick="closeModal()" style="width:100%;padding:10px;background:#111;color:#fff;border:0;border-radius:10px;margin-top:10px">বন্ধ করো</button></div></div>
+<div class="modal" id="detailModal"><div class="sheet"><div id="detailBox"></div><button onclick="closeModal('detailModal')" style="width:100%;padding:10px;margin-top:10px">বন্ধ করো</button></div></div>
+<div class="modal" id="cartModal"><div class="sheet"><div id="cartBox"></div><button onclick="closeModal('cartModal')" style="width:100%;padding:10px;margin-top:10px">বন্ধ করো</button></div></div>
 
 <script>
 let products=[
-{name:"⌚ Rolex Style ঘড়ি - কালো",cat:"watch",price:850,old:1500,del:60,stock:10,img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",badge:"HOT"},
-{name:"🕶️ Ray-Ban Style সানগ্লাস",cat:"sunglass",price:450,old:900,del:60,stock:15,img:"https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500",badge:"50% OFF"},
-{name:"👓 ফ্যাশন চশমা - ট্রান্সপারেন্ট",cat:"glass",price:350,old:600,del:60,stock:20,img:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500",badge:"NEW"},
-{name:"⌚ Smart Watch - Black",cat:"watch",price:1250,old:2000,del:120,stock:8,img:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500",badge:"BEST"},
-{name:"🕶️ UV Protection সানগ্লাস",cat:"sunglass",price:550,old:1000,del:60,stock:12,img:"https://images.unsplash.com/photo-1508296695146-257a814070b4?w=500",badge:""},
-{name:"⌚ চেইন ঘড়ি - গোল্ডেন",cat:"watch",price:950,old:1800,del:60,stock:5,img:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500",badge:"LIMITED"},
+{name:"T900 Ultra 2 Full Touch Watch",price:459,old:1200,rating:"4.7 (254)",sold:"1.4k Sold",img:"https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500",cat:"watch",free:true},
+{name:"BOYA BY M1 Microphone",price:361,old:500,rating:"4.5 (2)",sold:"200 Sold",img:"https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500",cat:"other",free:true},
+{name:"Mobile Gaming Headphone",price:245,old:1200,rating:"4.1 (539)",sold:"2.1k Sold",img:"https://images.unsplash.com/photo-1599669454699-248893623440?w=500",cat:"headphone",free:true},
+{name:"New Men Kids Soccer Shoes",price:459,old:700,rating:"4.3 (12)",sold:"50 Sold",img:"https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500",cat:"shoe",free:true},
+{name:"New Women Watch - Pink",price:102,old:580,rating:"4.8 (90)",sold:"500 Sold",img:"https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500",cat:"watch",free:true},
+{name:"Cute Cat Ear Wireless Headphones",price:383,old:900,rating:"4.9 (120)",sold:"800 Sold",img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",cat:"headphone",free:true},
+{name:"Premium Sunglass - Spot",price:229,old:400,rating:"4.5 (6)",sold:"45 Sold",img:"https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500",cat:"sunglass",free:true},
+{name:"M25 Bluetooth Earbuds",price:370,old:800,rating:"4.5 (211)",sold:"932 Sold",img:"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500",cat:"headphone",free:true},
 ];
-let cart=[]; let orders=[]; let currentCat='all'; let adminPass="1234";
-let myBkash="01XXX-XXXXXX"; // এখানে তোমার আসল বিকাশ নাম্বার বসাবা
+let cart=[]; let orders=[]; let adminPass="1234"; let curTab='foryou'; let selectedPay='Cash on Delivery';
+let bkashNum="01756596482";
 
+function calcOff(p){ return Math.round((1-p.price/p.old)*100); }
 function render(){
  let q=document.getElementById('searchBox').value.toLowerCase();
- let list=products.filter(p=>(currentCat=='all'||p.cat==currentCat) && p.name.toLowerCase().includes(q));
- document.getElementById('totalP').innerText=products.length;
- document.getElementById('productGrid').innerHTML=list.map((p,i)=>`
- <div class="card">
- ${p.badge?`<span class="badge">${p.badge}</span>`:""}
- <img src="${p.img}" onclick="viewProduct(${products.indexOf(p)})">
- <h3>${p.name}</h3>
- <div class="price">${p.price}৳ <span class="old">${p.old}৳</span></div>
- <p>🚚 ডেলিভারি: ${p.del}৳ | 📦 স্টক: ${p.stock} টা | ⭐ 4.8 (120)</p>
- <button class="cartBtn" onclick="addToCart(${products.indexOf(p)})">🛒 কার্টে যোগ করো</button>
- <button class="buy" onclick="buyNow(${products.indexOf(p)})">⚡ এখনই কিনো</button>
- </div>`).join("") || "<p>এই নামে কিছু পাওয়া যায় নাই</p>";
- updateCart();
-}
-function setCat(c,el){ currentCat=c; document.querySelectorAll('.topBar button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); render(); }
-function viewProduct(i){ let p=products[i]; document.getElementById('prodDetail').innerHTML=`<img src="${p.img}" style="width:100%;border-radius:12px;height:250px;object-fit:cover"><h2>${p.name}</h2><p style="font-size:20px;color:#16a34a;font-weight:bold">${p.price}৳ <span style="color:#999;text-decoration:line-through;font-size:14px">${p.old}৳</span></p><p>🚚 ডেলিভারি চার্জ: ${p.del}৳<br>📦 স্টক: ${p.stock} টা<br>💸 বিকাশে আগে শুধু ডেলিভারি চার্জ দিবা, বাকি টাকা মাল হাতে পেয়ে দিবা।</p><button onclick="addToCart(${i});closeModal()" style="width:100%;padding:12px;background:#facc15;border:0;border-radius:10px;font-weight:bold">🛒 কার্টে যোগ করো</button>`; document.getElementById('prodModal').classList.add('open'); }
-function closeModal(){ document.getElementById('prodModal').classList.remove('open'); }
-function addToCart(i){ cart.push(products[i]); updateCart(); alert("কার্টে যোগ হয়ে গেছে!"); }
-function buyNow(i){ cart=[products[i]]; updateCart(); openCart(); }
-function openCart(){ document.getElementById('cartSection').scrollIntoView({behavior:'smooth'}); }
-function updateCart(){
+ let list=products.filter(p=>p.name.toLowerCase().includes(q));
+ document.getElementById('totalP').innerText=list.length+" টা প্রোডাক্ট";
+ document.getElementById('flashRow').innerHTML=products.slice(0,3).map((p,i)=>`<div class="f" onclick="openDetail(${products.indexOf(p)})"><img src="${p.img}"><div><span class="price">৳${p.price}</span><span class="off">-${calcOff(p)}%</span></div></div>`).join("");
+ document.getElementById('grid').innerHTML=list.map((p,i)=>{
+  let idx=products.indexOf(p);
+  return `<div class="card" onclick="openDetail(${idx})">
+  <img src="${p.img}">
+  <div class="tag"><span class="g">FREE DELIVERY</span><span class="p">VOUCHER MAX</span></div>
+  <div><b>11.11</b> ${p.name}</div>
+  <div><span class="price">৳${p.price}</span><span class="off">-${calcOff(p)}%</span></div>
+  <div style="font-size:11px;background:#fff7ed;display:inline-block;padding:2px 5px;border-radius:5px">Coins save ৳${Math.floor(p.price/100)}</div>
+  <div class="rate">⭐ ${p.rating} | ${p.sold}</div>
+  <button class="buy" onclick="event.stopPropagation();buyNow(${idx})">Buy Now</button>
+  <button class="add" onclick="event.stopPropagation();addCart(${idx})">Add to Cart</button>
+  </div>`}).join("");
  document.getElementById('cartCount').innerText=cart.length;
- if(cart.length==0){ document.getElementById('cartList').innerHTML="কার্ট খালি।"; document.getElementById('checkoutArea').classList.add('hidden'); return; }
- let total=cart.reduce((a,b)=>a+b.price,0);
- let del=document.getElementById('cArea').value=="dhaka"?60:120;
- document.getElementById('deliveryFee').innerText=del;
- document.getElementById('payNow').innerText=del;
- document.getElementById('payLater').innerText=total;
- document.getElementById('cartList').innerHTML=cart.map((p,idx)=>`<div style="display:flex;gap:10px;align-items:center;border:1px solid #eee;padding:8px;border-radius:10px;margin:5px 0"><img src="${p.img}" style="width:50px;height:50px;border-radius:8px;object-fit:cover"><div style="flex:1"><b>${p.name}</b><br>${p.price}৳</div><button onclick="removeCart(${idx})" style="background:red;color:#fff;border:0;padding:6px 10px;border-radius:8px">X</button></div>`).join("")+`<p><b>মোট প্রোডাক্ট দাম: ${total}৳ + ডেলিভারি ${del}৳ = ${total+del}৳</b></p>`;
- document.getElementById('checkoutArea').classList.remove('hidden');
 }
-function removeCart(i){ cart.splice(i,1); updateCart(); }
-function copyNum(n){ navigator.clipboard.writeText(n); alert("নাম্বার কপি হয়ে গেছে: "+n); }
-function placeOrder(){
+function setTab(t,el){ curTab=t; document.querySelectorAll('.tabs span').forEach(s=>s.classList.remove('on')); el.classList.add('on'); render(); }
+function openDetail(i){ let p=products[i]; document.getElementById('detailBox').innerHTML=`
+<img class="detailImg" src="${p.img}">
+<div style="background:#7c3aed;color:#fff;padding:10px;border-radius:8px;display:flex;justify-content:space-between"><div><div style="font-size:12px">৳241 off with Promo</div><b style="font-size:24px">৳ ${p.price}</b> <span style="text-decoration:line-through;opacity:.7">৳${p.old}</span></div><div style="text-align:right"><b>11.11 BIGGEST SALE</b><br><small>End in 8 days</small></div></div>
+<p style="background:#ffe4e6;display:inline-block;padding:4px 8px;border-radius:6px;font-size:12px;color:#e11d48;font-weight:bold">Extra 10% OFF ></p>
+<h3>${p.name}</h3>
+<p>⭐ ${p.rating} | ${p.sold} &nbsp; ❤️</p>
+<p>✅ 14 days easy return<br>📦 Guaranteed by 18-20 Nov - Standard Delivery<br>🎨 Color: Multicolor</p>
+<div class="bkashBox">💸 বিকাশে ডেলিভারি চার্জ পাঠাও<br><b>${bkashNum}</b><br><button onclick="copyBkash()" style="background:#e11d48;color:#fff;border:0;padding:8px 16px;border-radius:8px;margin-top:5px">নাম্বার কপি করো</button><br><small>Send Money করবা, তারপর TrxID দিবা</small></div>
+<div style="display:flex;gap:8px"><button onclick="buyNow(${i});closeModal('detailModal')" style="flex:1;background:#ffb800;border:0;padding:13px;border-radius:8px;font-weight:bold;font-size:16px">Buy Now<br>৳ ${p.price}</button><button onclick="addCart(${i});closeModal('detailModal')" style="flex:1;background:#f85606;color:#fff;border:0;padding:13px;border-radius:8px;font-weight:bold;font-size:16px">Add to Cart</button></div>
+<p style="font-size:12px;color:#666">Store: My Choice Official | বিকাশ: ${bkashNum}</p>
+`; document.getElementById('detailModal').classList.add('open'); }
+function copyBkash(){ navigator.clipboard.writeText(bkashNum); alert("বিকাশ নাম্বার কপি হয়ে গেছে: "+bkashNum); }
+function addCart(i){ cart.push(products[i]); render(); alert("Cart এ যোগ হয়ে গেছে!"); }
+function buyNow(i){ cart=[products[i]]; render(); openCart(); }
+function openCart(){
+ let sub=cart.reduce((a,b)=>a+b.price,0);
+ let disc=Math.round(sub*0.15); let ship=cart.length?80:0; let platform=5; let codFee=20;
+ let total=sub - disc + ship + 25 + platform + codFee;
+ if(cart.length==0) total=0;
+ document.getElementById('cartBox').innerHTML=`
+ <h3>🛒 Checkout - Only ${cart.length} item(s) in stock</h3>
+ ${cart.length==0?"<p>Cart খালি। প্রোডাক্ট Add করো।</p>":cart.map((p,idx)=>`<div style="display:flex;gap:10px;border:1px solid #eee;padding:8px;border-radius:10px"><img src="${p.img}" style="width:70px;height:70px;border-radius:8px;object-fit:cover"><div style="flex:1"><b>My Choice</b><br>${p.name}<br><b>৳${p.price}</b> <span style="text-decoration:line-through;color:#999">৳${p.old}</span></div><button onclick="removeCart(${idx})">X</button></div>`).join("")}
+ <h4>Payment Methods</h4>
+ ${['Cash on Delivery','Credit/Debit Card','Save bKash Account','Nagad'].map(m=>`<div class="payOpt ${selectedPay==m?'sel':''}" onclick="selectPay('${m}')"><input type="radio" ${selectedPay==m?'checked':''} style="width:auto"> <b>${m}</b> <span style="font-size:12px;color:#666">${m=='Cash on Delivery'?'Cash on Delivery includes a handling fee':m=='Save bKash Account'?'বিকাশ: '+bkashNum:''}</span></div>`).join("")}
+ <div class="bkashBox">💸 <b>বিকাশ Send Money: ${bkashNum}</b><br><button onclick="copyBkash()" style="background:#e11d48;color:#fff;border:0;padding:8px 16px;border-radius:8px">কপি করো</button><br><small>আগে ডেলিভারি চার্জ পাঠাও, তাইলেই অর্ডার কনফার্ম হবে</small></div>
+ <input id="cName" placeholder="তোমার নাম *">
+ <input id="cPhone" placeholder="মোবাইল নাম্বার *">
+ <textarea id="cAddr" placeholder="ঠিকানা - গ্রাম, থানা, জেলা *"></textarea>
+ <input id="trxId" placeholder="বিকাশ TrxID দাও - যেমন: 9H7X... (COD হলে লাগবে না)">
+ <h4>Order Summary</h4>
+ <div class="checkRow"><span>Merchandise Subtotal</span><b>৳ ${sub}</b></div>
+ <div class="checkRow"><span>Discount</span><b style="color:#f85606">-৳ ${disc}</b></div>
+ <div class="checkRow"><span>Voucher & Code</span><b style="color:#f85606">-৳ ${disc} ></b></div>
+ <div class="checkRow"><span>Shipping Fee Total</span><b><span style="background:#d1fae5;padding:2px 5px;border-radius:5px;font-size:12px">Saved ৳95</span> ৳ ${ship} ></b></div>
+ <div class="checkRow"><span>Other Fees</span><b>৳ 25</b></div>
+ <div class="checkRow"><span>Platform Fee</span><b>৳ ${platform}</b></div>
+ <div class="checkRow"><span>Cash Payment Fee</span><b>৳ ${codFee}</b></div>
+ <div class="checkRow" style="font-size:18px"><span><b>Total</b> <small>VAT included</small></span><b>৳ ${total}</b></div>
+ <p style="text-align:center;color:#f85606">Total Saving ৳ ${disc+95}</p>
+ <button onclick="placeOrder(${total})" style="width:100%;background:#f85606;color:#fff;border:0;padding:14px;border-radius:8px;font-weight:bold;font-size:18px">Place Order &nbsp;&nbsp; ৳ ${total}</button>
+ `;
+ document.getElementById('cartModal').classList.add('open');
+}
+function selectPay(m){ selectedPay=m; openCart(); }
+function removeCart(i){ cart.splice(i,1); render(); openCart(); }
+function placeOrder(total){
  let name=document.getElementById('cName').value; let phone=document.getElementById('cPhone').value; let addr=document.getElementById('cAddr').value; let trx=document.getElementById('trxId').value;
- if(!name||!phone||!addr||!trx){ alert("সব ঘর পূরণ করো! নাম, মোবাইল, ঠিকানা, TrxID লাগবেই"); return; }
- let total=cart.reduce((a,b)=>a+b.price,0); let del=document.getElementById('cArea').value=="dhaka"?60:120;
- let order={id:Date.now(),name,phone,addr,trx,items:cart.map(c=>c.name).join(", "),total:total+del,del,date:new Date().toLocaleString('bn-BD'),status:"নতুন - চেক করো"};
- orders.unshift(order); cart=[]; updateCart();
- document.getElementById('orderMsg').innerText=`✅ অর্ডার হয়ে গেছে! অর্ডার ID: ${order.id}. আমরা TrxID চেক করে তোমাকে কল দিবো।`;
- document.getElementById('todayOrder').innerText=parseInt(document.getElementById('todayOrder').innerText)+1;
- renderOrders(); alert("অর্ডার সফল! আমরা তোমাকে কল দিবো।");
+ if(!name||!phone||!addr){ alert("নাম, মোবাইল, ঠিকানা দাও!"); return; }
+ let o={id:Date.now(),name,phone,addr,trx,items:cart.map(c=>c.name).join(", "),total,pay:selectedPay,status:"নতুন"};
+ orders.unshift(o); cart=[]; render(); renderOrders(); closeModal('cartModal'); alert("✅ অর্ডার হয়ে গেছে! ID: "+o.id+" - বিকাশে টাকা আসছে কিনা চেক করে আমরা কল দিবো। বিকাশ: "+bkashNum);
 }
-function openAdminLogin(){ document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); }
-function loginAdmin(){ let p=document.getElementById('adminPass').value; if(p==adminPass){ document.getElementById('adminForm').classList.remove('hidden'); document.getElementById('adminLogin').classList.add('hidden'); alert("Admin এ ঢুকে গেছো!"); } else alert("ভুল পাসওয়ার্ড!"); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function showPage(p){ if(p=='home') window.scrollTo({top:0,behavior:'smooth'}); if(p=='msg') alert("Messages: কাস্টমার জিজ্ঞেস করছে: দাম কত? বিকাশ নাম্বার কোনটা?"); if(p=='account') alert("Account: My Choice - বিকাশ: "+bkashNum); if(p=='offer') alert("50% OFF অফার চলতেছে!"); }
+function loginAdmin(){ if(document.getElementById('adminPass').value==adminPass){ document.getElementById('adminForm').classList.remove('hidden'); alert("Admin এ ঢুকে গেছো!"); } else alert("ভুল পাসওয়ার্ড!"); }
 function addProduct(){
- let name=document.getElementById('pName').value; let cat=document.getElementById('pCat').value; let img=document.getElementById('pImg').value||"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"; let price=parseInt(document.getElementById('pPrice').value)||0; let old=parseInt(document.getElementById('pOld').value)||price; let del=parseInt(document.getElementById('pDel').value)||60; let stock=parseInt(document.getElementById('pStock').value)||10;
+ let name=document.getElementById('pName').value; let img=document.getElementById('pImg').value||"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"; let price=parseInt(document.getElementById('pPrice').value)||0); let old=parseInt(document.getElementById('pOld').value)||price*2; let sold=document.getElementById('pSold').value||"100 Sold";
  if(!name||!price){ alert("নাম আর দাম দাও"); return; }
- products.unshift({name,cat,img,price,old,del,stock,badge:"NEW"}); render(); alert("✅ প্রোডাক্ট যোগ হয়ে গেছে! কাস্টমার এখন দেখতে পারবে।");
+ products.unshift({name,img,price,old,rating:"4.8 (10)",sold:sold+" Sold",cat:document.getElementById('pCat').value,free:true}); render(); alert("✅ প্রোডাক্ট যোগ হয়ে গেছে!");
 }
-function renderOrders(){ if(orders.length==0){ document.getElementById('orderList').innerHTML="এখনো কোনো অর্ডার নাই।"; return; } document.getElementById('orderList').innerHTML=orders.map(o=>`<div class="orderItem"><b>🆔 ${o.id}</b> - ${o.status}<br>👤 ${o.name} | 📞 ${o.phone}<br>📍 ${o.addr}<br>🛍️ ${o.items}<br>💸 মোট: ${o.total}৳ | TrxID: ${o.trx}<br><button onclick="confirmOrder(${o.id})" style="background:#16a34a;color:#fff;border:0;padding:6px 12px;border-radius:8px">✅ কনফার্ম করো</button> <button onclick="callCust('${o.phone}')" style="background:#111;color:#fff;border:0;padding:6px 12px;border-radius:8px">📞 কল করো</button></div>`).join(""); }
-function confirmOrder(id){ let o=orders.find(x=>x.id==id); if(o){ o.status="✅ কনফার্ম - মাল পাঠানো হচ্ছে"; renderOrders(); alert("অর্ডার কনফার্ম হয়ে গেছে!"); } }
-function callCust(ph){ window.open("tel:"+ph); }
-function clearOrders(){ orders=[]; renderOrders(); }
-function changePass(){ let np=prompt("নতুন পাসওয়ার্ড দাও"); if(np){ adminPass=np; alert("পাসওয়ার্ড বদলে গেছে: "+np); } }
-document.getElementById('cArea').addEventListener('change',updateCart);
+function renderOrders(){ if(orders.length==0) return; document.getElementById('orderList').innerHTML=orders.map(o=>`<div style="background:#222;padding:10px;border-radius:10px;margin:6px 0"><b>🆔 ${o.id}</b> - ${o.status}<br>👤 ${o.name} | 📞 ${o.phone}<br>📍 ${o.addr}<br>🛍️ ${o.items}<br>💸 মোট: ${o.total}৳ | Pay: ${o.pay} | Trx: ${o.trx||'COD'}<br><button onclick="confirmOrder(${o.id})" style="background:#22c55e;border:0;padding:6px 12px;border-radius:6px">✅ কনফার্ম</button> <button onclick="window.open('tel:${o.phone}')" style="background:#fff;border:0;padding:6px 12px;border-radius:6px">📞 কল</button></div>`).join(""); }
+function confirmOrder(id){ let o=orders.find(x=>x.id==id); if(o){ o.status="✅ কনফার্ম - বিকাশ চেক হইছে"; renderOrders(); alert("অর্ডার কনফার্ম! বিকাশ অ্যাপে TrxID চেক করো: "+o.trx); } }
+let sec=8*3600+2*60+9; setInterval(()=>{ sec--; let h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60; document.getElementById('timer').innerText=`End in ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; },1000);
 render();
 </script>
 </body>
-</html>
+ </html>
