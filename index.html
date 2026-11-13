@@ -3,212 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>আমার সুপারমার্কেট - মালিক গেম</title>
+<title>PDF Boi Ghor - ফ্রি PDF বই ডাউনলোড</title>
+<meta name="description" content="Class 6-12 NCTB বই, ইসলামিক বই, গল্পের বই ফ্রি PDF ডাউনলোড করো">
 <style>
-*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#fef3c7;padding-bottom:80px}
-header{background:#16a34a;color:#fff;padding:12px;text-align:center;position:sticky;top:0;z-index:10}
-.top{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;background:#fff;padding:8px;font-weight:bold;font-size:13px}
-.top span{background:#f0fdf4;padding:6px 10px;border-radius:20px}
-.container{max-width:650px;margin:auto;padding:10px}
-.card{background:#fff;border-radius:16px;padding:12px;margin-bottom:12px;box-shadow:0 2px 10px #0001}
-button{border:0;border-radius:10px;padding:10px 14px;font-weight:bold;cursor:pointer;background:#22c55e;color:#fff;margin:3px}
-button.blue{background:#3b82f6} button.orange{background:#f97316} button.purple{background:#a855f7} button.red{background:#ef4444} button.black{background:#111}
-button:disabled{background:#ccc}
-input,select{padding:9px;border-radius:8px;border:1px solid #ccc;width:100%;margin:4px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.shelf{border:2px solid #e5e7eb;border-radius:12px;padding:8px;text-align:center;background:#fffbeb;position:relative}
-.shelf.low{border-color:#ef4444;background:#fef2f2}
-.staffCard{border:1px solid #ddd;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center}
-.staffCard img{font-size:32px}
-.camera{ background:#111;color:#0f0;padding:10px;border-radius:12px;font-family:monospace;position:relative;overflow:hidden}
-.camera .rec{color:red;animation:blink 1s infinite}
-@keyframes blink{50%{opacity:0}}
-.cctv-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.cctv{ background:#222;color:#fff;border-radius:10px;padding:8px;font-size:12px;min-height:70px}
-.cctv b{color:#4ade80}
-.queue{display:flex;gap:6px;flex-wrap:wrap}
-.cust{background:#fff7ed;border:1px dashed #f97316;padding:6px 10px;border-radius:20px;font-size:13px}
-.hidden{display:none}
-.log{font-size:13px;line-height:1.6;max-height:180px;overflow:auto}
-.progress{height:10px;background:#eee;border-radius:20px;overflow:hidden}
-.progress div{height:100%;background:#22c55e}
+*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f8fafc}
+header{background:#16a34a;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
+header h1{margin:0;font-size:26px} header p{margin:5px;opacity:.9}
+.search{max-width:600px;margin:15px auto;padding:0 10px;display:flex;gap:8px}
+.search input{flex:1;padding:12px;border-radius:10px;border:1px solid #ccc;font-size:16px}
+.search button{padding:12px 20px;border:0;background:#f97316;color:#fff;border-radius:10px;font-weight:bold;cursor:pointer}
+.ad{background:#fff3cd;border:1px dashed #f59e0b;padding:12px;text-align:center;margin:10px auto;max-width:700px;border-radius:10px;font-size:13px;color:#92400e}
+.container{max-width:900px;margin:auto;padding:10px}
+.cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.cats button{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;font-weight:bold}
+.cats button.active{background:#16a34a;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:600px){.grid{grid-template-columns:1fr 1fr}}
+.book{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #0001;text-align:center;padding-bottom:10px}
+.book img{width:100%;height:150px;object-fit:cover;background:#e2e8f0}
+.book h3{font-size:15px;margin:8px 5px;min-height:36px}
+.book p{font-size:12px;color:#666;margin:2px}
+.book button{border:0;padding:9px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin:3px}
+.down{background:#16a34a;color:#fff} .view{background:#3b82f6;color:#fff}
+.admin{background:#111;color:#fff;padding:15px;border-radius:14px;margin-top:20px}
+.admin input{width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #333}
+footer{background:#111;color:#aaa;text-align:center;padding:20px;font-size:13px;margin-top:20px}
 </style>
 </head>
 <body>
-<header><h2 style="margin:0">🛒 <span id="shopTitle">আমার সুপারমার্কেট</span></h2><div>দিন <span id="day">1</span> | ⏰ <span id="clock">সকাল ৯টা</span> | 👑 তুমি মালিক</div></header>
-<div class="top"><span>💰 <span id="money">2000</span>৳</span><span>⭐ লেভেল <span id="level">1</span></span><span>😊 খুশি <span id="happy">0</span></span><span>👥 কাস্টমার <span id="custCount">0</span></span><span>🚨 চোর ধরা <span id="thiefCaught">0</span></span></div>
+<header>
+<h1>📚 PDF Boi Ghor</h1>
+<p>ফ্রি PDF বই ডাউনলোড করো - NCTB | ইসলামিক | গল্প</p>
+</header>
+
+<div class="search">
+<input id="searchBox" placeholder="বই খুঁজো... যেমন: Class 10 English" onkeyup="filterBooks()">
+<button onclick="filterBooks()">🔍 খুঁজো</button>
+</div>
+
+<!-- GOOGLE ADSENSE জায়গা - এখানে তোমার টাকা আসবে -->
+<div class="ad">
+📢 বিজ্ঞাপনের জায়গা - Google AdSense কোড এখানে বসাবা<br>
+<small>এখানে ক্লিক হলেই তোমার টাকা আসবে</small>
+</div>
 
 <div class="container">
-<!-- SETUP -->
-<div class="card" id="setupCard">
-<h3>তোমার সুপারমার্কেটের নাম দাও</h3>
-<input id="shopName" placeholder="যেমন: কাঞ্চন সুপার শপ">
-<button onclick="setShop()">দোকান খুলো 🚀</button>
+<div class="cats" id="cats">
+<button class="active" onclick="setCat('all',this)">সব বই</button>
+<button onclick="setCat('nctb',this)">📗 NCTB বই</button>
+<button onclick="setCat('islamic',this)">🕌 ইসলামিক</button>
+<button onclick="setCat('golpo',this)">📖 গল্প / উপন্যাস</button>
+<button onclick="setCat('job',this)">💼 চাকরির বই</button>
 </div>
 
-<!-- CCTV -->
-<div class="card">
-<h3>📹 CCTV ক্যামেরা সিস্টেম <span style="color:red">● REC</span> <button class="black" style="float:right" onclick="toggleCam()">ক্যামেরা দেখো / লুকাও</button></h3>
-<div id="camBox" class="camera">
-<div><span class="rec">● REC</span> CAM 01 - মেইন গেট | CAM 02 - র‍্যাক | CAM 03 - ক্যাশ কাউন্টার | CAM 04 - ফ্রিজ</div>
-<div class="cctv-grid" id="cctvGrid"></div>
-<p id="camMsg" style="color:yellow">সব ক্যামেরা ঠিক আছে। কোনো চোর নাই।</p>
-<button class="red" onclick="buyCamera()">📹 আরেকটা ক্যামেরা লাগাও (৩০০৳)</button>
-<button class="orange" onclick="catchThief()">🚨 চোর ধরো!</button>
+<div style="text-align:center;font-size:13px;color:#666">মোট বই: <span id="count">0</span> টা | আজ ডাউনলোড: <span id="todayDown">128</span></div><br>
+
+<div class="grid" id="bookGrid"></div>
+
+<div class="ad">
+📢 বিজ্ঞাপনের জায়গা ২ - ডাউনলোডের মাঝখানে<br>
+<small>এই জায়গাটায় সবচেয়ে বেশি ক্লিক হয়</small>
+</div>
+
+<!-- নিজে বই যোগ করার জায়গা -->
+<div class="admin">
+<h3>➕ নিজে বই যোগ করো (তুমি মালিক)</h3>
+<p style="font-size:12px;color:#aaa">শুধু ফ্রি / সরকারি বই দিবা। কপি করা বই দিবা না।</p>
+<input id="bTitle" placeholder="বইয়ের নাম - যেমন: Class 10 English For Today">
+<input id="bCat" placeholder="ক্যাটাগরি - nctb / islamic / golpo / job">
+<input id="bLink" placeholder="PDF লিংক - Google Drive / NCTB লিংক">
+<button style="background:#22c55e;color:#fff;border:0;padding:10px 18px;border-radius:8px;font-weight:bold;cursor:pointer" onclick="addBook()">বই যোগ করো ✅</button>
+<p id="adminMsg" style="color:#4ade80"></p>
 </div>
 </div>
 
-<!-- SHELVES -->
-<div class="card">
-<h3>🗄️ র‍্যাক - মাল সাজানো <button class="blue" onclick="callSalesman()">সেলসম্যানকে ডাকো</button></h3>
-<div class="grid" id="shelves"></div>
-<p>💡 র‍্যাক খালি হলে সেলসম্যান নিজে সাজিয়ে দিবে, যদি তুমি সেলসম্যান রাখো।</p>
-</div>
-
-<!-- STAFF -->
-<div class="card">
-<h3>👨‍💼 আমার লোকজন - Staff</h3>
-<div id="staffList"></div>
-<hr>
-<h4>নতুন লোক রাখো:</h4>
-<button onclick="hire('salesman')">🧑‍🤝‍🧑 সেলসম্যান রাখো (বেতন ১৫০৳/দিন) - মাল সাজাবে</button><br>
-<button class="blue" onclick="hire('cashier')">💰 ক্যাশিয়ার রাখো (বেতন ২০০৳/দিন) - টাকা নিবে</button><br>
-<button class="black" onclick="hire('guard')">👮 সিকিউরিটি গার্ড রাখো (বেতন ১৮০৳/দিন) - চোর ধরবে</button>
-<p id="staffMsg"></p>
-</div>
-
-<!-- CUSTOMER + CASH -->
-<div class="card">
-<h3>🛒 কাস্টমার আর ক্যাশ কাউন্টার</h3>
-<div>লাইনে আছে:</div><div class="queue" id="queue"></div><br>
-<div id="cashArea" style="background:#111;color:#fff;padding:12px;border-radius:12px">
-<b>🧾 ক্যাশ মেশিন</b><br>মোট বিল: <span id="bill">0</span>৳ | ক্যাশিয়ার: <span id="cashierStatus">তুমি নিজে বসো</span><br>
-<button onclick="checkout()">✅ বিল নাও / ভাংতি দাও</button> <button class="orange" onclick="newCustomer()">📢 কাস্টমার ডাকো</button>
-</div>
-<div class="progress" style="margin-top:8px"><div id="cashProgress" style="width:0%"></div></div>
-</div>
-
-<!-- ORDER -->
-<div class="card">
-<h3>📱 মোবাইল দিয়ে মাল অর্ডার করো (গোডাউন থেকে)</h3>
-<select id="orderItem">
-<option value="chips">চিপস বাক্স - ২০০৳</option>
-<option value="drinks">মজো / স্পিড - ২৫০৳</option>
-<option value="rice">চালের বস্তা - ৪০০৳</option>
-<option value="veg">সবজি - ৩০০৳</option>
-<option value="donut">ডোনাট / কেক - ৩৫০৳</option>
-</select>
-<button class="orange" onclick="orderStock()">অর্ডার করো 🛵</button>
-<div id="van" style="font-size:30px;text-align:center"></div>
-</div>
-
-<!-- OWNER -->
-<div class="card">
-<h3>👑 মালিকের রুম</h3>
-<p>তুমি মালিক। সব লোক কাজ করতেছে কিনা CCTV তে দেখো। দিন শেষে বেতন দিতে হবে।</p>
-<button class="purple" onclick="nextDay()">🌙 দিন শেষ করো - বেতন দাও + পরের দিন</button>
-<button onclick="upgrade()">⬆️ দোকান বড় করো (৮০০৳)</button>
-<div id="ownerMsg"></div>
-</div>
-
-<div class="card"><h3>📒 হিসাব খাতা</h3><div class="log" id="log">দোকান খুলে গেছে! লোক রাখো, মাল অর্ডার করো।</div></div>
-</div>
+<footer>
+PDF Boi Ghor © 2026 | সব বই ফ্রি ও লিগ্যাল সোর্স থেকে নেওয়া<br>
+<a href="#" style="color:#aaa">Privacy Policy</a> | <a href="#" style="color:#aaa">Contact</a> | <a href="#" style="color:#aaa">DMCA</a>
+</footer>
 
 <script>
-let money=2000, day=1, level=1, happy=0, thiefCaught=0, camCount=4;
-let staff={salesman:0,cashier:0,guard:0};
-let stock={chips:5,drinks:4,rice:3,veg:6,donut:2};
-let prices={chips:60,drinks:55,rice:120,veg:40,donut:80};
-let names={chips:"🍟 চিপস",drinks:"🥤 মজো/স্পিড",rice:"🍚 চাল",veg:"🥦 সবজি",donut:"🍩 ডোনাট"};
-let queue=[]; let godown={chips:0,drinks:0,rice:0,veg:0,donut:0};
-let custNames=["রহিম চাচা","সখিনা আপা","করিম","মিনা","আবুল","জরিনা","রাজু","পপি"];
-let thiefActive=false;
-
-function setShop(){ let n=document.getElementById('shopName').value||"আমার সুপারমার্কেট"; document.getElementById('shopTitle').innerText=n; document.getElementById('setupCard').classList.add('hidden'); addLog("🎉 "+n+" খুলে গেছে! তুমি এখন মালিক।"); render(); }
-function addLog(t){ document.getElementById('log').innerHTML="• "+t+"<br>"+document.getElementById('log').innerHTML; }
+let books=[
+{title:"Class 10 - English For Today",cat:"nctb",down:5420,img:"https://via.placeholder.com/300x150/16a34a/fff?text=Class+10+English",link:"https://nctb.gov.bd"},
+{title:"Class 9-10 - গণিত বই",cat:"nctb",down:4210,img:"https://via.placeholder.com/300x150/3b82f6/fff?text=Class+10+Math",link:"https://nctb.gov.bd"},
+{title:"Class 8 - বিজ্ঞান",cat:"nctb",down:3890,img:"https://via.placeholder.com/300x150/f97316/fff?text=Class+8+Science",link:"https://nctb.gov.bd"},
+{title:"আর-রাহীকুল মাখতুম - সীরাত",cat:"islamic",down:8900,img:"https://via.placeholder.com/300x150/065f46/fff?text=Islamic+Book",link:"#"},
+{title:"প্যারাডক্সিক্যাল সাজিদ (ফ্রি স্যাম্পল)",cat:"islamic",down:6700,img:"https://via.placeholder.com/300x150/7c3aed/fff?text=Sajid",link:"#"},
+{title:"পথের পাঁচালী - বিভূতিভূষণ",cat:"golpo",down:3200,img:"https://via.placeholder.com/300x150/b45309/fff?text=Pather+Pachali",link:"#"},
+{title:"BCS প্রিলি - সাধারণ জ্ঞান",cat:"job",down:9800,img:"https://via.placeholder.com/300x150/dc2626/fff?text=BCS+Book",link:"#"},
+{title:"Class 7 - বাংলা বই",cat:"nctb",down:2100,img:"https://via.placeholder.com/300x150/0891b2/fff?text=Class+7+Bangla",link:"https://nctb.gov.bd"},
+{title:"হুমায়ূন আহমেদ - হিমু সমগ্র",cat:"golpo",down:4500,img:"https://via.placeholder.com/300x150/db2777/fff?text=Himu",link:"#"},
+];
+let currentCat='all';
 function render(){
- document.getElementById('money').innerText=money; document.getElementById('day').innerText=day; document.getElementById('level').innerText=level; document.getElementById('happy').innerText=happy; document.getElementById('thiefCaught').innerText=thiefCaught;
- document.getElementById('custCount').innerText=queue.length;
- // shelves
- let h=""; for(let k in stock){ let low=stock[k]<=2?"low":""; h+=`<div class="shelf ${low}"><b>${names[k]}</b><br>র‍্যাকে: ${stock[k]} টা<br>গোডাউনে: ${godown[k]} টা<br>দাম: <input type="number" value="${prices[k]}" onchange="prices['${k}']=parseInt(this.value)">৳<br>${stock[k]<=2?"<span style='color:red'>⚠️ খালি হয়ে যাচ্ছে!</span>":"✅ ভরা আছে"}<br><button onclick="refill('${k}')">সাজাও</button></div>`; }
- document.getElementById('shelves').innerHTML=h;
- // staff
- let sh=""; if(staff.salesman==0 && staff.cashier==0 && staff.guard==0) sh="<p>এখনো কোনো লোক নাই। তুমি একাই সব করতেছো।</p>";
- if(staff.salesman>0) sh+=`<div class="staffCard">🧑‍🤝‍🧑 <div><b>সেলসম্যান x${staff.salesman}</b><br>কাজ: র‍্যাকে মাল সাজাচ্ছে... | বেতন: ${staff.salesman*150}৳/দিন <br><button onclick="fire('salesman')">ছাটাই করো</button></div></div>`;
- if(staff.cashier>0) sh+=`<div class="staffCard">💰 <div><b>ক্যাশিয়ার x${staff.cashier}</b><br>কাজ: ক্যাশে বসে আছে... | বেতন: ${staff.cashier*200}৳/দিন <br><button onclick="fire('cashier')">ছাটাই করো</button></div></div>`;
- if(staff.guard>0) sh+=`<div class="staffCard">👮 <div><b>গার্ড x${staff.guard}</b><br>কাজ: গেটে পাহারা দিচ্ছে... | বেতন: ${staff.guard*180}৳/দিন <br><button onclick="fire('guard')">ছাটাই করো</button></div></div>`;
- document.getElementById('staffList').innerHTML=sh;
- document.getElementById('cashierStatus').innerText= staff.cashier>0 ? `ক্যাশিয়ার বসে আছে (${staff.cashier} জন)` : "তুমি নিজে বসো";
- // queue
- document.getElementById('queue').innerHTML = queue.length==0 ? "কেউ নাই" : queue.map(q=>`<span class="cust">${q.name} - ${q.itemName} (${q.price}৳)</span>`).join("");
- let total=queue.reduce((a,b)=>a+b.price,0); document.getElementById('bill').innerText=total;
- // cctv
- let cams=["মেইন গেট","র‍্যাক","ক্যাশ","ফ্রিজ","গোডাউন","পার্কিং"];
- let ch=""; for(let i=0;i<camCount;i++){ ch+=`<div class="cctv">📹 CAM 0${i+1} - ${cams[i%6]}<br><b>${thiefActive && i==0 ? "⚠️ সন্দেহজনক লোক!" : "✅ সব ঠিক"}</b><br>${staff.salesman>0 && i==1?"সেলসম্যান মাল সাজাচ্ছে":""} ${staff.cashier>0 && i==2?"ক্যাশিয়ার টাকা নিচ্ছে":""}</div>`; }
- document.getElementById('cctvGrid').innerHTML=ch;
+ let q=document.getElementById('searchBox').value.toLowerCase();
+ let list=books.filter(b=>(currentCat=='all'||b.cat==currentCat) && b.title.toLowerCase().includes(q));
+ document.getElementById('count').innerText=list.length;
+ document.getElementById('bookGrid').innerHTML=list.map(b=>`
+ <div class="book">
+ <img src="${b.img}">
+ <h3>${b.title}</h3>
+ <p>📥 ${b.down} বার ডাউনলোড | ⭐ 4.8</p>
+ <button class="view" onclick="window.open('${b.link}')">👀 পড়ো</button>
+ <button class="down" onclick="downloadBook('${b.title}','${b.link}')">⬇️ ডাউনলোড</button>
+ </div>`).join("") || "<p>এই নামে কোনো বই পাওয়া যায় নাই</p>";
 }
-function hire(type){
- let cost={salesman:100,cashier:150,guard:120}[type];
- if(money<cost){ alert("টাকা নাই! আগে বেচো"); return; }
- money-=cost; staff[type]++; addLog(`✅ নতুন ${type=="salesman"?"সেলসম্যান":type=="cashier"?"ক্যাশিয়ার":"গার্ড"} রাখলা! জয়েনিং ফি ${cost}৳`);
- document.getElementById('staffMsg').innerText="লোকটা কাজে লেগে গেছে!";
- render();
- // auto work
- if(type=='salesman') setTimeout(()=>{ autoRestock(); },1000);
- if(type=='cashier') setTimeout(()=>{ autoCheckout(); },1500);
+function setCat(c,el){ currentCat=c; document.querySelectorAll('.cats button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); render(); }
+function filterBooks(){ render(); }
+function downloadBook(title,link){
+ let d=parseInt(document.getElementById('todayDown').innerText)+1; document.getElementById('todayDown').innerText=d;
+ alert("৫ সেকেন্ড বিজ্ঞাপন দেখার পর ডাউনলোড শুরু হবে...\n(এই বিজ্ঞাপন থেকেই তোমার ইনকাম)");
+ setTimeout(()=>{ window.open(link); },1000);
 }
-function fire(type){ if(staff[type]>0){ staff[type]--; addLog(`❌ ${type} কে ছাটাই করে দিলা`); render(); } }
-function refill(k){ if(godown[k]>0){ let take=Math.min(5,godown[k]); godown[k]-=take; stock[k]+=take; addLog(`🧑‍🤝‍🧑 সেলসম্যান ${names[k]} ${take} টা র‍্যাকে সাজিয়ে দিলো`); } else { addLog(`⚠️ গোডাউনে ${names[k]} নাই! অর্ডার করো`); } render(); }
-function callSalesman(){ if(staff.salesman==0){ alert("আগে সেলসম্যান রাখো!"); return; } autoRestock(); }
-function autoRestock(){ for(let k in godown){ if(stock[k]<3 && godown[k]>0){ refill(k); } } addLog("🧑‍🤝‍🧑 সেলসম্যান সব র‍্যাক চেক করে সাজিয়ে দিলো"); render(); }
-function newCustomer(){
- let keys=Object.keys(stock).filter(k=>stock[k]>0);
- if(keys.length==0){ alert("র‍্যাক খালি! অর্ডার করো"); return; }
- let item=keys[Math.floor(Math.random()*keys.length)];
- let name=custNames[Math.floor(Math.random()*custNames.length)];
- queue.push({name,itemName:names[item],item,price:prices[item]});
- addLog(`🛒 ${name} আসলো, ${names[item]} নিলো (${prices[item]}৳)`);
- // thief random
- if(Math.random()<0.18 && !thiefActive){ thiefActive=true; addLog("🚨 CCTV তে চোর দেখা যাচ্ছে! গার্ডকে ডাকো!"); document.getElementById('camMsg').innerText="⚠️ CAM 01 এ চোর! তাড়াতাড়ি ধরো!"; }
- render();
- // if cashier exists, auto checkout after 2 sec
- if(staff.cashier>0){ setTimeout(autoCheckout,2000); }
-}
-function checkout(){ autoCheckout(); }
-function autoCheckout(){
- if(queue.length==0){ alert("লাইনে কেউ নাই"); return; }
- let q=queue.shift(); stock[q.item]--; money+=q.price; happy++;
- addLog(`💰 ${staff.cashier>0?"ক্যাশিয়ার":"তুমি"} ${q.name} এর কাছ থেকে ${q.price}৳ নিলা, ভাংতি দিলা`);
- document.getElementById('cashProgress').style.width="100%"; setTimeout(()=>document.getElementById('cashProgress').style.width="0%",800);
+function addBook(){
+ let t=document.getElementById('bTitle').value; let c=document.getElementById('bCat').value||"nctb"; let l=document.getElementById('bLink').value||"#";
+ if(!t){alert("বইয়ের নাম দাও");return;}
+ books.unshift({title:t,cat:c,down:0,img:"https://via.placeholder.com/300x150/16a34a/fff?text="+encodeURIComponent(t),link:l});
+ document.getElementById('adminMsg').innerText="✅ বই যোগ হয়ে গেছে!";
  render();
 }
-function orderStock(){
- let v=document.getElementById('orderItem').value; let cost={chips:200,drinks:250,rice:400,veg:300,donut:350}[v];
- if(money<cost){ alert("টাকা নাই!"); return; }
- money-=cost; document.getElementById('van').innerHTML="🛵💨 ভ্যান আসতেছে...";
- setTimeout(()=>{ godown[v]+=10; document.getElementById('van').innerHTML="🛵✅ ভ্যান মাল দিয়ে গেলো! গোডাউনে ১০টা আসছে।"; addLog(`🛵 গোডাউনে ${names[v]} ১০টা আসছে`); if(staff.salesman>0) setTimeout(autoRestock,800); render(); },1800);
- render();
-}
-function buyCamera(){ if(money<300){ alert("৩০০৳ লাগবে"); return; } money-=300; camCount++; addLog("📹 নতুন ক্যামেরা লাগানো হইছে! এখন চোর ধরা সহজ"); render(); }
-function catchThief(){
- if(!thiefActive){ alert("এখন কোনো চোর নাই, CCTV ঠিক আছে"); return; }
- if(staff.guard>0){ thiefCaught++; thiefActive=false; money+=100; addLog("👮 গার্ড চোরকে ধরে ফেলছে! ১০০৳ জরিমানা পাইলা"); document.getElementById('camMsg').innerText="✅ গার্ড চোরকে ধরে ফেলছে!"; }
- else { addLog("😭 গার্ড নাই, চোর মাল নিয়ে পালাইছে! ২০০৳ লস"); money-=200; thiefActive=false; }
- render();
-}
-function toggleCam(){ let e=document.getElementById('camBox'); e.classList.toggle('hidden'); }
-function nextDay(){
- let salary=staff.salesman*150+staff.cashier*200+staff.guard*180;
- if(money<salary){ alert("বেতন দেওয়ার টাকা নাই! আগে মাল বেচো"); return; }
- money-=salary; day++; addLog(`🌙 দিন ${day} শুরু! বেতন দিলা ${salary}৳`);
- document.getElementById('ownerMsg').innerText=`দিন ${day} শুরু! বেতন ${salary}৳ কাটা হইছে।`;
- if(day%3==0){ level++; addLog("🎉 লেভেল আপ!"); }
- // auto customer next day
- setTimeout(newCustomer,1000); render();
-}
-function upgrade(){ if(money<800){ alert("৮০০৳ লাগবে"); return; } money-=800; level++; addLog("🏪 দোকান বড় হয়ে গেছে! এখন বেশি কাস্টমার আসবে"); render(); }
 render();
-setInterval(()=>{ if(Math.random()<0.3) newCustomer(); },15000);
 </script>
 </body>
 </html>
