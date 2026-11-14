@@ -3,28 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY DRESS - সব মাল এক জায়গায়</title>
+<title>My Online Shop - 11.11 Biggest Sale</title>
 <style>
-*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f2f2f2;padding-bottom:85px}
-.top{position:sticky;top:0;z-index:20;background:#fff;padding:10px}
-.logo{font-size:24px;font-weight:900} .logo span{color:#f85606}
-.search{display:flex;border:3px solid #f85606;border-radius:12px;overflow:hidden;margin-top:8px}
-.search input{flex:1;border:0;padding:15px;outline:none;font-size:16px;font-weight:bold}
-.search button{background:#f85606;color:#fff;border:0;padding:0 20px;font-size:22px}
+*{box-sizing:border-box;font-family:Hind Siliguri,Arial} body{margin:0;background:#f5f5f5;padding-bottom:85px}
+.top{position:sticky;top:0;z-index:20;background:#fff;padding:8px}
+.logo{font-size:22px;font-weight:900} .logo span{color:#f85606}
+.search{display:flex;border:2px solid #f85606;border-radius:8px;overflow:hidden;margin-top:6px}
+.search input{flex:1;border:0;padding:13px;outline:none;font-size:15px;font-weight:bold}
+.search button{background:#f85606;color:#fff;border:0;padding:0 18px;font-size:20px}
+.tabs{display:flex;gap:16px;padding:10px;background:#fff;font-weight:bold;overflow:auto;white-space:nowrap;font-size:14px}
+.tabs .on{color:#f85606;border-bottom:3px solid #f85606}
 .cats{display:flex;gap:8px;padding:10px;background:#fff;overflow:auto;white-space:nowrap}
-.cats button{border:2px solid #eee;background:#fff;padding:13px 18px;border-radius:25px;font-weight:bold;font-size:15px}
-.cats button.on{background:#f85606;color:#fff;border-color:#f85606}
-.banner{background:#f85606;color:#fff;text-align:center;padding:12px;font-weight:bold;margin:10px;border-radius:10px}
+.cats button{border:1px solid #eee;background:#fff;padding:10px 14px;border-radius:20px;font-weight:bold;font-size:13px}
+.cats button.on{background:#f85606;color:#fff}
+.banner{background:linear-gradient(90deg,#5b0bc0,#f85606);color:#fff;text-align:center;padding:12px;font-weight:bold;margin:10px;border-radius:10px}
+.flash{background:#fff;margin:10px;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+.flash b{font-size:20px} .flash b span{color:#f85606}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#fff;border-radius:14px;overflow:hidden;padding-bottom:10px;box-shadow:0 2px 8px #0001}
-.pimg{height:170px;display:flex;align-items:center;justify-content:center;font-size:85px}
-.card h4{font-size:15px;margin:8px;line-height:1.3;min-height:40px}
-.price{color:#f85606;font-weight:bold;font-size:20px;margin:0 8px} .old{color:#999;text-decoration:line-through;font-size:13px}
-.sold{color:#666;font-size:13px;display:block;margin:2px 8px} .rate{font-size:13px;margin:2px 8px}
-.buy{width:calc(100% - 16px);margin:6px 8px 0;padding:14px;border:0;border-radius:10px;font-weight:bold;font-size:16px;background:#ffb800}
-.add{width:calc(100% - 16px);margin:6px 8px 0;padding:14px;border:0;border-radius:10px;font-weight:bold;font-size:16px;background:#f85606;color:#fff}
+.card{background:#fff;border-radius:12px;overflow:hidden;padding-bottom:8px}
+.pimg{height:170px;display:flex;align-items:center;justify-content:center;font-size:80px;position:relative}
+.coins{position:absolute;left:0;bottom:0;background:#ffb800;color:#000;font-size:11px;font-weight:bold;padding:4px 8px;border-radius:0 8px 0 0}
+.card h4{font-size:14px;margin:6px 8px;min-height:38px;line-height:1.3}
+.price{color:#f85606;font-weight:bold;font-size:18px;margin:0 8px} .old{color:#999;text-decoration:line-through;font-size:12px}
+.off{float:right;background:#ff2d55;color:#fff;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:bold}
+.sold{color:#666;font-size:12px;display:block;margin:2px 8px} .left{color:#f85606;font-size:12px;font-weight:bold;margin:0 8px}
+.progress{height:6px;background:#ffe1d2;border-radius:10px;margin:5px 8px;overflow:hidden} .progress div{height:100%;background:#f85606}
+.buy{width:calc(100% - 16px);margin:6px 8px 0;padding:13px;border:0;border-radius:10px;font-weight:bold;font-size:15px;background:#ffb800}
+.add{width:calc(100% - 16px);margin:6px 8px 0;padding:13px;border:0;border-radius:10px;font-weight:bold;font-size:15px;background:#f85606;color:#fff}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:2px solid #ddd;z-index:30}
-.bottom div{text-align:center;font-size:14px}
+.bottom div{text-align:center;font-size:13px}
 .modal{position:fixed;inset:0;background:#0008;display:none;z-index:100;align-items:flex-end}
 .modal.open{display:flex}
 .sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:14px}
@@ -38,31 +45,33 @@ input,textarea,select{width:100%;padding:14px;border:1px solid #ddd;border-radiu
 <body>
 
 <div class="top">
-<div class="logo">MY <span>DRESS</span> 👗 <span style="font-size:13px;background:#ffe1d2;padding:4px 8px;border-radius:20px">11.11 SALE</span></div>
-<div class="search"><input id="searchBox" placeholder="খুঁজো... lotion, gun, drone, trimmer" onkeyup="render()"><button onclick="render()">🔍</button></div>
+<div class="logo">MY <span>ONLINE SHOP</span> 🛒 <span style="font-size:12px;background:#ffe1d2;padding:4px 8px;border-radius:20px">11.11 SALE</span></div>
+<div class="search"><input id="searchBox" placeholder="Search... lotion, trimmer, earphone, drone, t-shirt" onkeyup="render()"><button onclick="render()">🔍</button></div>
+<div class="tabs"><span>Deals with Coins</span><span>🕒 Viewed</span><span class="on">UPTO 99% OFF</span><span>Flash Sale</span><span>11.11</span><span>New Arrival</span></div>
 </div>
 
 <div class="cats">
 <button class="on" onclick="setCat('all',this)">সব</button>
-<button onclick="setCat('korean',this)">🇰🇷 Korean</button>
-<button onclick="setCat('beauty',this)">💄 কসমেটিক্স</button>
-<button onclick="setCat('gun',this)">🔫 গান</button>
-<button onclick="setCat('toy',this)">🧸 খেলনা</button>
-<button onclick="setCat('drone',this)">🚁 ড্রোন</button>
+<button onclick="setCat('fashion',this)">👕 টি-শার্ট / জার্সি</button>
+<button onclick="setCat('beauty',this)">💄 বিউটি</button>
 <button onclick="setCat('electronic',this)">🎧 ইলেকট্রনিক</button>
 <button onclick="setCat('home',this)">🏠 ঘরের জিনিস</button>
-<button onclick="setCat('fashion',this)">👗 ফ্যাশন</button>
+<button onclick="setCat('toy',this)">🧸 খেলনা</button>
+<button onclick="setCat('drone',this)">🚁 ড্রোন</button>
 </div>
 
-<div class="banner">MY DRESS - বিকাশ: 01756596482<br><span style="font-size:13px">আগে ডেলিভারি চার্জ বিকাশ করলেই অর্ডার কনফার্ম</span></div>
+<div class="banner">11.11 THE BIGGEST SALE OF THE YEAR<br>বিকাশ: 01756596482 | Safe Payment | Fast Delivery | Free Return</div>
+
+<div class="flash"><div><b>Flash <span>Sale</span></b><br><span style="font-size:13px">End in 7 days 14:30:53</span></div><b style="color:#f85606">Shop More ></b></div>
+
 <div style="padding:0 10px;font-size:13px;color:#666" id="resultCount"></div>
 <div class="grid" id="grid"></div>
 
 <div class="bottom">
 <div onclick="window.scrollTo({top:0,behavior:'smooth'})">🏠<br>Home</div>
-<div onclick="alert('Messages: কাস্টমার - দাম কত?')">💬<br>Messages</div>
+<div onclick="alert('Messages - 4 টা মেসেজ')">💬<br>Messages <span style="color:red">4</span></div>
 <div onclick="openCart()">🛒<br>Cart <span id="cartCount">0</span></div>
-<div onclick="alert('My Dress - বিকাশ: 01756596482')">👤<br>Account</div>
+<div onclick="alert('My Online Shop - বিকাশ: 01756596482')">👤<br>Account</div>
 </div>
 
 <div id="adminDot" onclick="openAdmin()"></div>
@@ -73,61 +82,39 @@ input,textarea,select{width:100%;padding:14px;border:1px solid #ddd;border-radiu
 
 <script>
 let products=[
-{name:"Earth Beauty Whitening Body Lotion",price:259,old:1000,emoji:"🧴",bg:"#ffe4e6",sold:"100 sold",rate:"4.5",cat:"korean"},
-{name:"Korean Glass Skin Serum Vitamin C",price:349,old:800,emoji:"💧",bg:"#dbeafe",sold:"85 sold",rate:"4.8",cat:"korean"},
-{name:"Korean Rice Water Face Wash",price:199,old:450,emoji:"🧼",bg:"#dcfce7",sold:"200 sold",rate:"4.7",cat:"korean"},
-{name:"Korean Makeup Combo 10pcs",price:899,old:1800,emoji:"💄",bg:"#fce7f3",sold:"120 sold",rate:"4.6",cat:"korean"},
-{name:"Korean Lip Tint 3pcs Set",price:299,old:600,emoji:"💋",bg:"#ffe4e6",sold:"90 sold",rate:"4.7",cat:"korean"},
-{name:"Kemei KM-2227 Trimmer",price:899,old:1750,emoji:"✂️",bg:"#e0e7ff",sold:"60 sold",rate:"4.4",cat:"electronic"},
-{name:"T9 Trimmer Professional",price:313,old:650,emoji:"💈",bg:"#e0e7ff",sold:"150 sold",rate:"4.5",cat:"electronic"},
-{name:"Dish Wash Scrubber 3PCS",price:49,old:80,emoji:"🧽",bg:"#fef9c3",sold:"60 sold",rate:"4.6",cat:"home"},
-{name:"Haier Water Heater 5500W",price:9890,old:12800,emoji:"🚿",bg:"#dbeafe",sold:"4 sold",rate:"4.9",cat:"home"},
-{name:"Yes Toilet Cleaner 400ml",price:99,old:260,emoji:"🚽",bg:"#dbeafe",sold:"70 sold",rate:"4.4",cat:"home"},
-{name:"Savings Challenge Frame",price:303,old:600,emoji:"🖼️",bg:"#fef9c3",sold:"90 sold",rate:"4.8",cat:"home"},
-{name:"U19 Earphone Best Bass",price:69,old:150,emoji:"🎧",bg:"#e0e7ff",sold:"500 sold",rate:"4.6",cat:"electronic"},
-{name:"QKZ Earphone Extra Bass",price:313,old:600,emoji:"🎧",bg:"#e0e7ff",sold:"300 sold",rate:"4.7",cat:"electronic"},
-{name:"Microfiber Towel Quick Dry",price:69,old:140,emoji:"🧺",bg:"#dcfce7",sold:"400 sold",rate:"4.5",cat:"home"},
-{name:"Back Support Belt",price:175,old:350,emoji:"🦴",bg:"#ffedd5",sold:"180 sold",rate:"4.4",cat:"home"},
-{name:"G63 Speaker Lamp Bluetooth",price:423,old:900,emoji:"🔊",bg:"#ede9fe",sold:"110 sold",rate:"4.6",cat:"electronic"},
-{name:"Hand Wash Liquid 500ml",price:179,old:300,emoji:"🧴",bg:"#dcfce7",sold:"250 sold",rate:"4.5",cat:"home"},
-{name:"Silicone Body Scrubber",price:129,old:250,emoji:"🛁",bg:"#fce7f3",sold:"320 sold",rate:"4.7",cat:"beauty"},
-{name:"24-in-1 Screwdriver Set",price:199,old:400,emoji:"🪛",bg:"#ffedd5",sold:"280 sold",rate:"4.6",cat:"home"},
-{name:"Flashlight Torch Super Bright",price:840,old:1500,emoji:"🔦",bg:"#fef9c3",sold:"70 sold",rate:"4.5",cat:"electronic"},
-{name:"Helicopter Toy Remote",price:279,old:600,emoji:"🚁",bg:"#dbeafe",sold:"95 sold",rate:"4.6",cat:"toy"},
-{name:"Heart Necklace Love Pendant",price:50,old:120,emoji:"💖",bg:"#fce7f3",sold:"600 sold",rate:"4.8",cat:"fashion"},
-{name:"Power Bank 20000mAh",price:1303,old:2500,emoji:"🔋",bg:"#e0e7ff",sold:"140 sold",rate:"4.7",cat:"electronic"},
-{name:"Faucet Water Filter",price:80,old:160,emoji:"🚰",bg:"#dbeafe",sold:"450 sold",rate:"4.5",cat:"home"},
-{name:"Drone GT50 Duel Camera",price:2593,old:4500,emoji:"🚁",bg:"#dbeafe",sold:"17 sold",rate:"4.5",cat:"drone"},
-{name:"FLH X5HW Drone Duel Battery",price:3139,old:5000,emoji:"🚁",bg:"#dbeafe",sold:"10 sold",rate:"5.0",cat:"drone"},
-{name:"FLH F88 Max Drone",price:2684,old:4800,emoji:"🚁",bg:"#dbeafe",sold:"68 sold",rate:"5.0",cat:"drone"},
-{name:"Wall Decor 3D Butterfly",price:209,old:400,emoji:"🦋",bg:"#fce7f3",sold:"220 sold",rate:"4.6",cat:"home"},
-{name:"Perfume Long Lasting 100ml",price:182,old:350,emoji:"🌸",bg:"#fce7f3",sold:"300 sold",rate:"4.5",cat:"beauty"},
-{name:"Sofa Cover 3 Seater",price:1628,old:2800,emoji:"🛋️",bg:"#ffedd5",sold:"25 sold",rate:"4.6",cat:"home"},
-{name:"Mini Fan Portable USB",price:236,old:450,emoji:"🌀",bg:"#dbeafe",sold:"180 sold",rate:"4.5",cat:"electronic"},
-{name:"Airpods Pro Wireless",price:199,old:500,emoji:"🎧",bg:"#e0e7ff",sold:"800 sold",rate:"4.4",cat:"electronic"},
-{name:"Anker Earbuds Soundcore",price:2318,old:3500,emoji:"🎧",bg:"#ede9fe",sold:"45 sold",rate:"4.8",cat:"electronic"},
-{name:"Sunglass UV Protection",price:159,old:300,emoji:"🕶️",bg:"#fef9c3",sold:"350 sold",rate:"4.6",cat:"fashion"},
-{name:"Gun Toys Python 357 Revolver - TOY",price:1871,old:3000,emoji:"🔫",bg:"#fee2e2",sold:"16 sold",rate:"4.3",cat:"gun"},
-{name:"GEL Blaster Gun Glock - TOY",price:500,old:900,emoji:"🔫",bg:"#fee2e2",sold:"15 sold",rate:"4.5",cat:"gun"},
-{name:"Nerf Elite Strongarm Blaster",price:3325,old:5000,emoji:"🔫",bg:"#fee2e2",sold:"20 sold",rate:"4.6",cat:"gun"},
-{name:"Bubble Toy Gun Automatic",price:159,old:300,emoji:"🫧",bg:"#dbeafe",sold:"2.5K sold",rate:"4.5",cat:"gun"},
-{name:"ZP-5 Soft Bullet Toy Gun",price:1432,old:2500,emoji:"🔫",bg:"#fee2e2",sold:"15 sold",rate:"5.0",cat:"gun"},
-{name:"6 in 1 Cosmetic Combo",price:247,old:500,emoji:"💄",bg:"#fce7f3",sold:"300 sold",rate:"4.7",cat:"beauty"},
-{name:"15 in 1 Cosmetics Combo",price:899,old:1600,emoji:"💄",bg:"#fce7f3",sold:"427 sold",rate:"4.8",cat:"beauty"},
-{name:"Student Makeup Combo 7pcs",price:300,old:600,emoji:"💄",bg:"#fce7f3",sold:"22 sold",rate:"5.0",cat:"beauty"},
-{name:"Eyeshadow Palette 35 Color",price:304,old:600,emoji:"🎨",bg:"#fce7f3",sold:"124 sold",rate:"5.0",cat:"beauty"},
-{name:"Shajgoj Combo 17 IN 1",price:1000,old:1800,emoji:"💄",bg:"#fce7f3",sold:"174 sold",rate:"4.8",cat:"beauty"},
-{name:"LCD Writing Tablet 8.5 inch",price:136,old:250,emoji:"✏️",bg:"#fef9c3",sold:"394 sold",rate:"4.6",cat:"toy"},
-{name:"Bangla Alphabet Learning Toy",price:100,old:200,emoji:"🔤",bg:"#dcfce7",sold:"2.3K sold",rate:"4.8",cat:"toy"},
-{name:"ABCD Puzzle Blocks",price:100,old:200,emoji:"🧩",bg:"#dcfce7",sold:"2.3K sold",rate:"4.7",cat:"toy"},
-{name:"Tic Tac Toe Board Game",price:99,old:180,emoji:"🎲",bg:"#fef9c3",sold:"158 sold",rate:"4.5",cat:"toy"},
-{name:"Doctor Set Toy for Kids",price:119,old:220,emoji:"🩺",bg:"#dcfce7",sold:"21 sold",rate:"5.0",cat:"toy"},
-{name:"Aircraft Softball Gun Toy",price:399,old:700,emoji:"✈️",bg:"#dbeafe",sold:"45 sold",rate:"4.6",cat:"toy"},
-{name:"Spider-Man Web Glove Toy",price:552,old:900,emoji:"🕷️",bg:"#fee2e2",sold:"10 sold",rate:"4.5",cat:"toy"},
-{name:"Dress Girls Party Frock",price:899,old:1500,emoji:"👗",bg:"#fce7f3",sold:"60 sold",rate:"4.7",cat:"fashion"},
-{name:"Saree Jamdani Premium",price:1499,old:2800,emoji:"🥻",bg:"#ffe4e6",sold:"40 sold",rate:"4.8",cat:"fashion"},
-{name:"Hijab Premium Georgette",price:499,old:900,emoji:"🧕",bg:"#ede9fe",sold:"120 sold",rate:"4.7",cat:"fashion"},
-{name:"Smart Watch Fitness",price:1299,old:2200,emoji:"⌚",bg:"#e0e7ff",sold:"90 sold",rate:"4.6",cat:"electronic"},
+{name:"Twin Horn Gaming Earphone Super Bass Stereo",price:131,old:280,off:53,emoji:"🎧",bg:"#dbeafe",sold:"9 Sold",rate:"4.0",left:8,cat:"electronic"},
+{name:"Seamless Open Elephant Nose Pouch Panties",price:886,old:1200,off:26,emoji:"🩲",bg:"#fce7f3",sold:"7 Sold",rate:"4.2",left:12,cat:"fashion"},
+{name:"Hand GUARANTEE Camera Hand Strap for EOS 5D Mark",price:639,old:900,off:29,emoji:"📷",bg:"#e0e7ff",sold:"15 Sold",rate:"4.5",left:5,cat:"electronic"},
+{name:"Timack X15 Gaming Earbuds Wireless Bluetooth",price:414,old:650,off:36,emoji:"🎧",bg:"#ede9fe",sold:"378 Sold",rate:"4.2",left:20,cat:"electronic"},
+{name:"T900 Ultra Smartwatch 2.19 Infinity Full Touch",price:899,old:1800,off:50,emoji:"⌚",bg:"#fef9c3",sold:"210 Sold",rate:"4.6",left:6,cat:"electronic"},
+{name:"Polyester Short Sleeve Home Jersey Brazil 2026",price:299,old:600,off:50,emoji:"👕",bg:"#dcfce7",sold:"149 Sold",rate:"3.9",left:15,cat:"fashion"},
+{name:"Brazil Design Stylish T-Shirt Comfortable Soft Wear For Men",price:89,old:200,off:56,emoji:"👕",bg:"#fff",sold:"867 Sold",rate:"4.7",left:30,cat:"fashion"},
+{name:"Real Madrid 2026/27 Third Football Jersey Dark Green Premium",price:321,old:1200,off:73,emoji:"👕",bg:"#064e3b",sold:"256 Sold",rate:"4.4",left:18,cat:"fashion"},
+{name:"Earth Beauty & You Vitamin E Moisturizing Body Lotion",price:259,old:500,off:48,emoji:"🧴",bg:"#ffe4e6",sold:"3.5K sold",rate:"4.8",left:25,cat:"beauty"},
+{name:"Kemei KM-809A Digital AC/DC Electric Trimmer",price:899,old:1500,off:40,emoji:"✂️",bg:"#e0e7ff",sold:"105 sold",rate:"4.5",left:10,cat:"electronic"},
+{name:"Dish Wash Foam Scrubber Pad 4 pcs",price:49,old:120,off:59,emoji:"🧽",bg:"#fef9c3",sold:"29.2K sold",rate:"4.6",left:40,cat:"home"},
+{name:"Haier ZenGlow 30 Litre Shock-proof Electric Water Heater",price:9890,old:14000,off:29,emoji:"🚿",bg:"#dbeafe",sold:"120 sold",rate:"4.0",left:3,cat:"home"},
+{name:"Yes Hand Wash Liquid Orange 1 Ltr",price:179,old:300,off:40,emoji:"🧴",bg:"#ffedd5",sold:"29.9K sold",rate:"4.7",left:35,cat:"home"},
+{name:"G63 Speaker Lamp APP Control 4 in 1 Multi-Function",price:423,old:800,off:47,emoji:"🔊",bg:"#ede9fe",sold:"122 sold",rate:"5.0",left:9,cat:"electronic"},
+{name:"New Vintage T9 Hair Trimmer Professional",price:313,old:680,off:54,emoji:"💈",bg:"#e0e7ff",sold:"2.7K sold",rate:"4.6",left:22,cat:"electronic"},
+{name:"1 Pc Silicone Back Scrubber for Shower",price:129,old:250,off:48,emoji:"🛁",bg:"#fce7f3",sold:"9.3K sold",rate:"4.7",left:28,cat:"beauty"},
+{name:"24-in-1 Precision Screwdriver Set",price:199,old:490,off:59,emoji:"🪛",bg:"#ffedd5",sold:"180 sold",rate:"4.6",left:4,cat:"home"},
+{name:"Sanford Ultra-Bright Flashlight LED",price:840,old:1490,off:44,emoji:"🔦",bg:"#fef9c3",sold:"95 sold",rate:"4.5",left:7,cat:"electronic"},
+{name:"QKZ DM10 Zinc Alloy HiFi Earphone",price:313,old:680,off:54,emoji:"🎧",bg:"#e0e7ff",sold:"220 sold",rate:"4.7",left:1,cat:"electronic"},
+{name:"Rechargeable Helicopter with Remote",price:279,old:450,off:38,emoji:"🚁",bg:"#dbeafe",sold:"120 sold",rate:"4.6",left:11,cat:"toy"},
+{name:"Korean Double Layer Heart Necklace",price:50,old:297,off:83,emoji:"💖",bg:"#fce7f3",sold:"400 sold",rate:"4.8",left:20,cat:"fashion"},
+{name:"Vendors VD-PB04 Power Bank 20000mAh 22.5W",price:1303,old:2670,off:51,emoji:"🔋",bg:"#e0e7ff",sold:"140 sold",rate:"4.7",left:10,cat:"electronic"},
+{name:"20pcs Water-saving Anti-splash Faucet Filter",price:80,old:320,off:75,emoji:"🚰",bg:"#dbeafe",sold:"500 sold",rate:"4.5",left:30,cat:"home"},
+{name:"FLH GT50 Camera Drone 300M Range",price:2401,old:6500,off:63,emoji:"🚁",bg:"#dbeafe",sold:"68 sold",rate:"4.6",left:6,cat:"drone"},
+{name:"Elegant Calligraphy Art PVC Wall Decor",price:209,old:369,off:43,emoji:"🖼️",bg:"#fef9c3",sold:"180 sold",rate:"4.6",left:14,cat:"home"},
+{name:"Ven-Dens VD-PB0 Power Bank Slim",price:508,old:1300,off:61,emoji:"🔋",bg:"#e0e7ff",sold:"90 sold",rate:"4.5",left:8,cat:"electronic"},
+{name:"FLH F88 EVO Remote Rotate Camera Drone",price:2401,old:6500,off:63,emoji:"🚁",bg:"#dbeafe",sold:"45 sold",rate:"4.7",left:5,cat:"drone"},
+{name:"Soft Perfume Type Arabian Fragrance",price:182,old:700,off:74,emoji:"🌸",bg:"#fce7f3",sold:"200 sold",rate:"4.6",left:1,cat:"beauty"},
+{name:"Sofa Cover 2+2+1 Set Premium",price:1628,old:3000,off:46,emoji:"🛋️",bg:"#ffe4e6",sold:"60 sold",rate:"4.6",left:3,cat:"home"},
+{name:"4-IN-1 Fast Charging Cable 65W",price:109,old:300,off:64,emoji:"🔌",bg:"#e0e7ff",sold:"300 sold",rate:"4.7",left:20,cat:"electronic"},
+{name:"K9 Dual Microphone For Type C",price:302,old:900,off:66,emoji:"🎤",bg:"#f3f4f6",sold:"150 sold",rate:"4.5",left:12,cat:"electronic"},
+{name:"Hoco W35 Max Headphone",price:1066,old:2000,off:47,emoji:"🎧",bg:"#fee2e2",sold:"80 sold",rate:"4.6",left:9,cat:"electronic"},
+{name:"10,000 Taka Money Saving Challenge Frame",price:238,old:500,off:52,emoji:"🖼️",bg:"#fef9c3",sold:"110 sold",rate:"4.8",left:16,cat:"home"},
 ];
 
 let cart=[]; let orders=[]; let curCat='all'; let bkashNum="01756596482"; let selectedPay='Cash on Delivery';
@@ -139,30 +126,27 @@ function render(){
   if(!q) return catOk;
   let name=p.name.toLowerCase();
   if(name.includes(q)) return catOk;
+  if(q.includes('টি-শার্ট') && p.cat=='fashion') return catOk;
+  if(q.includes('জার্সি') && name.includes('jersey')) return catOk;
   if(q.includes('লোশন') && name.includes('lotion')) return catOk;
-  if(q.includes('কসমেটিক') && (p.cat=='beauty'||p.cat=='korean')) return catOk;
-  if(q.includes('গান') && p.cat=='gun') return catOk;
-  if(q.includes('খেলনা') && p.cat=='toy') return catOk;
+  if(q.includes('গান') && p.cat=='toy') return catOk;
   if(q.includes('ড্রোন') && p.cat=='drone') return catOk;
-  if(q.includes('কোরিয়ান') && p.cat=='korean') return catOk;
-  if(q.includes('ট্রিমার') && name.includes('trimmer')) return catOk;
   if(q.includes('ইয়ারফোন') && name.includes('earphone')) return catOk;
-  if(q.includes('ড্রেস') && p.cat=='fashion') return catOk;
-  if(q.includes('জামা') && p.cat=='fashion') return catOk;
+  if(q.includes('ট্রিমার') && name.includes('trimmer')) return catOk;
   return false;
  });
  document.getElementById('resultCount').innerText=list.length+" টা পাওয়া গেছে"+(q?" - '"+q+"'":"");
- document.getElementById('grid').innerHTML=list.map(p=>{let i=products.indexOf(p); return `<div class="card" onclick="openDetail(${i})"><div class="pimg" style="background:${p.bg}">${p.emoji}</div><h4>${p.name}</h4><div class="price">৳ ${p.price} <span class="old">৳${p.old}</span></div><span class="sold">⭐ ${p.rate} | ${p.sold} | 📍 Dhaka</span><button class="buy" onclick="event.stopPropagation();buyNow(${i})">⚡ Buy Now</button><button class="add" onclick="event.stopPropagation();addCart(${i})">🛒 Add to Cart</button></div>`}).join("") || "<p style='padding:20px;text-align:center'>এই নামে কিছু পাওয়া যায় নাই। অন্য নাম লিখো।</p>";
+ document.getElementById('grid').innerHTML=list.map(p=>{let i=products.indexOf(p); return `<div class="card" onclick="openDetail(${i})"><div class="pimg" style="background:${p.bg}">${p.emoji}<span class="coins">🪙 COINS</span></div><h4>11.11 ${p.name}</h4><div class="price">৳ ${p.price} <span class="old">৳${p.old}</span> <span class="off">${p.off}% OFF</span></div><span class="sold">⭐ ${p.rate} | ${p.sold} | 📍 Dhaka</span><div class="left">Only ${p.left} left!</div><div class="progress"><div style="width:${Math.min(90,p.left*5)}%"></div></div><button class="buy" onclick="event.stopPropagation();buyNow(${i})">⚡ Buy Now</button><button class="add" onclick="event.stopPropagation();addCart(${i})">🛒 Add to Cart</button></div>`}).join("") || "<p style='padding:20px;text-align:center'>এই নামে কিছু পাওয়া যায় নাই। অন্য নাম লিখো।</p>";
  document.getElementById('cartCount').innerText=cart.length;
 }
 function setCat(c,el){curCat=c;document.querySelectorAll('.cats button').forEach(b=>b.classList.remove('on'));el.classList.add('on');render();}
-function openDetail(i){let p=products[i];document.getElementById('detailBox').innerHTML=`<div style="background:${p.bg};height:220px;display:flex;align-items:center;justify-content:center;font-size:110px;border-radius:12px">${p.emoji}</div><h3>${p.name}</h3><p style="font-size:24px;color:#f85606;font-weight:bold">৳ ${p.price} <span style="color:#999;text-decoration:line-through;font-size:14px">৳${p.old}</span></p><p>⭐ ${p.rate} | 📍 Dhaka | ✅ 14 days return | 📦 Standard Delivery</p><div class="bkashBox">💸 বিকাশে ডেলিভারি চার্জ পাঠাও<br><b>${bkashNum}</b><br><button onclick="copyBkash()" class="bigBtn" style="background:#e11d48;color:#fff;margin-top:8px">📋 নাম্বার কপি করো</button></div><div style="display:flex;gap:10px"><button onclick="buyNow(${i});closeModal('detailModal')" class="bigBtn" style="flex:1;background:#ffb800">⚡ Buy Now</button><button onclick="addCart(${i});closeModal('detailModal')" class="bigBtn" style="flex:1;background:#f85606;color:#fff">🛒 Add to Cart</button></div>`;document.getElementById('detailModal').classList.add('open');}
+function openDetail(i){let p=products[i];document.getElementById('detailBox').innerHTML=`<div style="background:${p.bg};height:220px;display:flex;align-items:center;justify-content:center;font-size:110px;border-radius:12px">${p.emoji}</div><h3>11.11 ${p.name}</h3><p style="font-size:26px;color:#f85606;font-weight:bold">৳ ${p.price} <span style="color:#999;text-decoration:line-through;font-size:14px">৳${p.old}</span> <span style="background:#ff2d55;color:#fff;padding:4px 8px;border-radius:8px;font-size:13px">${p.off}% OFF</span></p><p>⭐ ${p.rate} | ${p.sold} | 📍 Dhaka | ✅ 14 days return | 🚚 Free Delivery</p><div style="background:#5b0bc0;color:#fff;padding:12px;border-radius:10px;text-align:center;font-weight:bold">11.11 THE BIGGEST SALE - End in 7 days 14:30:53</div><div class="bkashBox">💸 বিকাশে ডেলিভারি চার্জ পাঠাও<br><b>${bkashNum}</b><br><button onclick="copyBkash()" class="bigBtn" style="background:#e11d48;color:#fff;margin-top:8px">📋 নাম্বার কপি করো</button></div><div style="display:flex;gap:10px"><button onclick="buyNow(${i});closeModal('detailModal')" class="bigBtn" style="flex:1;background:#ffb800">⚡ Buy Now</button><button onclick="addCart(${i});closeModal('detailModal')" class="bigBtn" style="flex:1;background:#f85606;color:#fff">🛒 Add to Cart</button></div>`;document.getElementById('detailModal').classList.add('open');}
 function copyBkash(){navigator.clipboard.writeText(bkashNum);alert("বিকাশ নাম্বার কপি: "+bkashNum);}
 function addCart(i){cart.push(products[i]);render();alert("✅ Cart এ যোগ হয়ে গেছে!");}
 function buyNow(i){cart=[products[i]];render();openCart();}
 function openCart(){
  let sub=cart.reduce((a,b)=>a+b.price,0); let disc=Math.round(sub*0.10); let ship=cart.length?80:0; let total=sub-disc+ship+25+5+20; if(cart.length==0) total=0;
- document.getElementById('cartBox').innerHTML=`<h3>🛒 Checkout - ${cart.length} টা জিনিস</h3>${cart.length==0?"<p>Cart খালি।</p>":cart.map((p,idx)=>`<div style="display:flex;gap:10px;border:1px solid #eee;padding:10px;border-radius:12px;margin:6px 0"><div style="background:${p.bg};width:70px;height:70px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:35px">${p.emoji}</div><div style="flex:1"><b>My Dress</b><br>${p.name}<br><b>৳${p.price}</b></div><button onclick="removeCart(${idx})" style="background:red;color:#fff;border:0;padding:10px 14px;border-radius:10px">X</button></div>`).join("")}
+ document.getElementById('cartBox').innerHTML=`<h3>🛒 Checkout - ${cart.length} টা জিনিস</h3>${cart.length==0?"<p>Cart খালি।</p>":cart.map((p,idx)=>`<div style="display:flex;gap:10px;border:1px solid #eee;padding:10px;border-radius:12px;margin:6px 0"><div style="background:${p.bg};width:70px;height:70px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:35px">${p.emoji}</div><div style="flex:1"><b>My Online Shop</b><br>${p.name}<br><b>৳${p.price}</b></div><button onclick="removeCart(${idx})" style="background:red;color:#fff;border:0;padding:10px 14px;border-radius:10px">X</button></div>`).join("")}
  <h4>Payment Methods</h4>
  ${['Cash on Delivery','Credit/Debit Card','Save bKash Account','Nagad'].map(m=>`<div style="border:2px solid #ddd;padding:13px;border-radius:12px;margin:8px 0;display:flex;gap:10px;align-items:center;${selectedPay==m?'border-color:#f85606;background:#fff7ed':''}" onclick="selectPay('${m}')"><b>${m}</b> <span>${m=='Save bKash Account'?'বিকাশ: '+bkashNum:''}</span></div>`).join("")}
  <div class="bkashBox">💸 <b>বিকাশ Send Money: ${bkashNum}</b><br><span style="font-size:13px">আগে ৮০৳ ডেলিভারি চার্জ পাঠাও, তারপর TrxID দাও</span><br><button onclick="copyBkash()" class="bigBtn" style="background:#e11d48;color:#fff;margin-top:8px">📋 কপি করো</button></div>
@@ -176,16 +160,16 @@ function removeCart(i){cart.splice(i,1);render();openCart();}
 function placeOrder(total){let n=document.getElementById('cName').value;let ph=document.getElementById('cPhone').value;let a=document.getElementById('cAddr').value;let tr=document.getElementById('trxId').value;if(!n||!ph||!a){alert("নাম, মোবাইল, ঠিকানা দাও!");return;}let o={id:Date.now(),name:n,phone:ph,addr:a,trx:tr,items:cart.map(c=>c.name).join(", "),total:total,pay:selectedPay};orders.unshift(o);cart=[];render();renderOrders();closeModal('cartModal');alert("✅ অর্ডার হয়ে গেছে! ID: "+o.id);}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function openAdmin(){
- let saved=localStorage.getItem('mydress_admin_pass');
+ let saved=localStorage.getItem('myonlineshop_admin_pass');
  if(!saved){
   let np=prompt("🔐 প্রথমবার Admin!\nতোমার নিজের Secret পাসওয়ার্ড বানাও (কমপক্ষে ৪ অক্ষর):");
   if(!np||np.length<4){alert("৪ অক্ষরের বেশি দাও!");return;}
-  localStorage.setItem('mydress_admin_pass',np); saved=np; alert("✅ তোমার Secret পাসওয়ার্ড সেভ হয়ে গেছে!");
+  localStorage.setItem('myonlineshop_admin_pass',np); saved=np; alert("✅ তোমার Secret পাসওয়ার্ড সেভ হয়ে গেছে!");
  }
  let en=prompt("🔐 Admin পাসওয়ার্ড দাও:");
  if(en!==saved){alert("❌ ভুল পাসওয়ার্ড!");return;}
- document.getElementById('adminBox').innerHTML=`<h3>🔐 Admin - My Dress (শুধু তুমি)</h3><input id="pName" placeholder="প্রোডাক্ট নাম"><select id="pCat"><option value="korean">🇰🇷 Korean</option><option value="beauty">💄 কসমেটিক্স</option><option value="gun">🔫 গান</option><option value="toy">🧸 খেলনা</option><option value="drone">🚁 ড্রোন</option><option value="electronic">🎧 ইলেকট্রনিক</option><option value="home">🏠 ঘরের জিনিস</option><option value="fashion">👗 ফ্যাশন</option></select><input id="pPrice" type="number" placeholder="দাম"><input id="pOld" type="number" placeholder="আগের দাম"><select id="pEmoji"><option value="📦">📦 বাক্স</option><option value="💄">💄 কসমেটিক্স</option><option value="🔫">🔫 গান</option><option value="🚁">🚁 ড্রোন</option><option value="🎧">🎧 ইয়ারফোন</option><option value="👗">👗 ড্রেস</option><option value="🧴">🧴 লোশন</option><option value="⌚">⌚ ঘড়ি</option></select><button onclick="addProduct()" class="bigBtn" style="background:#22c55e;color:#fff">➕ প্রোডাক্ট যোগ করো</button><hr><h4>📦 অর্ডার লিস্ট</h4><div id="orderList">এখনো অর্ডার নাই</div><button onclick="changePass()" class="bigBtn" style="background:#111;color:#fff;margin-top:10px">🔑 পাসওয়ার্ড বদলাও</button>`;
+ document.getElementById('adminBox').innerHTML=`<h3>🔐 Admin - My Online Shop (শুধু তুমি)</h3><input id="pName" placeholder="প্রোডাক্ট নাম"><select id="pCat"><option value="fashion">👕 ফ্যাশন</option><option value="beauty">💄 বিউটি</option><option value="electronic">🎧 ইলেকট্রনিক</option><option value="home">🏠 ঘরের জিনিস</option><option value="toy">🧸 খেলনা</option><option value="drone">🚁 ড্রোন</option></select><input id="pPrice" type="number" placeholder="দাম"><input id="pOld" type="number" placeholder="আগের দাম"><select id="pEmoji"><option value="📦">📦 বাক্স</option><option value="👕">👕 টি-শার্ট</option><option value="🎧">🎧 ইয়ারফোন</option><option value="🚁">🚁 ড্রোন</option><option value="💄">💄 কসমেটিক্স</option><option value="⌚">⌚ ঘড়ি</option></select><button onclick="addProduct()" class="bigBtn" style="background:#22c55e;color:#fff">➕ প্রোডাক্ট যোগ করো</button><hr><h4>📦 অর্ডার লিস্ট</h4><div id="orderList">এখনো অর্ডার নাই</div><button onclick="changePass()" class="bigBtn" style="background:#111;color:#fff;margin-top:10px">🔑 পাসওয়ার্ড বদলাও</button>`;
  document.getElementById('adminModal').classList.add('open'); renderOrders();
 }
-function changePass(){let np=prompt("নতুন Secret পাসওয়ার্ড দাও:"); if(np&&np.length>=4){localStorage.setItem('mydress_admin_pass',np);alert("✅ পাসওয়ার্ড বদলে গেছে!");} else alert("৪ অক্ষরের বেশি দাও!");}
-function addProduct(){let n=document.getElementById('pName').value;let pr=parseInt(document.getElementById(
+function changePass(){let np=prompt("নতুন Secret পাসওয়ার্ড দাও:"); if(np&&np.length>=4){localStorage.setItem('myonlineshop_admin_pass',np);alert("✅ পাসওয়ার্ড বদলে গেছে!");} else alert("৪ অক্ষরের বেশি দাও!");}
+function addProduct(){let n=document.getElementById('pName').value;let pr=parseInt(document.getElementById('pPrice').value)||0;let ol=parseInt(document.getElementById('pOld').value)||pr*2;let em=document.getElementById('pEmoji').value;if(!n||!pr){alert("নাম আর দাম দাও");return;}let off=Math.round((1-pr/ol)*100);products.unshift({name:n,p
