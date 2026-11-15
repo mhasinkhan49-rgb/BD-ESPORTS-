@@ -148,52 +148,7 @@ render(); updateUI();
     <p style="font-size:13px;color:#666">⚠️ আমরা কখনো আপনার Password চাইবো না। শুধু TrxID দিবেন।</p>
   </div>
 </div>
-
-<script>
-// ===== 10 TAKA LOCK + AI CHECK SYSTEM =====
-let lockStore = JSON.parse(localStorage.getItem('freeearn_lock') || '{"unlocked":false,"pendingTrx":"","status":"locked"}');
-let mainStore = JSON.parse(localStorage.getItem('freeearn_v2') || '{"wallet":0}');
-
-function checkLock(){
-  if(lockStore.unlocked){
-    document.getElementById('lockScreen').style.display='none';
-  } else {
-    document.getElementById('lockScreen').style.display='flex';
-    if(lockStore.pendingTrx){
-      let s=document.getElementById('aiStatus'); s.style.display='block';
-      s.innerHTML='🤖 AI Checking...<br>TrxID: '+lockStore.pendingTrx+'<br>⏳ আমাদের কাছে এখনো টাকা আসে নাই / Admin চেক করতেছে। Admin Approve করলেই Wallet খুলে যাবে।';
-    }
-  }
-}
-
-function send10Taka(){
-  let tr=document.getElementById('testTrx').value.trim();
-  if(!tr){alert('TrxID দাও! ১০ টাকা পাঠিয়ে TrxID টা দাও।'); return;}
-  lockStore.pendingTrx=tr; lockStore.status='pending';
-  // Admin এর জন্য Request save - আগের freeearn_v2 তে
-  let all=JSON.parse(localStorage.getItem('freeearn_v2') || '{"wallet":0,"orders":[],"withdraws":[],"topups":[]}');
-  if(!all.topups) all.topups=[];
-  all.topups.unshift({amt:10, trx:tr, type:'10 TAKA TEST - UNLOCK', time:new Date().toLocaleString()});
-  localStorage.setItem('freeearn_v2', JSON.stringify(all));
-  localStorage.setItem('freeearn_lock', JSON.stringify(lockStore));
-  let s=document.getElementById('aiStatus'); s.style.display='block';
-  s.innerHTML='🤖 AI Checking... TrxID: '+tr+'<br>⏳ দাঁড়াও... Admin চেক করতেছে।<br>টাকা আসলে Automatic Wallet এ ১০ টাকা যোগ হয়ে যাবে।';
-  // 3 সেকেন্ড পর AI Status দেখাবে
-  setTimeout(()=>{
-    s.innerHTML='🤖 AI Check Result:<br>⏳ আমাদের কাছে এখনো টাকা আসে নাই / Admin এখনো Approve করে নাই।<br>Admin বিকাশ App এ দেখে Approve করলেই তোমার Wallet খুলে যাবে। একটু অপেক্ষা করো।';
-  },3000);
-  alert('✅ Request গেছে Admin এর কাছে! Admin চেক করে Approve করলেই Lock খুলে যাবে।');
-}
-
-// ===== ADMIN এ এই ফাংশনটা যোগ করো - Admin Panel এ দেখাবে =====
-function adminApprove10Taka(trx){
-  // Admin যখন Approve চাপবে
-  lockStore.unlocked=true; lockStore.status='unlocked'; lockStore.pendingTrx='';
-  localStorage.setItem('freeearn_lock', JSON.stringify(lockStore));
-  let all=JSON.parse(localStorage.getItem('freeearn_v2') || '{"wallet":0}');
-  all.wallet=(all.wallet||0)+10;
-  localStorage.setItem('freeearn_v2', JSON.stringify(all));
-  document.getElementById('lockScreen').style.display='none';
+='none';
   alert('✅ ১০ টাকা Approve! ইউজারের Wallet এ ১০ টাকা যোগ হয়ে Lock খুলে গেছে। ইউজার এখন বুঝতে পারবে টাকা আসছে।');
   location.reload();
 }
@@ -205,3 +160,105 @@ function adminReject10Taka(){
 }
 checkLock();
 </script>
+<!-- ===== GMAIL LOGIN + ADMIN SEND MONEY SYSTEM ===== -->
+<style>
+.loginScreen{position:fixed;inset:0;background:#0f172a;z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
+.loginBox{background:#fff;color:#000;border-radius:18px;padding:20px;width:100%;max-width:420px;text-align:center}
+.userBar{background:#1e293b;border:1px solid #334155;padding:10px 12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin:10px}
+</style>
+
+<!-- GMAIL LOGIN SCREEN - আগে এটাই আসবে -->
+<div id="loginScreen" class="loginScreen">
+  <div class="loginBox">
+    <div style="font-size:50px">📧</div>
+    <h2 style="margin:4px 0">Free Earn BD</h2>
+    <p style="color:#666">Account খুলতে Gmail দিয়ে Login করো</p>
+    <div style="background:#fef9c3;padding:12px;border-radius:12px;font-weight:bold">⚠️ আমরা কখনো তোমার Gmail Password চাইবো না।<br>শুধু Gmail ঠিকানা দিলেই হবে।</div>
+    <input id="loginGmail" type="email" placeholder="তোমার Gmail দাও - যেমন: rakib@gmail.com" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:12px 0;font-size:16px">
+    <input id="loginName" placeholder="তোমার নাম দাও" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:0 0 12px;font-size:16px">
+    <button onclick="doGmailLogin()" style="width:100%;padding:15px;border:0;border-radius:10px;background:#dc2626;color:#fff;font-weight:bold;font-size:17px">📧 Gmail দিয়ে Login করো</button>
+    <p style="font-size:13px;color:#666">Login করলে Admin বুঝতে পারবে এই Request কোন Account থেকে আসছে।</p>
+  </div>
+</div>
+
+<!-- উপরে কার Account দেখাবে -->
+<div id="userBar" class="userBar" style="display:none">
+  <div>👤 <b id="showUserName">User</b><br><span id="showUserGmail" style="font-size:13px;color:#94a3b8">gmail</span></div>
+  <button onclick="logoutGmail()" style="border:0;padding:8px 12px;border-radius:8px;background:#ef4444;color:#fff;font-weight:bold">Logout</button>
+</div>
+
+<script>
+// ===== GMAIL LOGIN SYSTEM =====
+let user = JSON.parse(localStorage.getItem('freeearn_user') || 'null');
+
+function checkLogin(){
+  if(!user){
+    document.getElementById('loginScreen').style.display='flex';
+    document.getElementById('userBar').style.display='none';
+  } else {
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('userBar').style.display='flex';
+    document.getElementById('showUserName').innerText = user.name;
+    document.getElementById('showUserGmail').innerText = user.gmail;
+  }
+}
+function doGmailLogin(){
+  let gmail = document.getElementById('loginGmail').value.trim().toLowerCase();
+  let name = document.getElementById('loginName').value.trim();
+  if(!gmail || !gmail.includes('@gmail.com')){ alert('সঠিক Gmail দাও! যেমন: rakib@gmail.com'); return; }
+  if(!name){ alert('নাম দাও!'); return; }
+  user = {gmail: gmail, name: name, joined: new Date().toLocaleString()};
+  localStorage.setItem('freeearn_user', JSON.stringify(user));
+  // Admin এর জন্য User List এ save
+  let all = JSON.parse(localStorage.getItem('freeearn_v2') || '{"wallet":0,"orders":[],"withdraws":[],"topups":[],"users":[]}');
+  if(!all.users) all.users=[];
+  if(!all.users.find(u=>u.gmail==gmail)) all.users.push(user);
+  localStorage.setItem('freeearn_v2', JSON.stringify(all));
+  alert('✅ Welcome '+name+'! Login হয়ে গেছে। এখন তুমি ১০ টাকা দিয়ে চেক করতে পারবা।');
+  checkLogin();
+  // Login এর পর Lock Screen দেখাবে - ১০ টাকা না দিলে
+  if(typeof checkLock==='function') checkLock();
+}
+function logoutGmail(){
+  if(!confirm('Logout করবা?')) return;
+  localStorage.removeItem('freeearn_user');
+  user=null; checkLogin();
+}
+
+// ===== এখন থেকে প্রত্যেক Request এর সাথে Gmail যাবে =====
+function attachGmailToRequest(obj){
+  if(user){ obj.gmail=user.gmail; obj.userName=user.name; }
+  return obj;
+}
+
+// Admin এ Gmail দিয়ে টাকা পাঠানো - Admin Panel এ এইটা দেখবে
+function adminSendMoneyToUser(gmail){
+  let amt = prompt(gmail+' এর Wallet এ কত টাকা পাঠাবা?');
+  if(!amt || isNaN(amt)) return;
+  amt = parseInt(amt);
+  // এই মোবাইলে ওই ইউজার হলে Wallet এ যোগ হবে
+  // আর Admin Log এ থাকবে
+  let all = JSON.parse(localStorage.getItem('freeearn_v2') || '{"wallet":0}');
+  all.wallet = (all.wallet||0) + amt;
+  if(!all.adminLogs) all.adminLogs=[];
+  all.adminLogs.unshift({to:gmail, amt:amt, time:new Date().toLocaleString(), by:'Admin'});
+  localStorage.setItem('freeearn_v2', JSON.stringify(all));
+  alert('✅ '+gmail+' কে ৳'+amt+' পাঠানো হয়েছে! ওর Wallet এ যোগ হয়ে গেছে।');
+  location.reload();
+}
+
+// Admin Panel এ User List দেখানোর জন্য - তোমার Admin Box এ বসাও
+function getAdminUserListHTML(){
+  let all = JSON.parse(localStorage.getItem('freeearn_v2') || '{"users":[]}');
+  let users = all.users || [];
+  if(users.length==0) return 'কোনো User এখনো Login করে নাই';
+  return users.map(u=>`
+    <div style="background:#fff;border:1px solid #ddd;padding:10px;border-radius:10px;margin:6px 0">
+      👤 <b>${u.name}</b><br>📧 ${u.gmail}<br><span style="font-size:12px">Join: ${u.joined}</span><br>
+      <button onclick="adminSendMoneyToUser('${u.gmail}')" style="width:100%;padding:10px;border:0;border-radius:8px;background:#22c55e;color:#fff;font-weight:bold;margin-top:6px">💰 এই Gmail এর Wallet এ টাকা পাঠাও</button>
+    </div>
+  `).join('');
+}
+
+checkLogin();
+ </script>
