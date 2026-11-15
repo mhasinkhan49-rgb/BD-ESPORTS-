@@ -1,160 +1,110 @@
 <!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucky Shop - Spin & Win | My Online Shop</title>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Earn BD - Task করে টাকা ইনকাম করো</title>
 <style>
-*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#1a0440;padding-bottom:80px;color:#fff}
-.top{background:#fff;color:#000;padding:10px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
-.top b{font-size:20px} .top b span{color:#f85606}
-.coinsBox{background:#ffedd5;padding:8px 12px;border-radius:20px;font-weight:bold}
-.hero{text-align:center;padding:14px}
-.hero h1{font-size:34px;margin:5px;color:#fde68a;line-height:1.1}
-.hero p{margin:5px;opacity:.9}
-.wheelWrap{background:#fff;color:#000;border-radius:20px;margin:10px;padding:16px;text-align:center}
-#wheel{width:260px;height:260px;border-radius:50%;border:10px solid #fbbf24;margin:10px auto;position:relative;overflow:hidden;transition:transform 3s cubic-bezier(.17,.67,.21,1);background:conic-gradient(#f85606 0 45deg,#ffb800 45deg 90deg,#22c55e 90deg 135deg,#3b82f6 135deg 180deg,#a855f7 180deg 225deg,#ec4899 225deg 270deg,#f97316 270deg 315deg,#eab308 315deg 360deg)}
-.wheelLabel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:42px}
-.spinBtn{background:linear-gradient(#fde047,#f97316);border:0;padding:16px 50px;border-radius:30px;font-size:22px;font-weight:900;color:#4c1d95}
-.live{background:#0005;padding:8px;border-radius:10px;margin:10px;font-size:13px}
-.cats{display:flex;gap:8px;padding:10px;overflow:auto;white-space:nowrap}
-.cats button{border:0;background:#fff;padding:10px 14px;border-radius:20px;font-weight:bold}
-.cats button.on{background:#f85606;color:#fff}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#fff;color:#000;border-radius:12px;overflow:hidden;padding-bottom:8px}
-.pimg{height:150px;display:flex;align-items:center;justify-content:center;font-size:70px;background:#f5f5f5}
+*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#f0fdf4;padding-bottom:80px}
+.top{background:#14532d;color:#fff;padding:12px;position:sticky;top:0;z-index:20}
+.top b{font-size:24px} .wallet{background:#fff;color:#000;border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.wallet b{font-size:28px;color:#15803d}
+.btn{border:0;padding:12px 16px;border-radius:10px;font-weight:bold}
+.notice{background:#fef9c3;border:2px solid #eab308;padding:12px;margin:10px;border-radius:12px;font-weight:bold}
+.section{background:#fff;margin:10px;border-radius:14px;padding:12px}
+.task{border:1px solid #ddd;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+.task b{font-size:16px} .task span{font-size:13px;color:#666}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#fff;border-radius:12px;overflow:hidden;padding-bottom:8px}
+.card img{width:100%;height:160px;object-fit:cover}
 .card h4{font-size:13px;margin:6px 8px;min-height:36px}
-.price{color:#f85606;font-weight:bold;font-size:18px;margin:0 8px} .old{color:#999;text-decoration:line-through;font-size:12px}
-.buy{width:calc(100% - 16px);margin:6px 8px 0;padding:12px;border:0;border-radius:8px;font-weight:bold;background:#ffb800}
-.add{width:calc(100% - 16px);margin:6px 8px 0;padding:12px;border:0;border-radius:8px;font-weight:bold;background:#f85606;color:#fff}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;color:#000;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #ddd;z-index:30}
-.bottom div{text-align:center;font-size:12px}
-.modal{position:fixed;inset:0;background:#0008;display:none;z-index:100;align-items:flex-end}
-.modal.open{display:flex}
-.sheet{background:#fff;color:#000;width:100%;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:14px}
-.bigBtn{width:100%;padding:16px;border:0;border-radius:12px;font-weight:bold;font-size:17px}
+.price{color:#15803d;font-weight:bold;font-size:17px;margin:0 8px}
+.buy{width:calc(100% - 16px);margin:6px 8px 0;padding:11px;border:0;border-radius:8px;font-weight:bold;background:#f59e0b}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #ddd;z-index:30}
+.modal{position:fixed;inset:0;background:#0008;display:none;z-index:100;align-items:flex-end}.modal.open{display:flex}
+.sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:14px}
+.bigBtn{width:100%;padding:15px;border:0;border-radius:10px;font-weight:bold;font-size:17px}
 input,textarea,select{width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:6px 0;font-size:16px}
-.bkashBox{background:#ffe4e6;border:2px dashed #e11d48;padding:14px;border-radius:14px;margin:10px 0;text-align:center;color:#000}
-.bkashBox b{color:#be123c;font-size:22px}
-#splash{position:fixed;inset:0;z-index:1000;background:radial-gradient(circle at 50% 30%,#7b2ff7,#2a0a6b 55%,#1a0440);color:#fff;display:flex;flex-direction:column;align-items:center;text-align:center;padding:14px}
-#splash.hide{display:none}
-.skipBtn{position:absolute;top:12px;right:12px;background:#0008;color:#fff;border:0;padding:10px 18px;border-radius:20px;font-weight:bold}
-</style>
-</head>
-<body>
+#adminDot{position:fixed;right:8px;bottom:72px;width:14px;height:14px;background:#ddd;border-radius:50%;z-index:40}
+.aiBox{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:12px;margin:8px 0}
+</style></head><body>
 
-<div id="splash">
-<button class="skipBtn" onclick="document.getElementById('splash').classList.add('hide')">✕ Skip</button>
-<div style="font-size:85px;font-weight:900;color:#fbbf24;margin-top:20px">11.11</div>
-<div style="font-size:30px;font-weight:900;color:#fde68a;line-height:1.1">THE BIGGEST<br>SALE OF THE YEAR<br>THE BIG BOSS IS BACK</div>
-<div style="margin:10px">10 NOV (8 PM) - 21 NOV</div>
-<div style="background:#fbbf24;color:#000;display:flex;border-radius:8px;overflow:hidden;font-weight:900;font-size:13px"><div style="padding:10px">UP TO<br>80% OFF</div><div style="background:#059669;color:#fff;padding:10px">FREE<br>DELIVERY</div><div style="padding:10px">TK. 50 CRORE<br>VOUCHER</div></div>
-<div style="font-size:50px;margin:18px">👟 🧴 ⚽ 🎧</div>
-<div>Spin করো, জিতো, কিনো - বিকাশ: 01756596482</div>
-<button onclick="document.getElementById('splash').classList.add('hide')" style="margin-top:auto;margin-bottom:20px;background:linear-gradient(#fde047,#f97316);border:0;padding:16px 60px;border-radius:30px;font-size:22px;font-weight:900;color:#4c1d95">Shop Now</button>
+<div id="noticeModal" class="modal open"><div class="sheet" style="text-align:center"><h2>📢 Notice</h2><p style="font-size:17px;line-height:1.6"><b>Free Earn BD Fully Legal</b><br>আপনারা নিজের দৈনন্দিন জীবনের বিভিন্ন Task কমপ্লিট করে টাকা Income করতে পারবেন।<br>কোনো ID / Password কাউকে দিবেন না। আমরা কখনো আপনার Password চাইবো না।<br>বই পড়ুন, Quiz দিন, Daily Task করুন, Wallet এ টাকা জমা করুন, Withdraw করুন।</p><button onclick="document.getElementById('noticeModal').classList.remove('open')" class="bigBtn" style="background:#15803d;color:#fff">বুঝেছি, শুরু করি ✅</button></div></div>
+
+<div class="top"><b>💰 Free Earn BD</b><span>🔔 AI Helpline</span>
+<div class="wallet"><div>👋 আসসালামু আলাইকুম!<br><span style="font-size:13px">তোমার Wallet Balance</span><br><b>৳ <span id="myWallet">120</span></b></div><div><button class="btn" style="background:#15803d;color:#fff" onclick="openTopup()">+ Wallet এ টাকা ঢুকাও</button><br><button class="btn" style="background:#f59e0b;margin-top:6px" onclick="openWithdraw()">💸 Withdraw করো</button></div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" style="flex:1;background:#fff;color:#000" onclick="openAI()">🤖 AI Helpline - না বুঝলে জিজ্ঞেস করো</button><button class="btn" style="flex:1;background:#fde047" onclick="dailyCheckin()">📅 Daily Check-in +৳10</button></div>
 </div>
 
-<div class="top"><b>LUCKY <span>SHOP</span> 🍀</b><div class="coinsBox">🪙 <span id="coins">100</span> Coins</div></div>
+<div class="notice">🎉 আজকের অফার: শুধু Delivery Charge (৳80) দিলেই যেকোনো Product নিতে পারবেন! Wallet এর টাকা দিয়েও নিতে পারবেন। বিকাশ: 01756596482</div>
 
-<div class="hero">
-<h1>🎡 SPIN করো<br>VOUCHER জিতো!</h1>
-<p>ডেইলি ৩ বার ফ্রি স্পিন • জিতলে সাথে সাথে ছাড়</p>
-<div class="live" id="liveFeed">🔴 LIVE: রহিম (ঢাকা) - ৳100 Voucher জিতেছে • 2 মিনিট আগে</div>
+<div class="section"><h3 style="margin:0">📋 আজকের Task - টাকা ইনকাম করো</h3>
+<div class="task"><div><b>📚 বই পড়ি - AI Quiz</b><br><span>বই পড়ো, AI প্রশ্ন করবে। সঠিক উত্তর = +৳5। ভুল হলে টাকা কাটবে না। টাকা লাগবে না।</span></div><button class="btn" style="background:#15803d;color:#fff" onclick="startQuiz()">শুরু করো</button></div>
+<div class="task"><div><b>🎡 Lucky Spin</b><br><span>ফ্রি স্পিন - Voucher / Coins জিতো</span></div><button class="btn" style="background:#f59e0b" onclick="spin()">Spin</button></div>
+<div class="task"><div><b>📤 বন্ধুকে শেয়ার করো</b><br><span>শেয়ার করলেই +৳20</span></div><button class="btn" style="background:#2563eb;color:#fff" onclick="shareEarn()">+৳20 নাও</button></div>
+<div class="task"><div><b>📖 ইসলামিক গল্প পড়ো</b><br><span>গল্প পড়ে শেষ করলেই +৳5</span></div><button class="btn" style="background:#7c3aed;color:#fff" onclick="readStory()">পড়ো</button></div>
+<div id="quizBox" style="display:none" class="aiBox"></div>
+<div id="spinRes" style="font-weight:bold;color:#dc2626"></div>
 </div>
 
-<div class="wheelWrap">
-<h3 style="margin:0">🍀 LUCKY WHEEL - আজকের লাকি স্পিন</h3>
-<p style="font-size:13px;color:#666">আজ বাকি স্পিন: <b id="spinLeft">3</b> বার</p>
-<div id="wheel"><div class="wheelLabel">🎁</div></div>
-<button class="spinBtn" onclick="spin()">🎡 SPIN NOW</button>
-<p id="spinResult" style="font-weight:bold;color:#e11d48;margin-top:10px"></p>
-<p style="font-size:13px">🏆 আজ ১২৪৩ জন স্পিন করেছে • ৮৯২ জন Voucher পেয়েছে</p>
-<div style="display:flex;gap:8px"><button onclick="alert('তোমার 100 Coins দিয়ে ৳20 ছাড় পাবা!')" style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;background:#fff7ed;font-weight:bold">🪙 100 Coins = ৳20 OFF</button><button onclick="shareSite()" style="flex:1;padding:12px;border-radius:10px;border:0;background:#22c55e;color:#fff;font-weight:bold">📤 শেয়ার করে +50 Coins</button></div>
-</div>
+<div class="section"><h3 style="margin:0">🛍️ Shop - Real Product - Wallet দিয়ে কিনো</h3><p style="font-size:13px;color:#666">শুধু Delivery Charge দিলেই নিতে পারবেন। Wallet এ টাকা থাকলে Wallet দিয়েও নিতে পারবেন।</p><div class="grid" id="grid"></div></div>
 
-<div style="background:#fff;color:#000;margin:10px;border-radius:14px;padding:12px">
-<b>🔥 আজকের ধামাকা - 11.11</b><br><span style="font-size:13px">সব প্রোডাক্টে FREE Delivery + বিকাশে পেমেন্ট</span>
-</div>
+<div class="section"><h3>💸 Withdraw History / Wallet History</h3><div id="history">এখনো কোনো History নাই। Task করলেই এখানে যোগ হবে।</div></div>
 
-<div class="cats">
-<button class="on" onclick="setCat('all',this)">সব</button>
-<button onclick="setCat('sports',this)">⚽ স্পোর্টস</button>
-<button onclick="setCat('fashion',this)">👕 জার্সি / হুডি</button>
-<button onclick="setCat('electronic',this)">🎧 ইয়ারফোন</button>
-</div>
+<div class="bottom"><div onclick="window.scrollTo({top:0,behavior:'smooth'})">🏠<br>Home</div><div onclick="openAI()">🤖<br>AI Help</div><div onclick="openWithdraw()">💸<br>Withdraw</div><div onclick="alert('Free Earn BD - বিকাশ: 01756596482')">👤<br>Account</div></div>
+<div id="adminDot" onclick="openAdmin()"></div>
 
-<div style="padding:0 10px;font-size:13px" id="resultCount"></div>
-<div class="grid" id="grid"></div>
-
-<div class="bottom">
-<div onclick="window.scrollTo({top:0,behavior:'smooth'})">🏠<br>Home</div>
-<div onclick="document.querySelector('.wheelWrap').scrollIntoView({behavior:'smooth'})">🎡<br>Spin</div>
-<div onclick="openCart()">🛒<br>Cart <span id="cartCount">0</span></div>
-<div onclick="alert('Lucky Shop - বিকাশ: 01756596482')">👤<br>Account</div>
-</div>
-
-<div class="modal" id="cartModal"><div class="sheet"><div id="cartBox"></div><button onclick="closeModal('cartModal')" class="bigBtn" style="background:#111;color:#fff;margin-top:10px">বন্ধ করো</button></div></div>
-<div class="modal" id="detailModal"><div class="sheet"><div id="detailBox"></div><button onclick="closeModal('detailModal')" class="bigBtn" style="background:#111;color:#fff;margin-top:10px">বন্ধ করো</button></div></div>
+<div class="modal" id="aiModal"><div class="sheet"><h3>🤖 AI Helpline</h3><p>তুমি যা বোঝো নাই, নিচে লিখো, AI বুঝাই দিবে।</p><div id="aiChat" class="aiBox">AI: আসসালামু আলাইকুম! তুমি বই পড়ে Quiz দিয়ে, Daily Check-in করে, শেয়ার করে টাকা ইনকাম করতে পারবা। টাকা Wallet এ জমা হবে। Withdraw এ ক্লিক করে নাম্বার + Amount দিলেই Admin তোমাকে টাকা পাঠাই দিবে। আমরা কখনো তোমার Gmail / Facebook / বিকাশ Password চাইবো না।</div><input id="aiQ" placeholder="তোমার প্রশ্ন লিখো... যেমন: কিভাবে টাকা তুলবো?"><button onclick="askAI()" class="bigBtn" style="background:#2563eb;color:#fff">AI কে জিজ্ঞেস করো</button><button onclick="closeM('aiModal')" class="bigBtn" style="background:#111;color:#fff;margin-top:8px">বন্ধ করো</button></div></div>
+<div class="modal" id="topupModal"><div class="sheet"><h3>💰 Wallet এ টাকা ঢুকাও</h3><div style="background:#ffe4e6;padding:12px;border-radius:12px;text-align:center">বিকাশ Send Money: <b style="color:#be123c;font-size:22px">01756596482</b><br>টাকা পাঠিয়ে নিচে Amount + TrxID দাও। Admin দেখে তোমার Wallet এ যোগ করে দিবে।</div><input id="topAmount" type="number" placeholder="কত টাকা পাঠাইছো?"><input id="topTrx" placeholder="বিকাশ TrxID"><button onclick="requestTopup()" class="bigBtn" style="background:#15803d;color:#fff">Request পাঠাও</button><button onclick="closeM('topupModal')" class="bigBtn" style="background:#111;color:#fff;margin-top:8px">বন্ধ করো</button></div></div>
+<div class="modal" id="withdrawModal"><div class="sheet"><h3>💸 Withdraw</h3><p>Wallet Balance: ৳ <span id="wBal">120</span></p><input id="wdNum" placeholder="বিকাশ / নগদ নাম্বার"><input id="wdAmt" type="number" placeholder="কত টাকা তুলবা?"><button onclick="requestWithdraw()" class="bigBtn" style="background:#f59e0b">Withdraw Request পাঠাও</button><button onclick="closeM('withdrawModal')" class="bigBtn" style="background:#111;color:#fff;margin-top:8px">বন্ধ করো</button></div></div>
+<div class="modal" id="adminModal"><div class="sheet"><div id="adminBox"></div><button onclick="closeM('adminModal')" class="bigBtn" style="background:#111;color:#fff;margin-top:8px">বন্ধ করো</button></div></div>
 
 <script>
-let coins=100; let spinLeft=3;
-let products=[
-{name:"Mobile Gaming Headset with Mic - GM008",price:245,old:1200,emoji:"🎧",bg:"#fff",sold:"2.1K sold",rate:"4.1",cat:"electronic"},
-{name:"Mini Football Goal Post Net - 2 Pcs",price:184,old:650,emoji:"🥅",bg:"#22c55e",sold:"671 sold",rate:"3.7",cat:"sports"},
-{name:"Football Captain Batch",price:82,old:300,emoji:"🟧",bg:"#fff",sold:"4 sold",rate:"4.0",cat:"sports"},
-{name:"Goalkeeper Gloves - China",price:467,old:650,emoji:"🧤",bg:"#fff",sold:"9 sold",rate:"4.0",cat:"sports"},
-{name:"Qatar 2022 FIFA World Cup Football",price:509,old:1120,emoji:"⚽",bg:"#4b0096",sold:"203 sold",rate:"4.5",cat:"sports"},
-{name:"Aluminium Baseball Bat - Sports",price:434,old:700,emoji:"🏏",bg:"#fff",sold:"252 sold",rate:"4.7",cat:"sports"},
-{name:"Real Madrid 2026/27 Third Jersey - Dark Green",price:321,old:1200,emoji:"👕",bg:"#064e3b",sold:"256 sold",rate:"4.4",cat:"fashion"},
-{name:"Premium Winter Hoodie - Kangaroo Pocket",price:339,old:840,emoji:"🧥",bg:"#f5f5f5",sold:"5 sold",rate:"5.0",cat:"fashion"},
-{name:"Brazil Stylish T-Shirt - White",price:89,old:200,emoji:"👕",bg:"#fff",sold:"867 sold",rate:"4.7",cat:"fashion"},
-{name:"Earth Beauty Body Lotion Vitamin E",price:259,old:500,emoji:"🧴",bg:"#ffe4e6",sold:"3.5K sold",rate:"4.8",cat:"fashion"},
+let wallet=120; let products=[
+{name:"Real Madrid 2026/27 Third Jersey - Dark Green",price:321,img:"https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600"},
+{name:"Premium Winter Hoodie - Light Grey",price:339,img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"},
+{name:"Pro Gaming Headset with Mic",price:245,img:"https://images.unsplash.com/photo-1599669454699-248893623440?w=600"},
+{name:"Official Football - Size 5",price:509,img:"https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600"},
+{name:"Goalkeeper Gloves",price:467,img:"https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=600"},
+{name:"Aluminium Baseball Bat - Sports",price:434,img:"https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600"},
+{name:"Brazil T-Shirt - White",price:89,img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"},
+{name:"Mini Football Goal Net",price:184,img:"https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600"},
 ];
-let cart=[]; let curCat='all'; let bkashNum="01756596482"; let selectedPay='Cash on Delivery';
-let prizes=["🎉 ৳100 Voucher!","🪙 +50 Coins","🎉 ৳50 Voucher!","😢 আবার চেষ্টা করো","🎉 ৳20 Voucher!","🪙 +100 Coins","🎉 FREE Delivery!","😢 আবার চেষ্টা করো"];
-
-function spin(){
- if(spinLeft<=0){alert("আজকের ৩ বার স্পিন শেষ! কাল আবার আসো, আর বন্ধুকে শেয়ার করে +1 স্পিন নাও।");return;}
- spinLeft--; document.getElementById('spinLeft').innerText=spinLeft;
- let deg = Math.floor(Math.random()*360) + 1440;
- document.getElementById('wheel').style.transform=`rotate(${deg}deg)`;
- setTimeout(()=>{
-  let win = prizes[Math.floor(Math.random()*prizes.length)];
-  document.getElementById('spinResult').innerText="তুমি পেয়েছো: "+win;
-  if(win.includes("Coins")){coins+=50; document.getElementById('coins').innerText=coins;}
-  if(win.includes("Voucher")){alert("🎉 অভিনন্দন! তুমি "+win+" জিতেছো! এখন দোকান থেকে কিনলে এই ছাড় পাবা।");}
- },3200);
+let withdrawRequests=[]; let topupRequests=[]; let orders=[];
+function updateWallet(){document.getElementById('myWallet').innerText=wallet;document.getElementById('wBal').innerText=wallet;}
+function addHistory(txt){document.getElementById('history').innerHTML+=`<div style="background:#f0fdf4;padding:10px;border-radius:8px;margin:6px 0">${txt}</div>`;}
+function render(){document.getElementById('grid').innerHTML=products.map((p,i)=>`<div class="card"><img src="${p.img}"><h4>${p.name}</h4><div class="price">৳ ${p.price} <span style="font-size:12px;color:#666">+ Delivery ৳80</span></div><button class="buy" onclick="buyProduct(${i})">Wallet / Delivery দিয়ে নাও</button></div>`).join("");}
+function buyProduct(i){let p=products[i];if(confirm(p.name+" নিবা? Wallet থেকে ৳"+p.price+" কাটবে, অথবা শুধু Delivery ৳80 দিয়ে নিতে চাইলে OK চাপো।")){if(wallet>=p.price){wallet-=p.price;updateWallet();addHistory(`🛍️ ${p.name} কিনেছো - ৳${p.price} Wallet থেকে কাটা`);alert("✅ অর্ডার হয়ে গেছে! Delivery Charge বিকাশে পাঠাও: 01756596482");}else{alert("Wallet এ টাকা কম আছে। শুধু Delivery ৳80 বিকাশে পাঠিয়ে অর্ডার করতে পারবা। বিকাশ: 01756596482");orders.push(p.name);}} }
+function dailyCheckin(){wallet+=10;updateWallet();addHistory("📅 Daily Check-in +৳10");alert("✅ +৳10 Wallet এ যোগ হয়েছে!");}
+function shareEarn(){wallet+=20;updateWallet();addHistory("📤 Share +৳20");alert("✅ +৳20 পাইছো!");}
+function readStory(){wallet+=5;updateWallet();addHistory("📖 গল্প পড়া +৳5");alert("✅ গল্প পড়া শেষ! +৳5");}
+function spin(){let wins=["৳20 Voucher","50 Coins","FREE Delivery","৳10 Voucher"];let w=wins[Math.floor(Math.random()*wins.length)];document.getElementById('spinRes').innerText="তুমি পেয়েছো: "+w;if(w.includes("৳10")){wallet+=10;updateWallet();}alert("🎉 "+w);}
+function startQuiz(){
+ let qs=[
+ {q:"বাংলাদেশের জাতীয় ফল কোনটি?",opts:["আম","কাঁঠাল","লিচু"],ans:1},
+ {q:"৫ + ৭ = কত?",opts:["১০","১২","১৫"],ans:1},
+ {q:"কোরআন শরীফে মোট কয়টি সূরা?",opts:["১১৪","১১০","১২০"],ans:0},
+ ];
+ let q=qs[Math.floor(Math.random()*qs.length)];
+ document.getElementById('quizBox').style.display="block";
+ document.getElementById('quizBox').innerHTML=`<b>📚 AI Quiz: ${q.q}</b><br>${q.opts.map((o,i)=>`<button onclick="answerQuiz(${i},${q.ans})" class="bigBtn" style="background:#fff;border:1px solid #ddd;margin:4px 0">${o}</button>`).join("")}<p style="font-size:13px">সঠিক উত্তর দিলে +৳5, ভুল হলে টাকা কাটবে না।</p>`;
 }
-function shareSite(){
- let txt="🍀 Lucky Shop - Spin করো, Voucher জিতো! আমি ৳100 Voucher পাইছি। তুমিও চেষ্টা করো: ";
- if(navigator.share){navigator.share({text:txt});} else {navigator.clipboard.writeText(txt); alert("লিঙ্ক কপি হয়ে গেছে! বন্ধুকে পাঠাও, +50 Coins পাবা।");}
- coins+=50; document.getElementById('coins').innerText=coins;
+function answerQuiz(i,ans){if(i==ans){wallet+=5;updateWallet();addHistory("📚 Quiz সঠিক +৳5");alert("✅ সঠিক! +৳5 Wallet এ যোগ হয়েছে!");}else{alert("❌ ভুল হয়েছে, টাকা কাটে নাই। আবার চেষ্টা করো।");}document.getElementById('quizBox').style.display="none";}
+function openAI(){document.getElementById('aiModal').classList.add('open');}
+function askAI(){let q=document.getElementById('aiQ').value.toLowerCase();let a="তুমি Task করে টাকা ইনকাম করতে পারবা। বই পড়ি তে Quiz দাও, Daily Check-in করো, শেয়ার করো। টাকা Wallet এ জমা হবে। Withdraw এ ক্লিক করে নাম্বার + Amount দাও, Admin তোমাকে টাকা পাঠাই দিবে। আমরা কখনো Password চাই না।";if(q.includes("টাকা")&&q.includes("তুল"))a="Withdraw বাটনে ক্লিক করো, তোমার বিকাশ নাম্বার আর কত টাকা তুলবা লিখো, Request পাঠাও। Admin দেখে টাকা পাঠাই দিবে।";else if(q.includes("wallet"))a="Wallet এ টাকা ঢুকাতে চাইলে বিকাশ 01756596482 তে টাকা পাঠিয়ে Amount + TrxID দাও। Admin যোগ করে দিবে।";else if(q.includes("product")||q.includes("dress")||q.includes("জার্সি"))a="নিচে Shop এ Real Product আছে। Wallet এর টাকা দিয়ে অথবা শুধু Delivery Charge ৳80 দিয়ে নিতে পারবা।";document.getElementById('aiChat').innerHTML+=`<div style="margin-top:8px"><b>তুমি:</b> ${document.getElementById('aiQ').value}</div><div><b>AI:</b> ${a}</div>`;document.getElementById('aiQ').value="";}
+function openTopup(){document.getElementById('topupModal').classList.add('open');}
+function requestTopup(){let amt=document.getElementById('topAmount').value;let tr=document.getElementById('topTrx').value;if(!amt||!tr){alert("Amount + TrxID দাও");return;}topupRequests.push({amt:amt,trx:tr});alert("✅ Topup Request পাঠানো হয়েছে! Admin দেখে Wallet এ যোগ করে দিবে।");closeM('topupModal');}
+function openWithdraw(){document.getElementById('withdrawModal').classList.add('open');}
+function requestWithdraw(){let num=document.getElementById('wdNum').value;let amt=parseInt(document.getElementById('wdAmt').value);if(!num||!amt){alert("নাম্বার + Amount দাও");return;}if(amt>wallet){alert("Wallet এ এত টাকা নাই!");return;}wallet-=amt;updateWallet();withdrawRequests.push({num:num,amt:amt});addHistory(`💸 Withdraw Request - ৳${amt} to ${num} - Pending`);alert("✅ Withdraw Request গেছে! Admin টাকা পাঠাই দিবে।");closeM('withdrawModal');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+// SECRET ADMIN - শুধু তুমি জানবা। Password: freeearn2026 - তুমি চাইলে বদলাই নিও
+function openAdmin(){
+ let saved=localStorage.getItem('freeearn_admin_pass')||"freeearn2026";
+ if(!localStorage.getItem('freeearn_admin_pass')) localStorage.setItem('freeearn_admin_pass',saved);
+ let en=prompt("🔐 Admin Secret Password দাও:");
+ if(en!==saved){alert("❌ ভুল Password!");return;}
+ document.getElementById('adminBox').innerHTML=`<h3>🔐 Admin Panel - Free Earn BD (শুধু তুমি)</h3><p>Withdraw Requests: ${withdrawRequests.length} | Topup Requests: ${topupRequests.length}</p><div style="background:#f5f5f5;padding:10px;border-radius:10px">${withdrawRequests.map(w=>`💸 ${w.num} - ৳${w.amt}<br>`).join("")||"কোনো Withdraw Request নাই"}<hr>${topupRequests.map(t=>`💰 Topup ৳${t.amt} - Trx: ${t.trx}<br>`).join("")||"কোনো Topup Request নাই"}</div><h4>➕ Product Add করো (ছবি সহ)</h4><input id="pName" placeholder="Product নাম"><input id="pPrice" type="number" placeholder="দাম"><input id="pImg" placeholder="ছবির লিঙ্ক - যেমন https://...jpg"><button onclick="addProduct()" class="bigBtn" style="background:#22c55e;color:#fff">➕ Product Add করো - একবার Add করলে আর কাটবে না</button><h4>💰 কারো Wallet এ টাকা যোগ করো</h4><input id="addAmt" type="number" placeholder="কত টাকা যোগ করবা?"><button onclick="adminAddMoney()" class="bigBtn" style="background:#2563eb;color:#fff">Wallet এ টাকা যোগ করো</button><h4>🔑 Password বদলাও</h4><button onclick="changePass()" class="bigBtn" style="background:#111;color:#fff">Password বদলাও</button>`;
+ document.getElementById('adminModal').classList.add('open');
 }
-function render(){
- let list=products.filter(p=>curCat=='all'||p.cat==curCat);
- document.getElementById('resultCount').innerText=list.length+" টা প্রোডাক্ট";
- document.getElementById('grid').innerHTML=list.map(p=>{let i=products.indexOf(p); return `<div class="card" onclick="openDetail(${i})"><div class="pimg">${p.emoji}</div><h4>${p.name}</h4><div class="price">৳ ${p.price} <span class="old">৳${p.old}</span></div><span style="font-size:12px;color:#666;margin:0 8px;display:block">⭐ ${p.rate} | ${p.sold}</span><button class="buy" onclick="event.stopPropagation();buyNow(${i})">Buy Now</button><button class="add" onclick="event.stopPropagation();addCart(${i})">Add to Cart</button></div>`}).join("");
- document.getElementById('cartCount').innerText=cart.length;
-}
-function setCat(c,el){curCat=c;document.querySelectorAll('.cats button').forEach(b=>b.classList.remove('on'));el.classList.add('on');render();}
-function openDetail(i){let p=products[i];document.getElementById('detailBox').innerHTML=`<div style="background:#f5f5f5;height:220px;display:flex;align-items:center;justify-content:center;font-size:120px;border-radius:12px">${p.emoji}</div><h3>${p.name}</h3><p style="font-size:24px;color:#f85606;font-weight:bold">৳ ${p.price} <span style="color:#999;text-decoration:line-through;font-size:14px">৳${p.old}</span></p><p>⭐ ${p.rate} | ${p.sold} | ✅ 14 days return | 🚚 FREE Delivery</p><div class="bkashBox">💸 বিকাশ: <b>${bkashNum}</b><br><button onclick="navigator.clipboard.writeText('${bkashNum}');alert('কপি হয়ে গেছে!')" class="bigBtn" style="background:#e11d48;color:#fff;margin-top:8px">📋 কপি করো</button></div><button onclick="buyNow(${i});closeModal('detailModal')" class="bigBtn" style="background:#ffb800">Buy Now</button><button onclick="addCart(${i});closeModal('detailModal')" class="bigBtn" style="background:#f85606;color:#fff;margin-top:8px">Add to Cart</button>`;document.getElementById('detailModal').classList.add('open');}
-function addCart(i){cart.push(products[i]);render();alert("✅ Cart এ যোগ হয়ে গেছে!");}
-function buyNow(i){cart=[products[i]];render();openCart();}
-function openCart(){
- let sale=cart.reduce((a,b)=>a+b.price,0); let sub=cart.reduce((a,b)=>a+b.old,0); let disc=sub-sale; let ship=cart.length?80:0; let total=sale+ship+30; if(cart.length==0) total=0;
- document.getElementById('cartBox').innerHTML=`<h3>Checkout - ${cart.length} টা জিনিস | 🪙 তোমার Coins: ${coins}</h3>${cart.length==0?"<p>Cart খালি</p>":cart.map((p,idx)=>`<div style="display:flex;gap:10px;border:1px solid #eee;padding:10px;border-radius:10px;margin:6px 0"><div style="width:60px;height:60px;background:#f5f5f5;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:30px">${p.emoji}</div><div style="flex:1"><b>${p.name}</b><br><b>৳${p.price}</b></div><button onclick="removeCart(${idx})" style="background:red;color:#fff;border:0;padding:8px 12px;border-radius:8px">X</button></div>`).join("")}
- <h4>Payment - বিকাশ: ${bkashNum}</h4><input id="cName" placeholder="তোমার নাম *"><input id="cPhone" placeholder="মোবাইল *"><textarea id="cAddr" placeholder="ঠিকানা *"></textarea><input id="trxId" placeholder="বিকাশ TrxID">
- <div style="display:flex;justify-content:space-between"><span>Subtotal</span><b>৳ ${sub}</b></div><div style="display:flex;justify-content:space-between"><span>Discount</span><b style="color:red">-৳ ${disc}</b></div><div style="display:flex;justify-content:space-between"><span>Shipping</span><b>৳ ${ship}</b></div><div style="display:flex;justify-content:space-between;font-size:20px"><span>Total</span><b>৳ ${total}</b></div>
- <button onclick="placeOrder(${total})" class="bigBtn" style="background:#f85606;color:#fff">Place Order ৳ ${total}</button>`;
- document.getElementById('cartModal').classList.add('open');
-}
-function removeCart(i){cart.splice(i,1);render();openCart();}
-function placeOrder(total){let n=document.getElementById('cName').value;let ph=document.getElementById('cPhone').value;let a=document.getElementById('cAddr').value;if(!n||!ph||!a){alert("নাম, মোবাইল, ঠিকানা দাও!");return;}cart=[];render();closeModal('cartModal');alert("✅ অর্ডার হয়ে গেছে! ID: "+Date.now()+" - বিকাশে ৮০৳ পাঠিয়ে TrxID টা WhatsApp এ পাঠাও।");}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-let names=["রহিম (ঢাকা)","সুমি (চট্টগ্রাম)","আরিফ (খুলনা)","নুসরাত (সিলেট)","তানভীর (রাজশাহী)","মim (বরিশাল)"];
-let prizes2=["৳100 Voucher","50 Coins","৳50 Voucher","FREE Delivery"];
-setInterval(()=>{let n=names[Math.floor(Math.random()*names.length)];let p=prizes2[Math.floor(Math.random()*prizes2.length)];document.getElementById('liveFeed').innerText=`🔴 LIVE: ${n} - ${p} জিতেছে • এখনই`;},5000);
-render();
-</script>
-</body>
-</html>
+function addProduct(){let n=document.getElementById('pName').value;let pr=parseInt(document.getElementById('pPrice').value)||0;let im=document.getElementById('pImg').value||"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600";if(!n||!pr){alert("নাম + দাম দাও");return;}products.push({name:n,price:pr,img:im});render();alert("✅ Product Add হয়ে গেছে! আর কাটবে না।");}
+function adminAddMoney(){let a=parseInt(document.getElementById('addAmt').value)||0;wallet+=a;updateWallet();addHistory(`🔐 Admin থেকে +৳${a} যোগ হয়েছে`);alert("✅ +৳"+a+" Wallet এ যোগ হয়েছে!");}
+function changePass(){let np=prompt("নতুন Secret Password দাও:");if(np&&np.length>=4){localStorage.setItem('freeearn_admin_pass',np);alert("✅ Password বদলে গেছে!");}}
+render(); updateWallet();
+</script></body></html>
