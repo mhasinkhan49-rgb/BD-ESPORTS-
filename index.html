@@ -148,43 +148,5 @@ render(); updateUI();
     <p style="font-size:13px;color:#666">⚠️ আমরা কখনো আপনার Password চাইবো না। শুধু TrxID দিবেন।</p>
   </div>
 </div>
-='none';
-  alert('✅ ১০ টাকা Approve! ইউজারের Wallet এ ১০ টাকা যোগ হয়ে Lock খুলে গেছে। ইউজার এখন বুঝতে পারবে টাকা আসছে।');
-  location.reload();
-}
-function adminReject10Taka(){
-  lockStore.pendingTrx=''; lockStore.status='locked';
-  localStorage.setItem('freeearn_lock', JSON.stringify(lockStore));
-  alert('❌ টাকা আসে নাই। ইউজারকে Notice দেখাবে: আমাদের কাছে এখনো টাকা আসে নাই।');
-  location.reload();
-}
-checkLock();
-</script>
-<!-- ===== GMAIL LOGIN + ADMIN SEND MONEY SYSTEM ===== -->
-<style>
-.loginScreen{position:fixed;inset:0;background:#0f172a;z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
-.loginBox{background:#fff;color:#000;border-radius:18px;padding:20px;width:100%;max-width:420px;text-align:center}
-.userBar{background:#1e293b;border:1px solid #334155;padding:10px 12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin:10px}
-</style>
-
-<!-- GMAIL LOGIN SCREEN - আগে এটাই আসবে -->
-<div id="loginScreen" class="loginScreen">
-  <div class="loginBox">
-    <div style="font-size:50px">📧</div>
-    <h2 style="margin:4px 0">Free Earn BD</h2>
-    <p style="color:#666">Account খুলতে Gmail দিয়ে Login করো</p>
-    <div style="background:#fef9c3;padding:12px;border-radius:12px;font-weight:bold">⚠️ আমরা কখনো তোমার Gmail Password চাইবো না।<br>শুধু Gmail ঠিকানা দিলেই হবে।</div>
-    <input id="loginGmail" type="email" placeholder="তোমার Gmail দাও - যেমন: rakib@gmail.com" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:12px 0;font-size:16px">
-    <input id="loginName" placeholder="তোমার নাম দাও" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:0 0 12px;font-size:16px">
-    <button onclick="doGmailLogin()" style="width:100%;padding:15px;border:0;border-radius:10px;background:#dc2626;color:#fff;font-weight:bold;font-size:17px">📧 Gmail দিয়ে Login করো</button>
-    <p style="font-size:13px;color:#666">Login করলে Admin বুঝতে পারবে এই Request কোন Account থেকে আসছে।</p>
-  </div>
-</div>
-
-<!-- উপরে কার Account দেখাবে -->
-<div id="userBar" class="userBar" style="display:none">
-  <div>👤 <b id="showUserName">User</b><br><span id="showUserGmail" style="font-size:13px;color:#94a3b8">gmail</span></div>
-  <button onclick="logoutGmail()" style="border:0;padding:8px 12px;border-radius:8px;background:#ef4444;color:#fff;font-weight:bold">Logout</button>
-</div>
-
+='
 
