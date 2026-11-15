@@ -129,24 +129,3 @@ render(); updateUI();
 .aiCheck{background:#eff6ff;border:1px solid #bfdbfe;padding:12px;border-radius:12px;margin:10px 0;font-weight:bold}
 </style>
 
-<!-- বড় NOTICE - সবকিছুর উপরে -->
-<div class="bigNotice">
-  🔔 বিশ্বাস না হলে আগে মাত্র ১০ টাকা পাঠিয়ে দেখেন!<br>
-  <span style="font-size:15px;font-weight:normal">১০ টাকা পাঠিয়ে চেক করেন, বিশ্বাস হলে তারপর করেন। ১০ টাকা না পাঠালে সবকিছু Lock থাকবে।</span>
-</div>
-
-<!-- LOCK SCREEN - ১০ টাকা না দিলে এটাই দেখবে -->
-<div id="lockScreen" class="lockScreen">
-  <div class="lockBox">
-    <div style="font-size:50px">🔒</div>
-    <h2 style="margin:4px 0">আগে ১০ টাকা পাঠান,<br>তারপর সবকিছু খেলতে পারবেন</h2>
-    <div class="bigNotice">💡 বিশ্বাস না হলে আগে মাত্র ১০ টাকা পাঠিয়ে দেখেন!<br>১০ টাকা পাঠালেই আপনার Wallet খুলে যাবে।</div>
-    <div class="bkashBig">বিকাশ Send Money:<br><b onclick="navigator.clipboard.writeText('01756596482');alert('কপি: 01756596482')">01756596482 📋</b><br><span style="font-size:13px">নাম্বারে ক্লিক করলে কপি হবে</span></div>
-    <input id="testTrx" placeholder="১০ টাকার বিকাশ TrxID দাও *" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin:10px 0;font-size:16px">
-    <button onclick="send10Taka()" style="width:100%;padding:15px;border:0;border-radius:10px;background:#15803d;color:#fff;font-weight:bold;font-size:17px">✅ ১০ টাকা পাঠাইছি - Check করো</button>
-    <div id="aiStatus" class="aiCheck" style="display:none"></div>
-    <p style="font-size:13px;color:#666">⚠️ আমরা কখনো আপনার Password চাইবো না। শুধু TrxID দিবেন।</p>
-  </div>
-</div>
-='
-
