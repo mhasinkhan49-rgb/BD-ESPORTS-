@@ -1,91 +1,90 @@
 <!DOCTYPE html>
 <html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>BD FOOTBALL - Players</title><style>
-*{box-sizing:border-box}body{margin:0;background:#06130a;color:#fff;font-family:sans-serif;padding-bottom:90px}
+<title>BD FOOTBALL</title><style>
+*{box-sizing:border-box}body{margin:0;background:#06130a;color:#fff;font-family:sans-serif;overflow:hidden}
 .top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;padding:8px 10px;background:rgba(0,0,0,.8)}
-.logo{font-weight:900;color:#00ff88}.logo span{color:#ffd700}
-.pill{background:#1a2a1a;border:1px solid #00ff88;padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px}
-.hero{margin:52px 12px 0;border-radius:16px;overflow:hidden;border:2px solid #ffd700;position:relative}
-.hero img{width:100%;display:block;height:220px;object-fit:cover}
-.hero div{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.9));padding:30px 12px 10px}
-.card{background:#122a18;border:1px solid #2a5a35;border-radius:16px;padding:14px;margin:12px}
-.btn{width:100%;padding:13px;border:0;border-radius:12px;background:linear-gradient(90deg,#00c853,#00e676);color:#000;font-weight:900;cursor:pointer;margin:6px 0}
-.btn2{background:linear-gradient(90deg,#ffd700,#ff9800)} .btn3{background:#222;color:#fff;border:1px solid #444}
+.logo{font-weight:900;color:#00ff88}.pill{background:#1a2a1a;border:1px solid #00ff88;padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px;cursor:pointer}
+.screen{position:fixed;inset:0;display:none;overflow:auto;padding:58px 12px 90px;background:#0a2a12}.screen.active{display:block}
+.card{background:#122a18;border:1px solid #2a5a35;border-radius:16px;padding:14px;margin:10px 0}
+.btn{width:100%;padding:13px;border:0;border-radius:12px;background:#00e676;color:#000;font-weight:900;cursor:pointer;margin:6px 0}.btn2{background:linear-gradient(90deg,#ffd700,#ff9800)} .btn3{background:#222;color:#fff;border:1px solid #444}
 input,select{width:100%;padding:11px;border-radius:10px;border:0;background:#1e3a26;color:#fff;margin:6px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{background:#0f2415;border:1px solid #2a5a35;border-radius:12px;padding:10px;text-align:center;cursor:pointer}.item.sel{border:2px solid #ffd700;background:#2a2a10}
-.char-img{width:100%;height:110px;object-fit:cover;object-position:top;border-radius:8px}
-.screen{display:none}.screen.active{display:block}
-#gameWrap{position:fixed;inset:0;display:none;background:#2e9e4f;z-index:30}
-canvas{width:100%;height:100%;display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{background:#0f2415;border:1px solid #2a5a35;border-radius:12px;padding:10px;text-align:center;cursor:pointer}.item.sel{border:2px solid #ffd700}
+.jersey{width:70px;height:70px;margin:0 auto;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;text-shadow:0 1px 3px #000}
+.arg{background:repeating-linear-gradient(90deg,#fff 0 10px,#75aadb 10px 20px);color:#000}.bra{background:#ffea00;color:#009739}.esp{background:#e53935}.bd{background:#006a4e}.nep{background:#dc143c}.eur{background:#003399}
+canvas{width:100%;height:100%;display:block}#gameWrap{position:fixed;inset:0;display:none;background:#2e9e4f}
 .joy{position:absolute;left:16px;bottom:20px;width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,.35);border:2px solid #fff}.knob{position:absolute;left:35px;top:35px;width:50px;height:50px;border-radius:50%;background:#fff}
-.gbtn{position:absolute;right:14px;bottom:20px;display:flex;flex-direction:column;gap:8px}.gbtn button{width:72px;height:72px;border-radius:50%;border:2px solid #fff;font-weight:900;color:#fff}
+.gbtn{position:absolute;right:14px;bottom:20px;display:flex;flex-direction:column;gap:8px}.gbtn button{width:72px;height:72px;border-radius:50%;border:2px solid #fff;font-weight:900;color:#fff;font-size:12px}
+.score{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);padding:6px 14px;border-radius:20px;font-weight:900;z-index:10}
 #adminDot{position:fixed;right:6px;bottom:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #ffd700;z-index:100;cursor:pointer}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}.modal.open{display:flex}.box{background:#122a18;width:100%;max-width:420px;border-radius:16px;padding:16px;max-height:90vh;overflow:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}.modal.open{display:flex}.box{background:#122a18;width:100%;max-width:430px;border-radius:16px;padding:16px;max-height:92vh;overflow:auto}
+.wheel{width:160px;height:160px;border-radius:50%;border:6px solid #ffd700;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:26px;background:conic-gradient(#ff1744 0 45deg,#ffd700 45deg 90deg,#00e676 90deg 135deg,#1e88e5 135deg 180deg,#9c27b0 180deg 225deg,#ff9800 225deg 270deg,#00bcd4 270deg 315deg,#76ff03 315deg 360deg);transition:transform 2s}
 </style></head><body>
 
-<div class="top"><div class="logo">BD <span>FOOTBALL</span></div><div style="display:flex;gap:6px"><div class="pill">💎 <span id="diam">500</span></div><div class="pill" id="uName">Guest</div></div></div>
+<div class="top"><div class="logo">BD ⚽ FOOTBALL</div><div style="display:flex;gap:6px"><div class="pill" onclick="show('scr-diamond')">💎 <span id="diam">0</span> STORE</div><div class="pill">🪙 <span id="coin">0</span></div><div class="pill" id="uName">Guest</div></div></div>
 
-<!-- LOGIN -->
-<div id="scr-login" class="screen active">
-<div class="hero"><img src="players.jpg"><div><h2 style="margin:0">⚽ BD FOOTBALL</h2><p style="margin:2px 0;font-size:13px">তোমার ছবির ৪ স্টার এখন গেমে!</p></div></div>
-<div class="card"><input id="loginName" placeholder="তোমার নাম"><input id="loginGmail" placeholder="Gmail - name@gmail.com"><button class="btn" onclick="doLogin()">LOGIN → গেমে ঢুকো</button><p style="font-size:12px;color:#aaa;text-align:center">ছবিটা players.jpg নামে সেভ না করলে এখানে ছবি দেখাবে না, কিন্তু গেম চলবে।</p></div></div>
+<div id="scr-login" class="screen active"><div class="card" style="text-align:center"><h1>⚽ BD FOOTBALL</h1><p>Realistic Jersey • 3D Look Player • Luck Royal</p><input id="loginName" placeholder="নাম"><input id="loginGmail" placeholder="Gmail"><button class="btn" onclick="doLogin()">Gmail দিয়ে LOGIN</button><p style="font-size:12px;color:#aaa">প্রথম Login এ 100 💎 Bonus পাবা। একবার Login করলে আর দেখাবে না।</p></div></div>
 
-<!-- HOME -->
-<div id="scr-home" class="screen">
-<div class="hero"><img src="players.jpg"><div><h3 style="margin:0">🔴 MATCH DAY - LIVE</h3><p style="margin:0;font-size:12px">Team: <span id="myTeam">বাংলাদেশ</span> • Player: <span id="myChar">Bangladesh 8</span></p></div></div>
-<div class="card"><button class="btn" onclick="show('scr-mode')">▶️ PLAY NOW - 6v6 / 1v1 / WORLD CUP</button><div class="grid"><button class="btn btn2" onclick="show('scr-store')">🛍️ STORE</button><button class="btn btn2" onclick="show('scr-luck')">🎡 LUCK ROYAL</button></div></div>
-<div class="card"><h3>⭐ তোমার ছবির ৪ Character - একটা বাছো</h3><div class="grid" id="chars"></div></div>
-<div class="card"><h3>🌍 Country বাছো</h3><div class="grid" id="teams"></div></div>
-</div>
+<div id="scr-home" class="screen"><div class="card"><h3>👋 <span id="hiName">Player</span></h3><p>Team: <b id="myTeam">বাংলাদেশ</b> | Character: <b id="myChar">BD Star</b> | Spin: <b id="spinCount">0/10</b></p><p id="eventBanner" style="background:#ffd700;color:#000;padding:8px;border-radius:8px;font-weight:700">🎉 EVENT: Argentina Star No.10 - 10 Spin এ গ্যারান্টি! বাকি: <span id="eventDays">10</span> দিন</p><button class="btn" onclick="show('scr-mode')">▶️ PLAY NOW</button><div class="grid"><button class="btn btn2" onclick="show('scr-store')">🛍️ STORE - Jersey / Pant / Boots</button><button class="btn btn2" onclick="show('scr-luck')">🎡 LUCK ROYAL - 200 💎</button></div><button class="btn" onclick="dailyMission()">🎯 Daily Mission Complete - +20 💎</button><button class="btn btn2" onclick="show('scr-free')">🎁 FREE LUCKY WHEEL - Spain Jersey 20 💎</button></div>
+<div class="card"><h3>🌍 Country - জার্সি সহ</h3><div class="grid" id="teams"></div></div>
+<div class="card"><h3>⭐ Character</h3><div class="grid" id="chars"></div></div></div>
 
-<!-- MODE -->
-<div id="scr-mode" class="screen"><div class="card"><h3>🎮 Mode বাছো</h3><button class="btn" onclick="startGame('6v6')">6 VS 6</button><button class="btn" onclick="startGame('1v1')">1 VS 1</button><button class="btn" onclick="startGame('WORLD CUP')">🏆 WORLD CUP</button><button class="btn" onclick="startGame('FRIEND')">👥 FRIEND MATCH - Room Code</button><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
+<div id="scr-mode" class="screen"><div class="card"><h3>🎮 Mode</h3><button class="btn" onclick="startGame('6v6')">6 VS 6</button><button class="btn" onclick="startGame('1v1')">1 VS 1</button><button class="btn" onclick="startGame('WORLD CUP')">🏆 WORLD CUP</button><button class="btn" onclick="startGame('FRIEND')">👥 FRIEND</button><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
 
-<!-- STORE -->
-<div id="scr-store" class="screen"><div class="card"><h3>🛍️ STORE</h3><div class="grid" id="store"></div><button class="btn btn2" onclick="earnDiamond(500)">Daily Bonus +500 💎 নাও (ফ্রি)</button><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
+<div id="scr-store" class="screen"><div class="card"><h3>🛍️ STORE - Realistic Dress</h3><div class="grid" id="store"></div><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
 
-<!-- LUCK -->
-<div id="scr-luck" class="screen"><div class="card" style="text-align:center"><h3>🎡 LUCK ROYAL</h3><div id="wheel" style="width:160px;height:160px;border-radius:50%;border:6px solid #ffd700;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:30px;background:conic-gradient(#ff1744 0 36deg,#ffd700 36deg 72deg,#00e676 72deg 108deg,#1e88e5 108deg 144deg,#9c27b0 144deg 180deg,#ff9800 180deg 216deg,#00bcd4 216deg 252deg,#76ff03 252deg 288deg,#f50057 288deg 324deg,#ffea00 324deg 360deg);transition:transform 2s">🎁</div><button class="btn btn2" onclick="spin()">SPIN - 50 💎 (ফ্রি ডায়মন্ড)</button><p id="spinMsg" style="color:#ffd700;font-weight:700"></p></div><button class="btn btn3" onclick="show('scr-home')">← Back</button></div>
+<div id="scr-diamond" class="screen"><div class="card" style="text-align:center"><h3>💎 DIAMOND STORE - ফ্রি তে নাও</h3><p>আসল টাকায় কেনা লাগবে না। ম্যাচ + মিশন থেকে ফ্রি পাবা।</p><button class="btn btn2" onclick="earnDiamond(1000)">1000 💎 - ম্যাচ জিতে নাও</button><button class="btn btn2" onclick="earnDiamond(2000)">2000 💎 - Daily Bonus</button><button class="btn btn2" onclick="earnDiamond(3000)">3000 💎 - Event Bonus</button><p style="font-size:12px;color:#aaa">Demo: 1000 💎 = 10 টাকা, 2000 💎 = 20 টাকা, 3000 💎 = 30 টাকা - এই দামটা শুধু দেখানোর জন্য, আসলে ফ্রি।</p><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
 
-<!-- GAME -->
-<div id="gameWrap"><canvas id="cv"></canvas><div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);padding:6px 14px;border-radius:20px;font-weight:900" id="score">BD 0-0 OPP</div><div class="joy" id="joy"><div class="knob" id="knob"></div></div><div class="gbtn"><button style="background:#e53935" onclick="doShoot()">SHOOT</button><button style="background:#1e88e5" onclick="doPass()">PASS</button><button style="background:#ff9800" onclick="doThrough()">THROUGH</button><button style="background:#00c853" onclick="doSprint()">SPRINT</button></div><button onclick="exitGame()" style="position:absolute;top:10px;left:10px;padding:8px 12px;border-radius:20px;border:0;background:#000;color:#fff">✕ EXIT</button></div>
+<div id="scr-luck" class="screen"><div class="card" style="text-align:center"><h3>🎡 LUCK ROYAL</h3><div class="wheel" id="wheel">🎁</div><p>1 Spin = 200 💎 | তোমার Spin: <span id="luckSpin">0/10</span></p><button class="btn btn2" onclick="spinRoyal()">SPIN - 200 💎</button><p id="spinMsg" style="color:#ffd700;font-weight:700"></p><p style="font-size:12px">10 Spin করলেই Argentina Star No.10 Character গ্যারান্টি!</p></div><button class="btn btn3" onclick="show('scr-home')">← Back</button></div>
+
+<div id="scr-free" class="screen"><div class="card" style="text-align:center"><h3>🎁 FREE LUCKY WHEEL</h3><div class="wheel" id="wheel2">🇪🇸</div><p>Spain Jersey - 1 Spin = 20 💎</p><button class="btn btn2" onclick="spinFree()">SPIN - 20 💎</button><p id="freeMsg" style="color:#ffd700;font-weight:700"></p></div><button class="btn btn3" onclick="show('scr-home')">← Back</button></div>
+
+<div id="gameWrap"><canvas id="cv"></canvas><div class="score" id="score">BD 0-0 OPP</div><div class="joy" id="joy"><div class="knob" id="knob"></div></div><div class="gbtn"><button style="background:#e53935" onclick="doShoot()">SHOOT</button><button style="background:#1e88e5" onclick="doPass()">PASS</button><button style="background:#ff9800" onclick="doThrough()">THROUGH</button><button style="background:#00c853;width:56px;height:56px" onclick="doSprint()">SPRINT</button></div><button onclick="exitGame()" style="position:absolute;top:44px;left:10px;padding:8px 12px;border-radius:20px;border:0;background:#000;color:#fff">✕ EXIT</button></div>
 
 <div id="adminDot" onclick="openAdmin()"></div>
-<div id="adminModal" class="modal"><div class="box"><h3>🔐 Admin Panel</h3><input id="adminPass" type="password" placeholder="Password - admin123"><button class="btn" onclick="adminLogin()">Login</button><div id="adminBody" style="display:none"><input id="newCharName" placeholder="নতুন Character নাম"><input type="file" id="charImg" accept="image/*"><button class="btn" onclick="addChar()">+ Character Add করো</button><input id="eventName" placeholder="Event - যেমন: Eid Cup"><button class="btn btn2" onclick="addEvent()">Event দাও</button><p id="eventList"></p><input id="newPass" placeholder="নতুন Password"><button class="btn btn3" onclick="changePass()">Password Change</button></div><button class="btn btn3" onclick="closeAdmin()">Close</button></div></div>
+<div id="adminModal" class="modal"><div class="box"><h3>🔐 Admin Panel</h3><input id="adminPass" type="password" placeholder="Password - admin123"><button class="btn" onclick="adminLogin()">Login</button><div id="adminBody" style="display:none"><p><b>Character / Jersey Add করো - এটা সত্যি Add হবে</b></p><input id="newCharName" placeholder="নতুন Character / Jersey নাম"><input type="file" id="charImg" accept="image/*"><button class="btn" onclick="addChar()">+ Add করো (Store + Character এ যাবে)</button><p><b>Event Add</b></p><input id="eventName" placeholder="Event নাম"><button class="btn btn2" onclick="addEvent()">Event দাও</button><p id="eventList"></p><p><b>Password Change</b></p><input id="newPass" placeholder="নতুন Password"><button class="btn btn3" onclick="changePass()">Change করো</button></div><button class="btn btn3" onclick="closeAdmin()">Close</button></div></div>
 
 <script>
-let diamonds=500,myTeam="বাংলাদেশ",myChar="Bangladesh 8",adminPass="admin123",mode="6v6";
-let chars=[["Bangladesh 8","🇧🇩 Speed 90","বাংলাদেশ"],["Portugal 7","🇵🇹 Shoot 96","পর্তুগাল"],["Argentina 10","🇦🇷 Dribble 98","আর্জেন্টিনা"],["France 10","🇫🇷 Pace 94","ফ্রান্স"]];
-let teams=[["বাংলাদেশ","🇧🇩"],["ব্রাজিল","🇧🇷"],["আর্জেন্টিনা","🇦🇷"],["চায়না","🇨🇳"],["নেপাল","🇳🇵"],["ইউরোপ","🇪🇺"],["আর্সেনাল","🔴"]];
+let S=JSON.parse(localStorage.getItem('bdfoot')||'{}');
+let diamonds=S.diamonds??500,coins=S.coins??200,myTeam=S.team||'বাংলাদেশ',myChar=S.char||'BD Star',spins=S.spins||0,adminPass=S.adminPass||'admin123',eventStart=S.eventStart||Date.now(),hasBonus=S.hasBonus||false;
+let teams=[["বাংলাদেশ","🇧🇩","bd","সবুজ জার্সি"],["ব্রাজিল","🇧🇷","bra","হলুদ জার্সি"],["আর্জেন্টিনা","🇦🇷","arg","সাদা-আকাশি জার্সি"],["চায়না","🇨🇳","bra","লাল জার্সি"],["নেপাল","🇳🇵","nep","লাল-নীল"],["ইউরোপ","🇪🇺","eur","নীল"],["স্পেন","🇪🇸","esp","লাল জার্সি"],["আর্সেনাল","🔴","bra","লাল"]];
+let chars=S.chars||[["BD Star","⚡ Speed 90"],["Argentina Star No.10","🎯 Shoot 98 - Event"],["Brazil Star","🔥 Dribble 92"],["Goalkeeper","🧤 Save 95"]];
+let storeItems=S.store||[["আর্জেন্টিনা জার্সি","200 💎","arg","10"],["ব্রাজিল জার্সি","200 💎","bra","9"],["স্পেন জার্সি","150 💎","esp","7"],["BD জার্সি","100 💎","bd","11"],["Pro Pant","120 💎","bd","👖"],["Pro Boots","130 💎","bra","👟"],["Golden Ball","180 💎","bra","⚽"]];
+function save(){localStorage.setItem('bdfoot',JSON.stringify({diamonds,coins,team:myTeam,char:myChar,spins,adminPass,eventStart,hasBonus,chars,storeItems,login:S.login,name:S.name}));updateBal()}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
-function doLogin(){let n=document.getElementById('loginName').value.trim(),g=document.getElementById('loginGmail').value.trim();if(!n||!g.includes('@')){alert('নাম + Gmail দাও');return}document.getElementById('uName').innerText=n;show('scr-home')}
-function renderChars(){let h="";chars.forEach(c=>{h+=`<div class="item ${myChar===c[0]?'sel':''}" onclick="pickChar('${c[0]}','${c[2]}')"><img class="char-img" src="players.jpg"><b>${c[0]}</b><div style="font-size:12px">${c[1]}</div></div>`});document.getElementById('chars').innerHTML=h}
-function pickChar(c,t){myChar=c;myTeam=t;document.getElementById('myChar').innerText=c;document.getElementById('myTeam').innerText=t;renderChars();renderTeams();alert(c+' Select হইছে! 🔥')}
-function renderTeams(){let h="";teams.forEach(t=>{h+=`<div class="item ${myTeam===t[0]?'sel':''}" onclick="pickTeam('${t[0]}')"><div style="font-size:28px">${t[1]}</div><b>${t[0]}</b></div>`});document.getElementById('teams').innerHTML=h}
-function pickTeam(t){myTeam=t;document.getElementById('myTeam').innerText=t;renderTeams()}
-function renderStore(){let items=[["Bangladesh Jersey","150 💎"],["Golden Ball","180 💎"],["Pro Boots","120 💎"],["Keeper Gloves","130 💎"]];let h="";items.forEach(s=>{h+=`<div class="item"><b>${s[0]}</b><div>${s[1]}</div><button class="btn btn3" onclick="buy('${s[0]}')">BUY</button></div>`});document.getElementById('store').innerHTML=h}
-function buy(n){if(diamonds<120){alert('ডায়মন্ড কম! Daily Bonus নাও');return}diamonds-=120;document.getElementById('diam').innerText=diamonds;alert(n+' কিনা হইছে! ✅')}
-function earnDiamond(v){diamonds+=v;document.getElementById('diam').innerText=diamonds;alert('+'+v+' 💎 পাইছো!')}
-function spin(){if(diamonds<50){alert('ডায়মন্ড শেষ!');return}diamonds-=50;document.getElementById('diam').innerText=diamonds;let deg=360*5+Math.floor(Math.random()*360);document.getElementById('wheel').style.transform=`rotate(${deg}deg)`;setTimeout(()=>{let p=['Bangladesh Jersey','Golden Ball','Pro Boots','500 Coins','France 10 Character','100 Diamonds'];let r=p[Math.floor(Math.random()*p.length)];document.getElementById('spinMsg').innerText='🎉 পাইছো: '+r;if(r.includes('Diamond'))earnDiamond(100)},2100)}
+function doLogin(){let n=document.getElementById('loginName').value.trim(),g=document.getElementById('loginGmail').value.trim();if(!n||!g.includes('@')){alert('নাম + Gmail দাও');return}S.login=true;S.name=n;if(!hasBonus){diamonds+=100;hasBonus=true;alert('🎉 প্রথম Login Bonus +100 💎!')}save();document.getElementById('uName').innerText=n;document.getElementById('hiName').innerText=n;show('scr-home')}
+if(S.login){document.getElementById('uName').innerText=S.name||'Player';document.getElementById('hiName').innerText=S.name||'Player';document.getElementById('scr-login').classList.remove('active');document.getElementById('scr-home').classList.add('active')}
+function renderTeams(){document.getElementById('teams').innerHTML=teams.map(t=>`<div class="item ${myTeam===t[0]?'sel':''}" onclick="pickTeam('${t[0]}')"><div class="jersey ${t[2]}">${t[1]}</div><b>${t[0]}</b><div style="font-size:12px">${t[3]}</div></div>`).join('')}
+function pickTeam(t){myTeam=t;document.getElementById('myTeam').innerText=t;save();renderTeams()}
+function renderChars(){document.getElementById('chars').innerHTML=chars.map(c=>`<div class="item ${myChar===c[0]?'sel':''}" onclick="pickChar('${c[0]}')"><div style="font-size:28px">⭐</div><b>${c[0]}</b><div style="font-size:12px">${c[1]}</div></div>`).join('')}
+function pickChar(c){myChar=c;document.getElementById('myChar').innerText=c;save();renderChars()}
+function renderStore(){document.getElementById('store').innerHTML=storeItems.map(s=>`<div class="item"><div class="jersey ${s[2]}">${s[3]}</div><b>${s[0]}</b><div>${s[1]}</div><button class="btn btn3" onclick="buy('${s[0]}')">BUY</button></div>`).join('')}
+function buy(n){if(diamonds<100){alert('ডায়মন্ড কম!');return}diamonds-=100;save();alert(n+' কেনা হইছে ✅')}
+function earnDiamond(v){diamonds+=v;save();alert('+'+v+' 💎')}
+function dailyMission(){let today=new Date().toDateString();if(S.lastDaily===today){alert('আজকের Mission already নিছো! কাল আবার পাবা');return}S.lastDaily=today;diamonds+=20;save();alert('Daily Mission Done! +20 💎')}
+function updateBal(){document.getElementById('diam').innerText=diamonds;document.getElementById('coin').innerText=coins;document.getElementById('spinCount').innerText=spins+'/10';document.getElementById('luckSpin').innerText=spins+'/10';let daysLeft=10-Math.floor((Date.now()-eventStart)/(1000*60*60*24));if(daysLeft<=0){document.getElementById('eventBanner').innerText='Event শেষ হইছে - Auto Remove হইছে';}else{document.getElementById('eventDays').innerText=daysLeft}}
+function spinRoyal(){if(diamonds<200){alert('ডায়মন্ড কম!');return}diamonds-=200;spins++;save();document.getElementById('wheel').style.transform=`rotate(${360*5+Math.random()*360}deg)`;setTimeout(()=>{if(spins>=10){if(!chars.find(c=>c[0].includes('Argentina Star'))){chars.push(["Argentina Star No.10","🎯 Shoot 98"])}document.getElementById('spinMsg').innerText='🎉 গ্যারান্টি! Argentina Star No.10 Character পাইছো!';renderChars()}else{document.getElementById('spinMsg').innerText='🎁 পাইছো: '+['আর্জেন্টিনা জার্সি','ব্রাজিল জার্সি','Pro Boots','100 Coins','Golden Ball'][Math.floor(Math.random()*5)]+' | Spin '+spins+'/10';coins+=100}save()},2000)}
+function spinFree(){if(diamonds<20){alert('ডায়মন্ড কম');return}diamonds-=20;save();document.getElementById('wheel2').style.transform=`rotate(${360*5+200}deg)`;setTimeout(()=>{document.getElementById('freeMsg').innerText='🎉 স্পেন জার্সি পাইছো!';storeItems.push(['স্পেন জার্সি (Free Win)','0 💎','esp','🇪🇸']);save();renderStore()},2000)}
 function openAdmin(){document.getElementById('adminModal').classList.add('open')}
 function closeAdmin(){document.getElementById('adminModal').classList.remove('open')}
 function adminLogin(){if(document.getElementById('adminPass').value===adminPass){document.getElementById('adminBody').style.display='block';alert('Admin খুলছে ✅')}else alert('ভুল Password')}
-function addChar(){let n=document.getElementById('newCharName').value.trim();if(!n)return;chars.push([n,'⭐ New 88','বাংলাদেশ']);renderChars();alert(n+' Add হইছে!')}
-function addEvent(){let e=document.getElementById('eventName').value.trim();if(!e)return;document.getElementById('eventList').innerHTML+='<div>🎉 '+e+'</div>'}
-function changePass(){let np=document.getElementById('newPass').value;if(!np)return;adminPass=np;alert('Password Change হইছে!')}
-renderChars();renderTeams();renderStore();
-// GAME
-let cv=document.getElementById('cv'),ctx=cv.getContext('2d'),px,py,bx,by,vx=0,vy=0,scoreA=0,scoreB=0,timeLeft=120,playing=false;
+function addChar(){let n=document.getElementById('newCharName').value.trim();if(!n){alert('নাম দাও');return}chars.push([n,'⭐ New']);storeItems.push([n,'150 💎','bd','⭐']);save();renderChars();renderStore();alert(n+' Add হইছে! এখন Store + Character এ দেখা যাবে। রিফ্রেশ দিলেও থাকবে।')}
+function addEvent(){let e=document.getElementById('eventName').value.trim();if(!e)return;document.getElementById('eventList').innerHTML+='<div>🎉 '+e+'</div>';alert(e+' Event দেওয়া হইছে!')}
+function changePass(){let np=document.getElementById('newPass').value;if(!np)return;adminPass=np;save();alert('Password Change হইছে: '+np)}
+renderTeams();renderChars();renderStore();updateBal();save();
+
+// GAME - Player carries ball
+let cv=document.getElementById('cv'),ctx=cv.getContext('2d'),px,py,bx,by,vx=0,vy=0,scoreA=0,scoreB=0,timeLeft=120,playing=false,hasBall=true;
 let opp=[],mates=[];
-function startGame(m){mode=m;document.getElementById('gameWrap').style.display='block';cv.width=innerWidth;cv.height=innerHeight;px=cv.width/2;py=cv.height*0.7;bx=cv.width/2;by=cv.height/2;scoreA=0;scoreB=0;timeLeft=120;playing=true;opp=[];mates=[];for(let i=0;i<5;i++){opp.push({x:Math.random()*cv.width,y:Math.random()*cv.height*0.4});mates.push({x:Math.random()*cv.width,y:cv.height*0.5+Math.random()*80})}loop()}
-function exitGame(){playing=false;document.getElementById('gameWrap').style.display='none';show('scr-home')}
-function loop(){if(!playing)return;requestAnimationFrame(loop);px+=vx;py+=vy;bx+=(px-bx)*0.02;by+=(py-by)*0.02;draw();timeLeft-=0.016;let mm=Math.floor(timeLeft/60),ss=Math.floor(timeLeft%60);document.getElementById('score').innerText=`${myChar} ${scoreA} - ${scoreB} OPP • ${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')} • ${mode}`;if(timeLeft<=0){playing=false;alert(scoreA>scoreB?'🏆 জিতছো! +100 💎':'ম্যাচ শেষ '+scoreA+'-'+scoreB);if(scoreA>scoreB)earnDiamond(100);document.getElementById('gameWrap').style.display='none';show('scr-home')}}
-function draw(){ctx.fillStyle='#2e9e4f';ctx.fillRect(0,0,cv.width,cv.height);ctx.strokeStyle='rgba(255,255,255,.7)';ctx.strokeRect(20,20,cv.width-40,cv.height-40);ctx.beginPath();ctx.moveTo(cv.width/2,20);ctx.lineTo(cv.width/2,cv.height-20);ctx.stroke();ctx.beginPath();ctx.arc(cv.width/2,cv.height/2,70,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#fff';ctx.fillRect(cv.width/2-60,20,120,18);ctx.fillRect(cv.width/2-60,cv.height-38,120,18);mates.forEach(t=>{ctx.fillStyle='#006a4e';ctx.beginPath();ctx.arc(t.x,t.y,14,0,Math.PI*2);ctx.fill()});opp.forEach(o=>{ctx.fillStyle='#c62828';ctx.beginPath();ctx.arc(o.x,o.y,14,0,Math.PI*2);ctx.fill()});ctx.fillStyle='#ffd700';ctx.beginPath();ctx.arc(px,py,16,0,Math.PI*2);ctx.fill();ctx.fillStyle='#000';ctx.font='10px sans-serif';ctx.fillText(myChar,px-20,py-22);ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(bx,by,7,0,Math.PI*2);ctx.fill()}
-function doShoot(){by-=40;if(Math.abs(bx-cv.width/2)<60&&by<60){scoreA++;alert('GOAL! ⚽🔥 '+myChar)}else if(Math.random()>0.6){scoreB++;alert('Opponent Goal')}bx=cv.width/2;by=cv.height/2}
-function doPass(){bx=px+40;by=py+20;alert('PASS!')}
-function doThrough(){bx=px+80;by=py-60;alert('THROUGH PASS! দৌড়াও!')}
+function startGame(m){show('scr-home');document.getElementById('gameWrap').style.display='block';cv.width=innerWidth;cv.height=innerHeight;px=cv.width/2;py=cv.height*0.7;bx=px+18;by=py;scoreA=0;scoreB=0;timeLeft=120;playing=true;opp=[];mates=[];for(let i=0;i<5;i++){opp.push({x:Math.random()*cv.width,y:Math.random()*cv.height*0.35,dx:0,dy:0});mates.push({x:Math.random()*cv.width,y:cv.height*0.55+Math.random()*80})}loop()}
+function exitGame(){playing=false;document.getElementById('gameWrap').style.display='none';show('scr-home');earnDiamond(50)}
+function loop(){if(!playing)return;requestAnimationFrame(loop);px+=vx;py+=vy;px=Math.max(20,Math.min(cv.width-20,px));py=Math.max(60,Math.min(cv.height-20,py));if(hasBall){bx=px+18;by=py+8}opp.forEach(o=>{let dx=bx-o.x,dy=by-o.y,d=Math.hypot(dx,dy)||1;o.x+=dx/d*0.9;o.y+=dy/d*0.9;if(d<22&&hasBall){hasBall=false;alert('Opponent বল নিয়ে নিছে! বল ফেরত নাও!')}});mates.forEach(m=>{m.x+=(px-m.x)*0.005;m.y+=(py-m.y)*0.005});draw();timeLeft-=0.016;document.getElementById('score').innerText=`${myTeam} ${scoreA} - ${scoreB} OPP • ${Math.floor(timeLeft/60)}:${String(Math.floor(timeLeft%60)).padStart(2,'0')}`;if(timeLeft<=0){playing=false;if(scoreA>scoreB)earnDiamond(100);alert('ম্যাচ শেষ! '+scoreA+'-'+scoreB);document.getElementById('gameWrap').style.display='none';show('scr-home')}}
+function drawPlayer(x,y,color,name){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,16,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(x-10,y-22,20,12);ctx.fillStyle='#000';ctx.font='8px sans-serif';ctx.fillText('10',x-4,y-13);ctx.fillStyle='#fff';ctx.font='10px sans-serif';ctx.fillText(name,x-20,y-30)}
+function draw(){ctx.fillStyle='#2e9e4f';ctx.fillRect(0,0,cv.width,cv.height);ctx.strokeStyle='rgba(255,255,255,.7)';ctx.strokeRect(20,20,cv.width-40,cv.height-40);ctx.beginPath();ctx.moveTo(cv.width/2,20);ctx.lineTo(cv.width/2,cv.height-20);ctx.stroke();ctx.beginPath();ctx.arc(cv.width/2,cv.height/2,70,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#fff';ctx.fillRect(cv.width/2-60,20,120,18);ctx.fillRect(cv.width/2-60,cv.height-38,120,18);mates.forEach(m=>drawPlayer(m.x,m.y,'#006a4e','BD'));opp.forEach(o=>drawPlayer(o.x,o.y,'#c62828','OPP'));drawPlayer(px,py,'#006a4e',myChar);ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(bx,by,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#000';ctx.fillText('⚽',bx-4,by+3)}
+function doShoot(){if(!hasBall){alert('আগে বল নাও!');return}if(Math.abs(px-cv.width/2)<80&&py<140){scoreA++;alert('GOAL! ⚽🔥')}else{alert('Shot মিস!');hasBall=false;bx=px+40;by=py-40}setTimeout(()=>{bx=px+18;by=py;hasBall=true},1200)}
+function doPass(){hasBall=true;bx=px+30;by=py+20;alert('PASS!')}
+function doThrough(){bx=px+80;by=py-80;hasBall=false;alert('THROUGH! বলের পিছে দৌড়াও!');setTimeout(()=>{bx=px+18;by=py;hasBall=true},1000)}
 function doSprint(){vx*=1.8;vy*=1.8;setTimeout(()=>{vx/=1.8;vy/=1.8},800)}
 let joy=document.getElementById('joy'),knob=document.getElementById('knob');
-function joyMove(e){let r=joy.getBoundingClientRect();let cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left-60;let cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top-60;cx=Math.max(-35,Math.min(35,cx));cy=Math.max(-35,Math.min(35,cy));knob.style.left=(35+cx)+'px';knob.style.top=(35+cy)+'px';vx=cx*0.15;vy=cy*0.15}
-joy.addEventListener('touchmove',joyMove);joy.addEventListener('touchend',()=>{knob.style.left='35px';knob.style.top='35px';vx=0;vy=0})
+function joyMove(e){let r=joy.getBoundingClientRect();let cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left-60,cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top-60;cx=Math.max(-35,Math.min(35,cx));cy=Math.max(-35,Math.min(35,cy));knob.style.left=(35+cx)+'px';knob.style.top=(35+cy)+'px';vx=cx*0.15;vy=cy*0.15}
+joy.addEventListener('touchmove',joyMove);joy.addEventListener('touchend',()=>{knob.style.left='35px';knob.style.top='35px';vx=0;vy=0});joy.addEventListener('mousemove',e=>{if(e.buttons)joyMove(e)})
 </script></body></html>
