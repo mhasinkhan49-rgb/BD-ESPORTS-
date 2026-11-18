@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>BD FOOTBALL - World Cup V3</title><style>
+<title>BD FOOTBALL V4 - Landscape + Real GK</title><style>
 *{box-sizing:border-box}body{margin:0;background:#06130a;color:#fff;font-family:sans-serif;overflow:hidden}
 .top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;padding:8px 10px;background:rgba(0,0,0,.85)}
 .logo{font-weight:900;color:#00ff88}.pill{background:#1a2a1a;border:1px solid #00ff88;padding:5px 10px;border-radius:20px;font-weight:700;font-size:13px}
@@ -11,149 +11,154 @@ input{width:100%;padding:11px;border-radius:10px;border:0;background:#1e3a26;col
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{background:#0f2415;border:1px solid #2a5a35;border-radius:12px;padding:10px;text-align:center;cursor:pointer}.item.sel{border:2px solid #ffd700}
 .hero img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:2px solid #ffd700}
 canvas{width:100%;height:100%;display:block}#gameWrap{position:fixed;inset:0;display:none;background:#0a2a12;z-index:30}
-.joy{position:absolute;left:16px;bottom:20px;width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,.4);border:2px solid #fff;z-index:40}.knob{position:absolute;left:35px;top:35px;width:50px;height:50px;border-radius:50%;background:#fff}
-.gbtn{position:absolute;right:14px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:40}.gbtn button{width:72px;height:72px;border-radius:50%;border:2px solid #fff;font-weight:900;color:#fff}
-.score{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);padding:6px 14px;border-radius:20px;font-weight:900;z-index:40;white-space:nowrap}
-.popup{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.9);border:3px solid #ffd700;padding:16px 22px;border-radius:16px;font-size:28px;font-weight:900;text-align:center;z-index:50;display:none}
+.joy{position:absolute;left:16px;bottom:16px;width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,.4);border:2px solid #fff;z-index:40}.knob{position:absolute;left:35px;top:35px;width:50px;height:50px;border-radius:50%;background:#fff}
+.gbtn{position:absolute;right:14px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:40}.gbtn button{width:72px;height:72px;border-radius:50%;border:2px solid #fff;font-weight:900;color:#fff}
+.score{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);padding:6px 14px;border-radius:20px;font-weight:900;z-index:40;white-space:nowrap;font-size:14px}
+.popup{position:absolute;top:36%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.92);border:3px solid #ffd700;padding:14px 20px;border-radius:16px;font-size:26px;font-weight:900;text-align:center;z-index:50;display:none}
+#rotateTip{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);background:#ffd700;color:#000;padding:6px 12px;border-radius:20px;font-weight:800;font-size:12px;z-index:45}
 #adminDot{position:fixed;right:6px;bottom:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #ffd700;z-index:100}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}.modal.open{display:flex}.box{background:#122a18;width:100%;max-width:420px;border-radius:16px;padding:16px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}.modal.open{display:flex}.box{background:#122a18;width:100%;max-width:430px;border-radius:16px;padding:16px;max-height:92vh;overflow:auto}
+@media (orientation:landscape){.joy{width:110px;height:110px}.gbtn button{width:64px;height:64px}}
 </style></head><body>
 
-<div class="top"><div class="logo">BD ⚽ FOOTBALL</div><div style="display:flex;gap:6px"><div class="pill">💎 <span id="diam">500</span></div><div class="pill" id="uName">Guest</div></div></div>
+<div class="top"><div class="logo">BD ⚽ FOOTBALL V4</div><div style="display:flex;gap:6px"><div class="pill">💎 <span id="diam">500</span></div><div class="pill" id="uName">Guest</div></div></div>
 
-<div id="scr-login" class="screen active"><div class="hero"><img src="players.jpg"></div><div class="card" style="text-align:center"><h2>🏆 BD FOOTBALL - WORLD CUP</h2><p>6v6 • Realistic GK • Referee • Trophy Celebration</p><input id="loginName" placeholder="নাম"><input id="loginGmail" placeholder="Gmail"><button class="btn" onclick="doLogin()">LOGIN → খেলো</button></div></div>
+<div id="scr-login" class="screen active"><div class="hero"><img src="players.jpg"></div><div class="card" style="text-align:center"><h2>🏆 BD FOOTBALL - LANDSCAPE</h2><p>মোবাইল বাঁকা করে খেলো • Real GK + Net • 6v6 • Trophy</p><input id="loginName" placeholder="নাম"><input id="loginGmail" placeholder="Gmail"><button class="btn" onclick="doLogin()">LOGIN → খেলো</button><p style="font-size:12px;color:#ffd700">📱 টিপস: মোবাইলটা বাঁকা করো (Landscape) → Screen বড় হবে, মাঠ লম্বা হবে!</p></div></div>
 
-<div id="scr-home" class="screen"><div class="hero"><img src="players.jpg"></div><div class="card"><h3>👋 <span id="hiName">Player</span> | Team: <b id="myTeam">বাংলাদেশ</b> | Player: <b id="myChar">Bangladesh 8</b></h3><button class="btn" onclick="startGame('6v6')">▶️ 6 VS 6 - PLAY</button><button class="btn btn2" onclick="startGame('WORLD CUP')">🏆 WORLD CUP - দর্শক + পতাকা</button><button class="btn" onclick="startGame('1v1')">⚡ 1 VS 1</button><div class="grid"><button class="btn btn2" onclick="show('scr-store')">🛍️ STORE</button><button class="btn btn2" onclick="show('scr-luck')">🎡 LUCK ROYAL</button></div></div>
-<div class="card"><h3>⭐ Character বাছো - তোমার ছবির ৪ জন</h3><div class="grid" id="chars"></div></div>
+<div id="scr-home" class="screen"><div class="hero"><img src="players.jpg"></div><div class="card"><h3>👋 <span id="hiName">Player</span> | Team: <b id="myTeam">বাংলাদেশ</b> | Player: <b id="myChar">Bangladesh 8</b></h3><button class="btn" onclick="startGame('6v6')">▶️ 6 VS 6 - PLAY</button><button class="btn btn2" onclick="startGame('WORLD CUP')">🏆 WORLD CUP</button><button class="btn" onclick="startGame('1v1')">⚡ 1 VS 1</button><div class="grid"><button class="btn btn2" onclick="show('scr-store')">🛍️ STORE</button><button class="btn btn2" onclick="show('scr-luck')">🎡 LUCK ROYAL</button></div><p style="font-size:12px;color:#aaa">Store এ Admin থেকে Add করা জিনিস দেখা যাবে।</p></div>
+<div class="card"><h3>⭐ Character</h3><div class="grid" id="chars"></div></div>
 <div class="card"><h3>🌍 Country</h3><div class="grid" id="teams"></div></div></div>
 
-<div id="scr-store" class="screen"><div class="card"><h3>🛍️ STORE</h3><div class="grid" id="store"></div><button class="btn btn2" onclick="earnDiamond(500)">Daily Bonus +500 💎</button><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
+<div id="scr-store" class="screen"><div class="card"><h3>🛍️ STORE - Admin থেকে Add করা সহ</h3><div class="grid" id="store"></div><button class="btn btn2" onclick="earnDiamond(500)">Daily Bonus +500 💎 (ফ্রি)</button><button class="btn btn3" onclick="show('scr-home')">← Back</button></div></div>
 <div id="scr-luck" class="screen"><div class="card" style="text-align:center"><h3>🎡 LUCK ROYAL</h3><div id="wheel" style="width:150px;height:150px;border-radius:50%;border:6px solid #ffd700;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:28px;background:conic-gradient(#ff1744 0 45deg,#ffd700 45deg 90deg,#00e676 90deg 135deg,#1e88e5 135deg 180deg,#9c27b0 180deg 225deg,#ff9800 225deg 270deg,#00bcd4 270deg 315deg,#76ff03 315deg 360deg);transition:transform 2s">🎁</div><button class="btn btn2" onclick="spin()">SPIN - 50 💎</button><p id="spinMsg" style="color:#ffd700;font-weight:700"></p></div><button class="btn btn3" onclick="show('scr-home')">← Back</button></div>
 
-<div id="gameWrap"><canvas id="cv"></canvas><div class="score" id="score">BD 0-0 OPP • 2:00 • 1ST HALF</div><div class="popup" id="popup">GOAL!</div><div class="joy" id="joy"><div class="knob" id="knob"></div></div><div class="gbtn"><button style="background:#e53935" onclick="doShoot()">SHOOT</button><button style="background:#1e88e5" onclick="doPass()">PASS</button><button style="background:#ff9800" onclick="doThrough()">THROUGH</button><button style="background:#00c853" onclick="doSprint()">SPRINT</button></div><button onclick="exitGame()" style="position:absolute;top:10px;left:10px;padding:8px 12px;border-radius:20px;border:0;background:#000;color:#fff;z-index:40">✕ EXIT</button></div>
+<div id="gameWrap"><canvas id="cv"></canvas><div class="score" id="score">BD 0-0 OPP</div><div class="popup" id="popup">GOAL!</div><div id="rotateTip">📱 মোবাইল বাঁকা করো → Landscape = বড় মাঠ</div><div class="joy" id="joy"><div class="knob" id="knob"></div></div><div class="gbtn"><button style="background:#e53935" onclick="doShoot()">SHOOT 💥</button><button style="background:#1e88e5" onclick="doPass()">PASS</button><button style="background:#ff9800" onclick="doThrough()">THROUGH</button><button style="background:#00c853" onclick="doSprint()">SPRINT</button></div><button onclick="exitGame()" style="position:absolute;top:8px;left:10px;padding:8px 12px;border-radius:20px;border:0;background:#000;color:#fff;z-index:40">✕ EXIT</button></div>
 
 <div id="adminDot" onclick="openAdmin()"></div>
-<div id="adminModal" class="modal"><div class="box"><h3>🔐 Admin</h3><input id="adminPass" type="password" placeholder="admin123"><button class="btn" onclick="adminLogin()">Login</button><div id="adminBody" style="display:none"><input id="newCharName" placeholder="নতুন Character"><button class="btn" onclick="addChar()">+ Add</button><input id="eventName" placeholder="Event"><button class="btn btn2" onclick="addEvent()">Event দাও</button><p id="eventList"></p><input id="newPass" placeholder="নতুন Password"><button class="btn btn3" onclick="changePass()">Password Change</button></div><button class="btn btn3" onclick="closeAdmin()">Close</button></div></div>
+<div id="adminModal" class="modal"><div class="box"><h3>🔐 Admin Panel - সত্যি Add হবে</h3><input id="adminPass" type="password" placeholder="Password - admin123"><button class="btn" onclick="adminLogin()">Login</button><div id="adminBody" style="display:none"><p><b>1. Character / Jersey / Pant / Boots Add করো</b></p><input id="newCharName" placeholder="নাম - যেমন: New Jersey"><select id="newCharType"><option value="char">Character</option><option value="jersey">Jersey</option><option value="pant">Pant</option><option value="boots">Boots</option></select><input type="file" id="charImg" accept="image/*"><button class="btn" onclick="addChar()">+ ADD করো - Store + Character এ যাবে</button><p id="adminMsg" style="color:#00ff88"></p><p><b>2. Event</b></p><input id="eventName" placeholder="Event - যেমন: Eid Cup"><button class="btn btn2" onclick="addEvent()">Event দাও</button><p id="eventList"></p><p><b>3. Password Change</b></p><input id="newPass" placeholder="নতুন Password"><button class="btn btn3" onclick="changePass()">Change করো</button></div><button class="btn btn3" onclick="closeAdmin()">Close</button></div></div>
 
 <script>
-let diamonds=500,myTeam="বাংলাদেশ",myChar="Bangladesh 8",adminPass="admin123",mode="6v6";
-let chars=[["Bangladesh 8","🇧🇩 Speed 90"],["Portugal 7","🇵🇹 Shoot 96"],["Argentina 10","🇦🇷 Dribble 98"],["France 10","🇫🇷 Pace 94"]];
+let S=JSON.parse(localStorage.getItem('bdfootV4')||'{}');
+let diamonds=S.diamonds??500,myTeam=S.team||'বাংলাদেশ',myChar=S.char||'Bangladesh 8',adminPass=S.adminPass||'admin123';
+let chars=S.chars||[["Bangladesh 8","🇧🇩 Speed 90"],["Portugal 7","🇵🇹 Shoot 96"],["Argentina 10","🇦🇷 Dribble 98"],["France 10","🇫🇷 Pace 94"]];
+let storeItems=S.store||[["Bangladesh Jersey","150 💎"],["Pro Pant","120 💎"],["Pro Boots","130 💎"],["Golden Ball","180 💎"]];
 let teams=[["বাংলাদেশ","🇧🇩"],["ব্রাজিল","🇧🇷"],["আর্জেন্টিনা","🇦🇷"],["চায়না","🇨🇳"],["নেপাল","🇳🇵"],["ইউরোপ","🇪🇺"],["স্পেন","🇪🇸"]];
+function save(){localStorage.setItem('bdfootV4',JSON.stringify({diamonds,team:myTeam,char:myChar,adminPass,chars,storeItems,login:S.login,name:S.name}));updateBal()}
+function updateBal(){document.getElementById('diam').innerText=diamonds}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
-function doLogin(){let n=document.getElementById('loginName').value.trim(),g=document.getElementById('loginGmail').value.trim();if(!n||!g.includes('@')){alert('নাম + Gmail দাও');return}document.getElementById('uName').innerText=n;document.getElementById('hiName').innerText=n;show('scr-home')}
+function doLogin(){let n=document.getElementById('loginName').value.trim(),g=document.getElementById('loginGmail').value.trim();if(!n||!g.includes('@')){alert('নাম + Gmail দাও');return}S.login=true;S.name=n;save();document.getElementById('uName').innerText=n;document.getElementById('hiName').innerText=n;show('scr-home')}
+if(S.login){document.getElementById('uName').innerText=S.name||'Player';document.getElementById('hiName').innerText=S.name||'Player';document.getElementById('scr-login').classList.remove('active');document.getElementById('scr-home').classList.add('active')}
 function renderChars(){document.getElementById('chars').innerHTML=chars.map(c=>`<div class="item ${myChar===c[0]?'sel':''}" onclick="pickChar('${c[0]}')"><img src="players.jpg" style="width:100%;height:90px;object-fit:cover;border-radius:8px"><b>${c[0]}</b><div style="font-size:12px">${c[1]}</div></div>`).join('')}
-function pickChar(c){myChar=c;document.getElementById('myChar').innerText=c;renderChars()}
+function pickChar(c){myChar=c;document.getElementById('myChar').innerText=c;save();renderChars()}
 function renderTeams(){document.getElementById('teams').innerHTML=teams.map(t=>`<div class="item ${myTeam===t[0]?'sel':''}" onclick="pickTeam('${t[0]}')"><div style="font-size:28px">${t[1]}</div><b>${t[0]}</b></div>`).join('')}
-function pickTeam(t){myTeam=t;document.getElementById('myTeam').innerText=t;renderTeams()}
-function renderStore(){let it=[["Bangladesh Jersey","150 💎"],["Pro Pant","120 💎"],["Pro Boots","130 💎"],["Golden Ball","180 💎"]];document.getElementById('store').innerHTML=it.map(s=>`<div class="item"><b>${s[0]}</b><div>${s[1]}</div><button class="btn btn3" onclick="buy('${s[0]}')">BUY</button></div>`).join('')}
-function buy(n){if(diamonds<120){alert('ডায়মন্ড কম');return}diamonds-=120;document.getElementById('diam').innerText=diamonds;alert(n+' কেনা হইছে ✅')}
-function earnDiamond(v){diamonds+=v;document.getElementById('diam').innerText=diamonds;alert('+'+v+' 💎')}
-function spin(){if(diamonds<50){alert('ডায়মন্ড শেষ');return}diamonds-=50;document.getElementById('diam').innerText=diamonds;document.getElementById('wheel').style.transform=`rotate(${360*5+Math.random()*360}deg)`;setTimeout(()=>{document.getElementById('spinMsg').innerText='🎉 পাইছো: '+['Bangladesh Jersey','Golden Ball','Pro Boots','100 Coins'][Math.floor(Math.random()*4)]},2000)}
+function pickTeam(t){myTeam=t;document.getElementById('myTeam').innerText=t;save();renderTeams()}
+function renderStore(){document.getElementById('store').innerHTML=storeItems.map(s=>`<div class="item"><b>${s[0]}</b><div>${s[1]}</div><button class="btn btn3" onclick="buy('${s[0]}')">BUY</button></div>`).join('')}
+function buy(n){if(diamonds<100){alert('ডায়মন্ড কম');return}diamonds-=100;save();alert(n+' কেনা হইছে ✅')}
+function earnDiamond(v){diamonds+=v;save();alert('+'+v+' 💎')}
+function spin(){if(diamonds<50){alert('ডায়মন্ড শেষ');return}diamonds-=50;save();document.getElementById('wheel').style.transform=`rotate(${360*5+Math.random()*360}deg)`;setTimeout(()=>{document.getElementById('spinMsg').innerText='🎉 পাইছো: '+['Bangladesh Jersey','Golden Ball','Pro Boots','100 Coins'][Math.floor(Math.random()*4)]},2000)}
 function openAdmin(){document.getElementById('adminModal').classList.add('open')}
 function closeAdmin(){document.getElementById('adminModal').classList.remove('open')}
 function adminLogin(){if(document.getElementById('adminPass').value===adminPass){document.getElementById('adminBody').style.display='block';alert('Admin খুলছে ✅')}else alert('ভুল Password')}
-function addChar(){let n=document.getElementById('newCharName').value.trim();if(!n)return;chars.push([n,'⭐ New']);renderChars();alert(n+' Add হইছে!')}
-function addEvent(){let e=document.getElementById('eventName').value.trim();if(!e)return;document.getElementById('eventList').innerHTML+='<div>🎉 '+e+'</div>'}
-function changePass(){let np=document.getElementById('newPass').value;if(!np)return;adminPass=np;alert('Password Change হইছে!')}
-renderChars();renderTeams();renderStore();
+function addChar(){let n=document.getElementById('newCharName').value.trim(),ty=document.getElementById('newCharType').value;if(!n){alert('নাম দাও');return}chars.push([n,'⭐ New '+ty]);storeItems.push([n,'150 💎']);save();renderChars();renderStore();document.getElementById('adminMsg').innerText='✅ '+n+' Add হইছে! এখন Store + Character এ দেখো। রিফ্রেশ দিলেও থাকবে।';alert(n+' Add হইছে! Store এ চেক করো।')}
+function addEvent(){let e=document.getElementById('eventName').value.trim();if(!e)return;document.getElementById('eventList').innerHTML+='<div>🎉 '+e+'</div>';alert(e+' Event দেওয়া হইছে!')}
+function changePass(){let np=document.getElementById('newPass').value;if(!np)return;adminPass=np;save();alert('Password Change হইছে: '+np)}
+renderChars();renderTeams();renderStore();updateBal();
 
-// ===== GAME ENGINE - 6v6 + GK + Referee + Trophy =====
-let cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W,H,px,py,bx,by,vx=0,vy=0,scoreA=0,scoreB=0,playing=false,hasBall=true,ballVX=0,ballVY=0,half=1,halfTimeLeft=120,halfBreak=0,celebrate=0,foulMsg=0,gkDive=0,gkX=0,netShake=0,kickAnim=0;
-let myPlayers=[],oppPlayers=[],crowd=[],ref={x:0,y:0};
-function startGame(m){mode=m;show('scr-home');document.getElementById('gameWrap').style.display='block';W=cv.width=innerWidth;H=cv.height=innerHeight;scoreA=0;scoreB=0;half=1;halfTimeLeft=120;halfBreak=0;celebrate=0;playing=true;hasBall=true;ballVX=0;ballVY=0;
+// ===== GAME V4 - Landscape, Real GK, Both Teams Steal =====
+let cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W,H,px,py,bx,by,vx=0,vy=0,scoreA=0,scoreB=0,playing=false,ballVX=0,ballVY=0,ballOwner=null,half=1,halfTimeLeft=120,halfBreak=0,celebrate=0,gkDiveA=0,gkDiveB=0,netShake=0,kickAnim=0,shootPower=0,celebrateGoal=0;
+let myPlayers=[],oppPlayers=[],crowd=[];
+function startGame(m){show('scr-home');document.getElementById('gameWrap').style.display='block';resize();scoreA=0;scoreB=0;half=1;halfTimeLeft=120;halfBreak=0;celebrate=0;celebrateGoal=0;playing=true;ballOwner='YOU';ballVX=0;ballVY=0;
 myPlayers=[];oppPlayers=[];crowd=[];
-for(let i=0;i<6;i++){myPlayers.push({x:W*0.2+Math.random()*W*0.4,y:H*0.55+Math.random()*H*0.25,role:i==0?'GK':i==5?'YOU':'',kick:0});oppPlayers.push({x:W*0.2+Math.random()*W*0.4,y:H*0.15+Math.random()*H*0.25,role:i==0?'GK':'',kick:0})}
-px=myPlayers[5].x;py=myPlayers[5].y;bx=px+16;by=py+10;
-for(let i=0;i<120;i++){crowd.push({x:Math.random()*W,y:Math.random()*H*0.12,flag:['🇧🇩','🇧🇷','🇦🇷','🇫🇷','🇪🇸','🇳🇵'][Math.floor(Math.random()*6)],jump:Math.random()*6})}
-ref={x:W/2,y:H/2};loop()}
+for(let i=0;i<6;i++){myPlayers.push({x:W*0.2+i*W*0.08,y:H*0.55+Math.random()*H*0.25,jersey:0});oppPlayers.push({x:W*0.2+i*W*0.08,y:H*0.18+Math.random()*H*0.2,jersey:0})}
+px=myPlayers[5].x;py=myPlayers[5].y;bx=px+18;by=py;
+for(let i=0;i<140;i++){crowd.push({x:Math.random()*W,y:Math.random()*H*0.1,flag:['🇧🇩','🇧🇷','🇦🇷','🇫🇷','🇪🇸','🇳🇵'][Math.floor(Math.random()*6)],jump:Math.random()*6})}
+loop()}
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+window.addEventListener('resize',()=>{if(playing)resize()});
 function exitGame(){playing=false;document.getElementById('gameWrap').style.display='none';show('scr-home')}
 function showPopup(t){let p=document.getElementById('popup');p.innerText=t;p.style.display='block';setTimeout(()=>p.style.display='none',1800)}
 function whistle(){try{let a=new (window.AudioContext||window.webkitAudioContext)();let o=a.createOscillator();o.frequency.value=2200;o.connect(a.destination);o.start();o.stop(a.currentTime+0.3)}catch(e){}}
 function loop(){if(!playing)return;requestAnimationFrame(loop);
-if(halfBreak>0){halfBreak-=0.016;document.getElementById('score').innerText=`HALF TIME • ${Math.ceil(halfBreak)}s • ${scoreA}-${scoreB}`;draw(true);if(halfBreak<=0){half=2;halfTimeLeft=120;showPopup('⚽ 2ND HALF START!')}return}
+if(halfBreak>0){halfBreak-=0.016;document.getElementById('score').innerText=`HALF TIME • ${Math.ceil(halfBreak)}s • ${scoreA}-${scoreB}`;draw(true);if(halfBreak<=0){half=2;halfTimeLeft=120;showPopup('⚽ 2ND HALF!')}return}
 if(celebrate>0){celebrate-=0.016;draw(true);if(celebrate<=0){document.getElementById('gameWrap').style.display='none';show('scr-home')}return}
-halfTimeLeft-=0.016;
-// You move
-myPlayers[5].x+=vx;myPlayers[5].y+=vy;myPlayers[5].x=Math.max(30,Math.min(W-30,myPlayers[5].x));myPlayers[5].y=Math.max(H*0.14,Math.min(H-30,myPlayers[5].y));px=myPlayers[5].x;py=myPlayers[5].y;
-if(hasBall){bx=px+16;by=py+10;ballVX=0;ballVY=0}else{bx+=ballVX;by+=ballVY;ballVX*=0.98;ballVY*=0.98}
-// Mates follow
-myPlayers.forEach((p,i)=>{if(i!==5){p.x+=(px-p.x)*0.002;p.y+=(py-p.y)*0.002}});
-// Opponents - chase ball, dribble, cut, shoot
+halfTimeLeft-=0.016;if(celebrateGoal>0)celebrateGoal-=0.016;
+// YOU - 6 players active
+let you=myPlayers[5];you.x+=vx;you.y+=vy;you.x=Math.max(30,Math.min(W-30,you.x));you.y=Math.max(H*0.14,Math.min(H-30,you.y));px=you.x;py=you.y;
+// Ball follows owner
+if(ballOwner==='YOU'){bx=px+18;by=py+6;ballVX=0;ballVY=0}
+else if(ballOwner==='OPP'){let o=oppPlayers[5];bx=o.x+16;by=o.y+6}
+else if(ballOwner==='MATE'){let m=myPlayers[2];bx=m.x+16;by=m.y+6}
+else{bx+=ballVX;by+=ballVY;ballVX*=0.97;ballVY*=0.97;if(Math.abs(ballVX)<0.2&&Math.abs(ballVY)<0.2)ballVX=ballVY=0}
+// Mates - 5 others also try to take ball
+myPlayers.forEach((p,i)=>{if(i!==5){p.x+=(px-p.x)*0.003;p.y+=(py-p.y)*0.003;if(ballOwner===null&&Math.hypot(p.x-bx,p.y-by)<22){ballOwner='MATE';showPopup('✅ তোমার Player বল নিছে!');}}});
+// Opp - 6 players active, also steal
 oppPlayers.forEach((o,i)=>{
-if(i==0){ // GK
-  o.x+=(bx-o.x)*0.08; o.y=H*0.18; if(Math.abs(bx-o.x)<60&&by< H*0.25){gkDive=1; if(Math.random()>0.45){ballVY=5;ballVX=(Math.random()-0.5)*8;hasBall=false;showPopup('🧤 GK SAVE!')} }
-}else{
-  let dx=bx-o.x,dy=by-o.y,d=Math.hypot(dx,dy)||1;
-  o.x+=dx/d*0.85; o.y+=dy/d*0.85;
-  if(d<24&&hasBall){ // opponent steals
-    hasBall=false; ballVX=(Math.random()-0.5)*4; ballVY=4; showPopup('😤 Opponent বল কেড়ে নিছে!'); whistle();
-  }
-  if(!hasBall&&d<28){ // opponent dribbles to your goal
-    bx=o.x+14; by=o.y+10;
-    if(o.y>H*0.7&&Math.random()>0.98){scoreB++; showPopup('⚽ OPP GOAL!'); netShake=1; bx=W/2;by=H/2;hasBall=true; px=myPlayers[5].x;py=myPlayers[5].y;}
+if(i===0){o.x+=(bx-o.x)*0.06;o.y=H*0.16;return}
+let dx=bx-o.x,dy=by-o.y,d=Math.hypot(dx,dy)||1;o.x+=dx/d*0.9;o.y+=dy/d*0.9;
+if(d<24&&ballOwner!=='OPP'){ // OPP steals from YOU / MATE
+  if(ballOwner==='YOU'||ballOwner==='MATE'){ballOwner='OPP';showPopup('😤 Opponent বল কেড়ে নিছে!');whistle()}
+}
+if(ballOwner==='OPP'&&i===5){ // OPP dribbles to your goal
+  o.y+=1.0;if(o.y>H*0.75&&Math.random()>0.99){ // OPP shoot
+    if(Math.random()>0.45){scoreB++;netShake=1;celebrateGoal=3;showPopup('⚽ OPP GOAL! ওরা নাচতেছে!');ballOwner=null;bx=W/2;by=H/2;}else{gkDiveA=1;showPopup('🧤 তোমার GK ডাইভ মেরে SAVE!');ballOwner='YOU';}
   }
 }
-// Foul check - if opponent too close to you
-if(Math.hypot(o.x-px,o.y-py)<18&&Math.random()>0.995){foulMsg=1;whistle();showPopup('📯 FOUL! রেফারি বাঁশি 🟨 FREE KICK!');hasBall=true;bx=px+16;by=py+10;setTimeout(()=>foulMsg=0,1500)}
 });
-// My GK
-let myGK=myPlayers[0]; myGK.x+=(bx-myGK.x)*0.05; myGK.y=H*0.86; if(Math.abs(bx-myGK.x)<50&&by>H*0.78){gkDive=1; if(Math.random()>0.4){ballVY=-6;hasBall=false;showPopup('🧤 তোমার GK SAVE!')}}
-if(gkDive>0)gkDive-=0.02; if(netShake>0)netShake-=0.02; if(kickAnim>0)kickAnim-=0.05;
-ref.x+=(px-ref.x)*0.01; ref.y+=(py-ref.y)*0.01;
+// YOU steal back from OPP
+if(ballOwner==='OPP'&&Math.hypot(px-bx,py-by)<26){ballOwner='YOU';showPopup('✅ তুমি বল কেড়ে নিছো! এখন SHOOT করো!')}
+// GK dive timers
+if(gkDiveA>0)gkDiveA-=0.02;if(gkDiveB>0)gkDiveB-=0.02;if(netShake>0)netShake-=0.02;if(kickAnim>0)kickAnim-=0.04;
 draw(false);
-let mm=Math.floor(halfTimeLeft/60),ss=Math.floor(halfTimeLeft%60);document.getElementById('score').innerText=`${myTeam} ${scoreA} - ${scoreB} OPP • ${mm}:${String(ss).padStart(2,'0')} • ${half==1?'1ST HALF':'2ND HALF'} • ${mode}`;
-if(halfTimeLeft<=0){if(half==1){halfBreak=10;showPopup('⏸️ HALF TIME - 10s')}else{playing=false;celebrate=6;if(scoreA>scoreB){showPopup('🏆 তুমি জিতছো! TROPHY!')}else if(scoreB>scoreA){showPopup('😔 হারছো - আবার চেষ্টা করো')}else{showPopup('🤝 DRAW!')};earnDiamond(100)}}
+let mm=Math.floor(halfTimeLeft/60),ss=Math.floor(halfTimeLeft%60);document.getElementById('score').innerText=`${myTeam} ${scoreA} - ${scoreB} OPP • ${mm}:${String(ss).padStart(2,'0')} • ${half==1?'1ST HALF':'2ND HALF'}`;
+if(halfTimeLeft<=0){if(half==1){halfBreak=10;showPopup('⏸️ HALF TIME 10s')}else{playing=false;celebrate=6;if(scoreA>scoreB)showPopup('🏆 তুমি জিতছো! TROPHY!');else if(scoreB>scoreA)showPopup('😔 হারছো!');else showPopup('🤝 DRAW!');earnDiamond(100)}}
 }
-function drawPlayer(x,y,color,name,isYou){ // realistic top-view: head + jersey + pant + boots
-ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(x,y+14,10,5,0,0,Math.PI*2);ctx.fill(); // shadow
-ctx.fillStyle=color;ctx.fillRect(x-10,y-10,20,18); // jersey
-ctx.fillStyle='#fff';ctx.fillRect(x-10,y-2,20,3); // jersey line
-ctx.fillStyle='#111';ctx.fillRect(x-8,y+8,7,10);ctx.fillRect(x+1,y+8,7,10); // pant
-ctx.fillStyle='#000';ctx.fillRect(x-9,y+18,8,4);ctx.fillRect(x+1,y+18,8,4); // boots
-ctx.fillStyle='#ffdbac';ctx.beginPath();ctx.arc(x,y-14,9,0,Math.PI*2);ctx.fill(); // head
-ctx.fillStyle='#000';ctx.beginPath();ctx.arc(x,y-17,9,Math.PI,0);ctx.fill(); // hair
-if(isYou){ctx.fillStyle='#ffd700';ctx.fillRect(x-12,y-28,24,4)}
-ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';ctx.fillText(name,x-10,y+32)
+function drawPlayer(x,y,color,name,isYou,jerseyFly){
+ctx.save();ctx.translate(x,y);
+ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.ellipse(0,16,12,5,0,0,Math.PI*2);ctx.fill();
+// Legs - pant + boots
+ctx.fillStyle='#111';ctx.fillRect(-8,8,7,10);ctx.fillRect(1,8,7,10);
+ctx.fillStyle='#000';ctx.fillRect(-9,18,8,4);ctx.fillRect(1,18,8,4);
+// Jersey - with fly effect on shoot
+let fly=jerseyFly>0?Math.sin(Date.now()/30)*4:0;
+ctx.fillStyle=color;ctx.fillRect(-11,-10+fly,22,20);ctx.fillStyle='rgba(255,255,255,.9)';ctx.fillRect(-11,-2+fly,22,3);
+ctx.fillStyle='#ffdbac';ctx.beginPath();ctx.arc(0,-14,9,0,Math.PI*2);ctx.fill();
+ctx.fillStyle='#000';ctx.beginPath();ctx.arc(0,-17,9,Math.PI,0);ctx.fill();
+if(isYou){ctx.fillStyle='#ffd700';ctx.fillRect(-12,-28,24,4)}
+ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';ctx.fillText(name,-12,34);
+ctx.restore();
+}
+function drawGoal(x,y,isTop){ // Real Goal: 2 iron rods + net behind
+let shake=netShake>0?Math.sin(Date.now()/25)*3:0;
+ctx.strokeStyle='#888';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(x-70,y);ctx.lineTo(x-70,y+(isTop?28:-28));ctx.moveTo(x+70,y);ctx.lineTo(x+70,y+(isTop?28:-28));ctx.stroke();
+ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.strokeRect(x-70,y+(isTop?0:-28),140,28);
+ctx.fillStyle='rgba(255,255,255,.25)';ctx.fillRect(x-70+shake,y+(isTop?0:-28),140,28);
+// Net lines
+ctx.strokeStyle='rgba(0,0,0,.2)';for(let i=0;i<7;i++){ctx.beginPath();ctx.moveTo(x-70+i*20,y+(isTop?0:-28));ctx.lineTo(x-70+i*20,y+(isTop?28:0));ctx.stroke()}
 }
 function draw(isBreak){
 ctx.fillStyle='#0a2a12';ctx.fillRect(0,0,W,H);
-// Crowd - top stand
-ctx.fillStyle='#222';ctx.fillRect(0,0,W,H*0.13);
-crowd.forEach(c=>{let jy=celebrate>0?Math.sin(Date.now()/100+c.jump)*6:0;ctx.font='14px sans-serif';ctx.fillText('🧑',c.x,c.y+10+jy);ctx.fillText(c.flag,c.x+14,c.y+10+jy)});
-ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.fillText('🏟️ WORLD CUP • CROWD • FLAGS',W/2-80,H*0.06);
+// Crowd + flags waving
+ctx.fillStyle='#1a1a1a';ctx.fillRect(0,0,W,H*0.1);
+crowd.forEach(c=>{let wave=celebrateGoal>0||celebrate>0?Math.sin(Date.now()/80+c.jump)*8:Math.sin(Date.now()/400+c.jump)*2;ctx.font='15px sans-serif';ctx.fillText('🧑',c.x,c.y+10);ctx.fillText(c.flag,c.x+16,c.y+10+wave)});
+ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.fillText('🏟️ WORLD CUP • CROWD WAVING FLAGS',W/2-110,H*0.05);
 // Pitch
-ctx.fillStyle='#2e9e4f';ctx.fillRect(0,H*0.13,W,H*0.87);
-ctx.fillStyle='#37b35a';for(let i=0;i<6;i++){if(i%2==0)ctx.fillRect(0,H*0.13+i*H*0.145,W,H*0.145)}
-ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=2;ctx.strokeRect(20,H*0.15,W-40,H*0.82);ctx.beginPath();ctx.moveTo(20,H*0.56);ctx.lineTo(W-20,H*0.56);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H*0.56,60,0,Math.PI*2);ctx.stroke();
-// Goals + net shake
-let shake=netShake>0?Math.sin(Date.now()/30)*3:0;
-ctx.fillStyle='#fff';ctx.fillRect(W/2-70,H*0.15,140,14);ctx.fillRect(W/2-70+shake,H*0.95,140,14);
-ctx.strokeStyle='#fff';ctx.strokeRect(W/2-50,H*0.15,100,38);ctx.strokeRect(W/2-50,H*0.92,100,38);
-if(celebrate>0){ // Trophy celebration - players jump + dance
-  ctx.fillStyle='rgba(0,0,0,.6)';ctx.fillRect(0,0,W,H);ctx.font='80px sans-serif';ctx.fillText('🏆',W/2-40,H/2);ctx.fillStyle='#ffd700';ctx.font='bold 24px sans-serif';ctx.fillText(scoreA>scoreB?'🏆 CHAMPION! তুমি জিতছো!':'MATCH END',W/2-140,H/2+60);
-  myPlayers.forEach((p,i)=>{let jy=Math.sin(Date.now()/150+i)*12;drawPlayer(p.x,H/2+80+jy,'#006a4e','🎉')});
-  return;
-}
-if(isBreak){ctx.fillStyle='#fff';ctx.font='bold 22px sans-serif';ctx.fillText('⏸️ HALF TIME - 10s পর আবার খেলা',W/2-170,H/2);return}
-// Referee
-ctx.fillStyle='#000';ctx.beginPath();ctx.arc(ref.x,ref.y,10,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ffd700';ctx.fillText('REF',ref.x-12,ref.y-16);
-// Players
-myPlayers.forEach((p,i)=>{if(i==0)drawPlayer(p.x,p.y,'#ffea00','GK');else if(i==5)drawPlayer(p.x,p.y,'#006a4e',myChar);else drawPlayer(p.x,p.y,'#006a4e','BD')});
-oppPlayers.forEach((o,i)=>{if(i==0){let dx=gkDive>0?20:0;drawPlayer(o.x+dx,o.y,'#ff5722','GK')}else drawPlayer(o.x,o.y,'#c62828','OPP')});
-// Ball - in front, not behind
-ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(bx,by,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#000';ctx.beginPath();ctx.arc(bx-2,by-2,2,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.fillText('⚽',bx-7,by+3);
-if(foulMsg) {ctx.fillStyle='#ffeb3b';ctx.font='bold 16px sans-serif';ctx.fillText('🟨 FOUL! FREE KICK',W/2-80,80)}
-if(kickAnim>0){ctx.fillStyle='#fff';ctx.font='bold 18px sans-serif';ctx.fillText('💥 SHOOT!',px+20,py-30)}
-}
-function doShoot(){if(!hasBall){alert('আগে বল নাও! Opponent এর কাছ থেকে কেড়ে নাও!');return}kickAnim=1;myPlayers[5].kick=1;whistle();
-if(py<H*0.4){ // shooting to top goal
-  if(Math.random()>0.45){scoreA++;netShake=1;showPopup('⚽ GOAL! '+myChar+' 🔥');}else{showPopup('🧤 GK SAVE!');hasBall=false;ballVY=6}
-}else{showPopup('🎯 গোলের দিকে যাও, তারপর SHOOT!');return}
-hasBall=false;bx=W/2;by=H/2;setTimeout(()=>{bx=px+16;by=py+10;hasBall=true},1200)}
-function doPass(){if(!hasBall)return;bx=px+50;by=py+30;hasBall=false;setTimeout(()=>{bx=px+16;by=py+10;hasBall=true},600);showPopup('➡️ PASS!')}
-function doThrough(){if(!hasBall)return;ballVX=3;ballVY=-6;hasBall=false;showPopup('↗️ THROUGH! দৌড়াও!');setTimeout(()=>{if(Math.hypot(bx-px,by-py)<60){bx=px+16;by=py+10;hasBall=true}},900)}
-function doSprint(){vx*=1.9;vy*=1.9;setTimeout(()=>{vx/=1.9;vy/=1.9},800)}
-let joy=document.getElementById('joy'),knob=document.getElementById('knob');
-function joyMove(e){let r=joy.getBoundingClientRect();let cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left-60,cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top-60;cx=Math.max(-35,Math.min(35,cx));cy=Math.max(-35,Math.min(35,cy));knob.style.left=(35+cx)+'px';knob.style.top=(35+cy)+'px';vx=cx*0.18;vy=cy*0.18}
-joy.addEventListener('touchmove',joyMove);joy.addEventListener('touchend',()=>{knob.style.left='35px';knob.style.top='35px';vx=0;vy=0});joy.addEventListener('mousemove',e=>{if(e.buttons)joyMove(e)})
-</script></body></html>
+ctx.fillStyle='#2e9e4f';ctx.fillRect(0,H*0.1,W,H*0.9);
+ctx.fillStyle='#37b35a';for(let i=0;i<5;i++){if(i%2==0)ctx.fillRect(0,H*0.1+i*H*0.18,W,H*0.18)}
+ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=2;ctx.strokeRect(20,H*0.12,W-40,H*0.86);ctx.beginPath();ctx.moveTo(20,H*0.55);ctx.lineTo(W-20,H*0.55);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H*0.55,60,0,Math.PI*2);ctx.stroke();
+// Goals
+drawGoal(W/2,H*0.12,true);drawGoal(W/2,H*0.98,false);
+if(celebrate>0){ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(0,0,W,H);ctx.font='80px sans-serif';ctx.fillText('🏆',W/2-40,H/2-20);ctx.fillStyle='#ffd700';ctx.font='bold 22px sans-serif';ctx.fillText(scoreA>scoreB?'🏆 CHAMPION! Trophy নিয়ে নাচতেছে!':'MATCH END',W/2-180,H/2+50);myPlayers.forEach((p,i)=>{let jy=Math.sin(Date.now()/140+i)*14;drawPlayer(p.x,H/2+90+jy,'#006a4e','🎉',false,0)});return}
+if(isBreak){ctx.fillStyle='#fff';ctx.font='bold 20px sans-serif';ctx.fillText('⏸️ HALF TIME - 10s পর আবার খেলা',W/2-170,H/2);return}
+// GKs - realistic dive
+let gkTop={x:W/2,y:H*0.16},gkBot={x:W/2,y:H*0.9};
+let diveB=gkDiveB>0?30:0, diveA=gkDiveA>0?30:0;
+drawPlayer(gkTop.x+diveB,gkTop.y,'#ff5722','GK',false,0);
+drawPlayer(gkBot.x+diveA,gkBot.y,'#ffea00','GK',false,0);
+// Coach + Referee on side
+ctx.font='22px sans-serif';ctx.fillText('🧑‍🏫 COACH',20,H*0.5);ctx.fillText('📯 REF',W-70,H*0.5);
+// Players - 6v6
+myPlayers.forEach((p,i)=>{if(i!==0)drawPlayer(p.x,p.y,'#006a4e',i==5?myChar:'BD',i==5,kickAnim)});
+oppPlayers.forEach((o,i)=>{if(i!==0)drawPlayer(o.x,o.y,'#c62828','OPP',false,0)});
+// Ball
+ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(bx,by,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#000';ctx.beginPath();ctx.arc(bx-2,by-2,2,0,Math.PI*2);ctx.fill();
+if(celebrateGoal>0){ctx.fillStyle='#ffd700';ctx.font='bol
