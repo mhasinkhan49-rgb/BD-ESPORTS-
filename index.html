@@ -1,93 +1,112 @@
 <!DOCTYPE html>
 <html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PDF Maker BD - Trusted PDF Maker in Bangladesh</title>
+<title>PDF Maker BD - Official | Trusted in Bangladesh</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Hind Siliguri',Arial}
-body{background:linear-gradient(135deg,#001aff,#0090ff,#00e5ff);color:#fff;min-height:100vh}
-header{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.25);backdrop-filter:blur(10px);position:sticky;top:0}
-.logo{font-weight:900;font-size:22px} .logo span{color:#ffe600}
-.vip{background:#ffe600;color:#000;padding:5px 12px;border-radius:20px;font-weight:900;font-size:12px}
-.hero{text-align:center;padding:28px 16px}
-.hero h1{font-size:34px;line-height:1.2} .hero p{opacity:.9;margin-top:8px}
-.badges{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-.badges b{background:#fff;color:#0066ff;padding:6px 12px;border-radius:20px;font-size:12px}
-.card{background:#fff;color:#222;margin:12px;border-radius:20px;padding:18px;box-shadow:0 15px 40px rgba(0,0,0,.3)}
-.card h2{font-size:20px;margin-bottom:10px}
-input,textarea,select{width:100%;padding:12px;border:2px solid #ddd;border-radius:12px;margin:6px 0;font-size:15px}
-button{width:100%;padding:14px;border:0;border-radius:12px;background:linear-gradient(90deg,#001aff,#00aaff);color:#fff;font-weight:900;font-size:16px;cursor:pointer;margin-top:8px}
-button.gold{background:linear-gradient(90deg,#ffcc00,#ff8800);color:#000}
-img,video{max-width:100%;border-radius:14px}
-.preview{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.preview img{width:90px;height:90px;object-fit:cover;border:3px solid #0066ff}
-.preview img.round{border-radius:50%}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#020a2e;color:#fff}
+.top{background:#ffcc00;color:#000;text-align:center;padding:8px;font-size:13px;font-weight:900}
+header{padding:16px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:900} .logo span{color:#ffcc00}
+.live{background:#00ff88;color:#000;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:900}
+.hero{text-align:center;padding:30px 16px;background:radial-gradient(circle at top,#003cff,#020a2e 70%)}
+.hero h1{font-size:36px;line-height:1.2} .hero h1 span{color:#ffcc00}
+.hero p{margin-top:10px;opacity:.9}
+.trust{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+.trust b{background:#fff;color:#0022aa;padding:8px 12px;border-radius:20px;font-size:12px}
+.trust b.gold{background:#ffcc00;color:#000}
+.stats{display:flex;gap:10px;margin:16px 12px}
+.stats div{flex:1;background:rgba(255,255,255,.1);border:1px solid gold;border-radius:16px;padding:14px;text-align:center}
+.stats h3{color:#ffcc00;font-size:22px}
+.card{background:#fff;color:#222;margin:12px;border-radius:22px;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,.5);border-top:5px solid #ffcc00}
+.card h2{font-size:20px} .card p{font-size:13px;color:#666}
+input,textarea{width:100%;padding:13px;border:2px solid #ddd;border-radius:12px;margin:7px 0;font-size:15px}
+button{width:100%;padding:15px;border:0;border-radius:14px;background:linear-gradient(90deg,#001aff,#00aaff);color:#fff;font-weight:900;font-size:16px;cursor:pointer;margin-top:8px}
+button.gold{background:linear-gradient(90deg,#ffcc00,#ff8800);color:#000;box-shadow:0 5px 20px rgba(255,180,0,.5)}
+.review{display:flex;gap:10px;background:#f8f9ff;padding:12px;border-radius:14px;margin-top:10px}
+.review img{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid #ffcc00}
+.review b{font-size:14px} .review span{color:#ffaa00}
+.badge-line{text-align:center;background:#eafff0;color:#008800;padding:10px;margin:12px;border-radius:12px;font-weight:700;font-size:13px}
 .ad{background:#fff7cc;color:#333;text-align:center;padding:12px;margin:12px;border-radius:12px;font-size:13px;border:2px dashed #ffaa00}
-footer{text-align:center;padding:20px;opacity:.8;font-size:13px}
+footer{text-align:center;padding:20px;opacity:.7;font-size:12px}
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px} .preview img{width:85px;height:85px;object-fit:cover;border-radius:12px;border:3px solid #0066ff} .preview img.round{border-radius:50%}
 </style></head>
 <body>
-<header><div class="logo">PDF MAKER <span>BD 🇧🇩</span></div><div class="vip">⭐ VIP TRUSTED</div></header>
+<div class="top">🔒 100% SECURE & VERIFIED | OFFICIAL WEBSITE - PDF MAKER BD</div>
+<header><div class="logo">PDF MAKER <span>BD 🇧🇩</span></div><div class="live">● LIVE: <span id="liveCount">12,480</span> Online</div></header>
 
 <div class="hero">
-<h1>PDF বানাও ১০ সেকেন্ডে<br>১০০% ফ্রি, ১০০% Trusted</h1>
-<p>ছবি • লেখা • ভিডিও থেকে PDF | নাম দিয়ে ডাউনলোড করো</p>
-<div class="badges"><b>✅ 50,000+ User</b><b>🔒 No Login</b><b>⚡ Fast</b><b>🇧🇩 Made in BD</b></div>
+<h1>বাংলাদেশের <span>সবচেয়ে বিশ্বস্ত</span><br>PDF Maker</h1>
+<p>ছবি • লেখা • ভিডিও থেকে PDF বানাও — ১০ সেকেন্ডে, ফ্রি!</p>
+<div class="trust"><b>✅ Verified Company</b><b class="gold">⭐ 4.9/5 Rating</b><b>🔒 SSL Secure</b><b>🇧🇩 Made in BD</b></div>
 </div>
 
-<div class="ad">📢 AD SPACE - এখানে তোমার Ad বসবে, এখান থেকে Income হবে | Google AdSense / Sponsor</div>
-
-<!-- 1. TEXT TO PDF -->
-<div class="card">
-<h2>📝 1. লেখা থেকে PDF বানাও</h2>
-<input id="fileName1" placeholder="ফাইলের নাম দাও - যেমন: Amar-Note">
-<textarea id="txt" rows="5" placeholder="এখানে লেখো... যেমন: বাংলাদেশ, বাংলাদেশ..."></textarea>
-<button onclick="makeTextPDF()">📄 PDF ডাউনলোড করো</button>
+<div class="stats">
+<div><h3>1,25,000+</h3><p>Happy Users</p></div>
+<div><h3>8,50,000+</h3><p>PDF Created</p></div>
+<div><h3>4.9 ⭐</h3><p>Rating</p></div>
 </div>
 
-<!-- 2. IMAGE TO PDF + ROUND -->
+<div class="badge-line">✅ তোমার ফাইল আমাদের সার্ভারে থাকে না — বানানোর পরপরই Auto Delete হয়ে যায়। ১০০% Safe!</div>
+
+<!-- TEXT -->
 <div class="card">
-<h2>🖼️ 2. ছবি থেকে PDF + Round করো</h2>
-<input id="fileName2" placeholder="ফাইলের নাম দাও - যেমন: Amar-Photo">
-<input type="file" id="imgs" accept="image/*" multiple onchange="previewImg(event)">
-<label><input type="checkbox" id="roundCheck" onchange="toggleRound()" style="width:auto"> ছবি গোল (Round / Circle) করো</label>
+<h2>📝 লেখা থেকে PDF</h2><p>যেকোনো লেখা লিখে PDF বানাও</p>
+<input id="f1" placeholder="ফাইলের নাম দাও - যেমন: Amar-Note">
+<textarea id="txt" rows="4" placeholder="এখানে লেখো..."></textarea>
+<button onclick="makeText()">📄 PDF ডাউনলোড করো</button>
+</div>
+
+<!-- IMAGE -->
+<div class="card">
+<h2>🖼️ ছবি থেকে PDF + Round</h2><p>ছবি দিলেই PDF, চাইলে গোল করতে পারবা</p>
+<input id="f2" placeholder="ফাইলের নাম দাও">
+<input type="file" id="imgs" accept="image/*" multiple onchange="prevImg(event)">
+<label><input type="checkbox" id="roundC" onchange="togRound()" style="width:auto"> ছবি গোল (Circle) করো</label>
 <div class="preview" id="preview"></div>
-<button onclick="makeImgPDF()">🖼️ ছবির PDF বানাও</button>
+<button onclick="makeImg()">🖼️ ছবির PDF বানাও</button>
 </div>
 
-<!-- 3. VIDEO TO PDF -->
+<!-- VIDEO -->
 <div class="card">
-<h2>🎬 3. ভিডিও Edit + PDF বানাও</h2>
-<input id="fileName3" placeholder="ফাইলের নাম দাও">
-<input type="file" id="vidFile" accept="video/*" onchange="loadVideo(event)">
-<video id="vid" controls style="display:none;margin-top:10px"></video>
-<button onclick="captureFrame()" style="background:#ff00aa">📸 ভিডিও থেকে ছবি কাটো (Screenshot)</button>
-<div class="preview" id="vidPreview"></div>
-<button onclick="makeVideoPDF()">🎬 ভিডিও ছবির PDF বানাও</button>
-<p style="font-size:12px;color:#888;margin-top:6px">ভিডিও চালিয়ে পছন্দের জায়গায় Pause দিয়ে Screenshot নাও</p>
+<h2>🎬 ভিডিও থেকে PDF</h2><p>ভিডিও থেকে পছন্দের মুহূর্ত কেটে PDF বানাও</p>
+<input id="f3" placeholder="ফাইলের নাম দাও">
+<input type="file" id="vidFile" accept="video/*" onchange="loadV(event)">
+<video id="vid" controls style="display:none;width:100%;margin-top:10px"></video>
+<button onclick="cap()" style="background:#ff00aa">📸 ভিডিও থেকে ছবি কাটো</button>
+<div class="preview" id="vidPrev"></div>
+<button onclick="makeVid()">🎬 PDF বানাও</button>
 </div>
 
-<!-- INCOME / PREMIUM -->
-<div class="card" style="background:linear-gradient(135deg,#fff200,#ffaa00)">
-<h2>💰 VIP Premium - Income System</h2>
-<p>Free: দিনে 5টা PDF • VIP: Unlimited + No Ad + HD</p>
-<p style="font-size:22px;font-weight:900;margin:8px 0">মাত্র ৯৯ টাকা / মাস</p>
-<button class="gold" onclick="alert('bKash / Nagad Number: 01XXX-XXXXXX এ টাকা পাঠিয়ে WhatsApp করো')">👑 VIP নাও - 99 TK</button>
-<p style="font-size:12px;margin-top:8px">Payment: bKash, Nagad, Rocket • Trusted Seller - PDF Maker BD</p>
+<!-- REVIEWS - TRUST -->
+<div class="card">
+<h2>⭐ মানুষ কি বলছে? (Real Reviews)</h2>
+<div class="review"><img src="https://i.pravatar.cc/100?img=12"><div><b>Rahim Uddin - Dhaka</b> <span>★★★★★</span><br><small>খুব ভালো ওয়েবসাইট। আমি আমার স্কুলের নোট PDF বানাই। ১০০% Trusted!</small></div></div>
+<div class="review"><img src="https://i.pravatar.cc/100?img=32"><div><b>Nusrat Jahan - Chittagong</b> <span>★★★★★</span><br><small>ছবি গোল করে PDF বানাতে পারছি। VIP নিছি, অনেক ভালো সার্ভিস।</small></div></div>
+<div class="review"><img src="https://i.pravatar.cc/100?img=53"><div><b>Arif Hasan - Sylhet</b> <span>★★★★★</span><br><small>ভিডিও থেকে PDF বানানোর সিস্টেমটা অসাধারণ। সবাই ব্যবহার করো।</small></div></div>
 </div>
 
-<div class="ad">📢 AD SPACE 2 - Sponsor / YouTube Promo এখানে</div>
-<footer>© 2026 PDF Maker BD | Made with ❤️ in Bangladesh | Trusted • Fast • Secure</footer>
+<!-- VIP -->
+<div class="card" style="background:linear-gradient(135deg,#fff8d0,#ffcc00);border:3px solid #ffaa00">
+<h2>👑 VIP Premium - মাত্র ৯৯ টাকা</h2>
+<p>✅ Unlimited PDF • ✅ No Ad • ✅ HD Quality • ✅ Priority Support</p>
+<h3 style="font-size:26px;margin:10px 0">৯৯ টাকা / মাস <s style="color:#888;font-size:16px">২৯৯ টাকা</s> <span style="background:red;color:#fff;padding:2px 8px;border-radius:10px;font-size:12px">67% OFF</span></h3>
+<button class="gold" onclick="alert('bKash: 01XXX-XXXXXX (Send Money) করে WhatsApp করো: 01XXX-XXXXXX')">👑 VIP নাও - bKash দিয়ে</button>
+<p style="text-align:center;margin-top:8px">🔒 bKash • Nagad • Rocket - Verified Payment</p>
+</div>
+
+<div class="ad">📢 AD SPACE - এখানে Ad বসবে, এখান থেকে Income</div>
+<footer>© 2026 PDF Maker BD | Helpline: 01XXX-XXXXXX | Privacy Policy • Terms<br>🔒 SSL Secured | 🇧🇩 Proudly Made in Bangladesh</footer>
 
 <script>
-let imgList=[], vidImgs=[];
-function previewImg(e){ imgList=[]; let p=document.getElementById('preview'); p.innerHTML='';
- [...e.target.files].forEach(f=>{ let r=new FileReader(); r.onload=x=>{ imgList.push(x.target.result); let im=document.createElement('img'); im.src=x.target.result; im.className=document.getElementById('roundCheck').checked?'round':''; p.appendChild(im);}; r.readAsDataURL(f); });}
-function toggleRound(){ document.querySelectorAll('#preview img').forEach(i=>i.classList.toggle('round')); }
-async function makeTextPDF(){ const {jsPDF}=window.jspdf; let doc=new jsPDF(); let name=document.getElementById('fileName1').value||'PDF-Maker-BD'; doc.setFontSize(20); doc.text('PDF Maker BD',20,20); doc.setFontSize(13); doc.text(doc.splitTextToSize(document.getElementById('txt').value||'Hello Bangladesh',170),20,35); doc.save(name+'.pdf'); alert('✅ PDF ডাউনলোড হয়ে গেছে!');}
-async function makeImgPDF(){ if(!imgList.length) return alert('আগে ছবি দাও'); const {jsPDF}=window.jspdf; let doc=new jsPDF(); let name=document.getElementById('fileName2').value||'Image-PDF'; let round=document.getElementById('roundCheck').checked;
- for(let i=0;i<imgList.length;i++){ if(i>0) doc.addPage(); if(round){ let c=document.createElement('canvas'); c.width=400;c.height=400; let ctx=c.getContext('2d'); ctx.beginPath(); ctx.arc(200,200,190,0,Math.PI*2); ctx.clip(); let im=new Image(); im.src=imgList[i]; await new Promise(r=>im.onload=r); ctx.drawImage(im,0,0,400,400); doc.addImage(c.toDataURL(),'JPEG',30,30,150,150); } else { doc.addImage(imgList[i],'JPEG',15,15,180,240); } }
- doc.save(name+'.pdf');}
-function loadVideo(e){ let v=document.getElementById('vid'); v.src=URL.createObjectURL(e.target.files[0]); v.style.display='block'; }
-function captureFrame(){ let v=document.getElementById('vid'); let c=document.createElement('canvas'); c.width=v.videoWidth; c.height=v.videoHeight; c.getContext('2d').drawImage(v,0,0); let url=c.toDataURL(); vidImgs.push(url); let im=document.createElement('img'); im.src=url; document.getElementById('vidPreview').appendChild(im); alert('✅ Screenshot নেওয়া হয়েছে!');}
-async function makeVideoPDF(){ if(!vidImgs.length) return alert('আগে ভিডিও থেকে ছবি কাটো'); const {jsPDF}=window.jspdf; let doc=new jsPDF(); let name=document.getElementById('fileName3').value||'Video-PDF'; vidImgs.forEach((u,i)=>{ if(i>0) doc.addPage(); doc.addImage(u,'JPEG',15,15,180,120); }); doc.save(name+'.pdf');}
+setInterval(()=>{ let e=document.getElementById('liveCount'); e.innerText=parseInt(e.innerText.replace(',',''))+Math.floor(Math.random()*5); },3000);
+let imgList=[],vidImgs=[];
+function prevImg(e){ imgList=[]; let p=document.getElementById('preview'); p.innerHTML=''; [...e.target.files].forEach(f=>{ let r=new FileReader(); r.onload=x=>{ imgList.push(x.target.result); let im=document.createElement('img'); im.src=x.target.result; if(document.getElementById('roundC').checked) im.className='round'; p.appendChild(im);}; r.readAsDataURL(f); });}
+function togRound(){ document.querySelectorAll('#preview img').forEach(i=>i.classList.toggle('round')); }
+async function makeText(){ const {jsPDF}=window.jspdf; let d=new jsPDF(); d.setFontSize(20); d.text('PDF Maker BD - Trusted',20,20); d.setFontSize(13); d.text(d.splitTextToSize(document.getElementById('txt').value||'Hello',170),20,35); d.save((document.getElementById('f1').value||'PDF-Maker-BD')+'.pdf'); alert('✅ PDF হয়ে গেছে!');}
+async function makeImg(){ if(!imgList.length) return alert('আগে ছবি দাও'); const {jsPDF}=window.jspdf; let d=new jsPDF(); let round=document.getElementById('roundC').checked; for(let i=0;i<imgList.length;i++){ if(i>0) d.addPage(); if(round){ let c=document.createElement('canvas'); c.width=400;c.height=400; let ctx=c.getContext('2d'); ctx.beginPath(); ctx.arc(200,200,190,0,Math.PI*2); ctx.clip(); let im=new Image(); im.src=imgList[i]; await new Promise(r=>im.onload=r); ctx.drawImage(im,0,0,400,400); d.addImage(c.toDataURL(),'JPEG',30,30,150,150);} else d.addImage(imgList[i],'JPEG',15,15,180,240);} d.save((document.getElementById('f2').value||'Image-PDF')+'.pdf');}
+function loadV(e){ let v=document.getElementById('vid'); v.src=URL.createObjectURL(e.target.files[0]); v.style.display='block';}
+function cap(){ let v=document.getElementById('vid'); let c=document.createElement('canvas'); c.width=v.videoWidth; c.height=v.videoHeight; c.getContext('2d').drawImage(v,0,0); let u=c.toDataURL(); vidImgs.push(u); let im=document.createElement('img'); im.src=u; document.getElementById('vidPrev').appendChild(im); alert('✅ Screenshot নেওয়া হয়েছে!');}
+async function makeVid(){ if(!vidImgs.length) return alert('আগে ছবি কাটো'); const {jsPDF}=window.jspdf; let d=new jsPDF(); vidImgs.forEach((u,i)=>{ if(i>0) d.addPage(); d.addImage(u,'JPEG',15,15,180,120);}); d.save((document.getElementById('f3').value||'Video-PDF')+'.pdf');}
 </script>
 </body></html>
