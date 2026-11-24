@@ -1,131 +1,132 @@
 <!DOCTYPE html>
 <html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BD EARN GAME - Play & Earn Daily</title>
+<title>MY FARM - Bangladesh Farm Game</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#eef4ff;color:#222}
-.top{background:#ffcc00;text-align:center;padding:8px;font-weight:900;font-size:13px}
-header{padding:14px;background:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.08);position:sticky;top:0;z-index:10}
-.logo{font-size:22px;font-weight:900;color:#001aff} .logo span{color:#ff8800}
-.coin{background:#001aff;color:#fff;padding:8px 14px;border-radius:20px;font-weight:900}
-.hero{text-align:center;padding:22px 16px;background:linear-gradient(180deg,#dbe9ff,#eef4ff)}
-.hero h1{font-size:30px;color:#001aff;line-height:1.2} .hero h1 span{color:#ff8800}
-.card{background:#fff;margin:12px;border-radius:20px;padding:18px;box-shadow:0 5px 20px rgba(0,0,0,.06);text-align:center}
-button{width:100%;padding:14px;border:0;border-radius:14px;background:#001aff;color:#fff;font-weight:900;font-size:16px;margin-top:10px;cursor:pointer}
-button.gold{background:linear-gradient(90deg,#ffcc00,#ff8800);color:#000}
-button.green{background:#00cc66}
-.wheel{width:180px;height:180px;border-radius:50%;background:conic-gradient(#ffcc00 0 60deg,#001aff 60deg 120deg,#ff00aa 120deg 180deg,#00cc66 180deg 240deg,#ff8800 240deg 300deg,#00aaff 300deg 360deg);margin:14px auto;display:flex;align-items:center;justify-content:center;transition:transform 3s cubic-bezier(.17,.67,.21,1.05);border:6px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.wheel b{background:#fff;width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
-.tap-btn{width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,#ffcc00,#ff8800);font-size:40px;border:6px solid #fff;box-shadow:0 10px 30px rgba(255,150,0,.5);margin:10px auto;display:block;cursor:pointer}
-.tap-btn:active{transform:scale(.92)}
-.leader{display:flex;justify-content:space-between;padding:10px;background:#f1f4ff;border-radius:10px;margin-top:8px;font-size:14px}
+body{background:#E8F5D6}
+.top{background:#2E7D00;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.top b{font-size:18px}.top span{background:#FFC400;color:#000;padding:6px 10px;border-radius:20px;font-size:13px;font-weight:900}
+.menu{display:flex;gap:8px;padding:10px;overflow:auto;background:#fff;position:sticky;top:48px;z-index:10}
+.menu button{padding:10px 16px;border:0;border-radius:999px;background:#eee;font-weight:800;white-space:nowrap;cursor:pointer}
+.menu button.on{background:#2E7D00;color:#fff}
+.field{background:linear-gradient(#7ED321,#5BB500);margin:12px;border-radius:20px;padding:14px;min-height:260px;position:relative;border:4px solid #8B4513}
+.field h3{color:#fff;text-shadow:0 2px 4px #000}
+.animal{background:#fff;border-radius:16px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.animal b{font-size:15px}.animal small{color:#666}
+button{padding:10px 12px;border:0;border-radius:12px;background:#FF8A00;color:#fff;font-weight:900;cursor:pointer}
+button.green{background:#2E7D00} button.blue{background:#0B1DFF} button.gold{background:#FFC400;color:#000} button.red{background:#E91E63}
+.card{background:#fff;margin:12px;border-radius:18px;padding:16px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.shop-item{display:flex;gap:10px;align-items:center;padding:12px;border-bottom:1px solid #eee}
+.shop-item img{width:52px;height:52px;border-radius:12px;object-fit:cover}
 input{width:100%;padding:12px;border:2px solid #ddd;border-radius:12px;margin:6px 0}
-.ad{background:#fff7cc;text-align:center;padding:12px;margin:12px;border-radius:12px;border:2px dashed #ffaa00;font-size:13px}
-.admin-dot{opacity:.3;cursor:pointer;padding:5px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
-.modal>div{background:#fff;width:100%;max-width:420px;border-radius:18px;padding:20px;max-height:90vh;overflow:auto}
+.car{font-size:70px;text-align:center;animation:move 1.5s infinite alternate}
+@keyframes move{from{transform:translateX(-10px)}to{transform:translateX(10px)}}
+.egg{font-size:30px}
 </style></head>
 <body>
-<div class="top">🔥 LIVE: 48,290 জন এখন খেলতেছে | আজকে 2,15,000 টাকা Payout হয়েছে</div>
-<header><div class="logo">BD EARN <span>GAME 🎮</span></div><div><span class="coin">🪙 <span id="coins">0</span> Coin</span> <span class="admin-dot" onclick="openAdmin()">•••</span></div></header>
+<div class="top"><b>🌾 MY FARM 🇧🇩</b><div><span>💰 ৳ <span id="money">500</span></span> <span>🥚 <span id="eggs">0</span></span> <span>⭐ Lv <span id="level">1</span></span></div></div>
 
-<div class="hero">
-<h1>খেলো আর <span>প্রতিদিন টাকা জেতো</span></h1>
-<p>100 Coin = 10 টাকা | bKash / Nagad এ Withdraw</p>
-<p style="margin-top:8px;font-weight:700">তোমার Balance: <span id="tk" style="color:#00aa44">0</span> টাকা</p>
+<div class="menu">
+<button class="on" onclick="show('farm',this)">🏡 আমার খামার</button>
+<button onclick="show('market',this)">🛒 বাজার</button>
+<button onclick="show('myshop',this)">🏪 আমার দোকান</button>
+<button onclick="show('car',this)">🚗 গাড়ি + জমি</button>
 </div>
 
-<!-- SPIN -->
-<div class="card">
-<h2>🎡 Daily Spin - ফ্রি!</h2><p>প্রতিদিন 3 বার ফ্রি স্পিন</p>
-<div class="wheel" id="wheel"><b>SPIN</b></div>
-<p>আজ বাকি: <b id="spinLeft">3</b> বার</p>
-<button class="gold" onclick="spin()">🎡 SPIN করো - জেতো</button>
-<p id="spinMsg" style="color:green;font-weight:700;margin-top:8px"></p>
+<!-- FARM -->
+<div id="farm">
+<div class="field">
+<h3>🌾 আমার বড় মাঠ - <span id="landSize">ছোট মাঠ</span></h3>
+<p style="color:#fff;font-size:13px">প্রতিদিন তোমার পশুরা ডিম / দুধ দিবে। Collect করো আর বিক্রি করো!</p>
+<div id="animals"></div>
+<button class="gold" onclick="collectAll()">🥚 সব ডিম / দুধ Collect করো</button>
+<button onclick="nextDay()">🌅 পরের দিন যাও (+ ডিম আসবে)</button>
 </div>
 
-<div class="ad">📢 AD - এখানে Ad দেখলেই তোমার Income হবে</div>
-
-<!-- TAP -->
-<div class="card">
-<h2>👆 Tap & Earn</h2><p>ট্যাপ করলেই 1 Coin করে পাবা</p>
-<button class="tap-btn" onclick="tap()">👆</button>
-<p>আজ Tap: <b id="tapCount">0</b> / 500</p>
-<button onclick="watchAd()">📺 Ad দেখে +20 Coin নাও</button>
+<div class="card"><h3>➕ নতুন পশু কিনো (নিজের খামারে)</h3>
+<div class="shop-item"><span style="font-size:36px">🐔</span><div><b>মুরগি - ৳100</b><br><small>রোজ 2টা ডিম দেয়</small></div><button class="green" onclick="buyAnimal('🐔 মুরগি',100,'egg',2)">কিনো</button></div>
+<div class="shop-item"><span style="font-size:36px">🦆</span><div><b>হাঁস - ৳150</b><br><small>রোজ 2টা ডিম, ডাবল দামে বিক্রি হয়!</small></div><button class="green" onclick="buyAnimal('🦆 হাঁস',150,'egg',2)">কিনো</button></div>
+<div class="shop-item"><span style="font-size:36px">🐄</span><div><b>গরু - ৳800</b><br><small>রোজ 5 লিটার দুধ দেয়</small></div><button class="green" onclick="buyAnimal('🐄 গরু',800,'milk',5)">কিনো</button></div>
+<div class="shop-item"><span style="font-size:36px">🐐</span><div><b>ছাগল - ৳400</b><br><small>রোজ 2 লিটার দুধ</small></div><button class="green" onclick="buyAnimal('🐐 ছাগল',400,'milk',2)">কিনো</button></div>
 </div>
 
-<!-- TASK -->
-<div class="card">
-<h2>✅ Daily Task</h2>
-<p>1. 10 বার Tap করো - 10 Coin</p>
-<p>2. বন্ধুকে Invite করো - 50 Coin</p>
-<p>3. 1টা Ad দেখো - 20 Coin</p>
-<input id="refCode" readonly value="তোমার Refer Code: BD-12345">
-<button class="green" onclick="copyRef()">🔗 Refer Link কপি করো</button>
+<div class="card"><h3>🥚 ডিম / দুধ বিক্রি করো</h3>
+<p>ডিম: <b id="eggCount2">0</b> টা • দুধ: <b id="milkCount">0</b> লিটার</p>
+<button onclick="sell('egg',20)">🥚 ডিম বেচো - ৳20 / টা</button>
+<button onclick="sell('duckEgg',40)" style="background:#E91E63">🦆 হাঁসের ডিম বেচো - ৳40 / টা (ডাবল দাম!)</button>
+<button onclick="sell('milk',50)" style="background:#0B1DFF">🥛 দুধ বেচো - ৳50 / লিটার</button>
+</div>
 </div>
 
-<!-- WITHDRAW -->
-<div class="card" style="border:3px solid #00cc66">
-<h2>💰 টাকা তোলো - bKash / Nagad</h2>
-<p>Minimum Withdraw: 100 টাকা (1000 Coin)</p>
-<input id="wNum" placeholder="তোমার bKash / Nagad নাম্বার">
-<input id="wAmt" placeholder="কত টাকা তুলবা? - যেমন: 100">
-<button class="green" onclick="withdraw()">💸 Withdraw Request পাঠাও</button>
-<p id="wMsg" style="color:green;font-weight:700"></p>
-<p style="font-size:12px;color:#888;margin-top:8px">Admin 24 ঘন্টার মধ্যে bKash এ টাকা পাঠাবে। 10% Service Fee কাটা হবে।</p>
+<!-- MARKET -->
+<div id="market" style="display:none">
+<div class="card" style="background:linear-gradient(135deg,#FFF8D0,#FFC400)"><h2>🛒 বড় বাজার - 5টা দোকান</h2><p>দোকানদারের সাথে দামাদামি করো! দাম কমাতে পারলে লাভ বেশি!</p><p>🚗 গাড়ি দিয়ে আসছো: <b id="carStatus">গাড়ি রেডি ✅</b></p></div>
+
+<div class="card"><h3>🥬 কাঁচা বাজার - রহিমের দোকান</h3>
+<div id="bazarItems"></div>
+<p style="font-size:12px;color:#888">💡 Tip: দোকানদার প্রথমে বেশি দাম বলবে। "দাম কমাও" চাপলে দাম কমবে!</p></div>
+
+<div class="card"><h3>🍿 মুদি দোকান - করিম স্টোর</h3>
+<div class="shop-item"><span style="font-size:32px">🍟</span><div><b>চিপস - ৳30</b></div><button onclick="buyMarket('চিপস',30)">কিনো</button></div>
+<div class="shop-item"><span style="font-size:32px">🥜</span><div><b>চানাচুর - ৳25</b></div><button onclick="buyMarket('চানাচুর',25)">কিনো</button></div>
+<div class="shop-item"><span style="font-size:32px">🧃</span><div><b>জুস - ৳40</b></div><button onclick="buyMarket('জুস',40)">কিনো</button></div>
+<div class="shop-item"><span style="font-size:32px">🍪</span><div><b>বিস্কুট - ৳35</b></div><button onclick="buyMarket('বিস্কুট',35)">কিনো</button></div>
 </div>
 
-<!-- LEADERBOARD -->
-<div class="card"><h2>🏆 আজকের Top Player</h2>
-<div class="leader"><span>🥇 Rahim - Dhaka</span><b>12,500 Coin</b></div>
-<div class="leader"><span>🥈 Nusrat - Chattogram</span><b>11,200 Coin</b></div>
-<div class="leader"><span>🥉 Arif - Sylhet</span><b>10,800 Coin</b></div>
-<div class="leader"><span>4. তুমি</span><b id="myRank">0 Coin</b></div>
+<div class="card"><h3>🐔 পশু বাজার - হাঁস মুরগি</h3>
+<p>এখান থেকে কিনে খামারে নাও, বড় করে বেশি দামে বেচবা!</p>
+<button class="green" onclick="buyAnimal('🐔 মুরগি',90,'egg',2)">🐔 মুরগি - ৳90 (বাজারে সস্তা!)</button>
+<button class="green" onclick="buyAnimal('🦆 হাঁস',130,'egg',2)">🦆 হাঁস - ৳130</button>
+</div>
 </div>
 
-<!-- VIP -->
-<div class="card" style="background:linear-gradient(135deg,#fff8d0,#ffcc00)">
-<h2>👑 VIP - 2x Income!</h2>
-<p>VIP নিলে সব Coin ডাবল! Spin 10 বার!</p>
-<h3 style="font-size:24px">মাত্র <span id="vipPrice">৯৯</span> টাকা</h3>
-<p style="font-size:13px">bKash: <b style="color:#e2136e;font-size:18px">01712-345678</b> এ Send Money করে নিচে TrxID দাও</p>
-<input id="vipPhone" placeholder="তোমার bKash নাম্বার">
-<input id="vipTrx" placeholder="TrxID">
-<button class="gold" onclick="vipOrder()">👑 VIP Order দাও</button>
+<!-- MY SHOP -->
+<div id="myshop" style="display:none">
+<div class="card" style="background:linear-gradient(135deg,#E3F2FD,#fff)">
+<h2>🏪 <span id="shopName">আমার দোকান</span></h2>
+<p>তোমার দোকানে তোমার জিনিস বিক্রি হয়। দোকান বড় করলে বেশি কাস্টমার আসবে!</p>
+<input id="newShopName" placeholder="দোকানের নতুন নাম দাও - যেমন: রহিম স্টোর">
+<button class="blue" onclick="changeShop()">✏️ দোকানের নাম Change করো</button>
+</div>
+<div class="card"><h3>📦 আমার দোকানের মাল</h3><div id="myStock"></div>
+<button class="gold" onclick="sellShop()">💰 দোকান থেকে সব বিক্রি করো (লাভ সহ)</button>
+<p style="font-size:12px;color:#666;margin-top:8px">দোকানে বিক্রি করলে বাজারের চেয়ে 30% বেশি লাভ!</p></div>
 </div>
 
-<footer style="text-align:center;padding:18px;color:#888;font-size:12px">© BD Earn Game | Helpline: 01712-345678 | 100% Trusted • Daily Payment</footer>
-
-<!-- ADMIN -->
-<div class="modal" id="adminModal"><div>
-<h2>🔐 Admin Panel <span style="float:right;cursor:pointer" onclick="closeAdmin()">✕</span></h2>
-<input id="apass" type="password" placeholder="Password: admin123">
-<button onclick="adminLogin()">Login</button>
-<div id="adminBox" style="display:none">
-<h3 style="margin-top:12px">💰 VIP দাম + Offer</h3>
-<input id="newPrice" placeholder="নতুন VIP দাম - যেমন: 149">
-<input id="newOffer" placeholder="Offer - যেমন: আজকে 50% OFF">
-<button onclick="saveSet()">Save</button>
-<h3 style="margin-top:12px">📩 Withdraw + VIP Order</h3>
-<div id="orderList"></div>
-</div></div></div>
+<!-- CAR + LAND -->
+<div id="car" style="display:none">
+<div class="card"><h2>🚗 আমার গাড়ি</h2><div class="car">🚙💨</div>
+<p style="text-align:center">গাড়ি দিয়ে বাজারে যাও, মাল আনো, খামার বড় করো!</p>
+<button class="blue" onclick="goMarket()">🚗 গাড়ি দিয়ে বাজারে যাও</button>
+<p id="carMsg" style="text-align:center;color:green;font-weight:700;margin-top:8px"></p>
+</div>
+<div class="card"><h2>🌾 জমি বড় করো</h2>
+<p>এখন: <b id="landNow">ছোট মাঠ</b> — বড় করলে আরো বেশি পশু পালতে পারবা!</p>
+<button onclick="buyLand('মাঝারি মাঠ',1000)">🌾 মাঝারি মাঠ কিনো - ৳1000 (10টা পশু)</button>
+<button onclick="buyLand('বড় মাঠ',3000)">🌾🌾 বড় মাঠ কিনো - ৳3000 (30টা পশু)</button>
+<button onclick="buyLand('মহা খামার 👑',8000)" class="gold">👑 মহা খামার কিনো - ৳8000 (100টা পশু)</button>
+</div>
+<div class="card"><h2>🏆 তোমার Level</h2><p>Level বাড়লে নতুন জিনিস Unlock হবে। প্রতিদিন খেললে Level বাড়বে!</p><button class="green" onclick="alert('তুমি Level '+level+' এ আছো! আরো খেলো, আরো টাকা কামাও!')">⭐ Level দেখো</button></div>
+</div>
 
 <script>
-let coins=parseInt(localStorage.getItem('bde_coins')||'0'), taps=parseInt(localStorage.getItem('bde_taps')||'0'), spins=parseInt(localStorage.getItem('bde_spins')||'3');
-let settings=JSON.parse(localStorage.getItem('bde_set')||'{"price":"৯৯"}');
-document.getElementById('vipPrice').innerText=settings.price;
-function update(){ document.getElementById('coins').innerText=coins; document.getElementById('tk').innerText=(coins/10).toFixed(0); document.getElementById('tapCount').innerText=taps; document.getElementById('spinLeft').innerText=spins; document.getElementById('myRank').innerText=coins+' Coin'; localStorage.setItem('bde_coins',coins); localStorage.setItem('bde_taps',taps); localStorage.setItem('bde_spins',spins); }
-update();
-function tap(){ if(taps>=500) return alert('আজকের 500 Tap শেষ! কালকে আবার আসো'); taps++; coins++; update(); }
-function watchAd(){ alert('📺 Ad দেখতেছো... 5 সেকেন্ড পর Coin পাবা'); setTimeout(()=>{ coins+=20; update(); alert('✅ +20 Coin পাইছো!'); },2000); }
-let deg=0;
-function spin(){ if(spins<=0) return alert('আজকের Spin শেষ! VIP নিলে 10 বার পাবা'); spins--; deg+=360*5+Math.floor(Math.random()*360); document.getElementById('wheel').style.transform='rotate('+deg+'deg)'; setTimeout(()=>{ let win=[5,10,20,50,100,10][Math.floor(Math.random()*6)]; coins+=win; update(); document.getElementById('spinMsg').innerText='🎉 তুমি জিতছো '+win+' Coin!'; },3100); }
-function copyRef(){ navigator.clipboard.writeText('https://bdearngame.com?ref=BD-12345'); alert('✅ Refer Link কপি হয়েছে! বন্ধুকে পাঠাও'); }
-function withdraw(){ let n=document.getElementById('wNum').value, a=parseInt(document.getElementById('wAmt').value); if(!n||!a) return alert('নাম্বার + টাকা দাও'); if(coins < a*10) return alert('Coin কম আছে! আরো খেলো'); let orders=JSON.parse(localStorage.getItem('bde_orders')||'[]'); orders.push({type:'WITHDRAW',phone:n,amt:a,time:new Date().toLocaleString()}); localStorage.setItem('bde_orders',JSON.stringify(orders)); coins-=a*10; update(); document.getElementById('wMsg').innerText='✅ Withdraw Request গেছে! 24 ঘন্টার মধ্যে টাকা পাবা।'; }
-function vipOrder(){ let p=document.getElementById('vipPhone').value, t=document.getElementById('vipTrx').value; if(!p||!t) return alert('নাম্বার + TrxID দাও'); let orders=JSON.parse(localStorage.getItem('bde_orders')||'[]'); orders.push({type:'VIP',phone:p,trx:t,time:new Date().toLocaleString()}); localStorage.setItem('bde_orders',JSON.stringify(orders)); alert('✅ VIP Order গেছে! Admin Approve করলেই VIP পাবা'); }
-function openAdmin(){ document.getElementById('adminModal').style.display='flex'; }
-function closeAdmin(){ document.getElementById('adminModal').style.display='none'; }
-function adminLogin(){ if(document.getElementById('apass').value!=='admin123') return alert('ভুল Password'); document.getElementById('adminBox').style.display='block'; let orders=JSON.parse(localStorage.getItem('bde_orders')||'[]'); let h=document.getElementById('orderList'); h.innerHTML=orders.length?'':'কোনো Order নাই'; orders.forEach((o,i)=>{ h.innerHTML+=`<div style="background:#f1f4ff;padding:10px;border-radius:10px;margin-top:8px;font-size:13px"><b>${o.type}</b> - ${o.phone} - ${o.amt||''} ${o.trx||''}<br>${o.time}<br><button onclick="approve(${i})" style="padding:8px;margin-top:6px">✅ Approve</button></div>`; }); }
-function approve(i){ let orders=JSON.parse(localStorage.getItem('bde_orders')||'[]'); alert('✅ Approve হয়ে গেছে! এখন '+orders[i].phone+' কে bKash এ টাকা পাঠায় দাও।'); orders.splice(i,1); localStorage.setItem('bde_orders',JSON.stringify(orders)); }
-function saveSet(){ settings.price=document.getElementById('newPrice').value||settings.price; localStorage.setItem('bde_set',JSON.stringify(settings)); alert('✅ Save হয়েছে! দাম: '+settings.price); location.reload(); }
+let money=500, eggs=0, milk=0, level=1, day=1, stock=[], animals=[{name:'🐔 মুরগি',type:'egg',per:2,ready:2},{name:'🦆 হাঁস',type:'egg',per:2,ready:2}];
+let bazar=[{name:'🍅 টমেটো',price:40},{name:'🧅 পেঁয়াজ',price:50},{name:'🥔 আলু',price:30},{name:'🥕 গাজর',price:35},{name:'🌶️ মরিচ',price:20}];
+function upd(){ document.getElementById('money').innerText=money; document.getElementById('eggs').innerText=eggs; document.getElementById('eggCount2').innerText=eggs; document.getElementById('milkCount').innerText=milk; document.getElementById('level').innerText=level;
+let h=document.getElementById('animals'); h.innerHTML=''; animals.forEach((a,i)=>{ h.innerHTML+=`<div class="animal"><div><b>${a.name}</b><br><small>রেডি: ${a.ready} টা ${a.type=='egg'?'ডিম':'লিটার দুধ'} • Day ${day}</small></div><button onclick="collectOne(${i})">Collect</button></div>`; });
+let b=document.getElementById('bazarItems'); b.innerHTML=''; bazar.forEach((x,i)=>{ b.innerHTML+=`<div class="shop-item"><div><b>${x.name} - ৳${x.price}</b><br><small>দোকানদার বলছে: ৳${x.price}</small></div><button onclick="haggle(${i})">💬 দাম কমাও</button><button class="green" onclick="buyMarket('${x.name}',${x.price})">কিনো</button></div>`; });
+let s=document.getElementById('myStock'); s.innerHTML=stock.length? '':'দোকান খালি - বাজার থেকে মাল কিনে আনো'; stock.forEach(x=>{ s.innerHTML+=`<div class="shop-item"><div><b>${x}</b></div></div>`; });
+} upd();
+function show(id,btn){ ['farm','market','myshop','car'].forEach(x=>document.getElementById(x).style.display='none'); document.getElementById(id).style.display='block'; document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
+function buyAnimal(name,price,type,per){ if(money<price) return alert('টাকা কম! আগে ডিম বেচো'); money-=price; animals.push({name,type,per,ready:per}); upd(); alert('✅ '+name+' কিনছো! এখন থেকে রোজ ডিম/দুধ দিবে'); }
+function collectOne(i){ let a=animals[i]; if(a.type=='egg') eggs+=a.ready; else milk+=a.ready; a.ready=0; upd(); alert('✅ Collect করছো!'); }
+function collectAll(){ animals.forEach(a=>{ if(a.type=='egg') eggs+=a.ready; else milk+=a.ready; a.ready=0; }); upd(); alert('🥚 সব Collect হয়ে গেছে! এখন বিক্রি করো'); }
+function nextDay(){ day++; animals.forEach(a=>a.ready+=a.per); level=Math.floor(day/3)+1; upd(); alert('🌅 Day '+day+' — তোমার পশুরা নতুন ডিম/দুধ দিছে!'); }
+function sell(type,price){ if(type=='egg'){ if(eggs<=0) return alert('ডিম নাই! Collect করো'); money+=eggs*price; eggs=0; } if(type=='duckEgg'){ if(eggs<=0) return alert('হাঁসের ডিম নাই'); money+=eggs*40; eggs=0; } if(type=='milk'){ if(milk<=0) return alert('দুধ নাই'); money+=milk*price; milk=0; } upd(); alert('💰 বিক্রি হয়ে গেছে! টাকা পাইছো'); }
+function haggle(i){ let old=bazar[i].price; bazar[i].price=Math.max(10, old - Math.floor(Math.random()*15+5)); upd(); alert('💬 দোকানদার: আচ্ছা ঠিক আছে! '+bazar[i].name+' এখন ৳'+bazar[i].price+' দিলাম। আগে ছিল ৳'+old); }
+function buyMarket(name,price){ if(money<price) return alert('টাকা কম!'); money-=price; stock.push(name+' - ৳'+price); upd(); alert('✅ '+name+' কিনছো! এখন তোমার দোকানে আছে, বেশি দামে বেচতে পারবা'); }
+function changeShop(){ let n=document.getElementById('newShopName').value; if(!n) return alert('নাম লিখো'); document.getElementById('shopName').innerText=n; alert('✅ দোকানের নাম এখন: '+n); }
+function sellShop(){ if(!stock.length) return alert('দোকানে মাল নাই!'); let gain=stock.length*60; money+=gain; stock=[]; upd(); alert('💰 দোকান থেকে সব বিক্রি! ৳'+gain+' লাভ হইছে! (30% বেশি লাভ)'); }
+function goMarket(){ document.getElementById('carMsg').innerText='🚗 গাড়ি চলতেছে... বাজারে পৌঁছে গেছো!'; setTimeout(()=>{ show('market',document.querySelectorAll('.menu button')[1]); },800); }
+function buyLand(name,price){ if(money<price) return alert('টাকা কম! আরো ডিম বেচো'); money-=price; document.getElementById('landSize').innerText=name; document.getElementById('landNow').innerText=name; upd(); alert('🌾 অভিনন্দন! এখন তোমার '+name+' হয়ে গেছে!'); }
 </script></body></html>
