@@ -1,132 +1,124 @@
-<!DOCTYPE html>
-<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MY FARM - Bangladesh Farm Game</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#E8F5D6}
-.top{background:#2E7D00;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.top b{font-size:18px}.top span{background:#FFC400;color:#000;padding:6px 10px;border-radius:20px;font-size:13px;font-weight:900}
-.menu{display:flex;gap:8px;padding:10px;overflow:auto;background:#fff;position:sticky;top:48px;z-index:10}
-.menu button{padding:10px 16px;border:0;border-radius:999px;background:#eee;font-weight:800;white-space:nowrap;cursor:pointer}
-.menu button.on{background:#2E7D00;color:#fff}
-.field{background:linear-gradient(#7ED321,#5BB500);margin:12px;border-radius:20px;padding:14px;min-height:260px;position:relative;border:4px solid #8B4513}
-.field h3{color:#fff;text-shadow:0 2px 4px #000}
-.animal{background:#fff;border-radius:16px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 10px rgba(0,0,0,.2)}
-.animal b{font-size:15px}.animal small{color:#666}
-button{padding:10px 12px;border:0;border-radius:12px;background:#FF8A00;color:#fff;font-weight:900;cursor:pointer}
-button.green{background:#2E7D00} button.blue{background:#0B1DFF} button.gold{background:#FFC400;color:#000} button.red{background:#E91E63}
-.card{background:#fff;margin:12px;border-radius:18px;padding:16px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
-.shop-item{display:flex;gap:10px;align-items:center;padding:12px;border-bottom:1px solid #eee}
-.shop-item img{width:52px;height:52px;border-radius:12px;object-fit:cover}
-input{width:100%;padding:12px;border:2px solid #ddd;border-radius:12px;margin:6px 0}
-.car{font-size:70px;text-align:center;animation:move 1.5s infinite alternate}
-@keyframes move{from{transform:translateX(-10px)}to{transform:translateX(10px)}}
-.egg{font-size:30px}
-</style></head>
-<body>
-<div class="top"><b>🌾 MY FARM 🇧🇩</b><div><span>💰 ৳ <span id="money">500</span></span> <span>🥚 <span id="eggs">0</span></span> <span>⭐ Lv <span id="level">1</span></span></div></div>
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BANGLADESH VICE CITY - Police Officer</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#111}
+.top{background:#0A3D00;color:#fff;padding:9px;display:flex;justify-content:space-between;font-size:12px;font-weight:900}
+.top span{background:#FFC400;color:#000;padding:5px 8px;border-radius:20px}
+#city{position:relative;width:100%;height:58vh;background:#4A9E2A;overflow:hidden;border:3px solid #fff}
+.roadV{position:absolute;left:48%;top:0;bottom:0;width:18%;background:#444;border-left:3px dashed #FFC400;border-right:3px dashed #FFC400}
+.roadH{position:absolute;top:48%;left:0;right:0;height:18%;background:#444;border-top:3px dashed #FFC400;border-bottom:3px dashed #FFC400}
+.bld{position:absolute;background:#fff;border-radius:10px;padding:6px;text-align:center;font-size:11px;font-weight:900;box-shadow:0 4px 10px rgba(0,0,0,.4);cursor:pointer}
+#player{position:absolute;font-size:32px;z-index:20;transition:all .15s}
+#pcar{position:absolute;font-size:40px;z-index:15;transition:all .15s}
+#visitorCar{position:absolute;font-size:38px;z-index:12;transition:all 1.2s;display:none}
+.gate{position:absolute;left:48%;top:42%;width:18%;height:8%;background:#FF0000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;z-index:10;border:3px solid #fff}
+.jail{position:absolute;background:#333;color:#fff;border:4px solid #000}
+.controls{background:#111;padding:10px;text-align:center}
+.pad{display:grid;grid-template-columns:58px 58px 58px;gap:7px;justify-content:center}
+.pad button{width:58px;height:52px;font-size:22px;border:0;border-radius:12px;background:#fff;font-weight:900}
+.pad button:active{background:#FFC400}
+.act{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.act button{padding:10px 11px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;font-size:12px}
+.act button.green{background:#2E7D00}.act button.blue{background:#0B1DFF}.act button.red{background:#E91E63}
+#msg{background:#fff;margin:8px;border-radius:10px;padding:10px;text-align:center;font-weight:700;font-size:13px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:14px}
+.modal>div{background:#fff;width:100%;max-width:430px;border-radius:16px;padding:18px;text-align:center}
+.passport{background:#E3F2FD;border:2px solid #0B1DFF;border-radius:12px;padding:12px;margin:10px 0;text-align:left;font-size:13px}
+</style></head><body>
+<div class="top"><span>🇧🇩 BANGLADESH VICE CITY</span><span>👮 <span id="officer">Officer Rahim</span></span><span>💰 ৳ <span id="money">5000</span></span><span>⭐ Lv <span id="level">1</span></span><span id="mode">🚶 হাঁটতেছো</span></div>
 
-<div class="menu">
-<button class="on" onclick="show('farm',this)">🏡 আমার খামার</button>
-<button onclick="show('market',this)">🛒 বাজার</button>
-<button onclick="show('myshop',this)">🏪 আমার দোকান</button>
-<button onclick="show('car',this)">🚗 গাড়ি + জমি</button>
-</div>
+<div id="city">
+<div class="roadV"></div><div class="roadH"></div>
+<!-- BUILDINGS -->
+<div class="bld" style="left:5px;top:5px;width:38%;height:20%" onclick="openStation()">👮‍♂️ পুলিশ স্টেশন<br><small>রিপোর্ট লেখাও</small><div>🏢</div></div>
+<div class="bld" style="right:5px;top:5px;width:38%;height:20%;background:#FFE082" onclick="openParliament()">🏛️ সংসদ ভবন<br><small>বাংলাদেশ</small><div>🇧🇩</div></div>
+<div class="bld" style="left:5px;bottom:5px;width:38%;height:20%;background:#FFCDD2" onclick="openGun()">🔫 বন্দুকের দোকান<br><small>দামাদামি করো</small><div>🔫</div></div>
+<div class="bld" style="right:5px;bottom:5px;width:38%;height:20%;background:#C8E6C9">🏠 তোমার ঘর<br><small>Officer এর বাসা</small><div>🏠</div></div>
+<div class="bld" style="left:40%;top:2%;width:28%;height:12%;background:#FFC400">🛂 BORDER<br>CHECKPOST</div>
 
-<!-- FARM -->
-<div id="farm">
-<div class="field">
-<h3>🌾 আমার বড় মাঠ - <span id="landSize">ছোট মাঠ</span></h3>
-<p style="color:#fff;font-size:13px">প্রতিদিন তোমার পশুরা ডিম / দুধ দিবে। Collect করো আর বিক্রি করো!</p>
-<div id="animals"></div>
-<button class="gold" onclick="collectAll()">🥚 সব ডিম / দুধ Collect করো</button>
-<button onclick="nextDay()">🌅 পরের দিন যাও (+ ডিম আসবে)</button>
-</div>
+<div class="gate" id="gate">🔒 GATE বন্ধ</div>
+<div class="jail" style="left:2%;top:38%;padding:6px;font-size:11px">🔒 জেলখানা<br><span id="jailCount">0 জন বন্দি</span></div>
 
-<div class="card"><h3>➕ নতুন পশু কিনো (নিজের খামারে)</h3>
-<div class="shop-item"><span style="font-size:36px">🐔</span><div><b>মুরগি - ৳100</b><br><small>রোজ 2টা ডিম দেয়</small></div><button class="green" onclick="buyAnimal('🐔 মুরগি',100,'egg',2)">কিনো</button></div>
-<div class="shop-item"><span style="font-size:36px">🦆</span><div><b>হাঁস - ৳150</b><br><small>রোজ 2টা ডিম, ডাবল দামে বিক্রি হয়!</small></div><button class="green" onclick="buyAnimal('🦆 হাঁস',150,'egg',2)">কিনো</button></div>
-<div class="shop-item"><span style="font-size:36px">🐄</span><div><b>গরু - ৳800</b><br><small>রোজ 5 লিটার দুধ দেয়</small></div><button class="green" onclick="buyAnimal('🐄 গরু',800,'milk',5)">কিনো</button></div>
-<div class="shop-item"><span style="font-size:36px">🐐</span><div><b>ছাগল - ৳400</b><br><small>রোজ 2 লিটার দুধ</small></div><button class="green" onclick="buyAnimal('🐐 ছাগল',400,'milk',2)">কিনো</button></div>
+<div id="visitorCar">🚗</div>
+<div id="pcar">🚓</div>
+<div id="player">👮‍♂️</div>
 </div>
 
-<div class="card"><h3>🥚 ডিম / দুধ বিক্রি করো</h3>
-<p>ডিম: <b id="eggCount2">0</b> টা • দুধ: <b id="milkCount">0</b> লিটার</p>
-<button onclick="sell('egg',20)">🥚 ডিম বেচো - ৳20 / টা</button>
-<button onclick="sell('duckEgg',40)" style="background:#E91E63">🦆 হাঁসের ডিম বেচো - ৳40 / টা (ডাবল দাম!)</button>
-<button onclick="sell('milk',50)" style="background:#0B1DFF">🥛 দুধ বেচো - ৳50 / লিটার</button>
-</div>
-</div>
+<div id="msg">👮‍♂️ তুমি পুলিশ অফিসার! গাড়িতে ওঠো → বর্ডারে যাও → গেট খোলো → পাসপোর্ট চেক করো!</div>
 
-<!-- MARKET -->
-<div id="market" style="display:none">
-<div class="card" style="background:linear-gradient(135deg,#FFF8D0,#FFC400)"><h2>🛒 বড় বাজার - 5টা দোকান</h2><p>দোকানদারের সাথে দামাদামি করো! দাম কমাতে পারলে লাভ বেশি!</p><p>🚗 গাড়ি দিয়ে আসছো: <b id="carStatus">গাড়ি রেডি ✅</b></p></div>
+<div class="controls">
+<div class="pad"><div></div><button onclick="move(0,-1)">⬆️</button><div></div><button onclick="move(-1,0)">⬅️</button><button onclick="move(0,1)">⬇️</button><button onclick="move(1,0)">➡️</button></div>
+<div class="act">
+<button class="green" id="enterBtn" onclick="enterCar()">🚓 গাড়িতে ওঠো</button>
+<button class="red" id="exitBtn" onclick="exitCar()" style="display:none">⬇️ গাড়ি থেকে নামো</button>
+<button class="blue" onclick="openGate()">🔓 গেট খোলো</button>
+<button onclick="checkPassport()">🛂 পাসপোর্ট চেক</button>
+<button onclick="openStation()">📝 রিপোর্ট</button>
+<button onclick="openGun()">🔫 বন্দুক</button>
+</div></div>
 
-<div class="card"><h3>🥬 কাঁচা বাজার - রহিমের দোকান</h3>
-<div id="bazarItems"></div>
-<p style="font-size:12px;color:#888">💡 Tip: দোকানদার প্রথমে বেশি দাম বলবে। "দাম কমাও" চাপলে দাম কমবে!</p></div>
+<!-- PASSPORT MODAL -->
+<div class="modal" id="passModal"><div>
+<h2>🛂 পাসপোর্ট চেক</h2>
+<div class="passport" id="passInfo"></div>
+<p>এই লোককে ছাড়বা?</p>
+<button style="width:48%;padding:13px;border:0;border-radius:10px;background:#00C853;color:#fff;font-weight:900" onclick="decide(true)">✅ YES - ছেড়ে দাও</button>
+<button style="width:48%;padding:13px;border:0;border-radius:10px;background:#E91E63;color:#fff;font-weight:900" onclick="decide(false)">❌ NO - আটকাও</button>
+<div id="noOptions" style="display:none;margin-top:10px">
+<button style="width:100%;padding:11px;border:0;border-radius:10px;background:#333;color:#fff;font-weight:900;margin:3px" onclick="sendJail()">🔒 জেলখানায় পাঠাও</button>
+<button style="width:100%;padding:11px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;margin:3px" onclick="fine()">💰 ৳1000 জরিমানা করে ছাড়ো</button>
+<button style="width:100%;padding:11px;border:0;border-radius:10px;background:#0B1DFF;color:#fff;font-weight:900;margin:3px" onclick="sendBack()">↩️ অন্য রাস্তা দিয়ে ফেরত পাঠাও</button>
+</div>
+</div></div>
 
-<div class="card"><h3>🍿 মুদি দোকান - করিম স্টোর</h3>
-<div class="shop-item"><span style="font-size:32px">🍟</span><div><b>চিপস - ৳30</b></div><button onclick="buyMarket('চিপস',30)">কিনো</button></div>
-<div class="shop-item"><span style="font-size:32px">🥜</span><div><b>চানাচুর - ৳25</b></div><button onclick="buyMarket('চানাচুর',25)">কিনো</button></div>
-<div class="shop-item"><span style="font-size:32px">🧃</span><div><b>জুস - ৳40</b></div><button onclick="buyMarket('জুস',40)">কিনো</button></div>
-<div class="shop-item"><span style="font-size:32px">🍪</span><div><b>বিস্কুট - ৳35</b></div><button onclick="buyMarket('বিস্কুট',35)">কিনো</button></div>
-</div>
+<!-- GUN SHOP -->
+<div class="modal" id="gunModal"><div>
+<h2>🔫 বন্দুকের দোকান - মামুন ভাই</h2>
+<p>দোকানদার: "স্যার, এই পিস্তল <b>৳<span id="gunPrice">8000</span></b>! একদম অরিজিনাল!"</p>
+<div style="font-size:50px;margin:10px">🔫</div>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;margin:4px" onclick="haggleGun()">💬 "ভাই ৫০০০ দিবো!" - দামাদামি</button>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#2E7D00;color:#fff;font-weight:900;margin:4px" onclick="buyGun()">✅ এই দামে কিনো</button>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#ddd;font-weight:900;margin:4px" onclick="closeModal('gunModal')">❌ বের হও</button>
+<p>তোমার বন্দুক: <b id="myGun">নাই</b></p>
+</div></div>
 
-<div class="card"><h3>🐔 পশু বাজার - হাঁস মুরগি</h3>
-<p>এখান থেকে কিনে খামারে নাও, বড় করে বেশি দামে বেচবা!</p>
-<button class="green" onclick="buyAnimal('🐔 মুরগি',90,'egg',2)">🐔 মুরগি - ৳90 (বাজারে সস্তা!)</button>
-<button class="green" onclick="buyAnimal('🦆 হাঁস',130,'egg',2)">🦆 হাঁস - ৳130</button>
-</div>
-</div>
-
-<!-- MY SHOP -->
-<div id="myshop" style="display:none">
-<div class="card" style="background:linear-gradient(135deg,#E3F2FD,#fff)">
-<h2>🏪 <span id="shopName">আমার দোকান</span></h2>
-<p>তোমার দোকানে তোমার জিনিস বিক্রি হয়। দোকান বড় করলে বেশি কাস্টমার আসবে!</p>
-<input id="newShopName" placeholder="দোকানের নতুন নাম দাও - যেমন: রহিম স্টোর">
-<button class="blue" onclick="changeShop()">✏️ দোকানের নাম Change করো</button>
-</div>
-<div class="card"><h3>📦 আমার দোকানের মাল</h3><div id="myStock"></div>
-<button class="gold" onclick="sellShop()">💰 দোকান থেকে সব বিক্রি করো (লাভ সহ)</button>
-<p style="font-size:12px;color:#666;margin-top:8px">দোকানে বিক্রি করলে বাজারের চেয়ে 30% বেশি লাভ!</p></div>
-</div>
-
-<!-- CAR + LAND -->
-<div id="car" style="display:none">
-<div class="card"><h2>🚗 আমার গাড়ি</h2><div class="car">🚙💨</div>
-<p style="text-align:center">গাড়ি দিয়ে বাজারে যাও, মাল আনো, খামার বড় করো!</p>
-<button class="blue" onclick="goMarket()">🚗 গাড়ি দিয়ে বাজারে যাও</button>
-<p id="carMsg" style="text-align:center;color:green;font-weight:700;margin-top:8px"></p>
-</div>
-<div class="card"><h2>🌾 জমি বড় করো</h2>
-<p>এখন: <b id="landNow">ছোট মাঠ</b> — বড় করলে আরো বেশি পশু পালতে পারবা!</p>
-<button onclick="buyLand('মাঝারি মাঠ',1000)">🌾 মাঝারি মাঠ কিনো - ৳1000 (10টা পশু)</button>
-<button onclick="buyLand('বড় মাঠ',3000)">🌾🌾 বড় মাঠ কিনো - ৳3000 (30টা পশু)</button>
-<button onclick="buyLand('মহা খামার 👑',8000)" class="gold">👑 মহা খামার কিনো - ৳8000 (100টা পশু)</button>
-</div>
-<div class="card"><h2>🏆 তোমার Level</h2><p>Level বাড়লে নতুন জিনিস Unlock হবে। প্রতিদিন খেললে Level বাড়বে!</p><button class="green" onclick="alert('তুমি Level '+level+' এ আছো! আরো খেলো, আরো টাকা কামাও!')">⭐ Level দেখো</button></div>
-</div>
+<!-- POLICE STATION -->
+<div class="modal" id="stationModal"><div>
+<h2>👮‍♂️ পুলিশ স্টেশন - রিপোর্ট</h2>
+<p id="reportText" style="background:#FFF3E0;padding:12px;border-radius:10px;margin:10px 0">🧕 একজন মহিলা আসছে: "স্যার, আমার বাসায় চুরি হইছে! আমার বাসা মিরপুরে, একটু আসবেন?"</p>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#0B1DFF;color:#fff;font-weight:900;margin:4px" onclick="takeReport()">✅ রিপোর্ট নিলাম - তার বাসায় যাবো</button>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#ddd;font-weight:900;margin:4px" onclick="closeModal('stationModal')">❌ পরে</button>
+</div></div>
 
 <script>
-let money=500, eggs=0, milk=0, level=1, day=1, stock=[], animals=[{name:'🐔 মুরগি',type:'egg',per:2,ready:2},{name:'🦆 হাঁস',type:'egg',per:2,ready:2}];
-let bazar=[{name:'🍅 টমেটো',price:40},{name:'🧅 পেঁয়াজ',price:50},{name:'🥔 আলু',price:30},{name:'🥕 গাজর',price:35},{name:'🌶️ মরিচ',price:20}];
-function upd(){ document.getElementById('money').innerText=money; document.getElementById('eggs').innerText=eggs; document.getElementById('eggCount2').innerText=eggs; document.getElementById('milkCount').innerText=milk; document.getElementById('level').innerText=level;
-let h=document.getElementById('animals'); h.innerHTML=''; animals.forEach((a,i)=>{ h.innerHTML+=`<div class="animal"><div><b>${a.name}</b><br><small>রেডি: ${a.ready} টা ${a.type=='egg'?'ডিম':'লিটার দুধ'} • Day ${day}</small></div><button onclick="collectOne(${i})">Collect</button></div>`; });
-let b=document.getElementById('bazarItems'); b.innerHTML=''; bazar.forEach((x,i)=>{ b.innerHTML+=`<div class="shop-item"><div><b>${x.name} - ৳${x.price}</b><br><small>দোকানদার বলছে: ৳${x.price}</small></div><button onclick="haggle(${i})">💬 দাম কমাও</button><button class="green" onclick="buyMarket('${x.name}',${x.price})">কিনো</button></div>`; });
-let s=document.getElementById('myStock'); s.innerHTML=stock.length? '':'দোকান খালি - বাজার থেকে মাল কিনে আনো'; stock.forEach(x=>{ s.innerHTML+=`<div class="shop-item"><div><b>${x}</b></div></div>`; });
-} upd();
-function show(id,btn){ ['farm','market','myshop','car'].forEach(x=>document.getElementById(x).style.display='none'); document.getElementById(id).style.display='block'; document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
-function buyAnimal(name,price,type,per){ if(money<price) return alert('টাকা কম! আগে ডিম বেচো'); money-=price; animals.push({name,type,per,ready:per}); upd(); alert('✅ '+name+' কিনছো! এখন থেকে রোজ ডিম/দুধ দিবে'); }
-function collectOne(i){ let a=animals[i]; if(a.type=='egg') eggs+=a.ready; else milk+=a.ready; a.ready=0; upd(); alert('✅ Collect করছো!'); }
-function collectAll(){ animals.forEach(a=>{ if(a.type=='egg') eggs+=a.ready; else milk+=a.ready; a.ready=0; }); upd(); alert('🥚 সব Collect হয়ে গেছে! এখন বিক্রি করো'); }
-function nextDay(){ day++; animals.forEach(a=>a.ready+=a.per); level=Math.floor(day/3)+1; upd(); alert('🌅 Day '+day+' — তোমার পশুরা নতুন ডিম/দুধ দিছে!'); }
-function sell(type,price){ if(type=='egg'){ if(eggs<=0) return alert('ডিম নাই! Collect করো'); money+=eggs*price; eggs=0; } if(type=='duckEgg'){ if(eggs<=0) return alert('হাঁসের ডিম নাই'); money+=eggs*40; eggs=0; } if(type=='milk'){ if(milk<=0) return alert('দুধ নাই'); money+=milk*price; milk=0; } upd(); alert('💰 বিক্রি হয়ে গেছে! টাকা পাইছো'); }
-function haggle(i){ let old=bazar[i].price; bazar[i].price=Math.max(10, old - Math.floor(Math.random()*15+5)); upd(); alert('💬 দোকানদার: আচ্ছা ঠিক আছে! '+bazar[i].name+' এখন ৳'+bazar[i].price+' দিলাম। আগে ছিল ৳'+old); }
-function buyMarket(name,price){ if(money<price) return alert('টাকা কম!'); money-=price; stock.push(name+' - ৳'+price); upd(); alert('✅ '+name+' কিনছো! এখন তোমার দোকানে আছে, বেশি দামে বেচতে পারবা'); }
-function changeShop(){ let n=document.getElementById('newShopName').value; if(!n) return alert('নাম লিখো'); document.getElementById('shopName').innerText=n; alert('✅ দোকানের নাম এখন: '+n); }
-function sellShop(){ if(!stock.length) return alert('দোকানে মাল নাই!'); let gain=stock.length*60; money+=gain; stock=[]; upd(); alert('💰 দোকান থেকে সব বিক্রি! ৳'+gain+' লাভ হইছে! (30% বেশি লাভ)'); }
-function goMarket(){ document.getElementById('carMsg').innerText='🚗 গাড়ি চলতেছে... বাজারে পৌঁছে গেছো!'; setTimeout(()=>{ show('market',document.querySelectorAll('.menu button')[1]); },800); }
-function buyLand(name,price){ if(money<price) return alert('টাকা কম! আরো ডিম বেচো'); money-=price; document.getElementById('landSize').innerText=name; document.getElementById('landNow').innerText=name; upd(); alert('🌾 অভিনন্দন! এখন তোমার '+name+' হয়ে গেছে!'); }
+let px=40,py=180,cx=150,cy=180,inCar=false,money=5000,level=1,xp=0,jail=0,gunPrice=8000,curPass=null,gateOpen=false;
+function render(){ let p=document.getElementById('player'),c=document.getElementById('pcar');
+ if(inCar){ c.style.left=cx+'px';c.style.top=cy+'px';p.style.left=(cx+6)+'px';p.style.top=(cy-4)+'px';p.innerText='';c.innerText='🚓👮'; } else { p.style.left=px+'px';p.style.top=py+'px';p.innerText='👮‍♂️';c.style.left=cx+'px';c.style.top=cy+'px';c.innerText='🚓'; }
+ document.getElementById('money').innerText=money; document.getElementById('level').innerText=level; document.getElementById('jailCount').innerText=jail+' জন বন্দি';
+} render();
+function move(dx,dy){ let s=inCar?26:16; if(inCar){ cx+=dx*s;cy+=dy*s;cx=Math.max(0,Math.min(320,cx));cy=Math.max(0,Math.min(300,cy)); } else { px+=dx*s;py+=dy*s;px=Math.max(0,Math.min(320,px));py=Math.max(0,Math.min(300,py)); } render(); checkNear(); }
+function checkNear(){ let d=Math.abs(px-cx)+Math.abs(py-cy); if(!inCar && d<50){ document.getElementById('enterBtn').innerText='🚓 গাড়ির কাছে আছো! ওঠো!'; document.getElementById('enterBtn').style.background='#00C853'; } }
+function enterCar(){ if(Math.abs(px-cx)+Math.abs(py-cy)>60) return alert('আগে পুলিশ গাড়ির কাছে যাও!'); inCar=true; document.getElementById('mode').innerText='🚓 গাড়ি চালাচ্ছো'; document.getElementById('enterBtn').style.display='none'; document.getElementById('exitBtn').style.display='block'; document.getElementById('msg').innerText='✅ পুলিশ গাড়িতে উঠছো! এখন বর্ডারে যাও - উপরে মাঝখানে!'; render(); }
+function exitCar(){ inCar=false; px=cx+25;py=cy+15; document.getElementById('mode').innerText='🚶 হাঁটতেছো'; document.getElementById('enterBtn').style.display='block'; document.getElementById('exitBtn').style.display='none'; render(); }
+function openGate(){ gateOpen=true; document.getElementById('gate').innerText='🟢 GATE খোলা'; document.getElementById('gate').style.background='#00C853'; document.getElementById('msg').innerText='🔓 গেট খুলছো! এখন একটা গাড়ি আসতেছে...'; setTimeout(()=>{ let v=document.getElementById('visitorCar'); v.style.display='block'; v.style.left='150px'; v.style.top='20px'; v.innerText='🚗'; setTimeout(()=>{ v.style.top='140px'; document.getElementById('msg').innerText='🚗 গাড়ি আসছে! এখন "পাসপোর্ট চেক" চাপো!'; },1000); },800); }
+function checkPassport(){ if(!gateOpen) return alert('আগে গেট খোলো!'); let valid=Math.random()>0.5; curPass={name:['Rahim Khan','John Smith','Abdul Malek','David Lee'][Math.floor(Math.random()*4)], valid, passportNo:'BD'+Math.floor(Math.random()*90000+10000), country:valid?'Bangladesh':'India'};
+ document.getElementById('passInfo').innerHTML=`<b>নাম:</b> ${curPass.name}<br><b>পাসপোর্ট নং:</b> ${curPass.passportNo}<br><b>দেশ:</b> ${curPass.country}<br><b>মেয়াদ:</b> ${valid?'✅ ঠিক আছে (2028 পর্যন্ত)':'❌ মেয়াদ শেষ (2023)'}<br><b>ভিসা:</b> ${valid?'✅ আছে':'❌ নাই'}`;
+ document.getElementById('passModal').style.display='flex'; document.getElementById('noOptions').style.display='none';
+}
+function decide(yes){
+ if(yes){ if(curPass.valid){ addXP(100); document.getElementById('msg').innerText='✅ সঠিক সিদ্ধান্ত! পাসপোর্ট ঠিক ছিল, ছেড়ে দিছো। +100 XP'; } else { document.getElementById('msg').innerText='❌ ভুল করছো! পাসপোর্ট ভুয়া ছিল, তবুও ছেড়ে দিছো! -50 XP'; } closeModal('passModal'); hideVisitor(); }
+ else { document.getElementById('noOptions').style.display='block'; }
+}
+function sendJail(){ jail++; addXP(150); document.getElementById('msg').innerText='🔒 লোকটাকে জেলখানায় পাঠাইছো! +150 XP • জেলখানায় এখন '+jail+' জন'; closeModal('passModal'); hideVisitor(); render(); }
+function fine(){ money+=1000; addXP(80); document.getElementById('msg').innerText='💰 ৳1000 জরিমানা নিছো! টাকা পাইছো +80 XP'; closeModal('passModal'); hideVisitor(); render(); }
+function sendBack(){ addXP(60); document.getElementById('msg').innerText='↩️ লোকটাকে অন্য রাস্তা দিয়ে ফেরত পাঠাইছো! +60 XP'; closeModal('passModal'); hideVisitor(); }
+function hideVisitor(){ let v=document.getElementById('visitorCar'); v.style.top='-50px'; setTimeout(()=>v.style.display='none',1000); gateOpen=false; document.getElementById('gate').innerText='🔒 GATE বন্ধ'; document.getElementById('gate').style.background='#FF0000'; }
+function addXP(n){ xp+=n; if(xp>=300){ level++; xp=0; alert('🎉 LEVEL UP! এখন তুমি Level '+level+' অফিসার! নতুন বন্দুক + নতুন মিশন Unlock!'); } render(); }
+function openGun(){ document.getElementById('gunModal').style.display='flex'; }
+function haggleGun(){ gunPrice=Math.max(4000,gunPrice-1000); document.getElementById('gunPrice').innerText=gunPrice; document.getElementById('msg').innerText='🧑 দোকানদার: "আচ্ছা স্যার, '+gunPrice+' টাকা দেন!"'; }
+function buyGun(){ if(money<gunPrice) return alert('টাকা কম! আগে জরিমানা করে টাকা কামাও'); money-=gunPrice; document.getElementById('myGun').innerText='🔫 পিস্তল কিনছো!'; closeModal('gunModal'); addXP(100); document.getElementById('msg').innerText='🔫 বন্দুক কিনছো! এখন তুমি আরো শক্তিশালী পুলিশ!'; render(); }
+function openStation(){ document.getElementById('stationModal').style.display='flex'; }
+function takeReport(){ closeModal('stationModal'); addXP(120); document.getElementById('msg').innerText='📝 রিপোর্ট নিছো! এখন তার বাসায় যাও - নিচে ডান দিকে তোমার ঘরের কাছে। +120 XP'; }
+function openParliament(){ alert('🏛️ সংসদ ভবন! এখানে তুমি Level 5 এ গেলে মন্ত্রীর সাথে দেখা করতে পারবা!'); }
+function closeModal(id){ document.getElementById(id).style.display='none'; }
+document.addEventListener('keydown',e=>{ if(e.key=='ArrowUp')move(0,-1); if(e.key=='ArrowDown')move(0,1); if(e.key=='ArrowLeft')move(-1,0); if(e.key=='ArrowRight')move(1,0); });
 </script></body></html>
