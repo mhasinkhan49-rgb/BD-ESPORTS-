@@ -1,124 +1,103 @@
-<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BANGLADESH VICE CITY - Police Officer</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#111}
-.top{background:#0A3D00;color:#fff;padding:9px;display:flex;justify-content:space-between;font-size:12px;font-weight:900}
-.top span{background:#FFC400;color:#000;padding:5px 8px;border-radius:20px}
-#city{position:relative;width:100%;height:58vh;background:#4A9E2A;overflow:hidden;border:3px solid #fff}
-.roadV{position:absolute;left:48%;top:0;bottom:0;width:18%;background:#444;border-left:3px dashed #FFC400;border-right:3px dashed #FFC400}
-.roadH{position:absolute;top:48%;left:0;right:0;height:18%;background:#444;border-top:3px dashed #FFC400;border-bottom:3px dashed #FFC400}
-.bld{position:absolute;background:#fff;border-radius:10px;padding:6px;text-align:center;font-size:11px;font-weight:900;box-shadow:0 4px 10px rgba(0,0,0,.4);cursor:pointer}
-#player{position:absolute;font-size:32px;z-index:20;transition:all .15s}
-#pcar{position:absolute;font-size:40px;z-index:15;transition:all .15s}
-#visitorCar{position:absolute;font-size:38px;z-index:12;transition:all 1.2s;display:none}
-.gate{position:absolute;left:48%;top:42%;width:18%;height:8%;background:#FF0000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;z-index:10;border:3px solid #fff}
-.jail{position:absolute;background:#333;color:#fff;border:4px solid #000}
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>MY FARM - You Drive!</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;touch-action:none}body{background:#222;overflow:hidden}
+.top{background:#2E7D00;color:#fff;padding:8px;display:flex;justify-content:space-between;font-size:13px;font-weight:900}
+.top span{background:#FFC400;color:#000;padding:4px 8px;border-radius:20px}
+#game{position:relative;width:100%;height:52vh;background:#7ED321;overflow:hidden;border:3px solid #fff}
+.farm{position:absolute;left:0;top:0;width:42%;height:45%;background:#C6F16D;border:3px solid #fff;border-radius:10px;padding:6px;font-size:12px;font-weight:900}
+.market{position:absolute;right:0;top:0;width:42%;height:45%;background:#FFE082;border:3px solid #fff;border-radius:10px;padding:6px;font-size:12px;font-weight:900;cursor:pointer}
+.shop{position:absolute;left:0;bottom:0;width:42%;height:35%;background:#BBDEFB;border:3px solid #fff;border-radius:10px;padding:6px;font-size:12px;font-weight:900}
+.pond{position:absolute;right:0;bottom:0;width:42%;height:35%;background:#4FC3F7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}
+.road{position:absolute;left:0;right:0;top:46%;height:18%;background:#555;border-top:3px dashed yellow;border-bottom:3px dashed yellow}
+#player{position:absolute;font-size:34px;z-index:10;transition:all .15s}
+#car{position:absolute;font-size:44px;z-index:9;transition:all .15s}
+.animal{position:absolute;font-size:26px}
 .controls{background:#111;padding:10px;text-align:center}
-.pad{display:grid;grid-template-columns:58px 58px 58px;gap:7px;justify-content:center}
-.pad button{width:58px;height:52px;font-size:22px;border:0;border-radius:12px;background:#fff;font-weight:900}
+.pad{display:grid;grid-template-columns:60px 60px 60px;gap:8px;justify-content:center}
+.pad button{width:60px;height:55px;font-size:24px;border:0;border-radius:14px;background:#fff;font-weight:900}
 .pad button:active{background:#FFC400}
-.act{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px}
-.act button{padding:10px 11px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;font-size:12px}
-.act button.green{background:#2E7D00}.act button.blue{background:#0B1DFF}.act button.red{background:#E91E63}
+.action{margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.action button{padding:12px 14px;border:0;border-radius:12px;background:#FF8A00;color:#fff;font-weight:900}
+.action button.green{background:#2E7D00}.action button.blue{background:#0B1DFF}.action button.red{background:#E91E63}
 #msg{background:#fff;margin:8px;border-radius:10px;padding:10px;text-align:center;font-weight:700;font-size:13px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99;padding:14px}
-.modal>div{background:#fff;width:100%;max-width:430px;border-radius:16px;padding:18px;text-align:center}
-.passport{background:#E3F2FD;border:2px solid #0B1DFF;border-radius:12px;padding:12px;margin:10px 0;text-align:left;font-size:13px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
+.modal>div{background:#fff;width:100%;max-width:400px;border-radius:16px;padding:18px;text-align:center}
 </style></head><body>
-<div class="top"><span>🇧🇩 BANGLADESH VICE CITY</span><span>👮 <span id="officer">Officer Rahim</span></span><span>💰 ৳ <span id="money">5000</span></span><span>⭐ Lv <span id="level">1</span></span><span id="mode">🚶 হাঁটতেছো</span></div>
+<div class="top"><span>🌾 MY FARM</span><span>💰 ৳ <span id="money">500</span></span><span>🥚 <span id="eggs">0</span></span><span id="mode">🚶 হাঁটতেছো</span></div>
 
-<div id="city">
-<div class="roadV"></div><div class="roadH"></div>
-<!-- BUILDINGS -->
-<div class="bld" style="left:5px;top:5px;width:38%;height:20%" onclick="openStation()">👮‍♂️ পুলিশ স্টেশন<br><small>রিপোর্ট লেখাও</small><div>🏢</div></div>
-<div class="bld" style="right:5px;top:5px;width:38%;height:20%;background:#FFE082" onclick="openParliament()">🏛️ সংসদ ভবন<br><small>বাংলাদেশ</small><div>🇧🇩</div></div>
-<div class="bld" style="left:5px;bottom:5px;width:38%;height:20%;background:#FFCDD2" onclick="openGun()">🔫 বন্দুকের দোকান<br><small>দামাদামি করো</small><div>🔫</div></div>
-<div class="bld" style="right:5px;bottom:5px;width:38%;height:20%;background:#C8E6C9">🏠 তোমার ঘর<br><small>Officer এর বাসা</small><div>🏠</div></div>
-<div class="bld" style="left:40%;top:2%;width:28%;height:12%;background:#FFC400">🛂 BORDER<br>CHECKPOST</div>
-
-<div class="gate" id="gate">🔒 GATE বন্ধ</div>
-<div class="jail" style="left:2%;top:38%;padding:6px;font-size:11px">🔒 জেলখানা<br><span id="jailCount">0 জন বন্দি</span></div>
-
-<div id="visitorCar">🚗</div>
-<div id="pcar">🚓</div>
-<div id="player">👮‍♂️</div>
+<div id="game">
+<div class="farm">🏡 খামার<br><span style="font-weight:400">মুরগি 🐔 হাঁস 🦆 গরু 🐄</span><div class="animal" style="left:10px;top:40px">🐔</div><div class="animal" style="left:50px;top:70px">🦆</div><div class="animal" style="left:90px;top:40px">🐄</div></div>
+<div class="market" onclick="tryMarket()">🛒 বাজার<br><span style="font-weight:400">গাড়ি নিয়ে এখানে আসো!</span><div style="font-size:28px">🧑‍🌾🍅🧅🍟🧃</div></div>
+<div class="road"></div>
+<div class="shop">🏪 আমার দোকান<br><span style="font-weight:400">এখানে বিক্রি করো</span><div style="font-size:24px">🥚🥛</div></div>
+<div class="pond">🦆💦</div>
+<div id="car">🚙</div>
+<div id="player">🧑‍🌾</div>
 </div>
 
-<div id="msg">👮‍♂️ তুমি পুলিশ অফিসার! গাড়িতে ওঠো → বর্ডারে যাও → গেট খোলো → পাসপোর্ট চেক করো!</div>
+<div id="msg">🧑‍🌾 তুমি খামারে আছো। গাড়ির কাছে যাও → গাড়িতে ওঠো → গাড়ি চালায় বাজারে যাও!</div>
 
 <div class="controls">
-<div class="pad"><div></div><button onclick="move(0,-1)">⬆️</button><div></div><button onclick="move(-1,0)">⬅️</button><button onclick="move(0,1)">⬇️</button><button onclick="move(1,0)">➡️</button></div>
-<div class="act">
-<button class="green" id="enterBtn" onclick="enterCar()">🚓 গাড়িতে ওঠো</button>
-<button class="red" id="exitBtn" onclick="exitCar()" style="display:none">⬇️ গাড়ি থেকে নামো</button>
-<button class="blue" onclick="openGate()">🔓 গেট খোলো</button>
-<button onclick="checkPassport()">🛂 পাসপোর্ট চেক</button>
-<button onclick="openStation()">📝 রিপোর্ট</button>
-<button onclick="openGun()">🔫 বন্দুক</button>
-</div></div>
-
-<!-- PASSPORT MODAL -->
-<div class="modal" id="passModal"><div>
-<h2>🛂 পাসপোর্ট চেক</h2>
-<div class="passport" id="passInfo"></div>
-<p>এই লোককে ছাড়বা?</p>
-<button style="width:48%;padding:13px;border:0;border-radius:10px;background:#00C853;color:#fff;font-weight:900" onclick="decide(true)">✅ YES - ছেড়ে দাও</button>
-<button style="width:48%;padding:13px;border:0;border-radius:10px;background:#E91E63;color:#fff;font-weight:900" onclick="decide(false)">❌ NO - আটকাও</button>
-<div id="noOptions" style="display:none;margin-top:10px">
-<button style="width:100%;padding:11px;border:0;border-radius:10px;background:#333;color:#fff;font-weight:900;margin:3px" onclick="sendJail()">🔒 জেলখানায় পাঠাও</button>
-<button style="width:100%;padding:11px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;margin:3px" onclick="fine()">💰 ৳1000 জরিমানা করে ছাড়ো</button>
-<button style="width:100%;padding:11px;border:0;border-radius:10px;background:#0B1DFF;color:#fff;font-weight:900;margin:3px" onclick="sendBack()">↩️ অন্য রাস্তা দিয়ে ফেরত পাঠাও</button>
+<div class="pad">
+<div></div><button onclick="move(0,-1)">⬆️</button><div></div>
+<button onclick="move(-1,0)">⬅️</button><button onclick="move(0,1)">⬇️</button><button onclick="move(1,0)">➡️</button>
 </div>
-</div></div>
+<div class="action">
+<button class="green" id="enterBtn" onclick="enterCar()">🚗 গাড়িতে ওঠো</button>
+<button class="red" id="exitBtn" onclick="exitCar()" style="display:none">⬇️ গাড়ি থেকে নামো</button>
+<button class="blue" onclick="collect()">🥚 ডিম নাও</button>
+<button onclick="tryMarket()">🛒 বাজার দেখো</button>
+</div>
+</div>
 
-<!-- GUN SHOP -->
-<div class="modal" id="gunModal"><div>
-<h2>🔫 বন্দুকের দোকান - মামুন ভাই</h2>
-<p>দোকানদার: "স্যার, এই পিস্তল <b>৳<span id="gunPrice">8000</span></b>! একদম অরিজিনাল!"</p>
-<div style="font-size:50px;margin:10px">🔫</div>
-<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;margin:4px" onclick="haggleGun()">💬 "ভাই ৫০০০ দিবো!" - দামাদামি</button>
-<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#2E7D00;color:#fff;font-weight:900;margin:4px" onclick="buyGun()">✅ এই দামে কিনো</button>
-<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#ddd;font-weight:900;margin:4px" onclick="closeModal('gunModal')">❌ বের হও</button>
-<p>তোমার বন্দুক: <b id="myGun">নাই</b></p>
-</div></div>
-
-<!-- POLICE STATION -->
-<div class="modal" id="stationModal"><div>
-<h2>👮‍♂️ পুলিশ স্টেশন - রিপোর্ট</h2>
-<p id="reportText" style="background:#FFF3E0;padding:12px;border-radius:10px;margin:10px 0">🧕 একজন মহিলা আসছে: "স্যার, আমার বাসায় চুরি হইছে! আমার বাসা মিরপুরে, একটু আসবেন?"</p>
-<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#0B1DFF;color:#fff;font-weight:900;margin:4px" onclick="takeReport()">✅ রিপোর্ট নিলাম - তার বাসায় যাবো</button>
-<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#ddd;font-weight:900;margin:4px" onclick="closeModal('stationModal')">❌ পরে</button>
+<div class="modal" id="marketModal"><div>
+<h2>🛒 বাজার - রহিমের দোকান</h2><p style="margin:8px 0">দোকানদার: "আসেন ভাই! টমেটো <b>৳<span id="price">50</span></b>!"</p>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#FF8A00;color:#fff;font-weight:900;margin:4px" onclick="haggle()">💬 "ভাই ৩০ টাকা দিবো!" - দাম কমাও</button>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#2E7D00;color:#fff;font-weight:900;margin:4px" onclick="buyItem()">✅ এই দামে কিনো (৳<span id="price2">50</span>)</button>
+<button style="width:100%;padding:12px;border:0;border-radius:10px;background:#ddd;font-weight:900;margin:4px" onclick="closeMarket()">❌ বাজার থেকে বের হও</button>
+<p style="font-size:12px;color:#888;margin-top:8px">গাড়ি দিয়ে আসছো বলে দোকানদার খুশি!</p>
 </div></div>
 
 <script>
-let px=40,py=180,cx=150,cy=180,inCar=false,money=5000,level=1,xp=0,jail=0,gunPrice=8000,curPass=null,gateOpen=false;
-function render(){ let p=document.getElementById('player'),c=document.getElementById('pcar');
- if(inCar){ c.style.left=cx+'px';c.style.top=cy+'px';p.style.left=(cx+6)+'px';p.style.top=(cy-4)+'px';p.innerText='';c.innerText='🚓👮'; } else { p.style.left=px+'px';p.style.top=py+'px';p.innerText='👮‍♂️';c.style.left=cx+'px';c.style.top=cy+'px';c.innerText='🚓'; }
- document.getElementById('money').innerText=money; document.getElementById('level').innerText=level; document.getElementById('jailCount').innerText=jail+' জন বন্দি';
-} render();
-function move(dx,dy){ let s=inCar?26:16; if(inCar){ cx+=dx*s;cy+=dy*s;cx=Math.max(0,Math.min(320,cx));cy=Math.max(0,Math.min(300,cy)); } else { px+=dx*s;py+=dy*s;px=Math.max(0,Math.min(320,px));py=Math.max(0,Math.min(300,py)); } render(); checkNear(); }
-function checkNear(){ let d=Math.abs(px-cx)+Math.abs(py-cy); if(!inCar && d<50){ document.getElementById('enterBtn').innerText='🚓 গাড়ির কাছে আছো! ওঠো!'; document.getElementById('enterBtn').style.background='#00C853'; } }
-function enterCar(){ if(Math.abs(px-cx)+Math.abs(py-cy)>60) return alert('আগে পুলিশ গাড়ির কাছে যাও!'); inCar=true; document.getElementById('mode').innerText='🚓 গাড়ি চালাচ্ছো'; document.getElementById('enterBtn').style.display='none'; document.getElementById('exitBtn').style.display='block'; document.getElementById('msg').innerText='✅ পুলিশ গাড়িতে উঠছো! এখন বর্ডারে যাও - উপরে মাঝখানে!'; render(); }
-function exitCar(){ inCar=false; px=cx+25;py=cy+15; document.getElementById('mode').innerText='🚶 হাঁটতেছো'; document.getElementById('enterBtn').style.display='block'; document.getElementById('exitBtn').style.display='none'; render(); }
-function openGate(){ gateOpen=true; document.getElementById('gate').innerText='🟢 GATE খোলা'; document.getElementById('gate').style.background='#00C853'; document.getElementById('msg').innerText='🔓 গেট খুলছো! এখন একটা গাড়ি আসতেছে...'; setTimeout(()=>{ let v=document.getElementById('visitorCar'); v.style.display='block'; v.style.left='150px'; v.style.top='20px'; v.innerText='🚗'; setTimeout(()=>{ v.style.top='140px'; document.getElementById('msg').innerText='🚗 গাড়ি আসছে! এখন "পাসপোর্ট চেক" চাপো!'; },1000); },800); }
-function checkPassport(){ if(!gateOpen) return alert('আগে গেট খোলো!'); let valid=Math.random()>0.5; curPass={name:['Rahim Khan','John Smith','Abdul Malek','David Lee'][Math.floor(Math.random()*4)], valid, passportNo:'BD'+Math.floor(Math.random()*90000+10000), country:valid?'Bangladesh':'India'};
- document.getElementById('passInfo').innerHTML=`<b>নাম:</b> ${curPass.name}<br><b>পাসপোর্ট নং:</b> ${curPass.passportNo}<br><b>দেশ:</b> ${curPass.country}<br><b>মেয়াদ:</b> ${valid?'✅ ঠিক আছে (2028 পর্যন্ত)':'❌ মেয়াদ শেষ (2023)'}<br><b>ভিসা:</b> ${valid?'✅ আছে':'❌ নাই'}`;
- document.getElementById('passModal').style.display='flex'; document.getElementById('noOptions').style.display='none';
+let px=30, py=150, cx=120, cy=210, inCar=false, money=500, eggs=0, price=50;
+function render(){
+ let p=document.getElementById('player'), c=document.getElementById('car');
+ if(inCar){ c.style.left=cx+'px'; c.style.top=cy+'px'; p.style.left=(cx+8)+'px'; p.style.top=(cy-5)+'px'; p.innerText=''; c.innerText='🚙🧑‍🌾'; }
+ else { p.style.left=px+'px'; p.style.top=py+'px'; p.innerText='🧑‍🌾'; c.style.left=cx+'px'; c.style.top=cy+'px'; c.innerText='🚙'; }
+ document.getElementById('money').innerText=money; document.getElementById('eggs').innerText=eggs;
 }
-function decide(yes){
- if(yes){ if(curPass.valid){ addXP(100); document.getElementById('msg').innerText='✅ সঠিক সিদ্ধান্ত! পাসপোর্ট ঠিক ছিল, ছেড়ে দিছো। +100 XP'; } else { document.getElementById('msg').innerText='❌ ভুল করছো! পাসপোর্ট ভুয়া ছিল, তবুও ছেড়ে দিছো! -50 XP'; } closeModal('passModal'); hideVisitor(); }
- else { document.getElementById('noOptions').style.display='block'; }
+render();
+function move(dx,dy){
+ let step=inCar?22:18;
+ if(inCar){ cx+=dx*step; cy+=dy*step; cx=Math.max(0,Math.min(320,cx)); cy=Math.max(0,Math.min(280,cy)); }
+ else { px+=dx*step; py+=dy*step; px=Math.max(0,Math.min(320,px)); py=Math.max(0,Math.min(280,py)); }
+ render();
+ // বাজারে পৌঁছাইছো কিনা চেক
+ let x=inCar?cx:px, y=inCar?cy:py;
+ if(x>200 && y<80){ document.getElementById('msg').innerText='🎉 বাজারে পৌঁছে গেছো! "বাজার দেখো" চাপো!'; }
+ else if(inCar){ document.getElementById('msg').innerText='🚗 তুমি গাড়ি চালাচ্ছো! ➡️ চাপে বাজারে যাও (ডান উপরে)'; }
+ else { document.getElementById('msg').innerText='🚶 তুমি হাঁটতেছো। গাড়ির কাছে যাও!'; }
+ checkNearCar();
 }
-function sendJail(){ jail++; addXP(150); document.getElementById('msg').innerText='🔒 লোকটাকে জেলখানায় পাঠাইছো! +150 XP • জেলখানায় এখন '+jail+' জন'; closeModal('passModal'); hideVisitor(); render(); }
-function fine(){ money+=1000; addXP(80); document.getElementById('msg').innerText='💰 ৳1000 জরিমানা নিছো! টাকা পাইছো +80 XP'; closeModal('passModal'); hideVisitor(); render(); }
-function sendBack(){ addXP(60); document.getElementById('msg').innerText='↩️ লোকটাকে অন্য রাস্তা দিয়ে ফেরত পাঠাইছো! +60 XP'; closeModal('passModal'); hideVisitor(); }
-function hideVisitor(){ let v=document.getElementById('visitorCar'); v.style.top='-50px'; setTimeout(()=>v.style.display='none',1000); gateOpen=false; document.getElementById('gate').innerText='🔒 GATE বন্ধ'; document.getElementById('gate').style.background='#FF0000'; }
-function addXP(n){ xp+=n; if(xp>=300){ level++; xp=0; alert('🎉 LEVEL UP! এখন তুমি Level '+level+' অফিসার! নতুন বন্দুক + নতুন মিশন Unlock!'); } render(); }
-function openGun(){ document.getElementById('gunModal').style.display='flex'; }
-function haggleGun(){ gunPrice=Math.max(4000,gunPrice-1000); document.getElementById('gunPrice').innerText=gunPrice; document.getElementById('msg').innerText='🧑 দোকানদার: "আচ্ছা স্যার, '+gunPrice+' টাকা দেন!"'; }
-function buyGun(){ if(money<gunPrice) return alert('টাকা কম! আগে জরিমানা করে টাকা কামাও'); money-=gunPrice; document.getElementById('myGun').innerText='🔫 পিস্তল কিনছো!'; closeModal('gunModal'); addXP(100); document.getElementById('msg').innerText='🔫 বন্দুক কিনছো! এখন তুমি আরো শক্তিশালী পুলিশ!'; render(); }
-function openStation(){ document.getElementById('stationModal').style.display='flex'; }
-function takeReport(){ closeModal('stationModal'); addXP(120); document.getElementById('msg').innerText='📝 রিপোর্ট নিছো! এখন তার বাসায় যাও - নিচে ডান দিকে তোমার ঘরের কাছে। +120 XP'; }
-function openParliament(){ alert('🏛️ সংসদ ভবন! এখানে তুমি Level 5 এ গেলে মন্ত্রীর সাথে দেখা করতে পারবা!'); }
-function closeModal(id){ document.getElementById(id).style.display='none'; }
-document.addEventListener('keydown',e=>{ if(e.key=='ArrowUp')move(0,-1); if(e.key=='ArrowDown')move(0,1); if(e.key=='ArrowLeft')move(-1,0); if(e.key=='ArrowRight')move(1,0); });
+function checkNearCar(){
+ let d=Math.abs(px-cx)+Math.abs(py-cy);
+ let b=document.getElementById('enterBtn');
+ if(!inCar && d<45){ b.style.background='#00C853'; b.innerText='🚗 গাড়ির কাছে আছো! ওঠো!'; }
+ else if(!inCar){ b.style.background='#FF8A00'; b.innerText='🚗 গাড়িতে ওঠো'; }
+}
+function enterCar(){
+ let d=Math.abs(px-cx)+Math.abs(py-cy);
+ if(d>50) return alert('আগে গাড়ির কাছে যাও! ⬆️⬇️⬅️➡️ দিয়ে হেঁটে গাড়ির কাছে যাও');
+ inCar=true; document.getElementById('mode').innerText='🚗 গাড়ি চালাচ্ছো'; document.getElementById('enterBtn').style.display='none'; document.getElementById('exitBtn').style.display='block';
+ document.getElementById('msg').innerText='✅ গাড়িতে উঠছো! এখন ⬆️⬇️⬅️➡️ দিয়ে তুমি নিজে গাড়ি চালাও! বাজার ডান উপরে!';
+ render();
+}
+function exitCar(){ inCar=false; px=cx+30; py=cy+20; document.getElementById('mode').innerText='🚶 হাঁটতেছো'; document.getElementById('enterBtn').style.display='block'; document.getElementById('exitBtn').style.display='none'; document.getElementById('msg').innerText='⬇️ গাড়ি থেকে নামছো! এখন হেঁটে খামারে যাও'; render(); }
+function collect(){ eggs+=3; render(); document.getElementById('msg').innerText='🥚 ৩টা ডিম পাইছো! মুরগি: কক কক!'; }
+function tryMarket(){ let x=inCar?cx:px, y=inCar?cy:py; if(x<180 || y>100){ alert('বাজারে যাও নাই! আগে গাড়ি চালায় ডান উপরে বাজারে যাও!'); return; } document.getElementById('marketModal').style.display='flex'; }
+function haggle(){ price=Math.max(25, price-10); document.getElementById('price').innerText=price; document.getElementById('price2').innerText=price; document.getElementById('msg').innerText='🧑‍🌾 দোকানদার: "আচ্ছা '+price+' টাকা দেন!"'; }
+function buyItem(){ if(money<price) return alert('টাকা নাই!'); money-=price; eggs+=2; closeMarket(); render(); document.getElementById('msg').innerText='✅ টমেটো কিনছো ৳'+price+' দিয়ে! এখন দোকানে বেচতে পারবা'; price=50; }
+function closeMarket(){ document.getElementById('marketModal').style.display='none'; }
+// কিবোর্ড দিয়েও চালানো যাবে
+document.addEventListener('keydown',e=>{ if(e.key=='ArrowUp') move(0,-1); if(e.key=='ArrowDown') move(0,1); if(e.key=='ArrowLeft') move(-1,0); if(e.key=='ArrowRight') move(1,0); });
 </script></body></html>
